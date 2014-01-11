@@ -1,13 +1,13 @@
-html/**
-img/**
-js/**
+# Ignore docs files
+html
+img
+js
 css/master.css
 less/master.less
 index.php
-.gitignore
 
-# OS generated files #
-######################
+
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
