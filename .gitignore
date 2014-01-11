@@ -4,6 +4,7 @@ js/**
 css/master.css
 less/master.less
 index.php
+.gitignore
 
 # OS generated files #
 ######################
