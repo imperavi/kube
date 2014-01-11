@@ -4,7 +4,7 @@ img
 js
 css/master.css
 less/master.less
-index.php
+*.php
 
 
 # OS generated files
