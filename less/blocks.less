@@ -1,0 +1,71 @@
+/* =Blocks
+-----------------------------------------------------------------------------*/
+.blocks-2,
+.blocks-3,
+.blocks-4,
+.blocks-5,
+.blocks-6 {
+	padding-left: 0;
+	list-style: none;
+	margin-left: -@gridGutterWidth / (@gridWidth / 100) * 1%;
+	.clearfix;
+	& li {
+		height: auto;
+		float: left;
+		margin-bottom: @baseLine / @em;
+		margin-left: @gridGutterWidth / (@gridWidth / 100) * 1%;
+	}
+}
+
+.blocks-2 > li { .block(2); }
+.blocks-3 > li { .block(3); }
+.blocks-4 > li { .block(4); }
+.blocks-5 > li { .block(5); }
+.blocks-6 > li { .block(6); }
+
+.block-first {
+	clear: both;
+}
+
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+
+	.blocks-2,
+	.blocks-3,
+	.blocks-4,
+	.blocks-5,
+	.blocks-6 {
+		margin-left: 0;
+		margin-bottom: @baseLine/@em;
+	}
+
+	.blocks-2 > li,
+	.blocks-3 > li,
+	.blocks-4 > li,
+	.blocks-5 > li,
+	.blocks-6 > li {
+		float: none;
+		margin-left: 0;
+		width: 100%;
+	}
+
+	.blocks-mobile-50 > li,
+	.blocks-mobile-33 > li {
+		float: left;
+		margin-left: @gridGutterWidth/(@gridWidth/100)*1%;
+	}
+	.blocks-mobile-33,
+	.blocks-mobile-50 {
+		margin-left: -@gridGutterWidth/(@gridWidth/100)*1%;
+	}
+
+	.blocks-mobile-50 > li {
+		.block(2);
+	}
+	.blocks-mobile-33 > li {
+		.block(3);
+	}
+
+
+}

@@ -1,0 +1,40 @@
+/* =Tables
+-----------------------------------------------------------------------------*/
+table.table-bordered td,
+table.table-bordered th {
+	border: 1px solid #ddd;
+}
+table.table-simple td,
+table.table-simple th {
+	border: none;
+	padding-left: 0;
+}
+table.table-flat td,
+table.table-flat th {
+	border: none;
+	padding: 0;
+}
+table.table-striped tbody tr:nth-child(odd) td {
+	background-color: #f8f8f8;
+}
+
+/* Responsive Tables */
+.table-container {
+	width: 100%;
+	overflow: auto;
+	margin-bottom: @baseLineInEms;
+	& table {
+		margin-bottom: 0;
+	}
+	&::-webkit-scrollbar {
+		-webkit-appearance: none;
+		width: 14px;
+		height: 14px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		border: 3px solid #fff;
+		background-color: rgba(0, 0, 0, .3);
+	}
+}
+

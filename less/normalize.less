@@ -1,0 +1,225 @@
+/* =Normalize
+-----------------------------------------------------------------------------*/
+*,
+*:before,
+*:after {
+	.box-sizing(border-box);
+}
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+html,
+body,
+div,
+span,
+object,
+iframe,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+a:active,
+a:hover {
+    outline: 0;
+}
+button,
+input {
+    line-height: normal;
+}
+button,
+select {
+    text-transform: none;
+}
+/* Structure tags */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+	display: block;
+}
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+/* To prevent some browsers from inserting quotes on q and p */
+blockquote,
+q {
+	quotes: none;
+}
+blockquote p:before,
+blockquote p:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+/* Table reset */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption,
+th,
+td {
+	text-align: left;
+	vertical-align: top;
+	font-weight: normal;
+}
+thead th,
+thead td {
+	font-weight: bold;
+	vertical-align: bottom;
+}
+/* Image inside */
+a img,
+th img,
+td img {
+	vertical-align: top;
+}
+button,
+input,
+select,
+textarea {
+	margin: 0;
+}
+textarea {
+	overflow: auto;
+	vertical-align: top;
+	resize: vertical;
+}
+/* Normalize buttons in IE */
+button {
+	width: auto;
+	overflow: visible;
+}
+/* Hand cursor on clickable controls */
+input[type=button],
+input[type=submit],
+button {
+	cursor: pointer;
+}
+/* Trick with vertical align for radio and checkbox  */
+input[type="radio"],
+input[type="checkbox"] {
+	font-size: 110%;
+	position: relative;
+	top: -1px;
+}
+/* Normalize search fields */
+input[type="search"] {
+	-webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ddd;
+}
+/* Responsive media */
+img,
+video {
+	max-width: 100%;
+	height: auto;
+}
+img {
+	-ms-interpolation-mode: bicubic;
+}
+audio {
+	width: 100%;
+}
