@@ -2,54 +2,39 @@
 -----------------------------------------------------------------------------*/
 
 /* NavBar */
-.nav-bar,
-.nav-bar-left,
-.nav-bar-right {
+.navbar {
 	margin-bottom: @baseLineInEms;
 	.clearfix;
 }
-.nav-bar-left {
+.navbar-left {
 	float: left;
 }
-.nav-bar-right {
+.navbar-right {
 	float: right;
 }
-.nav-bar ul,
-.nav-bar-left ul,
-.nav-bar-right ul {
+.navbar ul {
 	list-style: none;
 	margin: 0;
 	.clearfix;
 }
-.nav-bar ul li,
-.nav-bar-left ul li {
+.navbar ul li {
 	float: left;
 	margin-right: @baseLineInEms - 1em;
 }
-.nav-bar-right ul li {
+.navbar-right ul li {
 	float: left;
 	margin-left: @baseLineInEms - 1em;
 }
-.nav-bar ul li a,
-.nav-bar ul li span,
-.nav-bar-left ul li a,
-.nav-bar-left ul li span,
-.nav-bar-right ul li a,
-.nav-bar-right ul li span {
+.navbar ul li a,
+.navbar ul li span {
 	padding: .5em;
 	display: block;
 }
-.nav-bar ul li a:hover,
-.nav-bar-left ul li a:hover,
-.nav-bar-right ul li a:hover {
+.navbar ul li a:hover {
 	color: @colorLinkHover;
 }
-.nav-bar ul li.active a,
-.nav-bar ul li span,
-.nav-bar-left ul li.active a,
-.nav-bar-left ul li span,
-.nav-bar-right ul li.active a,
-.nav-bar-right ul li span {
+.navbar ul li.active a,
+.navbar ul li span {
 	text-decoration: none;
 	cursor: text;
 	color: rgba(0, 0, 0, .4);
@@ -57,10 +42,10 @@
 
 
 /* Fullwidth */
-.nav-fullwidth ul {
+.fullwidth ul {
 	width: 100%;
 }
-.nav-fullwidth li {
+.fullwidth li {
 	float: none !important;
 	margin: 0;
 	display: table-cell;
@@ -69,13 +54,11 @@
 }
 
 /* Subnav */
-.subnav,
-.subnav-right {
+.subnav {
 	margin-bottom: @baseLineInEms;
 	.clearfix;
 }
-.subnav ul,
-.subnav-right ul {
+.subnav ul {
 	list-style: none;
 	margin: 0;
 	.clearfix;
@@ -92,21 +75,16 @@
 	margin-left: @baseLineInEms;
 }
 .subnav ul li a,
-.subnav ul li span,
-.subnav-right ul li a,
-.subnav-right ul li span {
+.subnav ul li span {
 	display: block;
 	text-decoration: none;
 }
-.subnav ul li a:hover,
-.subnav-right ul li a:hover {
+.subnav ul li a:hover {
 	color: @colorLinkHover;
 	text-decoration: underline;
 }
 .subnav ul li.active a,
-.subnav ul li span,
-.subnav-right ul li.active a,
-.subnav-right ul li span {
+.subnav ul li span {
 	text-decoration: none;
 	cursor: text;
 	color: rgba(0, 0, 0, .4);

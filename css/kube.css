@@ -1013,75 +1013,56 @@ select.unit-100 {
 /* =Navs
 -----------------------------------------------------------------------------*/
 /* NavBar */
-.nav-bar,
-.nav-bar-left,
-.nav-bar-right {
+.navbar {
   margin-bottom: 1.618em;
 }
-.nav-bar:after,
-.nav-bar-left:after,
-.nav-bar-right:after {
+.navbar:after {
   content: "";
   display: table;
   clear: both;
 }
-.nav-bar-left {
+.navbar-left {
   float: left;
 }
-.nav-bar-right {
+.navbar-right {
   float: right;
 }
-.nav-bar ul,
-.nav-bar-left ul,
-.nav-bar-right ul {
+.navbar ul {
   list-style: none;
   margin: 0;
 }
-.nav-bar ul:after,
-.nav-bar-left ul:after,
-.nav-bar-right ul:after {
+.navbar ul:after {
   content: "";
   display: table;
   clear: both;
 }
-.nav-bar ul li,
-.nav-bar-left ul li {
+.navbar ul li {
   float: left;
   margin-right: 0.6180000000000001em;
 }
-.nav-bar-right ul li {
+.navbar-right ul li {
   float: left;
   margin-left: 0.6180000000000001em;
 }
-.nav-bar ul li a,
-.nav-bar ul li span,
-.nav-bar-left ul li a,
-.nav-bar-left ul li span,
-.nav-bar-right ul li a,
-.nav-bar-right ul li span {
+.navbar ul li a,
+.navbar ul li span {
   padding: .5em;
   display: block;
 }
-.nav-bar ul li a:hover,
-.nav-bar-left ul li a:hover,
-.nav-bar-right ul li a:hover {
+.navbar ul li a:hover {
   color: #d70a16;
 }
-.nav-bar ul li.active a,
-.nav-bar ul li span,
-.nav-bar-left ul li.active a,
-.nav-bar-left ul li span,
-.nav-bar-right ul li.active a,
-.nav-bar-right ul li span {
+.navbar ul li.active a,
+.navbar ul li span {
   text-decoration: none;
   cursor: text;
   color: rgba(0, 0, 0, 0.4);
 }
 /* Fullwidth */
-.nav-fullwidth ul {
+.fullwidth ul {
   width: 100%;
 }
-.nav-fullwidth li {
+.fullwidth li {
   float: none !important;
   margin: 0;
   display: table-cell;
@@ -1089,23 +1070,19 @@ select.unit-100 {
   text-align: center;
 }
 /* Subnav */
-.subnav,
-.subnav-right {
+.subnav {
   margin-bottom: 1.618em;
 }
-.subnav:after,
-.subnav-right:after {
+.subnav:after {
   content: "";
   display: table;
   clear: both;
 }
-.subnav ul,
-.subnav-right ul {
+.subnav ul {
   list-style: none;
   margin: 0;
 }
-.subnav ul:after,
-.subnav-right ul:after {
+.subnav ul:after {
   content: "";
   display: table;
   clear: both;
@@ -1122,21 +1099,16 @@ select.unit-100 {
   margin-left: 1.618em;
 }
 .subnav ul li a,
-.subnav ul li span,
-.subnav-right ul li a,
-.subnav-right ul li span {
+.subnav ul li span {
   display: block;
   text-decoration: none;
 }
-.subnav ul li a:hover,
-.subnav-right ul li a:hover {
+.subnav ul li a:hover {
   color: #d70a16;
   text-decoration: underline;
 }
 .subnav ul li.active a,
-.subnav ul li span,
-.subnav-right ul li.active a,
-.subnav-right ul li span {
+.subnav ul li span {
   text-decoration: none;
   cursor: text;
   color: rgba(0, 0, 0, 0.4);
@@ -1537,18 +1509,7 @@ input[type="search"] {
 }
 /* =Buttons
 -----------------------------------------------------------------------------*/
-.btn,
-.btn-small,
-.btn-outline,
-.btn-active,
-.btn-disabled,
-.btn[disabled],
-.btn-white,
-.btn-blue,
-.btn-red,
-.btn-green,
-.btn-yellow,
-.btn-black {
+.btn {
   display: inline-block;
   vertical-align: top;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1565,18 +1526,7 @@ input[type="search"] {
   background: #eeeded;
   padding: 0.65em 1.3333333333333333em;
 }
-.btn:hover,
-.btn-small:hover,
-.btn-outline:hover,
-.btn-active:hover,
-.btn-disabled:hover,
-.btn[disabled]:hover,
-.btn-white:hover,
-.btn-blue:hover,
-.btn-red:hover,
-.btn-green:hover,
-.btn-yellow:hover,
-.btn-black:hover {
+.btn:hover {
   color: rgba(0, 0, 0, 0.5);
   background: #dbdada;
 }
@@ -1647,7 +1597,6 @@ input[type="search"] {
 }
 .btn-active,
 .btn[disabled],
-.btn-small[disabled],
 .btn-disabled {
   border: none;
   background: none;
@@ -1656,7 +1605,6 @@ input[type="search"] {
 }
 .btn-active:hover,
 .btn[disabled]:hover,
-.btn-small[disabled]:hover,
 .btn-disabled:hover {
   color: rgba(0, 0, 0, 0.5);
 }
@@ -1664,7 +1612,6 @@ input[type="search"] {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset;
 }
 .btn[disabled],
-.btn-small[disabled],
 .btn-disabled {
   cursor: default;
   box-shadow: none;
@@ -1748,14 +1695,7 @@ input[type="search"] {
 }
 /* =Labels
 -----------------------------------------------------------------------------*/
-.label,
-.label-small,
-.label-blue,
-.label-green,
-.label-red,
-.label-yellow,
-.label-black,
-.label-gray {
+.label {
   display: inline-block;
   line-height: 1;
   font-size: 12px;
