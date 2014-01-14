@@ -1041,7 +1041,7 @@ select.unit-100 {
   margin-right: 0.6180000000000001em;
 }
 .navbar-right ul li {
-  float: left;
+  margin-right: 0;
   margin-left: 0.6180000000000001em;
 }
 .navbar ul li a,
@@ -1276,6 +1276,34 @@ select.unit-100 {
   text-decoration: none;
   background-color: #0f0f0f;
   color: #fff;
+}
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+  .navbar-left,
+  .navbar-right,
+  .navbar ul li,
+  .navbar-right ul li,
+  .subnav-right ul,
+  .subnav ul li,
+  .subnav-right ul li {
+    float: none;
+    text-align: center;
+  }
+  .navbar ul li,
+  .navbar-right ul li,
+  .subnav ul li,
+  .subnav-right ul li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .fullwidth ul {
+    width: auto;
+  }
+  .fullwidth li {
+    display: block;
+    width: auto;
+  }
 }
 /* =Tables
 -----------------------------------------------------------------------------*/
