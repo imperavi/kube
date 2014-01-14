@@ -5,7 +5,6 @@ Kube is a minimalistic CSS-framework for professional developers and designers.
 
 Here’s your most advanced and flexible CSS-framework. Take a look. Kube doesn’t force you into specific styling, Kube doesn’t require rewriting its code; it leaves all of the important decisions to you and your creative genius. Think about Kube as if it was your most reliable helper, who would do your routine job with a smile on his face, so that you can actually concentrate on something big and wonderful.
 
-
 ##[Documentation and examples](http://imperavi.com/kube/)
 
 - [Basic template](http://imperavi.com/kube/template/)
@@ -20,7 +19,6 @@ Here’s your most advanced and flexible CSS-framework. Take a look. Kube doesn�
 - [Labels](http://imperavi.com/kube/labels/)
 - [Helpers](http://imperavi.com/kube/helpers/)
 - [Mixins](http://imperavi.com/kube/mixins/)
-
 
 ####Works in every modern browser
 
