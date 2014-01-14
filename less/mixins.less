@@ -6,6 +6,12 @@
 	}
 
 }
+.btn-color(@color, @darken: 10%) {
+	background: @color;
+	&:hover {
+		background: darken(@color, @darken);
+	}
+}
 .opacity(@opacity: 100) {
 	filter: e(%("alpha(opacity=%d)", @opacity));
 	-moz-opacity: @opacity / 100;
