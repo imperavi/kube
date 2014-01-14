@@ -1853,11 +1853,11 @@ input[type="search"] {
 .italic {
   font-style: italic;
 }
-.right {
-  float: right;
-}
 .left {
   float: left;
+}
+.right {
+  float: right;
 }
 /* Responsive embedded objects */
 .video-wrapper {
@@ -1874,6 +1874,14 @@ input[type="search"] {
   left: 0;
   width: 100%;
   height: 100%;
+}
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+  .left,
+  .right {
+    float: none;
+  }
 }
 /* string content */
 .str {
