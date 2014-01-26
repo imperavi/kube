@@ -1,3 +1,10 @@
+.vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 /* =Normalize
 -----------------------------------------------------------------------------*/
 *,
@@ -230,8 +237,8 @@ audio {
 body {
   background: #ffffff;
   color: #333333;
-  font-size: 15px;
-  line-height: 1.618em;
+  font-size: 14px;
+  line-height: 1.6em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 a {
@@ -249,49 +256,76 @@ h4,
 h5,
 h6 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-weight: bold;
   color: #222222;
   text-rendering: optimizeLegibility;
 }
-.title {
-  font-size: 58.425px;
-  line-height: 1.111em;
-  margin-bottom: .15em;
-}
 h1 {
-  font-size: 39.480000000000004px;
+  font-size: 36px;
   line-height: 1.111em;
   margin-bottom: .25em;
 }
 h2 {
-  font-size: 24.479999999999997px;
+  font-size: 30px;
   line-height: 1.111em;
   margin-bottom: .5em;
 }
 h3 {
-  font-size: 19.995px;
+  font-size: 24px;
   line-height: 1.333em;
   margin-bottom: .5em;
 }
 h4 {
-  font-size: 18.165000000000003px;
+  font-size: 18px;
   line-height: 1.5em;
   margin-bottom: .333em;
 }
 h5 {
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1.618em;
+  font-size: 14px;
+  line-height: 1.6em;
   margin-bottom: .25em;
 }
 h6 {
   font-size: 12px;
   text-transform: uppercase;
-  line-height: 1.618em;
+  line-height: 1.6em;
   margin-bottom: .45em;
 }
+/* =Subheading
+-----------------------------------------------------------------------------*/
+hgroup h1:first-child,
+hgroup h2:first-child,
+hgroup h3:first-child,
+hgroup h4:first-child,
+hgroup h5:first-child {
+  margin-bottom: 0;
+}
+h1.subheading,
+h2.subheading,
+h3.subheading,
+h4.subheading,
+h5.subheading {
+  font-weight: 300;
+}
+h1.subheading {
+  font-size: 30px;
+}
+h2.subheading {
+  font-size: 24px;
+}
+h3.subheading {
+  font-size: 18px;
+}
+h4.subheading {
+  font-size: 14px;
+}
+h5.subheading {
+  font-size: 12px;
+}
+/* =Lead
+-----------------------------------------------------------------------------*/
 .lead {
-  font-size: 18.165000000000003px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.5em;
   margin-bottom: .75em;
@@ -305,7 +339,7 @@ dt,
 blockquote,
 td,
 th {
-  line-height: 1.618em;
+  line-height: 1.6em;
 }
 ul,
 ol,
@@ -313,7 +347,7 @@ ul ul,
 ol ol,
 ul ol,
 ol ul {
-  margin: 0 0 0 1.618em;
+  margin: 0 0 0 1.6em;
 }
 ol ol li {
   list-style-type: lower-alpha;
@@ -333,7 +367,7 @@ form,
 fieldset,
 figure,
 address {
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 address {
   font-style: normal;
@@ -345,10 +379,10 @@ dd {
   margin-left: 1em;
 }
 blockquote {
-  font-size: 17px;
+  font-size: 16px;
   font-style: italic;
   position: relative;
-  padding-left: 1.618em;
+  padding-left: 1.6em;
   margin-left: 0;
   border-left: 2px solid #dbdada;
 }
@@ -415,7 +449,7 @@ pre {
   line-height: 1.45em;
   color: #333333;
   background: #f6f6f6;
-  padding: 1.618em;
+  padding: 1.6em;
   overflow: auto;
 }
 code {
@@ -430,7 +464,7 @@ pre code {
   border: none;
   padding: 0;
   background: none;
-  line-height: 1.618em;
+  line-height: 1.6em;
 }
 kbd {
   padding: 2px 6px 1px 6px;
@@ -463,13 +497,13 @@ textarea,
 select[multiple="multiple"] {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1;
-  font-size: 15px;
+  font-size: 14px;
   border-radius: 0;
   background: #fff;
   box-shadow: none;
   border: 1px solid #bbbcc0;
   outline: none;
-  padding: 0.5em 0.3333333333333333em;
+  padding: 7px 5px 6px 5px;
   position: relative;
   z-index: 2;
 }
@@ -482,8 +516,8 @@ textarea {
   line-height: 1.35em;
 }
 fieldset {
-  padding: 1.618em;
-  margin-bottom: 1.618em;
+  padding: 1.6em;
+  margin-bottom: 1.6em;
   border: 1px solid #dbdada;
 }
 legend {
@@ -522,7 +556,7 @@ table caption {
   margin-top: -1px;
 }
 .units-row {
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .units-row-end {
   margin-bottom: 0;
@@ -770,7 +804,7 @@ select.unit-100 {
   margin: 0 auto !important;
 }
 .unit-padding {
-  padding: 1.618em;
+  padding: 1.6em;
 }
 .units-padding .unit-100,
 .units-padding .unit-80,
@@ -786,7 +820,7 @@ select.unit-100 {
 .units-padding .unit-30,
 .units-padding .unit-25,
 .units-padding .unit-20 {
-  padding: 1.618em;
+  padding: 1.6em;
 }
 .units-split .unit-80,
 .units-split .unit-75,
@@ -874,7 +908,7 @@ select.unit-100 {
     width: 100%;
     float: none;
     margin-left: 0;
-    margin-bottom: 1.618em;
+    margin-bottom: 1.6em;
   }
   .unit-push-80,
   .unit-push-75,
@@ -953,7 +987,7 @@ select.unit-100 {
 .blocks-6 li {
   height: auto;
   float: left;
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
   margin-left: 3%;
 }
 .blocks-2 > li {
@@ -983,7 +1017,7 @@ select.unit-100 {
   .blocks-5,
   .blocks-6 {
     margin-left: 0;
-    margin-bottom: 1.618em;
+    margin-bottom: 1.6em;
   }
   .blocks-2 > li,
   .blocks-3 > li,
@@ -1014,7 +1048,7 @@ select.unit-100 {
 -----------------------------------------------------------------------------*/
 /* NavBar */
 .navbar {
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .navbar:after {
   content: "";
@@ -1038,16 +1072,16 @@ select.unit-100 {
 }
 .navbar ul li {
   float: left;
-  margin-right: 0.6180000000000001em;
+  margin-right: 1.6em;
 }
 .navbar-right ul li {
   margin-right: 0;
-  margin-left: 0.6180000000000001em;
+  margin-left: 1.6em;
 }
 .navbar ul li a,
 .navbar ul li span {
-  padding: .5em;
   display: block;
+  text-decoration: none;
 }
 .navbar ul li a:hover {
   color: #d70a16;
@@ -1069,53 +1103,9 @@ select.unit-100 {
   width: 1%;
   text-align: center;
 }
-/* Subnav */
-.subnav {
-  margin-bottom: 1.618em;
-}
-.subnav:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.subnav ul {
-  list-style: none;
-  margin: 0;
-}
-.subnav ul:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.subnav-right ul {
-  float: right;
-}
-.subnav ul li {
-  float: left;
-  margin-right: 1.618em;
-}
-.subnav-right ul li {
-  float: left;
-  margin-left: 1.618em;
-}
-.subnav ul li a,
-.subnav ul li span {
-  display: block;
-  text-decoration: none;
-}
-.subnav ul li a:hover {
-  color: #d70a16;
-  text-decoration: underline;
-}
-.subnav ul li.active a,
-.subnav ul li span {
-  text-decoration: none;
-  cursor: text;
-  color: rgba(0, 0, 0, 0.4);
-}
 /* Vertical */
 .nav {
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .nav ul {
   list-style: none;
@@ -1191,7 +1181,7 @@ select.unit-100 {
 }
 /* Breadcrumbs */
 .breadcrumbs {
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .breadcrumbs:after {
   content: "";
@@ -1328,7 +1318,7 @@ table.table-striped tbody tr:nth-child(odd) td {
 .table-container {
   width: 100%;
   overflow: auto;
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .table-container table {
   margin-bottom: 0;
@@ -1541,7 +1531,7 @@ input[type="search"] {
   display: inline-block;
   vertical-align: top;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1;
   text-align: center;
@@ -1552,18 +1542,23 @@ input[type="search"] {
   box-shadow: none;
   cursor: pointer;
   background: #eeeded;
-  padding: 0.65em 1.3333333333333333em;
+  padding: 9px 20px;
 }
 .btn:hover {
   color: rgba(0, 0, 0, 0.5);
   background: #dbdada;
 }
 .btn-small {
-  font-size: 12px;
+  font-size: 11px;
+  padding: 7px 16px;
 }
 .btn-outline {
   background: none;
   border: 1px solid #ddd;
+  padding: 8px 19px;
+}
+.btn-outline.btn-small {
+  padding: 6px 15px;
 }
 .btn-blue,
 .btn-red,
@@ -1839,7 +1834,7 @@ input[type="search"] {
   margin-right: 0 !important;
 }
 .pause {
-  margin-bottom: 0.809em !important;
+  margin-bottom: 0.8em !important;
 }
 .end {
   margin-bottom: 0 !important;
@@ -1864,7 +1859,7 @@ input[type="search"] {
   height: 0;
   padding-bottom: 56.25%;
   position: relative;
-  margin-bottom: 1.618em;
+  margin-bottom: 1.6em;
 }
 .video-wrapper iframe,
 .video-wrapper object,

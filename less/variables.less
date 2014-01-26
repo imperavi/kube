@@ -15,26 +15,33 @@
 @gridGutterWidth: 30;
 
 // Type
-@baseFontSize: 15;
-@baseLineHeight: 1.618;
+@baseFontSize: 14;
+@baseLineHeight: 1.6;
 @baseLine: @baseFontSize * @baseLineHeight;
 @baseLineInEms: @baseLine / @em;
 
 // Heading
-@titleFontSize: (@baseFontSize * 3.895) + 0px;
-@h1FontSize: (@baseFontSize * 2.632) + 0px;
-@h2FontSize: (@baseFontSize * 1.632) + 0px;
-@h3FontSize: (@baseFontSize * 1.333) + 0px;
-@h4FontSize: (@baseFontSize * 1.211) + 0px;
-@h5FontSize: @baseFontSize + 0px;
-@h6FontSize: (@baseFontSize - 3) + 0px;
+@h1FontSize: @baseFontSize + 22px; // 36px
+@h2FontSize: @baseFontSize + 16px; // 30px
+@h3FontSize: @baseFontSize + 10px; // 24px
+@h4FontSize: @baseFontSize + 4px; // 18px
+@h5FontSize: @baseFontSize + 0px; // 14px
+@h6FontSize: @baseFontSize - 2px; // 12px
+
+@h1SubheadingFontSize: @baseFontSize + 16px; // 30px
+@h2SubheadingFontSize: @baseFontSize + 10px; // 24px
+@h3SubheadingFontSize: @baseFontSize + 4px; // 18px
+@h4SubheadingFontSize: @baseFontSize + 0px; // 14px
+@h5SubheadingFontSize: @baseFontSize - 2px; // 12px
 
 // Font size
-@superSmallFontSize: (@baseFontSize - 5) + 0px;
-@smallFontSize: (@baseFontSize - 3) + 0px;
-@bigFontSize: (@baseFontSize + 4) + 0px;
-@quoteFontSize: (@baseFontSize + 2) + 0px;
-
+@superSmallFontSize: @baseFontSize - 4px; // 10px
+@smallFontSize: @baseFontSize - 2px; // 12px
+@leadFontSize: @baseFontSize + 4px; // 18px
+@bigFontSize: @baseFontSize + 4px; // 18px
+@quoteFontSize: @baseFontSize + 2px; // 16px
+@buttonsFontSize: @baseFontSize - 1px; // 13px
+@buttonsSmallFontSize: @baseFontSize - 3px; // 11px
 
 // Colors
 @colorBlack: #0f0f0f;

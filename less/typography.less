@@ -22,14 +22,9 @@ h4,
 h5,
 h6 {
 	font-family: @headingsFontFamily;
-	font-weight: 500;
+	font-weight: bold;
 	color: @colorHeadings;
 	text-rendering: optimizeLegibility;
-}
-.title {
-	font-size: @titleFontSize;
-	line-height: 1.111em;
-	margin-bottom: .15em;
 }
 h1 {
 	font-size: @h1FontSize;
@@ -53,7 +48,6 @@ h4 {
 }
 h5 {
 	font-size: @h5FontSize;
-	font-weight: bold;
 	line-height: @baseLineInEms;
 	margin-bottom: .25em;
 }
@@ -63,8 +57,43 @@ h6 {
 	line-height: @baseLineInEms;
 	margin-bottom: .45em;
 }
+
+/* =Subheading
+-----------------------------------------------------------------------------*/
+hgroup h1:first-child,
+hgroup h2:first-child,
+hgroup h3:first-child,
+hgroup h4:first-child,
+hgroup h5:first-child, {
+	margin-bottom: 0;
+}
+h1.subheading,
+h2.subheading,
+h3.subheading,
+h4.subheading,
+h5.subheading {
+	font-weight: 300;
+}
+h1.subheading {
+	font-size: @h1SubheadingFontSize;
+}
+h2.subheading {
+	font-size: @h2SubheadingFontSize;
+}
+h3.subheading {
+	font-size: @h3SubheadingFontSize;
+}
+h4.subheading {
+	font-size: @h4SubheadingFontSize;
+}
+h5.subheading {
+	font-size: @h5SubheadingFontSize;
+}
+
+/* =Lead
+-----------------------------------------------------------------------------*/
 .lead {
-	font-size: @h4FontSize;
+	font-size: @leadFontSize;
 	font-weight: 300;
 	line-height: 1.5em;
 	margin-bottom: .75em;
@@ -242,7 +271,7 @@ select[multiple="multiple"] {
 	box-shadow: none;
 	border: 1px solid #bbbcc0;
 	outline: none;
-	padding: .5em (5 / @baseFontSize) + 0em;
+	padding: 7px 5px 6px 5px;
 	position: relative;
 	z-index: 2;
 }

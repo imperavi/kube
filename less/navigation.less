@@ -19,16 +19,16 @@
 }
 .navbar ul li {
 	float: left;
-	margin-right: @baseLineInEms - 1em;
+	margin-right: @baseLineInEms;
 }
 .navbar-right ul li {
 	margin-right: 0;
-	margin-left: @baseLineInEms - 1em;
+	margin-left: @baseLineInEms;
 }
 .navbar ul li a,
 .navbar ul li span {
-	padding: .5em;
 	display: block;
+	text-decoration: none;
 }
 .navbar ul li a:hover {
 	color: @colorLinkHover;
@@ -52,44 +52,6 @@
 	width: 1%;
 	text-align: center;
 }
-
-/* Subnav */
-.subnav {
-	margin-bottom: @baseLineInEms;
-	.clearfix;
-}
-.subnav ul {
-	list-style: none;
-	margin: 0;
-	.clearfix;
-}
-.subnav-right ul {
-	float: right;
-}
-.subnav ul li {
-	float: left;
-	margin-right: @baseLineInEms;
-}
-.subnav-right ul li {
-	float: left;
-	margin-left: @baseLineInEms;
-}
-.subnav ul li a,
-.subnav ul li span {
-	display: block;
-	text-decoration: none;
-}
-.subnav ul li a:hover {
-	color: @colorLinkHover;
-	text-decoration: underline;
-}
-.subnav ul li.active a,
-.subnav ul li span {
-	text-decoration: none;
-	cursor: text;
-	color: rgba(0, 0, 0, .4);
-}
-
 
 
 /* Vertical */

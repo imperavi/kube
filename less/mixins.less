@@ -28,6 +28,13 @@
 	-moz-box-sizing: @box-model;
 	box-sizing: @box-model;
 }
+.vertical-align {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
 .gradient(@start: #555, @end: #333) {
 	background-color: mix(@start, @end, 60%);
 	background-image: -moz-linear-gradient(top, @start, @end); // FF 3.6+

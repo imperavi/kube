@@ -5,7 +5,7 @@
 	vertical-align: top;
 
 	font-family: @buttonsFontFamily;
-	font-size: @baseFontSize + 0px;
+	font-size: @buttonsFontSize;
 	font-weight: 400;
 
 	line-height: 1;
@@ -21,7 +21,7 @@
 	cursor: pointer;
 
 	background: #eeeded;
-	padding: .65em (20 / @baseFontSize) + 0em;
+	padding: 9px 20px;
 
 	&:hover {
 		color: rgba(0, 0, 0, .5);
@@ -29,12 +29,18 @@
 	}
 }
 .btn-small {
-	font-size: @smallFontSize + 0px;
+	font-size: @buttonsSmallFontSize;
+	padding: 7px 16px;
 }
 .btn-outline {
 	background: none;
 	border: 1px solid #ddd;
+	padding: 8px 19px;
+	&.btn-small {
+		padding: 6px 15px;
+	}
 }
+
 
 .btn-blue,
 .btn-red,
