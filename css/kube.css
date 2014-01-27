@@ -1103,6 +1103,10 @@ select.unit-100 {
   width: 1%;
   text-align: center;
 }
+.fullwidth li a,
+.fullwidth li span {
+  display: block;
+}
 /* Vertical */
 .nav {
   margin-bottom: 1.6em;
@@ -1115,17 +1119,14 @@ select.unit-100 {
   margin-left: 2em;
   font-size: .95em;
 }
-.nav ul li ul li:last-child {
-  border-bottom: none;
-}
-.nav ul li ul li a,
-.nav ul li ul li span {
-  padding: 4px 0;
-}
 .nav ul li a,
 .nav ul li span {
   display: block;
   padding: 5px 0;
+}
+.nav ul li ul li a,
+.nav ul li ul li span {
+  padding: 4px 0;
 }
 .nav ul li a {
   text-decoration: none;
@@ -1715,78 +1716,6 @@ input[type="search"] {
 }
 .btn-append .btn {
   border-radius: 0 4px 4px 0;
-}
-/* =Labels
------------------------------------------------------------------------------*/
-.label {
-  display: inline-block;
-  line-height: 1;
-  font-size: 12px;
-  text-decoration: none;
-  border-radius: 3px;
-}
-.label,
-.label-small {
-  color: #0f0f0f;
-  padding: 3px 10px;
-  border: 1px solid #ddd;
-}
-.label:hover,
-.label-small:hover {
-  color: #0f0f0f;
-}
-.label-small {
-  font-size: 10px;
-  padding: 2px 9px;
-}
-.label-blue,
-.label-green,
-.label-red,
-.label-yellow,
-.label-black,
-.label-gray {
-  padding: 4px 11px;
-  border: none;
-}
-.label-blue.label-small,
-.label-green.label-small,
-.label-red.label-small,
-.label-yellow.label-small,
-.label-black.label-small,
-.label-gray.label-small {
-  padding: 3px 10px;
-}
-.label-blue,
-.label-green,
-.label-red,
-.label-black,
-.label-gray {
-  color: #ffffff;
-}
-.label-blue:hover,
-.label-green:hover,
-.label-red:hover,
-.label-black:hover,
-.label-gray:hover {
-  color: #ffffff;
-}
-.label-blue {
-  background: #3d58a8;
-}
-.label-green {
-  background: #159776;
-}
-.label-red {
-  background: #d70a16;
-}
-.label-yellow {
-  background: #fddc43;
-}
-.label-black {
-  background: #0f0f0f;
-}
-.label-gray {
-  background: #bbbcc0;
 }
 /* =Helpers
 -----------------------------------------------------------------------------*/
