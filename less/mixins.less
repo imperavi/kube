@@ -69,7 +69,7 @@
 }
 .retina-image(@path, @w: auto, @h: auto) {
   background-image: url(@path);
-  @at2x_path: ~`"@{path}".split('.').slice(0, "@{path}".split('.').length - 1).join(".") + "@2x" + "." + "@{path}".split('.')["@{path}".split('.').length - 1]`;
+  @at2x_path: ~'@{path}.replace(/\.\w+$/, function(match) { return "@2x" + match; })';
 
   @media
   only screen and (-webkit-min-device-pixel-ratio: 2),
