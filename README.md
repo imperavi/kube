@@ -7,8 +7,7 @@ Hereâ€™s your most advanced and flexible CSS-framework. Take a look. Kube doesnâ
 
 ##[Documentation and examples](http://imperavi.com/kube/)
 
-- [Basic template](http://imperavi.com/kube/template/)
-- [Details](http://imperavi.com/kube/details/)
+- [Details](http://imperavi.com/kube/)
 - [Typography](http://imperavi.com/kube/typography/)
 - [Grid](http://imperavi.com/kube/grid/)
 - [Blocks](http://imperavi.com/kube/blocks/)
@@ -16,7 +15,6 @@ Hereâ€™s your most advanced and flexible CSS-framework. Take a look. Kube doesnâ
 - [Forms](http://imperavi.com/kube/forms/)
 - [Navigation](http://imperavi.com/kube/navigation/)
 - [Buttons](http://imperavi.com/kube/buttons/)
-- [Labels](http://imperavi.com/kube/labels/)
 - [Helpers](http://imperavi.com/kube/helpers/)
 - [Mixins](http://imperavi.com/kube/mixins/)
 
