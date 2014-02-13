@@ -503,9 +503,11 @@ select[multiple="multiple"] {
   box-shadow: none;
   border: 1px solid #bbbcc0;
   outline: none;
-  padding: 7px 5px 6px 5px;
+  padding: 7px 5px;
+  height: 2.3em;
   position: relative;
   z-index: 2;
+  -webkit-appearance: none;
 }
 input[type="range"] {
   position: relative;
@@ -1532,18 +1534,20 @@ input[type="search"] {
   display: inline-block;
   vertical-align: top;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   text-align: center;
   text-decoration: none;
   color: #333333;
+  margin: 0;
   border: none;
   border-radius: 3px;
   box-shadow: none;
   cursor: pointer;
   background: #eeeded;
   padding: 9px 20px;
+  height: 2.3em;
 }
 .btn:hover {
   color: rgba(0, 0, 0, 0.5);
