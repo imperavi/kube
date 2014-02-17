@@ -1511,21 +1511,25 @@ input[type="search"] {
 }
 .input-groups input,
 .input-groups .input-append,
-.input-groups .input-prepend {
+.input-groups .input-prepend,
+.input-groups .btn-append {
   display: table-cell !important;
 }
+.input-groups .btn-append,
 .input-groups .input-append,
 .input-groups .input-prepend {
   width: 1%;
+  vertical-align: middle;
+}
+.input-groups .input-append,
+.input-groups .input-prepend {
   background-color: #eee;
   border: 1px solid #ccc;
   margin: 0;
-  padding: 9px 5px 7px 5px;
-  height: 2.3em;
+  padding: 0;
   color: #333333;
   line-height: 1;
   font-size: 1em;
-  vertical-align: middle;
   white-space: nowrap;
 }
 .input-groups .input-prepend {
@@ -1535,6 +1539,11 @@ input[type="search"] {
   position: relative;
   z-index: 1;
   border-left: none;
+}
+.input-groups .btn-append .btn {
+  display: block;
+  height: auto;
+  border-radius: 0 4px 4px 0;
 }
 /* =Mobile (Portrait)
 -----------------------------------------------------------------------------*/
@@ -1725,19 +1734,6 @@ input[type="submit"].btn {
 .btn-black.btn-disabled,
 .btn-black[disabled] {
   background: #4d4d4d;
-}
-/* Append  */
-.btn-append:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.btn-append input,
-.btn-append .btn {
-  float: left;
-}
-.btn-append .btn {
-  border-radius: 0 4px 4px 0;
 }
 /* =Helpers
 -----------------------------------------------------------------------------*/
