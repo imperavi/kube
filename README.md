@@ -31,7 +31,7 @@ Kube works in all modern browsers on desktops and mobile devices:
 
 ####License
 
-Kube Framework is absolutely free for personal or commercial use.
+Kube licensed under [MIT](http://opensource.org/licenses/MIT). Kube Framework is absolutely free for personal or commercial use.
 
 ####License FAQ
 
