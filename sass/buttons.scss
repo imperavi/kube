@@ -1,0 +1,170 @@
+/* =Buttons
+-----------------------------------------------------------------------------*/
+.btn {
+	display: inline-block;
+	vertical-align: top;
+
+	font-family: $controlsFontFamily;
+	font-size: $baseFontSize + 0px;
+	font-weight: 400;
+
+	line-height: 1;
+
+    text-align: center;
+	text-decoration: none;
+	color: $colorBody;
+
+	margin: 0;
+	border: none;
+	border-radius: 3px;
+	box-shadow: none;
+
+	cursor: pointer;
+
+	background: #eeeded;
+	padding: 9px 20px;
+	height: 2.3em;
+
+	&:hover {
+		color: rgba(0, 0, 0, .5);
+		background: #dbdada;
+	}
+}
+input[type="submit"].btn {
+	-webkit-appearance: none;
+}
+.btn-small {
+	font-size: $buttonsSmallFontSize;
+	padding: 7px 16px;
+}
+.btn-outline {
+	background: none;
+	border: 1px solid #ddd;
+	padding: 8px 19px;
+	&.btn-small {
+		padding: 6px 15px;
+	}
+}
+
+
+.btn-blue,
+.btn-red,
+.btn-green,
+.btn-black {
+	color: #fff;
+	&:hover {
+		color: rgba(255, 255, 255, .7);
+	}
+}
+.btn-white {
+	background: #fff;
+	&:hover { background: darken(#fff, 5%); }
+}
+.btn-white.btn-outline {
+	background: none;
+	border-color: rgba(255, 255, 255, .85);
+	color: rgba(255, 255, 255, .85);
+	&:hover {
+		color: rgba(0, 0, 0, .9);
+		background: #fff;
+	}
+}
+.btn-blue {
+	background: $colorBlue;
+	&:hover { background: darken($colorBlue, 10%); }
+}
+.btn-red {
+	background: $colorRed;
+	&:hover { background: darken($colorRed, 10%); }
+}
+.btn-green {
+	background: $colorGreen;
+	&:hover { background: darken($colorGreen, 10%); }
+}
+.btn-yellow {
+	background: $colorYellow;
+	color: #000;
+	&:hover {
+		background: darken($colorYellow, 17%);
+	}
+}
+.btn-black {
+	background: #000;
+	&:hover { background: lighten(#000, 20%); }
+}
+
+.btn-active,
+.btn[disabled],
+.btn-disabled {
+	border: none;
+	background: none;
+	background-color: #dbdada;
+	color: rgba(0, 0, 0, .5);
+	&:hover {
+		color: rgba(0, 0, 0, .5);
+	}
+}
+.btn-active {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset;
+}
+.btn[disabled],
+.btn-disabled {
+	cursor: default;
+	box-shadow: none;
+}
+
+.btn-blue.btn-active,
+.btn-red.btn-active,
+.btn-green.btn-active,
+.btn-black.btn-active {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .7) inset;
+}
+
+.btn-blue.btn-active,
+.btn-red.btn-active,
+.btn-green.btn-active,
+.btn-black.btn-active,
+.btn-blue.btn-disabled,
+.btn-red.btn-disabled,
+.btn-green.btn-disabled,
+.btn-black.btn-disabled,
+.btn-blue[disabled],
+.btn-red[disabled],
+.btn-green[disabled],
+.btn-black[disabled] {
+	color: rgba(255, 255, 255, .6);
+	&:hover {
+		color: rgba(255, 255, 255, .6);
+	}
+}
+
+.btn-white.btn-active,
+.btn-white.btn-disabled,
+.btn-white[disabled] {
+	background: darken(#fff, 5%);
+}
+.btn-blue.btn-active,
+.btn-blue.btn-disabled,
+.btn-blue[disabled] {
+	background: darken($colorBlue, 10%);
+}
+.btn-red.btn-active,
+.btn-red.btn-disabled,
+.btn-red[disabled] {
+	background: darken($colorRed, 10%);
+}
+.btn-green.btn-active,
+.btn-green.btn-disabled,
+.btn-green[disabled] {
+	background: darken($colorGreen, 10%);
+}
+.btn-yellow.btn-active,
+.btn-yellow.btn-disabled,
+.btn-yellow[disabled] {
+	background: darken($colorYellow, 17%);
+}
+.btn-black.btn-active,
+.btn-black.btn-disabled,
+.btn-black[disabled] {
+	background: lighten(#000, 30%);
+}
