@@ -172,7 +172,8 @@
 	color: @color-black;
 	text-decoration: none;
 }
-.breadcrumbs ul li.active a {
+.breadcrumbs ul li.active a,
+.breadcrumbs ul li.active a:hover {
 	text-decoration: none;
 	cursor: text;
 	color: rgba(0, 0, 0, .4);
@@ -204,14 +205,19 @@
 	color: @color-black;
 	text-decoration: none;
 }
-.pagination span {
+.pagination li span,
+.pagination li.active a,
+.pagination li.active a:hover {
 	border: 1px solid #ddd;
+	background: none;
+	cursor: text;
 }
 .pagination li a:focus,
 .pagination li a:hover {
 	text-decoration: none;
 	background-color: @color-black;
 	color: #fff;
+	border: 1px solid transparent;
 }
 
 /* =Responsive
@@ -220,17 +226,12 @@
 	.navbar-left,
 	.navbar-right,
 	.navbar ul li,
-	.navbar-right ul li,
-	.subnav-right ul,
-	.subnav ul li,
-	.subnav-right ul li	{
+	.navbar-right ul li {
 		float: none;
 		text-align: center;
 	}
 	.navbar ul li,
-	.navbar-right ul li,
-	.subnav ul li,
-	.subnav-right ul li	{
+	.navbar-right ul li {
 		margin-left: 0;
 		margin-right: 0;
 	}
