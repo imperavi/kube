@@ -2,6 +2,9 @@
 html
 img
 js
+tests
+index.html
+test.html
 css/master.css
 less/master.less
 *.php

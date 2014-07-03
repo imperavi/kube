@@ -3,12 +3,7 @@
 .forms {
 	& label {
 		display: block;
-		margin-bottom: @fieldsBottom;
-	}
-
-	& fieldset {
-		padding-bottom: .5em;
-		border-radius: 4px;
+		margin-bottom: @base-line / 1.5;
 	}
 
 	& input[type="text"],
@@ -20,6 +15,9 @@
 	& input[type="number"],
 	& input[type="datetime"],
 	& input[type="date"],
+	& input[type="month"],
+	& input[type="color"],
+	& input[type="time"],
 	& input[type="search"],
 	& input[type="range"],
 	& input[type="file"],
@@ -40,6 +38,9 @@
 	& input[type="number"],
 	& input[type="datetime"],
 	& input[type="date"],
+	& input[type="month"],
+	& input[type="color"],
+	& input[type="time"],
 	& input[type="search"],
 	& input[type="range"],
 	& input[type="file"],
@@ -54,7 +55,7 @@
 .forms-inline-list {
 	margin: 0;
 	padding: 0;
-	margin-bottom: @fieldsBottom;
+	margin-bottom: @base-line / 1.5;
 	list-style: none;
 }
 .forms-list label,
@@ -64,7 +65,10 @@
 	margin-bottom: 0;
 }
 .forms-inline-list li label {
-	margin-right: @fieldsBottom;
+	margin-right: @base-line / 2;
+}
+.forms-inline-list li {
+	margin-bottom: 3px;
 }
 .forms-list li {
 	margin-bottom: 6px;
@@ -72,16 +76,10 @@
 .forms-desc {
 	margin-top: 4px;
 	color: rgba(0, 0, 0, .4);
-	font-size: @smallFontSize;
+	font-size: @font-size-small;
 	line-height: 1.4em;
 }
 
-
-input[type="radio"],
-input[type="checkbox"] {
-	position: relative;
-	top: -1px;
-}
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -91,41 +89,35 @@ input[type="tel"],
 input[type="number"],
 input[type="datetime"],
 input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
 input[type="search"],
 input[type="datetime-local"],
 textarea {
 	.transition(border ease .5s);
 }
-input[type="range"] {
-	position: relative;
-	top: 3px;
-}
-textarea {
-	line-height: 1.4em;
-}
-select {
-	margin-bottom: 0 !important;
-}
+
 
 /* States */
 .error,
 .success {
 	font-weight: normal;
-	font-size: @smallFontSize;
+	font-size: @font-size-small;
 }
 input.input-error,
 textarea.input-error,
 select.input-error,
 .input-error {
-	border-color: @colorRed;
-	box-shadow: 0 0 0 2px rgba(red(@colorRed), green(@colorRed), blue(@colorRed), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+	border-color: @color-red;
+	box-shadow: 0 0 0 2px rgba(red(@color-red), green(@color-red), blue(@color-red), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
 }
 input.input-success,
 textarea.input-success,
 select.input-success,
 .input-success  {
-	border-color: @colorGreen;
-	box-shadow: 0 0 0 2px rgba(red(@colorGreen), green(@colorGreen), blue(@colorGreen), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+	border-color: @color-green;
+	box-shadow: 0 0 0 2px rgba(red(@color-green), green(@color-green), blue(@color-green), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
 
 }
 input.input-gray,
@@ -136,19 +128,50 @@ select.input-gray,
 	box-shadow: 0 0 0 2px rgba(204, 204, 204, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
 }
 
-input:focus,
-textarea:focus {
-	outline: none;
-	border-color: #5ca9e4;
-	box-shadow: 0 0 0 2px rgba(70, 161, 231, .3), 0 1px 2px rgba(0, 0, 0, .2) inset;
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
+input[type="search"],
+input[type="datetime-local"],
+textarea {
+	&:focus {
+		outline: none;
+		border-color: #5ca9e4;
+		box-shadow: 0 0 0 2px rgba(70, 161, 231, .3), 0 1px 2px rgba(0, 0, 0, .2) inset;
+	}
 }
 
 input.input-search,
 input[type="search"] {
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: .5em;
+	padding-left: .5em;
 	margin-bottom: 0;
 	border-radius: 15px;
+}
+
+/* Sizes */
+.input-big,
+.input-small,
+.input-small-super {
+	padding: .3em 1.75em;
+}
+.input-big {
+	font-size: @font-size-big;
+}
+.input-small {
+	font-size: @font-size-small;
+}
+.input-small-super {
+	font-size: @font-size-small-super;
 }
 
 /* Append & Prepend */
@@ -175,10 +198,10 @@ input[type="search"] {
 	background-color: #eee;
 	border: 1px solid #ccc;
 	margin: 0;
-	padding: 0;
-	color: @colorBody;
-	line-height: 1;
-	font-size: 1em;
+	padding: .35em .75em .25em .75em;
+	color: rgba(0, 0, 0, .5);
+	line-height: @base-line;
+	font-size: @font-size-small;
 	white-space: nowrap;
 }
 .input-groups .input-prepend {
@@ -192,7 +215,7 @@ input[type="search"] {
 .input-groups .btn-append .btn {
 	display: block;
 	height: auto;
-	border-radius: 0 4px 4px 0;
+	border-radius: 0 2px 2px 0;
 }
 
 /* =Mobile (Portrait)

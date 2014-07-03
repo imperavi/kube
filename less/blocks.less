@@ -7,13 +7,13 @@
 .blocks-6 {
 	padding-left: 0;
 	list-style: none;
-	margin-left: -@gridGutterWidth / (@gridWidth / 100) * 1%;
+	margin-left: -@grid-gutter-width / (@grid-width / 100) * 1%;
 	.clearfix;
 	& li {
 		height: auto;
 		float: left;
-		margin-bottom: @baseLine / @em;
-		margin-left: @gridGutterWidth / (@gridWidth / 100) * 1%;
+		margin-bottom: @base-line;
+		margin-left: @grid-gutter-width / (@grid-width / 100) * 1%;
 	}
 }
 
@@ -37,7 +37,7 @@
 	.blocks-5,
 	.blocks-6 {
 		margin-left: 0;
-		margin-bottom: @baseLine/@em;
+		margin-bottom: @base-line;
 	}
 
 	.blocks-2 > li,
@@ -53,11 +53,11 @@
 	.blocks-mobile-50 > li,
 	.blocks-mobile-33 > li {
 		float: left;
-		margin-left: @gridGutterWidth/(@gridWidth/100)*1%;
+		margin-left: @grid-gutter-width/(@grid-width/100)*1%;
 	}
 	.blocks-mobile-33,
 	.blocks-mobile-50 {
-		margin-left: -@gridGutterWidth/(@gridWidth/100)*1%;
+		margin-left: -@grid-gutter-width/(@grid-width/100)*1%;
 	}
 
 	.blocks-mobile-50 > li {

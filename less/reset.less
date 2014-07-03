@@ -1,15 +1,19 @@
-/* =Normalize
+@import "mixins.less";
+
+/* =Reset
 -----------------------------------------------------------------------------*/
 *,
 *:before,
 *:after {
 	.box-sizing(border-box);
 }
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
+
 html,
 body,
 div,
@@ -98,19 +102,12 @@ h6 {
 	vertical-align: baseline;
 	background: transparent;
 }
+
 a:active,
 a:hover {
     outline: 0;
 }
-button,
-input {
-    line-height: normal;
-}
-button,
-select {
-    text-transform: none;
-}
-/* Structure tags */
+
 article,
 aside,
 details,
@@ -122,18 +119,24 @@ hgroup,
 main,
 nav,
 section,
-summary {
+embed,
+object,
+iframe,
+audio,
+video,
+canvas,
+progress,
+meter,
+output,
+textarea {
 	display: block;
 }
-audio,
-canvas,
-video {
-    display: inline-block;
-}
+
 audio:not([controls]) {
     display: none;
     height: 0;
 }
+
 /* To prevent some browsers from inserting quotes on q and p */
 blockquote,
 q {
@@ -146,6 +149,7 @@ q:after {
 	content: '';
 	content: none;
 }
+
 /* Table reset */
 table {
 	border-collapse: collapse;
@@ -156,19 +160,20 @@ th,
 td {
 	text-align: left;
 	vertical-align: top;
-	font-weight: normal;
 }
 thead th,
 thead td {
 	font-weight: bold;
 	vertical-align: bottom;
 }
+
 /* Image inside */
 a img,
 th img,
 td img {
 	vertical-align: top;
 }
+
 button,
 input,
 select,
@@ -180,17 +185,25 @@ textarea {
 	vertical-align: top;
 	resize: vertical;
 }
+
 /* Normalize buttons in IE */
 button {
 	width: auto;
 	overflow: visible;
 }
+
 /* Hand cursor on clickable controls */
-input[type=button],
-input[type=submit],
+input[type="reset"],
+input[type="submit"],
+input[type="file"],
+input[type="radio"],
+input[type="checkbox"],
+select,
 button {
 	cursor: pointer;
 }
+
+
 /* Trick with vertical align for radio and checkbox  */
 input[type="radio"],
 input[type="checkbox"] {
@@ -198,28 +211,43 @@ input[type="checkbox"] {
 	position: relative;
 	top: -1px;
 }
+
 /* Normalize search fields */
 input[type="search"] {
 	-webkit-appearance: textfield;
 }
-input[type="search"]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
 	-webkit-appearance: none;
 }
+
+/* Normalize horizontal line */
 hr {
 	display: block;
 	height: 1px;
 	border: 0;
 	border-top: 1px solid #ddd;
 }
+
 /* Responsive media */
 img,
-video {
+video,
+audio,
+embed,
+object {
 	max-width: 100%;
+}
+img,
+video,
+embed,
+object {
 	height: auto;
 }
-img {
-	-ms-interpolation-mode: bicubic;
+embed,
+object {
+    height: 100%;
 }
-audio {
-	width: 100%;
+img {
+	vertical-align: middle;
+	-ms-interpolation-mode: bicubic;
 }

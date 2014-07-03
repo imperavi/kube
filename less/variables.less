@@ -1,59 +1,81 @@
 // Font
-@baseFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
-@headingsFontFamily: @baseFontFamily;
-@controlsFontFamily: @baseFontFamily;
-@codeFontFamily: Menlo, Monaco, Consolas, "Courier New", monospace;
-
-// Base color
-@backgroundBody: #fff;
-@colorBody: #333;
-@colorHeadings: #222;
+@font-family-base: "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+@font-family-headings: @font-family-base;
+@font-family-controls: @font-family-base;
+@font-family-code: Menlo, Monaco, Consolas, "Courier New", monospace;
 
 // Grid
-@gridWidth: 1000;
-@gridGutterWidth: 30;
+@grid-width: 1000;
+@grid-gutter-width: 30;
+
+// Base color
+@background-body: #fff;
+@color-body: #333;
+@color-headings: #222;
 
 // Type
-@baseFontSize: 14;
-@baseLineHeight: 1.6;
-@baseLine: @baseFontSize * @baseLineHeight;
-@baseLineInEms: @baseLine / @em;
+@font-size-print: 12pt;
+@font-size-base: .85em; // 14px by default
+@base-line: 1.618em;
 
-// Heading
-@h1FontSize: @baseFontSize + 22px; // 36px
-@h2FontSize: @baseFontSize + 16px; // 30px
-@h3FontSize: @baseFontSize + 10px; // 24px
-@h4FontSize: @baseFontSize + 4px; // 18px
-@h5FontSize: @baseFontSize + 0px; // 14px
-@h6FontSize: @baseFontSize - 2px; // 12px
+// Font size and line height
+@font-size-lead: 1.35em;
+@line-height-lead: 1.35em;
 
-@h1SubheadingFontSize: @baseFontSize + 16px; // 30px
-@h2SubheadingFontSize: @baseFontSize + 10px; // 24px
-@h3SubheadingFontSize: @baseFontSize + 4px; // 18px
-@h4SubheadingFontSize: @baseFontSize + 0px; // 14px
-@h5SubheadingFontSize: @baseFontSize - 2px; // 12px
+@font-size-big: 1.25em;
+@font-size-small: .85em;
+@font-size-small-super: .65em;
 
-// Font size
-@superSmallFontSize: @baseFontSize - 4px; // 10px
-@smallFontSize: @baseFontSize - 2px; // 12px
-@leadFontSize: @baseFontSize + 4px; // 18px
-@bigFontSize: @baseFontSize + 4px; // 18px
-@quoteFontSize: @baseFontSize + 2px; // 16px
-@buttonsSmallFontSize: @baseFontSize - 3px; // 11px
+
+// Headings
+
+// subheadings
+@subheading-h1-scale: 1.5;
+@subheading-h2-scale: 1.5;
+@subheading-h3-scale: 1.5;
+@subheading-h4-scale: 1.2;
+@subheading-h5-scale: 1.125;
+
+// print
+@font-size-h1-print: 36pt;
+@font-size-h2-print: 24pt;
+@font-size-h3-print: 18pt;
+@font-size-h4-print: 14pt;
+@font-size-h5-print: 12pt;
+@font-size-h6-print: 12pt;
+
+// Large desktop
+@font-size-h1-lg: @font-size-base * 2.5;
+@font-size-h2-lg: @font-size-base * 2;
+@font-size-h3-lg: @font-size-base * 1.7;
+@font-size-h4-lg: @font-size-base * 1.3;
+@font-size-h5-lg: @font-size-base * 1;
+@font-size-h6-lg: @font-size-base * 0.85;
+
+// Portrait tablet to landscape and desktop
+@font-size-h1-md: @font-size-base * 2.5;
+@font-size-h2-md: @font-size-base * 2;
+@font-size-h3-md: @font-size-base * 1.7;
+@font-size-h4-md: @font-size-base * 1.3;
+@font-size-h5-md: @font-size-base * 1;
+@font-size-h6-md: @font-size-base * 0.85;
+
+// Landscape phone to portrait tablet
+@font-size-h1-sm: @font-size-base * 2;
+@font-size-h2-sm: @font-size-base * 1.5;
+@font-size-h3-sm: @font-size-base * 1.375;
+@font-size-h4-sm: @font-size-base * 1.125;
+@font-size-h5-sm: @font-size-base * 1;
+@font-size-h6-sm: @font-size-base * 0.85;
+
 
 // Colors
-@colorBlack: #0f0f0f;
-@colorBlue: #3d58a8;
-@colorRed: #d70a16;
-@colorGreen: #159776;
-@colorYellow: #fddc43;
+@color-black: #0f0f0f;
+@color-blue: #3d58a8;
+@color-red: #d70a16;
+@color-green: #159776;
+@color-yellow: #fddc43;
 
 // LinkColor
-@colorLink: #3570c3;
-@colorLinkHover: @colorRed;
-
-// Forms
-@fieldsBottom: 1em;
-
-// Util
-@em: @baseFontSize * 1em; // outputting ems, e.g. 14 / @em
+@color-link: #3570c3;
+@color-link-hover: @color-red;

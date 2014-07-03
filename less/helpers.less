@@ -3,8 +3,14 @@
 .group {
 	.clearfix;
 }
+.big {
+	font-size: @font-size-big;
+}
 .small {
-	font-size: @smallFontSize;
+	font-size: @font-size-small;
+}
+.small-super {
+	font-size: @font-size-small-super;
 }
 .nowrap,
 .nowrap td {
@@ -13,7 +19,7 @@
 .req,
 .required {
 	font-weight: normal;
-	color: @colorRed;
+	color: @color-red;
 }
 .color-gray {
 	color: #777;
@@ -26,11 +32,11 @@
 }
 .color-red,
 .error {
-	color: @colorRed;
+	color: @color-red;
 }
 .color-green,
 .success {
-	color: @colorGreen;
+	color: @color-green;
 }
 .text-centered {
 	text-align: center;
@@ -42,7 +48,7 @@
 	margin-right: 0 !important;
 }
 .pause {
-	margin-bottom: @baseLineHeight/2 + 0em !important;
+	margin-bottom: @base-line / 2 !important;
 }
 .end {
 	margin-bottom: 0 !important;
@@ -69,7 +75,7 @@
 	height: 0;
 	padding-bottom: 56.25%; // ratio 16:9
 	position: relative;
-	margin-bottom: @baseLineInEms;
+	margin-bottom: @base-line;
 	& iframe,
 	& object,
 	& embed {

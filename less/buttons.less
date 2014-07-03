@@ -4,46 +4,47 @@
 	display: inline-block;
 	vertical-align: top;
 
-	font-family: @controlsFontFamily;
-	font-size: @baseFontSize + 0px;
+	font-family: @font-family-controls;
+	font-size: 1em;
 	font-weight: 400;
 
-	line-height: 1;
+	line-height: @base-line;
 
     text-align: center;
 	text-decoration: none;
-	color: @colorBody;
+	color: @color-body;
 
 	margin: 0;
-	border: none;
-	border-radius: 3px;
+	border: 1px solid transparent;
+	border-radius: 2px;
 	box-shadow: none;
-
 	cursor: pointer;
-
 	background: #eeeded;
-	padding: 9px 20px;
-	height: 2.3em;
+	padding: .3em 1.3em;
 
 	&:hover {
 		color: rgba(0, 0, 0, .5);
 		background: #dbdada;
 	}
 }
-input[type="submit"].btn {
-	-webkit-appearance: none;
+.btn::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+.btn-big {
+	font-size: @font-size-big;
 }
 .btn-small {
-	font-size: @buttonsSmallFontSize;
-	padding: 7px 16px;
+	font-size: @font-size-small;
 }
+.btn-small-super {
+	font-size: @font-size-small-super;
+	vertical-align: baseline;
+}
+
 .btn-outline {
 	background: none;
 	border: 1px solid #ddd;
-	padding: 8px 19px;
-	&.btn-small {
-		padding: 6px 15px;
-	}
 }
 
 
@@ -51,9 +52,9 @@ input[type="submit"].btn {
 .btn-red,
 .btn-green,
 .btn-black {
-	color: #fff;
+		color: rgba(255, 255, 255, .9);
 	&:hover {
-		color: rgba(255, 255, 255, .7);
+		color: rgba(255, 255, 255, .6);
 	}
 }
 .btn-white {
@@ -70,22 +71,22 @@ input[type="submit"].btn {
 	}
 }
 .btn-blue {
-	background: @colorBlue;
-	&:hover { background: darken(@colorBlue, 10%); }
+	background: @color-blue;
+	&:hover { background: darken(@color-blue, 10%); }
 }
 .btn-red {
-	background: @colorRed;
-	&:hover { background: darken(@colorRed, 10%); }
+	background: @color-red;
+	&:hover { background: darken(@color-red, 10%); }
 }
 .btn-green {
-	background: @colorGreen;
-	&:hover { background: darken(@colorGreen, 10%); }
+	background: @color-green;
+	&:hover { background: darken(@color-green, 10%); }
 }
 .btn-yellow {
-	background: @colorYellow;
+	background: @color-yellow;
 	color: #000;
 	&:hover {
-		background: darken(@colorYellow, 17%);
+		background: darken(@color-yellow, 17%);
 	}
 }
 .btn-black {
@@ -96,16 +97,35 @@ input[type="submit"].btn {
 .btn-active,
 .btn[disabled],
 .btn-disabled {
-	border: none;
 	background: none;
-	background-color: #dbdada;
+	background: #dbdada;
 	color: rgba(0, 0, 0, .5);
 	&:hover {
 		color: rgba(0, 0, 0, .5);
 	}
 }
 .btn-active {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset;
+	border-top-color: #aaa;
+	border-right-color: #bbb;
+	border-left-color: #bbb;
+	border-bottom-color: #ccc;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
+}
+.btn-outline.btn[disabled],
+.btn-outline.btn-disabled {
+	background: none;
+	box-shadow: none;
+	color: rgba(0, 0, 0, .3);
+	border: 1px solid rgba(0, 0, 0, .1);
+}
+.btn-outline.btn-active {
+	background: none;
+	color: rgba(0, 0, 0, .4);
+	border-top-color: #ccc;
+	border-right-color: #ccc;
+	border-left-color: #ccc;
+	border-bottom-color: #ddd;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
 }
 .btn[disabled],
 .btn-disabled {
@@ -117,7 +137,7 @@ input[type="submit"].btn {
 .btn-red.btn-active,
 .btn-green.btn-active,
 .btn-black.btn-active {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, .7) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .5) inset;
 }
 
 .btn-blue.btn-active,
@@ -138,6 +158,26 @@ input[type="submit"].btn {
 	}
 }
 
+.btn-white.btn-active {
+	border-color: #ccc;
+	border-bottom-color: #ddd;
+}
+.btn-blue.btn-active {
+	border-color: darken(@color-blue, 10%);
+}
+.btn-green.btn-active {
+	border-color: darken(@color-green, 10%);
+}
+.btn-red.btn-active {
+	border-color: darken(@color-red, 10%);
+}
+.btn-yellow.btn-active {
+	border-color: darken(@color-yellow, 25%);
+}
+.btn-black.btn-active {
+	border-color: #000;
+}
+
 .btn-white.btn-active,
 .btn-white.btn-disabled,
 .btn-white[disabled] {
@@ -146,22 +186,22 @@ input[type="submit"].btn {
 .btn-blue.btn-active,
 .btn-blue.btn-disabled,
 .btn-blue[disabled] {
-	background: darken(@colorBlue, 10%);
+	background: darken(@color-blue, 10%);
 }
 .btn-red.btn-active,
 .btn-red.btn-disabled,
 .btn-red[disabled] {
-	background: darken(@colorRed, 10%);
+	background: darken(@color-red, 10%);
 }
 .btn-green.btn-active,
 .btn-green.btn-disabled,
 .btn-green[disabled] {
-	background: darken(@colorGreen, 10%);
+	background: darken(@color-green, 10%);
 }
 .btn-yellow.btn-active,
 .btn-yellow.btn-disabled,
 .btn-yellow[disabled] {
-	background: darken(@colorYellow, 17%);
+	background: darken(@color-yellow, 17%);
 }
 .btn-black.btn-active,
 .btn-black.btn-disabled,

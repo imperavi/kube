@@ -28,7 +28,7 @@
 	-moz-box-sizing: @box-model;
 	box-sizing: @box-model;
 }
-.vertical-align {
+.vertical-align() {
 	position: relative;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
@@ -165,21 +165,21 @@
 }
 // Grid
 .block(@num) {
-	width: ((@gridWidth - (@gridGutterWidth * @num)) / @num / (@gridWidth / 100)) * 1%;
+	width: ((@grid-width - (@grid-gutter-width * @num)) / @num / (@grid-width / 100)) * 1%;
 }
 
 .column(@num) {
-	width: ((@gridWidth - (@gridGutterWidth * (@num - 1))) / @num / (@gridWidth / 100)) * 1%;
+	width: ((@grid-width - (@grid-gutter-width * (@num - 1))) / @num / (@grid-width / 100)) * 1%;
 }
 
 .columns(@factor, @num) {
-	width: (((@gridWidth - (@gridGutterWidth * (@num - 1))) / @num / (@gridWidth / 100)) * @factor) + ((@gridGutterWidth / (@gridWidth / 100)) * (@factor - 1)) * 1%;
+	width: (((@grid-width - (@grid-gutter-width * (@num - 1))) / @num / (@grid-width / 100)) * @factor) + ((@grid-gutter-width / (@grid-width / 100)) * (@factor - 1)) * 1%;
 }
 
 .column-push(@num) {
-	left: (((@gridWidth - (@gridGutterWidth * (@num - 1))) / @num / (@gridWidth / 100)) + @gridGutterWidth/(@gridWidth/100)) * 1%;
+	left: (((@grid-width - (@grid-gutter-width * (@num - 1))) / @num / (@grid-width / 100)) + @grid-gutter-width/(@grid-width/100)) * 1%;
 }
 
 .columns-push(@factor, @num) {
-	left: ((((@gridWidth - (@gridGutterWidth * (@num - 1))) / @num / (@gridWidth / 100)) * @factor) + ((@gridGutterWidth / (@gridWidth / 100)) * (@factor - 1)) + @gridGutterWidth/(@gridWidth/100)) * 1%;
+	left: ((((@grid-width - (@grid-gutter-width * (@num - 1))) / @num / (@grid-width / 100)) * @factor) + ((@grid-gutter-width / (@grid-width / 100)) * (@factor - 1)) + @grid-gutter-width/(@grid-width/100)) * 1%;
 }
