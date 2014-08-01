@@ -1,0 +1,187 @@
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+@mixin btn-color($color, $darken: 10%) {
+	background: $color;
+	&:hover {
+		background: darken($color, $darken);
+	}
+}
+@mixin opacity($opacity: 100) {
+	filter: alpha(opacity=$opacity);
+	-moz-opacity: $opacity / 100;
+	opacity: $opacity / 100;
+}
+@mixin selection($r, $g, $b) {
+	::selection { background: rgb($r, $g, $b); }
+	::-moz-selection { background: rgb($r, $g, $b); }
+	img::selection { background: transparent; }
+	img::-moz-selection { background: transparent; 	}
+}
+@mixin box-sizing($box-model) {
+	-webkit-box-sizing: $box-model;
+	-moz-box-sizing: $box-model;
+	box-sizing: $box-model;
+}
+@mixin vertical-align {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+@mixin gradient($start: #555, $end: #333) {
+	background-color: mix($start, $end, 60%);
+	background-image: -moz-linear-gradient(top, $start, $end); // FF 3.6+
+	background-image: -ms-linear-gradient(top, $start, $end); // IE10
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($start), to($end)); // Safari 4+, Chrome 2+
+	background-image: -webkit-linear-gradient(top, $start, $end); // Safari 5.1+, Chrome 10+
+	background-image: -o-linear-gradient(top, $start, $end); // Opera 11.10
+	background-image: linear-gradient(top, $start, $end); // The standard
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$start, endColorstr=$end, GradientType=0); // IE9 and down
+}
+@mixin border-top-radius($radius) {
+	border-top-right-radius: $radius;
+	border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+	border-bottom-right-radius: $radius;
+	border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+	border-bottom-right-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+	border-bottom-left-radius: $radius;
+	border-top-left-radius: $radius;
+}
+@mixin bordered($top-color: #eee, $right-color: #eee, $bottom-color: #eee, $left-color: #eee) {
+	border-top: 1px solid $top-color;
+	border-right: 1px solid $right-color;
+	border-bottom: 1px solid $bottom-color;
+	border-left: 1px solid $left-color;
+}
+@mixin retina-image($path, $w: auto, $h: auto) {
+  background-image: url($path);
+
+  $at2x_path: '${path}.replace(/\.\w+$/, function(match) { return "@2x" + match; })'; //SaSS
+
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background-image: url($at2x_path);
+    background-size: $w $h;
+  }
+}
+@mixin transition($transition: all linear .2s) {
+	-moz-transition: $transition;
+	transition: $transition;
+}
+@mixin blur($radius) {
+	-webkit-filter: blur($radius);
+	-moz-filter: blur($radius);
+	-ms-filter: blur($radius);
+	filter: blur($radius);
+}
+@mixin arrow-top($color: #fff, $size: 5px, $left: 5px) {
+	&:after {
+		bottom: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-bottom-color: $color;
+		border-width: $size;
+		left: $left;
+	}
+}
+@mixin arrow-bottom($color: #fff, $size: 5px, $left: 5px) {
+	&:after {
+		top: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-top-color: $color;
+		border-width: $size;
+		left: $left;
+	}
+}
+@mixin arrow-left($color: #fff, $size: 5px, $top: 5px) {
+	&:after {
+		right: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-right-color: $color;
+		border-width: $size;
+		top: $top;
+	}
+}
+@mixin arrow-right($color: #fff, $size: 5px, $top: 5px) {
+	&:after {
+		left: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-left-color: $color;
+		border-width: $size;
+		top: $top;
+	}
+}
+@mixin close($r: 0, $g: 0, $b: 0) {
+	padding: 4px 6px;
+	line-height: 1;
+	font-size: 18px;
+	cursor: pointer;
+	color: rgba($r, $g, $b, 1);
+	text-decoration: none;
+	&.opacity {
+		@include opacity(50);
+	}
+	&:before {
+		content: '\00D7';
+	}
+	&:hover {
+		@include opacity(100);
+	}
+}
+// Grid
+@mixin block($num) {
+	width: (($gridWidth - ($gridGutterWidth * $num)) / $num / ($gridWidth / 100)) * 1%;
+}
+
+@mixin column($num) {
+	width: (($gridWidth - ($gridGutterWidth * ($num - 1))) / $num / ($gridWidth / 100)) * 1%;
+}
+
+@mixin columns($factor, $num) {
+	width: ((($gridWidth - ($gridGutterWidth * ($num - 1))) / $num / ($gridWidth / 100)) * $factor) + (($gridGutterWidth / ($gridWidth / 100)) * ($factor - 1)) * 1%;
+}
+
+@mixin column-push($num) {
+	left: ((($gridWidth - ($gridGutterWidth * ($num - 1))) / $num / ($gridWidth / 100)) + $gridGutterWidth/($gridWidth/100)) * 1%;
+}
+
+@mixin columns-push($factor, $num) {
+	left: (((($gridWidth - ($gridGutterWidth * ($num - 1))) / $num / ($gridWidth / 100)) * $factor) + (($gridGutterWidth / ($gridWidth / 100)) * ($factor - 1)) + $gridGutterWidth/($gridWidth/100)) * 1%;
+}

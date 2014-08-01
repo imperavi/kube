@@ -1,0 +1,62 @@
+// Font
+$baseFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headingsFontFamily: $baseFontFamily;
+$controlsFontFamily: $baseFontFamily;
+$codeFontFamily: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+// Base color
+$backgroundBody: #fff;
+$colorBody: #333;
+$colorHeadings: #222;
+
+// Grid
+$gridWidth: 1000;
+$gridGutterWidth: 30;
+
+// Type
+$baseFontSize: 14;
+$baseLineHeight: 1.6;
+$baseLine: $baseFontSize * $baseLineHeight;
+
+// Util
+$em: $baseFontSize; // outputting ems, e.g. 14 / $em
+
+$baseLineInEms: $baseLine / $em em;
+
+// Heading
+$h1FontSize: $baseFontSize + 22px; // 36px
+$h2FontSize: $baseFontSize + 16px; // 30px
+$h3FontSize: $baseFontSize + 10px; // 24px
+$h4FontSize: $baseFontSize + 4px; // 18px
+$h5FontSize: $baseFontSize + 0px; // 14px
+$h6FontSize: $baseFontSize - 2px; // 12px
+
+$h1SubheadingFontSize: $baseFontSize + 16px; // 30px
+$h2SubheadingFontSize: $baseFontSize + 10px; // 24px
+$h3SubheadingFontSize: $baseFontSize + 4px; // 18px
+$h4SubheadingFontSize: $baseFontSize + 0px; // 14px
+$h5SubheadingFontSize: $baseFontSize - 2px; // 12px
+
+// Font size
+$superSmallFontSize: $baseFontSize - 4px; // 10px
+$smallFontSize: $baseFontSize - 2px; // 12px
+$leadFontSize: $baseFontSize + 4px; // 18px
+$bigFontSize: $baseFontSize + 4px; // 18px
+$quoteFontSize: $baseFontSize + 2px; // 16px
+$buttonsSmallFontSize: $baseFontSize - 3px; // 11px
+
+// Colors
+$colorBlack: #0f0f0f;
+$colorBlue: #3d58a8;
+$colorRed: #d70a16;
+$colorGreen: #159776;
+$colorYellow: #fddc43;
+
+// LinkColor
+$colorLink: #3570c3;
+$colorLinkHover: $colorRed;
+
+// Forms
+$fieldsBottom: 1em;
+
+

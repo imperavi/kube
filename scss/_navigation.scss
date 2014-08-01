@@ -1,0 +1,244 @@
+/* =Navs
+-----------------------------------------------------------------------------*/
+
+/* NavBar */
+.navbar {
+	margin-bottom: $baseLineInEms;
+	@include clearfix;
+}
+.navbar-left {
+	float: left;
+}
+.navbar-right {
+	float: right;
+}
+.navbar ul {
+	list-style: none;
+	margin: 0;
+	@include clearfix;
+}
+.navbar ul li {
+	float: left;
+	margin-right: $baseLineInEms;
+}
+.navbar-right ul li {
+	margin-right: 0;
+	margin-left: $baseLineInEms;
+}
+.navbar ul li a,
+.navbar ul li span {
+	display: block;
+	text-decoration: none;
+}
+.navbar ul li a:hover {
+	color: $colorLinkHover;
+}
+.navbar ul li.active a,
+.navbar ul li span {
+	text-decoration: none;
+	cursor: text;
+	color: rgba(0, 0, 0, .4);
+}
+
+
+/* Fullwidth */
+.fullwidth ul {
+	width: 100%;
+}
+.fullwidth li {
+	float: none !important;
+	margin: 0;
+	display: table-cell;
+	width: 1%;
+	text-align: center;
+}
+.fullwidth li a,
+.fullwidth li span {
+	display: block;
+}
+
+
+/* Vertical */
+.nav {
+	margin-bottom: $baseLineInEms;
+}
+.nav ul {
+	list-style: none;
+	margin: 0;
+}
+.nav ul li ul {
+	margin-left: 2em;
+	font-size: .95em;
+}
+.nav ul li a,
+.nav ul li span {
+	display: block;
+	padding: 5px 0;
+}
+.nav ul li ul li a,
+.nav ul li ul li span {
+	padding: 4px 0;
+}
+.nav ul li a {
+	text-decoration: none;
+}
+.nav ul li a:hover {
+	color: $colorLinkHover;
+	text-decoration: underline;
+}
+.nav ul li.active a,
+.nav ul li span {
+	text-decoration: none;
+	cursor: text;
+	color: rgba(0, 0, 0, .4);
+}
+
+/* Stroked */
+.nav-stroked li {
+	border-bottom: 1px solid #eee;
+}
+.nav-stroked li:last-child {
+	border-bottom: none;
+}
+
+/* Stacked */
+.nav-stacked ul {
+	border: 1px solid #eee;
+	border-bottom: 0;
+}
+.nav-stacked ul li {
+	border-bottom: 1px solid #eee;
+}
+.nav-stacked ul li a,
+.nav-stacked ul li span {
+	padding: 5px 10px;
+}
+.nav-stacked ul li a:hover {
+	background-color: #f5f5f5;
+}
+
+/* Stats */
+.nav-stats li {
+	position: relative;
+}
+.nav-stats li a,
+.nav-stats li span {
+	padding-right: 50px;
+}
+.nav-stats sup {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	color: rgba(0, 0, 0, .4);
+}
+.nav-stats.nav-stacked sup {
+	right: .5em;
+}
+
+
+/* Breadcrumbs */
+.breadcrumbs {
+	margin-bottom: $baseLineInEms;
+	@include clearfix;
+}
+.breadcrumbs ul {
+	font-size: .9em;
+	color: rgba(0, 0, 0, .4);
+	list-style: none;
+	margin: 0;
+	@include clearfix;
+}
+.breadcrumbs ul li {
+	float: left;
+	margin-right: 3px;
+}
+.breadcrumbs li + li:before {
+    content: " > ";
+    color: #aaa;
+    font-size: 12px;
+	margin: 0 3px;
+	position: relative;
+	top: -1px;
+}
+.breadcrumbs-sections li + li:before {
+    content: " | ";
+	top: 0;
+}
+.breadcrumbs-path li + li:before {
+    content: " / ";
+	top: 0;
+}
+.breadcrumbs ul li a {
+	color: $colorBlack;
+	text-decoration: none;
+}
+.breadcrumbs ul li.active a {
+	text-decoration: none;
+	cursor: text;
+	color: rgba(0, 0, 0, .4);
+}
+.breadcrumbs ul li a:hover {
+	color: $colorBlack;
+	text-decoration: underline;
+}
+
+/* =Pagination
+-----------------------------------------------------------------------------*/
+.pagination {
+	position: relative;
+	left: -9px;
+	margin-left: 0;
+	list-style: none;
+	@include clearfix;
+}
+.pagination li {
+	float: left;
+	margin-right: 2px;
+}
+.pagination li a,
+.pagination li span {
+	display: block;
+	padding: 7px 9px;
+	line-height: 1;
+	border-radius: 3px;
+	color: $colorBlack;
+	text-decoration: none;
+}
+.pagination span {
+	border: 1px solid #ddd;
+}
+.pagination li a:focus,
+.pagination li a:hover {
+	text-decoration: none;
+	background-color: $colorBlack;
+	color: #fff;
+}
+
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+	.navbar-left,
+	.navbar-right,
+	.navbar ul li,
+	.navbar-right ul li,
+	.subnav-right ul,
+	.subnav ul li,
+	.subnav-right ul li	{
+		float: none;
+		text-align: center;
+	}
+	.navbar ul li,
+	.navbar-right ul li,
+	.subnav ul li,
+	.subnav-right ul li	{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.fullwidth ul {
+		width: auto;
+	}
+	.fullwidth li {
+		display: block;
+		width: auto;
+	}
+}
