@@ -4,7 +4,7 @@ img
 lib
 tests
 tmp
-index.html
+/index.html
 css/font-awesome.min.css
 css/fonts
 css/webfont.css
