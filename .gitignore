@@ -1,10 +1,14 @@
 # Ignore docs files
 html
 img
-js
+lib
 tests
+tmp
 index.html
-test.html
+css/font-awesome.min.css
+css/fonts
+css/webfont.css
+css/webfonts
 css/master.css
 less/master.less
 *.php

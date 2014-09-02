@@ -1,0 +1,28 @@
+/* =Autocomplete
+-----------------------------------------------------------------------------*/
+.autocomplete {
+	position: absolute;
+	z-index: 1000;
+	left: 0;
+	display: none;
+	margin: 0;
+	list-style: none;
+	background: #fff;
+	width: 250px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	max-height: 250px;
+	overflow: auto;
+	& a {
+		padding: 4px 10px;
+		color: #000;
+		display: block;
+		text-decoration: none;
+		&:hover {
+			background: @color-gray-light;
+		}
+		&.active {
+			background: @color-blue;
+			color: #fff;
+		}
+	}
+}

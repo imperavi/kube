@@ -1,0 +1,101 @@
+/* =Labels
+-----------------------------------------------------------------------------*/
+.label,
+.badge {
+	background: @color-gray;
+	font-size: @font-size-small;
+	display: inline-block;
+	line-height: 1;
+	padding: 4px 7px 3px 7px;
+	color: @color-black;
+	text-align: center;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+.label-outline {
+	background: none;
+	border: 1px solid @color-black;
+	padding: 3px 6px 2px 6px;
+}
+.badge {
+	border-radius: 15px;
+}
+.badge-small {
+	font-size: @font-size-smaller;
+	padding: 3px 5px;
+}
+.label-black,
+.label-blue,
+.label-red,
+.label-green,
+.badge-black,
+.badge-blue,
+.badge-red,
+.badge-green {
+	color: @color-white;
+}
+.label-black,
+.badge-black {
+	background: @color-black;
+}
+.label-blue,
+.badge-blue {
+	background: @color-blue;
+}
+.label-red,
+.badge-red {
+	background: @color-red;
+}
+.label-green,
+.badge-green {
+	background: @color-green;
+}
+.label-yellow,
+.badge-yellow {
+	background: @color-yellow;
+}
+.label-white,
+.badge-white {
+	background: @color-white;
+}
+.label-black,
+.label-blue,
+.label-red,
+.label-green,
+.label-yellow,
+.label-white {
+	&.label-outline {
+		background: none;
+		color: @color-black;
+	}
+}
+.label-blue {
+	&.label-outline {
+		border-color: @color-blue;
+		color: @color-blue;
+	}
+}
+.label-red {
+	&.label-outline {
+		border-color: @color-red;
+		color: @color-red;
+	}
+}
+.label-green {
+	&.label-outline {
+		border-color: @color-green;
+		color: @color-green;
+	}
+}
+.label-yellow {
+	&.label-outline {
+		border-color: @color-yellow;
+		color: @color-yellow;
+	}
+}
+.label-white {
+	&.label-outline {
+		border-color: @color-white;
+		color: @color-white;
+	}
+}

@@ -6,12 +6,6 @@
 	}
 
 }
-.btn-color(@color, @darken: 10%) {
-	background: @color;
-	&:hover {
-		background: darken(@color, @darken);
-	}
-}
 .opacity(@opacity: 100) {
 	filter: e(%("alpha(opacity=%d)", @opacity));
 	-moz-opacity: @opacity / 100;
@@ -151,7 +145,7 @@
 .close(@r: 0, @g: 0, @b: 0) {
 	padding: 4px 6px;
 	line-height: 1;
-	font-size: 18px;
+	font-size: 20px;
 	cursor: pointer;
 	color: rgba(@r, @g, @b, 1);
 	text-decoration: none;
@@ -163,6 +157,17 @@
 		.opacity(100);
 	}
 }
+.striped(@color: rgba(255, 255, 255, .2); @angle: 45deg) {
+	background-image: -webkit-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+	background-image: -o-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+	background-image: linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+}
+.animation(@animation) {
+	-webkit-animation: @animation;
+	-o-animation: @animation;
+	animation: @animation;
+}
+
 // Grid
 .block(@num) {
 	width: ((@grid-width - (@grid-gutter-width * @num)) / @num / (@grid-width / 100)) * 1%;
@@ -182,4 +187,55 @@
 
 .columns-push(@factor, @num) {
 	left: ((((@grid-width - (@grid-gutter-width * (@num - 1))) / @num / (@grid-width / 100)) * @factor) + ((@grid-gutter-width / (@grid-width / 100)) * (@factor - 1)) + @grid-gutter-width/(@grid-width/100)) * 1%;
+}
+
+// Buttons
+.make-color-btn(@color, @color-dark, @color-text, @active-shadow: .5) {
+
+	color: rgba(red(@color-text), green(@color-text), blue(@color-text), .9);
+	background: @color;
+
+	&:hover {
+		color: rgba(red(@color-text), green(@color-text), blue(@color-text), .6);
+		background: @color-dark;
+	}
+
+
+	&.btn-active {
+		box-shadow: 0 1px 4px rgba(0, 0, 0, @active-shadow) inset;
+	}
+
+	&.btn-active,
+	&.btn-disabled,
+	&[disabled] {
+		color: rgba(red(@color-text), green(@color-text), blue(@color-text), .5);
+		background: @color-dark;
+		&:hover {
+			color: rgba(red(@color-text), green(@color-text), blue(@color-text), .5);
+		}
+	}
+
+	&.btn-outline {
+		background: none;
+		border-color: @color;
+		color: @color;
+		&:hover {
+			color: rgba(red(@color-text), green(@color-text), blue(@color-text), .9);
+			background: @color;
+		}
+	}
+
+	&.btn-outline.btn[disabled],
+	&.btn-outline.btn-disabled {
+		background: none;
+		box-shadow: none;
+		color: rgba(red(@color), green(@color), blue(@color), .4);
+		border: 1px solid rgba(red(@color), green(@color), blue(@color), .3);
+	}
+	&.btn-outline.btn-active {
+		background: none;
+		color: rgba(red(@color), green(@color), blue(@color), .6);
+		border: none;
+		box-shadow: 0 1px 3px rgba(red(@color-dark), green(@color-dark), blue(@color-dark), .6) inset;
+	}
 }

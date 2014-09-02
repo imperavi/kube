@@ -1,9 +1,9 @@
-Kube CSS-Framework
+Kube Web Framework 4
 ====
 
-Kube is a minimalistic CSS-framework for professional developers and designers.
+Kube is a minimalistic Web framework for professional developers and designers.
 
-Here’s your most advanced and flexible CSS-framework. Take a look. Kube doesn’t force you into specific styling, Kube doesn’t require rewriting its code; it leaves all of the important decisions to you and your creative genius. Think about Kube as if it was your most reliable helper, who would do your routine job with a smile on his face, so that you can actually concentrate on something big and wonderful.
+Here’s your most advanced and flexible web framework. Take a look. Kube doesn’t force you into specific styling, Kube doesn’t require rewriting its code; it leaves all of the important decisions to you and your creative genius. Think about Kube as if it was your most reliable helper, who would do your routine job with a smile on his face, so that you can actually concentrate on something big and wonderful.
 
 ##[Documentation and examples](http://imperavi.com/kube/)
 
@@ -15,8 +15,34 @@ Here’s your most advanced and flexible CSS-framework. Take a look. Kube doesn�
 - [Forms](http://imperavi.com/kube/forms/)
 - [Navigation](http://imperavi.com/kube/navigation/)
 - [Buttons](http://imperavi.com/kube/buttons/)
+- [Labels](http://imperavi.com/kube/labels/)
+- [Search](http://imperavi.com/kube/search/)
+- [Notifications](http://imperavi.com/kube/notifications/)
+- [Colors](http://imperavi.com/kube/colors/)
 - [Helpers](http://imperavi.com/kube/helpers/)
 - [Mixins](http://imperavi.com/kube/mixins/)
+- [Icons](http://imperavi.com/kube/icons/)
+
+- [Accordion](http://imperavi.com/kube/js-accordion/)
+- [Autocomplete](http://imperavi.com/kube/js-autocomplete/)
+- [Buttons](http://imperavi.com/kube/js-buttons/)
+- [Check All](http://imperavi.com/kube/js-check-all/)
+- [Dropdown](http://imperavi.com/kube/js-dropdown/)
+- [Filterbox](http://imperavi.com/kube/js-filterbox/)
+- [Navigation Fixed](http://imperavi.com/kube/js-fixed/)
+- [Infinite Scroll](http://imperavi.com/kube/js-infinite-scroll/)
+- [Livesearch](http://imperavi.com/kube/js-livesearch/)
+- [Message](http://imperavi.com/kube/js-message/)
+- [Modal](http://imperavi.com/kube/js-modal/)
+- [Navigation Toggle](http://imperavi.com/kube/js-navigation-toggle/)
+- [Progress Bar](http://imperavi.com/kube/js-progress/)
+- [Tabs](http://imperavi.com/kube/js-tabs/)
+- [TextFit](http://imperavi.com/kube/js-textfit/)
+- [Tooltip](http://imperavi.com/kube/js-tooltip/)
+- [Upload](http://imperavi.com/kube/js-upload/)
+
+
+
 
 ####Works in every modern browser
 

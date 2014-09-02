@@ -1,6 +1,7 @@
 /* =Buttons
 -----------------------------------------------------------------------------*/
-.btn {
+.btn,
+input[type="submit"].btn {
 	display: inline-block;
 	vertical-align: top;
 
@@ -14,139 +15,70 @@
 	text-decoration: none;
 	color: @color-body;
 
+	-webkit-appearance: none;
+
+	outline: none;
 	margin: 0;
-	border: 1px solid transparent;
+	border: none;
 	border-radius: 2px;
 	box-shadow: none;
 	cursor: pointer;
-	background: #eeeded;
-	padding: .3em 1.3em;
+	background: @color-gray;
+	padding: @padding-btn;
 
 	&:hover {
 		color: rgba(0, 0, 0, .5);
-		background: #dbdada;
+		background: @color-gray-dark;
 	}
 }
 .btn::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-.btn-big {
+.btn-big,
+input[type="submit"].btn-big {
 	font-size: @font-size-big;
 }
-.btn-small {
+.btn-small,
+input[type="submit"].btn-small {
 	font-size: @font-size-small;
 }
-.btn-small-super {
-	font-size: @font-size-small-super;
+.btn-smaller,
+input[type="submit"].btn-smaller {
+	font-size: @font-size-smaller;
 	vertical-align: baseline;
 }
-
+.btn-round {
+	border-radius: 15px;
+}
 .btn-outline {
 	background: none;
-	border: 1px solid #ddd;
-}
-
-
-.btn-blue,
-.btn-red,
-.btn-green,
-.btn-black {
-		color: rgba(255, 255, 255, .9);
+	padding: @padding-btn-outline;
+	border: 1px solid @color-black;
 	&:hover {
-		color: rgba(255, 255, 255, .6);
+		border-color: @color-gray-dark;
 	}
 }
-.btn-white {
-	background: #fff;
-	&:hover { background: darken(#fff, 5%); }
+.btn-outline.btn-active {
+	padding: @padding-btn;
 }
-.btn-white.btn-outline {
-	background: none;
-	border-color: rgba(255, 255, 255, .85);
-	color: rgba(255, 255, 255, .85);
-	&:hover {
-		color: rgba(0, 0, 0, .9);
-		background: #fff;
-	}
+.btn-outline.bold {
+	border-width: 2px;
+	padding: @padding-btn-outline-bold;
 }
-.btn-blue.btn-outline {
-	background: none;
-	border-color: @color-blue;
-	color: @color-blue;
-	&:hover {
-		color: rgba(255, 255, 255, .9);
-		background: @color-blue;
-	}
-}
-.btn-red.btn-outline {
-	background: none;
-	border-color: @color-red;
-	color: @color-red;
-	&:hover {
-		color: rgba(255, 255, 255, .9);
-		background: @color-red;
-	}
-}
-.btn-green.btn-outline {
-	background: none;
-	border-color: @color-green;
-	color: @color-green;
-	&:hover {
-		color: rgba(255, 255, 255, .9);
-		background: @color-green;
-	}
-}
-.btn-black.btn-outline {
-	background: none;
-	border-color: @color-black;
-	color: @color-black;
-	&:hover {
-		color: rgba(255, 255, 255, .9);
-		background: @color-black;
-	}
-}
-
-.btn-blue {
-	background: @color-blue;
-	&:hover { background: darken(@color-blue, 10%); }
-}
-.btn-red {
-	background: @color-red;
-	&:hover { background: darken(@color-red, 10%); }
-}
-.btn-green {
-	background: @color-green;
-	&:hover { background: darken(@color-green, 10%); }
-}
-.btn-yellow {
-	background: @color-yellow;
-	color: #000;
-	&:hover {
-		background: darken(@color-yellow, 17%);
-	}
-}
-.btn-black {
-	background: #000;
-	&:hover { background: lighten(#000, 20%); }
-}
-
 .btn-active,
 .btn[disabled],
 .btn-disabled {
 	background: none;
-	background: #dbdada;
+	background: @color-gray-dark;
 	color: rgba(0, 0, 0, .5);
 	&:hover {
 		color: rgba(0, 0, 0, .5);
+		background: @color-gray-dark;
 	}
 }
 .btn-active {
-	border-top-color: #aaa;
-	border-right-color: #bbb;
-	border-left-color: #bbb;
-	border-bottom-color: #ccc;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset;
 }
 .btn-outline.btn[disabled],
 .btn-outline.btn-disabled {
@@ -158,10 +90,7 @@
 .btn-outline.btn-active {
 	background: none;
 	color: rgba(0, 0, 0, .4);
-	border-top-color: #ccc;
-	border-right-color: #ccc;
-	border-left-color: #ccc;
-	border-bottom-color: #ddd;
+	border: none;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
 }
 .btn[disabled],
@@ -170,78 +99,56 @@
 	box-shadow: none;
 }
 
-.btn-blue.btn-active,
-.btn-red.btn-active,
-.btn-green.btn-active,
-.btn-black.btn-active {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, .5) inset;
-}
 
-.btn-blue.btn-active,
-.btn-red.btn-active,
-.btn-green.btn-active,
-.btn-black.btn-active,
-.btn-blue.btn-disabled,
-.btn-red.btn-disabled,
-.btn-green.btn-disabled,
-.btn-black.btn-disabled,
-.btn-blue[disabled],
-.btn-red[disabled],
-.btn-green[disabled],
-.btn-black[disabled] {
-	color: rgba(255, 255, 255, .6);
-	&:hover {
-		color: rgba(255, 255, 255, .6);
+.btn-blue 	{ .make-color-btn(@color-blue, @color-blue-dark, #fff); 	}
+.btn-red 	{ .make-color-btn(@color-red, @color-red-dark, #fff); 	    }
+.btn-green 	{ .make-color-btn(@color-green, @color-green-dark, #fff);   }
+.btn-black 	{ .make-color-btn(@color-black, @color-black-light, #fff, .7);  }
+.btn-yellow	{ .make-color-btn(@color-yellow, @color-yellow-dark, #000); }
+.btn-white	{ .make-color-btn(@color-white, darken(#fff, 7%), #000, .2); }
+
+.btn-white {
+	&.btn-outline.btn-active {
+		box-shadow: none;
+		border: 1px solid rgba(255, 255, 255, .3);
+		padding: @padding-btn-outline;
 	}
 }
 
-.btn-white.btn-active {
-	border-color: #ccc;
-	border-bottom-color: #ddd;
+
+/*
+	Buttons Group
+*/
+.btn-single,
+.btn-group {
+	display: inline-block;
+	margin-right: 2px;
+	.clearfix;
+	vertical-align: bottom;
 }
-.btn-blue.btn-active {
-	border-color: darken(@color-blue, 10%);
+.btn-single > .btn,
+.btn-single > input,
+.btn-group > .btn,
+.btn-group > input {
+	float: left;
+	border-radius: 0;
+	margin-left: -1px;
 }
-.btn-green.btn-active {
-	border-color: darken(@color-green, 10%);
+.btn-single > .btn {
+	border-radius: 2px;
 }
-.btn-red.btn-active {
-	border-color: darken(@color-red, 10%);
+.btn-group > .btn:first-child {
+	border-radius: 2px 0 0 2px;
 }
-.btn-yellow.btn-active {
-	border-color: darken(@color-yellow, 25%);
+.btn-group > .btn:last-child {
+	border-radius: 0 2px 2px 0;
 }
-.btn-black.btn-active {
-	border-color: #000;
+.btn-group > .btn.btn-round:first-child,
+.btn-group > .input-search:first-child {
+	border-radius: 15px 0 0 15px;
+}
+.btn-group > .btn.btn-round:last-child,
+.btn-group > .input-search:last-child {
+	border-radius: 0 15px 15px 0;
 }
 
-.btn-white.btn-active,
-.btn-white.btn-disabled,
-.btn-white[disabled] {
-	background: darken(#fff, 5%);
-}
-.btn-blue.btn-active,
-.btn-blue.btn-disabled,
-.btn-blue[disabled] {
-	background: darken(@color-blue, 10%);
-}
-.btn-red.btn-active,
-.btn-red.btn-disabled,
-.btn-red[disabled] {
-	background: darken(@color-red, 10%);
-}
-.btn-green.btn-active,
-.btn-green.btn-disabled,
-.btn-green[disabled] {
-	background: darken(@color-green, 10%);
-}
-.btn-yellow.btn-active,
-.btn-yellow.btn-disabled,
-.btn-yellow[disabled] {
-	background: darken(@color-yellow, 17%);
-}
-.btn-black.btn-active,
-.btn-black.btn-disabled,
-.btn-black[disabled] {
-	background: lighten(#000, 30%);
-}
