@@ -4,6 +4,7 @@ img
 lib
 tests
 tmp
+production
 /index.html
 css/font-awesome.min.css
 css/fonts
