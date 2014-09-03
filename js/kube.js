@@ -211,6 +211,754 @@
 
 })(jQuery);
 /*
+	Autocomplete Tool
+*/
+(function($)
+{
+	"use strict";
+
+	// Plugin
+	$.fn.autocomplete = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'autocomplete', {});
+			$.data(this, 'autocomplete', Autocomplete(this, options));
+		});
+
+	};
+
+	// Initialization
+	function Autocomplete(el, options)
+	{
+		return new Autocomplete.prototype.init(el, options);
+	}
+
+	$.Autocomplete = Autocomplete;
+	$.Autocomplete.NAME = 'autocomplete';
+	$.Autocomplete.VERSION = '1.0';
+	$.Autocomplete.opts = {
+
+		url: false,
+		min: 2,
+		set: 'value' // value or id
+
+	};
+
+	// Functionality
+	Autocomplete.fn = $.Autocomplete.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+			this.loadOptions();
+
+			this.build();
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Autocomplete.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		setCallback: function(type, e, data)
+		{
+			var events = $._data(this.$element[0], 'events');
+			if (events && typeof events[type] != 'undefined')
+			{
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.Autocomplete.NAME || namespace == $.Autocomplete.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
+			}
+
+			return (typeof data == 'undefined') ? e : data;
+
+		},
+		build: function()
+		{
+			this.result = $('<ul class="autocomplete">').hide();
+
+			this.pos = this.$element.offset();
+			this.elementHeight = this.$element.innerHeight();
+
+			$('body').append(this.result);
+
+			this.placement = (($(document).height() - (this.pos.top + this.elementHeight)) < this.result.height()) ? 'top' : 'bottom';
+			$(document).on('click', $.proxy(this.hide, this));
+
+			this.$element.on('keyup', $.proxy(function(e)
+			{
+				var value = this.$element.val();
+				if (value.length >= this.opts.min)
+				{
+					this.$element.addClass('autocomplete-in');
+					this.result.addClass('autocomplete-open');
+
+					this.listen(e);
+				}
+				else
+				{
+					this.hide();
+				}
+
+			}, this));
+		},
+		lookup: function()
+		{
+			$.ajax({
+				url: this.opts.url,
+				type: 'post',
+				data: this.$element.attr('name') + '=' + this.$element.val(),
+				success: $.proxy(function(json)
+				{
+					var data = $.parseJSON(json);
+
+					this.result.html('');
+
+					$.each(data, $.proxy(function(i,s)
+					{
+						var li = $('<li>');
+						var a = $('<a href="#" rel="' + s.id + '">').html(s.value).on('click', $.proxy(this.set, this));
+
+						li.append(a);
+						this.result.append(li);
+
+					}, this));
+
+					var top = (this.placement === 'top') ? (this.pos.top - this.result.height() - this.elementHeight) : (this.pos.top + this.elementHeight);
+
+					this.result.css({ top: top + 'px', left: this.pos.left + 'px' });
+					this.result.show();
+					this.active = false;
+
+				}, this)
+			});
+
+		},
+		listen: function(e)
+		{
+			if (!this.$element.hasClass('autocomplete-in')) return;
+
+			e.stopPropagation();
+			e.preventDefault();
+
+			switch(e.keyCode)
+			{
+				case 40: // down arrow
+					this.select('next');
+				break;
+
+				case 38: // up arrow
+					this.select('prev');
+				break;
+
+				case 13: // enter
+					this.set();
+				break;
+
+				case 27: // escape
+					this.hide()
+				break;
+
+				default:
+					this.lookup();
+				break;
+			}
+
+		},
+		select: function(type)
+		{
+			var $links = this.result.find('a');
+			var size = $links.size();
+
+			var $active = this.result.find('a.active');
+			$active.removeClass('active');
+
+			var $item = (type === 'next') ? $active.parent().next().children('a') : $active.parent().prev().children('a');
+			if ($item.size() == 0)
+			{
+				$item = (type === 'next') ? $links.eq(0) : $links.eq(size-1);
+			}
+
+			$item.addClass('active');
+			this.active = $item;
+		},
+		set: function(e)
+		{
+			var $el = $(this.active);
+			if (e)
+			{
+				e.preventDefault();
+				$el = $(e.target);
+			}
+
+			var id = $el.attr('rel');
+			var value = $el.html();
+
+			(this.opts.set == 'value') ? this.$element.val(value) : this.$element.val(id);
+			this.setCallback('set', id, value);
+
+
+			this.hide();
+		},
+		hide: function(e)
+		{
+			if (e && ($(e.target).hasClass('autocomplete-in') || $(e.target).hasClass('autocomplete-open') || $(e.target).parents().hasClass('autocomplete-open')))
+			{
+				return;
+			}
+
+			this.$element.removeClass('autocomplete-in');
+			this.result.removeClass('autocomplete-open');
+			this.result.hide();
+		}
+	};
+
+	$(window).on('load.tools.autocomplete', function()
+	{
+		$('[data-tools="autocomplete"]').autocomplete();
+	})
+
+	// constructor
+	Autocomplete.prototype.init.prototype = Autocomplete.prototype;
+
+
+})(jQuery);
+/*
+	Buttons Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.buttons = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'buttons', {});
+			$.data(this, 'buttons', Buttons(this, options));
+		});
+
+	};
+
+	// Initialization
+	function Buttons(el, options)
+	{
+		return new Buttons.prototype.init(el, options);
+	}
+
+	$.Buttons = Buttons;
+	$.Buttons.NAME = 'buttons';
+	$.Buttons.VERSION = '1.0';
+	$.Buttons.opts = {
+
+		className: 'btn',
+		activeClassName: 'btn-active',
+		target: false,
+		type: 'switch' // switch, toggle, segmented
+
+	};
+
+	// Functionality
+	Buttons.fn = $.Buttons.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+
+			this.$element = el !== false ? $(el) : false;
+			this.loadOptions(options);
+
+			this.buttons = this.getButtons();
+			this.value = this.getValue();
+
+			this.buttons.each($.proxy(function(i,s)
+			{
+				var $s = $(s);
+
+				this.setDefault($s);
+
+				$s.click($.proxy(function(e)
+				{
+					e.preventDefault();
+
+					if (this.opts.type === 'segmented') this.setSegmented($s);
+					else if (this.opts.type === 'toggle') this.setToggle($s);
+					else this.setBasic($s);
+
+				}, this));
+
+			}, this));
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Buttons.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		getButtons: function()
+		{
+			return (this.opts.type === 'toggle') ? this.$element : this.$element.find('.' + this.opts.className);
+		},
+		getValue: function()
+		{
+			return (this.opts.type === 'segmented') ? $(this.opts.target).val().split(',') : $(this.opts.target).val();
+		},
+		setDefault: function($el)
+		{
+			if (this.opts.type === 'segmented' && $.inArray($el.val(), this.value) !== -1)
+			{
+				this.setActive($el);
+			}
+			else if ((this.opts.type === 'toggle' && this.value === 1) || this.value === $el.val())
+			{
+				this.setActive($el);
+			}
+		},
+		setBasic: function($el)
+		{
+			this.setInActive(this.buttons);
+			this.setActive($el);
+			$(this.opts.target).val($el.val());
+		},
+		setSegmented: function($el)
+		{
+			var $target = $(this.opts.target);
+			this.value = $target.val().split(',');
+
+			if (!$el.hasClass(this.opts.activeClassName))
+			{
+				this.setActive($el);
+				this.value.push($el.val());
+			}
+			else
+			{
+				this.setInActive($el);
+				this.value.splice(this.value.indexOf($el.val()), 1);
+			}
+
+			$target.val(this.value.join(',').replace(/^,/, ''));
+		},
+		setToggle: function($el)
+		{
+			if ($el.hasClass(this.opts.activeClassName))
+			{
+				this.setInActive($el);
+				$(this.opts.target).val(0);
+			}
+			else
+			{
+				this.setActive($el);
+				$(this.opts.target).val(1);
+			}
+		},
+		setActive: function($el)
+		{
+			$el.addClass(this.opts.activeClassName);
+		},
+		setInActive: function($el)
+		{
+			$el.removeClass(this.opts.activeClassName);
+		}
+	};
+
+	$(window).on('load.tools.buttons', function()
+	{
+		$('[data-tools="buttons"]').buttons();
+	});
+
+	// constructor
+	Buttons.prototype.init.prototype = Buttons.prototype;
+
+
+})(jQuery);
+/*
+	CheckAll Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.checkAll = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'checkAll', {});
+			$.data(this, 'checkAll', CheckAll(this, options));
+		});
+
+	};
+
+	// Initialization
+	function CheckAll(el, options)
+	{
+		return new CheckAll.prototype.init(el, options);
+	}
+
+	$.CheckAll = CheckAll;
+	$.CheckAll.opts = {
+
+		classname: false,
+		parent: false,
+		highlight: 'highlight',
+		target: false
+
+	};
+
+	// Functionality
+	CheckAll.fn = $.CheckAll.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+			this.loadOptions(options);
+
+			this.$elements = $('.' + this.opts.classname);
+			this.$target = $(this.opts.target);
+
+			// load
+			this.$element.on('click', $.proxy(this.load, this));
+
+			this.setter = (this.opts.target) ? this.$target.val().split(',') : [];
+			this.$elements.each($.proxy(this.setOnStart, this));
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.CheckAll.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		load: function()
+		{
+			if (this.$element.prop('checked'))
+			{
+				this.$elements.prop('checked', true);
+
+				if (this.opts.parent || this.opts.target)
+				{
+					this.$elements.each($.proxy(function(i,s)
+					{
+						var $s = $(s);
+						this.setHighlight($s);
+						this.setValue($s.val());
+
+					}, this));
+				}
+			}
+			else
+			{
+				this.$elements.prop('checked', false);
+				if (this.opts.parent) this.$elements.each($.proxy(this.removeHighlight, this));
+				if (this.opts.target) this.$target.val('');
+			}
+		},
+		setOnStart: function(i, el)
+		{
+			var $el = $(el);
+			if (this.$element.prop('checked') || (this.setter && ($.inArray($el.val(), this.setter) !== -1)))
+			{
+				$el.prop('checked', true);
+				this.setHighlight($el);
+			}
+
+			$el.on('click', $.proxy(function()
+			{
+				var checkedSize = this.$elements.filter(':checked').size();
+
+				if ($el.prop('checked'))
+				{
+					this.setValue($el.val());
+					this.setHighlight($el);
+				}
+				else
+				{
+					this.removeValue($el.val());
+					this.removeHighlight($el);
+				}
+
+				var prop = (checkedSize !== this.$elements.size()) ? false : true;
+				this.$element.prop('checked', prop);
+
+
+			}, this));
+		},
+		setHighlight: function($el)
+		{
+			if (!this.opts.parent) return;
+
+			$el.closest(this.opts.parent).addClass(this.opts.highlight);
+		},
+		removeHighlight: function(i, $el)
+		{
+			if (!this.opts.parent) return;
+
+			$($el).closest(this.opts.parent).removeClass(this.opts.highlight);
+		},
+		setValue: function(value)
+		{
+			if (!this.opts.target) return;
+
+			var str = this.$target.val();
+			var arr = str.split(',');
+			arr.push(value);
+
+			if (str === '')
+			{
+				arr = [value];
+			}
+
+			this.$target.val(arr.join(','));
+		},
+		removeValue: function(value)
+		{
+			if (!this.opts.target) return;
+
+			var arr = this.$target.val().split(',');
+
+			var index = arr.indexOf(value);
+			arr.splice(index, 1);
+
+			this.$target.val(arr.join(','));
+		}
+	};
+
+
+	$(window).on('load.tools.buttons', function()
+	{
+		$('[data-tools="check-all"]').checkAll();
+	});
+
+	// constructor
+	CheckAll.prototype.init.prototype = CheckAll.prototype;
+
+
+})(jQuery);
+/*
+	Dropdown Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.dropdown = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'dropdown', {});
+			$.data(this, 'dropdown', Dropdown(this, options));
+		});
+
+	};
+
+
+	// Initialization
+	function Dropdown(el, options)
+	{
+		return new Dropdown.prototype.init(el, options);
+	}
+
+	$.Dropdown = Dropdown;
+	$.Dropdown.NAME = 'dropdown';
+	$.Dropdown.VERSION = '1.0';
+	$.Dropdown.opts = {
+
+		target: false
+
+	};
+
+	// Functionality
+	Dropdown.fn = $.Dropdown.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+			this.loadOptions(options);
+
+			this.build();
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Dropdown.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		setCallback: function(type, e, data)
+		{
+			var events = $._data(this.$element[0], 'events');
+			if (events && typeof events[type] != 'undefined')
+			{
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.Dropdown.NAME || namespace == $.Dropdown.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
+			}
+
+			return (typeof data == 'undefined') ? e : data;
+
+		},
+		build: function()
+		{
+			this.$dropdown = $(this.opts.target);
+			this.$dropdown.hide();
+
+			this.$caret = $('<b class="caret"></b>');
+			this.$element.append(this.$caret);
+
+			this.setCaretUp();
+
+			this.$element.click($.proxy(this.toggle, this));
+		},
+		setCaretUp: function()
+		{
+			var height =  this.$element.offset().top + this.$element.innerHeight() + this.$dropdown.innerHeight();
+			if ($(document).height() > height) return;
+
+			this.$caret.addClass('caret-up');
+		},
+		toggle: function(e)
+		{
+			e.preventDefault();
+			(this.$element.hasClass('dropdown-in')) ? this.hide() : this.show();
+		},
+		getPlacement: function(height)
+		{
+			return ($(document).height() < height) ? 'top' : 'bottom';
+		},
+		getPosition: function()
+		{
+			return (this.$element.closest('.navigation-fixed').size() != 0) ? 'fixed' : 'absolute';
+		},
+		setPosition: function()
+		{
+			var pos =  this.$element.offset();
+			var elementHeight = this.$element.innerHeight();
+			var elementWidth = this.$element.innerWidth();
+			var height = this.$dropdown.innerHeight();
+			var width = this.$dropdown.innerWidth();
+
+			var position = this.getPosition();
+			var placement = this.getPlacement(pos.top + height + elementHeight);
+
+			var leftFix = 0;
+			if ($(window).width() < (pos.left + width))
+			{
+				leftFix = (width - elementWidth);
+			}
+
+			var top;
+			var	left = pos.left - leftFix;
+			if (placement == 'bottom')
+			{
+				this.$caret.removeClass('caret-up');
+				top = (position == 'fixed') ? elementHeight : pos.top + elementHeight;
+			}
+			else
+			{
+				this.$caret.addClass('caret-up');
+				top = (position == 'fixed') ? height : pos.top - height;
+			}
+
+			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' })
+		},
+		show: function()
+		{
+			$('.dropdown-in').removeClass('dropdown-in');
+			$('.dropdown').removeClass('dropdown-open').hide();
+
+			this.setPosition();
+
+			this.$dropdown.addClass('dropdown-open').show();
+			this.$element.addClass('dropdown-in');
+
+			$(document).on('scroll.tools.dropdown', $.proxy(this.setPosition, this));
+			$(window).on('resize.tools.dropdown', $.proxy(this.setPosition, this));
+			$(document).on('click.tools.dropdown', $.proxy(this.hide, this));
+			$(document).on('keydown.tools.dropdown', $.proxy(function(e)
+			{
+			   if (e.which === 27) // esc
+			   {
+				   this.hide();
+			   }
+
+			}, this));
+
+			this.setCallback('opened', this.$dropdown, this.$element);
+
+		},
+		hide: function(e)
+		{
+			if (e)
+			{
+				var $target = $(e.target);
+				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.hasClass('dropdown-open'))
+				{
+					return;
+				}
+			}
+
+			this.$dropdown.removeClass('dropdown-open').hide();
+			this.$element.removeClass('dropdown-in');
+
+			$(document).off('.tools.dropdown');
+			$(window).off('.tools.dropdown');
+
+			this.setCallback('closed', this.$dropdown, this.$element);
+		}
+	};
+
+	$(window).on('load.tools.dropdown', function()
+	{
+		$('[data-tools="dropdown"]').dropdown();
+	});
+
+	// constructor
+	Dropdown.prototype.init.prototype = Dropdown.prototype;
+
+
+})(jQuery);
+/*
 	FilterBox Tool
 */
 (function($)
@@ -482,41 +1230,7 @@
 
 })(jQuery);
 /*
-	Progress Tool
-*/
-(function($)
-{
-	$.progress = {
-		show: function()
-		{
-			if ($('#tools-progress').length != 0)
-			{
-				$('#tools-progress').fadeIn();
-			}
-			else
-			{
-				var $progress = $('<div id="tools-progress"><span></span></div>').hide();
-				$(document.body).append($progress);
-				$('#tools-progress').fadeIn();
-			}
-		},
-		update: function(value)
-		{
-			if ($('#tools-progress').length == 0) this.show();
-
-			$('#tools-progress').find('span').css('width', value + '%');
-		},
-		hide: function()
-		{
-			$('#tools-progress').fadeOut(1500);
-		}
-	};
-
-
-})(jQuery);
-
-/*
-	Tabs Tool
+	Infinity Scroll Tool
 */
 (function($)
 {
@@ -524,480 +1238,36 @@
 	"use strict";
 
 	// Plugin
-	$.fn.tabs = function(options)
-	{
-		var val = [];
-		var args = Array.prototype.slice.call(arguments, 1);
-
-		if (typeof options === 'string')
-		{
-			this.each(function()
-			{
-				var instance = $.data(this, 'tabs');
-				if (typeof instance !== 'undefined' && $.isFunction(instance[options]))
-				{
-					var methodVal = instance[options].apply(instance, args);
-					if (methodVal !== undefined && methodVal !== instance) val.push(methodVal);
-				}
-				else return $.error('No such method "' + options + '" for Tabs');
-			});
-		}
-		else
-		{
-			this.each(function()
-			{
-				$.data(this, 'tabs', {});
-				$.data(this, 'tabs', Tabs(this, options));
-			});
-		}
-
-		if (val.length === 0) return this;
-		else if (val.length === 1) return val[0];
-		else return val;
-	};
-
-	// Initialization
-	function Tabs(el, options)
-	{
-		return new Tabs.prototype.init(el, options);
-	}
-
-	$.Tabs = Tabs;
-	$.Tabs.NAME = 'tabs';
-	$.Tabs.VERSION = '1.0';
-	$.Tabs.opts = {
-
-		equals: false,
-		active: false
-
-	};
-
-	// Functionality
-	Tabs.fn = $.Tabs.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			this.$element = el !== false ? $(el) : false;
-
-			this.loadOptions(options);
-
-			this.links = this.$element.find('a');
-			this.tabs = [];
-
-			this.links.each($.proxy(this.load, this));
-
-			this.setEquals();
-			this.setCallback('init');
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Tabs.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$element[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Tabs.NAME || namespace == $.Tabs.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		load: function(i, el)
-		{
-			var $el = $(el);
-			var hash = $el.attr('href');
-			$el.attr('rel', hash);
-
-			this.tabs.push($(hash));
-
-			if (!$el.parent().hasClass('active'))
-			{
-				$(hash).hide();
-			}
-
-			// is hash in url
-			this.readLocationHash(hash);
-
-			// is active
-			if (this.opts.active !== false && this.opts.active === hash)
-			{
-				this.show(hash);
-			}
-
-			$el.on('click', $.proxy(this.onClick, this));
-		},
-		onClick: function(e)
-		{
-			e.preventDefault();
-
-			var hash = $(e.target).attr('rel');
-			top.location.hash = hash;
-			this.show(hash);
-		},
-		readLocationHash: function(hash)
-		{
-			if (top.location.hash == '' || top.location.hash != hash) return;
-
-			this.opts.active = top.location.hash;
-		},
-		setActive: function(hash)
-		{
-			this.activeHash = hash;
-			this.activeTab = $('[rel=' + hash + ']');
-
-			this.links.parent().removeClass('active');
-			this.activeTab.parent().addClass('active');
-		},
-		getActiveHash: function()
-		{
-			return this.activeHash;
-		},
-		getActiveTab: function()
-		{
-			return this.activeTab;
-		},
-		show: function(hash)
-		{
-			this.hideAll();
-			$(hash).show();
-			this.setActive(hash);
-
-			this.setCallback('show', $('[rel=' + hash + ']'), hash);
-		},
-		hideAll: function()
-		{
-			$.each(this.tabs, function()
-			{
-				$(this).hide();
-			});
-		},
-		setEquals: function()
-		{
-			if (!this.opts.equals) return;
-
-			this.setMaxHeight(this.getMaxHeight());
-		},
-		setMaxHeight: function(height)
-		{
-			$.each(this.tabs, function()
-			{
-				$(this).css('min-height', height + 'px');
-			});
-		},
-		getMaxHeight: function()
-		{
-			var max = 0;
-			$.each(this.tabs, function()
-			{
-				var h = $(this).height();
-				max = h > max ? h : max;
-			});
-
-			return max;
-		}
-	};
-
-	$(window).on('load.tools.tabs', function()
-	{
-		$('[data-tools="tabs"]').tabs();
-	});
-
-	// constructor
-	Tabs.prototype.init.prototype = Tabs.prototype;
-
-})(jQuery);
-
-
-/*
-	TextFit Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.textfit = function(options)
+	$.fn.infinityScroll = function(options)
 	{
 		return this.each(function()
 		{
-			$.data(this, 'textfit', {});
-			$.data(this, 'textfit', Textfit(this, options));
-		});
-
-	};
-
-	// Initialization
-	function Textfit(el, options)
-	{
-		return new Textfit.prototype.init(el, options);
-	}
-
-	$.Textfit = Textfit;
-	$.Textfit.NAME = 'textfit';
-	$.Textfit.VERSION = '1.0';
-	$.Textfit.opts = {
-
-		min: '10px',
-		max: '100px',
-		compressor: 1
-
-	};
-
-	// Functionality
-	Textfit.fn = $.Textfit.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions(options);
-
-			this.$element.css('font-size', Math.max(Math.min(this.$element.width() / (this.opts.compressor*10), parseFloat(this.opts.max)), parseFloat(this.opts.min)));
-
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Textfit.opts),
-				this.$element.data(),
-				options
-			);
-		}
-	};
-
-	$(window).on('load.tools.textfit', function()
-	{
-		$('[data-tools="textfit"]').textfit();
-	});
-
-	// constructor
-	Textfit.prototype.init.prototype = Textfit.prototype;
-
-
-})(jQuery);
-/*
-	Tabs Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.message = function(options)
-	{
-		var val = [];
-		var args = Array.prototype.slice.call(arguments, 1);
-
-		if (typeof options === 'string')
-		{
-			this.each(function()
-			{
-				var instance = $.data(this, 'message');
-				if (typeof instance !== 'undefined' && $.isFunction(instance[options]))
-				{
-					var methodVal = instance[options].apply(instance, args);
-					if (methodVal !== undefined && methodVal !== instance) val.push(methodVal);
-				}
-				else return $.error('No such method "' + options + '" for Message');
-			});
-		}
-		else
-		{
-			this.each(function()
-			{
-				$.data(this, 'message', {});
-				$.data(this, 'message', Message(this, options));
-			});
-		}
-
-		if (val.length === 0) return this;
-		else if (val.length === 1) return val[0];
-		else return val;
-	};
-
-	// Initialization
-	function Message(el, options)
-	{
-		return new Message.prototype.init(el, options);
-	}
-
-	$.Message = Message;
-	$.Message.NAME = 'message';
-	$.Message.VERSION = '1.0';
-	$.Message.opts = {
-
-		target: false,
-		delay: 10 // message delay - seconds or false
-
-	};
-
-	// Functionality
-	Message.fn = $.Message.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			this.$element = el !== false ? $(el) : false;
-
-			this.loadOptions(options);
-			this.build();
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Message.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$message[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Message.NAME || namespace == $.Message.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		build: function()
-		{
-
-			if (!this.opts.target)
-			{
-				this.$message = this.$element;
-				this.show();
-			}
-			else
-			{
-				this.$message = $(this.opts.target);
-
-				this.$message.data('message', '');
-				this.$message.data('message', this);
-
-				this.$element.on('click', $.proxy(this.show, this));
-			}
-		},
-		show: function()
-		{
-			if (this.$message.hasClass('open'))
-			{
-				this.hide();
-				return;
-			}
-
-			$('.tools-message').hide().removeClass('open');
-			this.$message.addClass('open').fadeIn('fast').on('click.tools.message', $.proxy(this.hide, this));
-
-			if (this.opts.delay)
-			{
-				setTimeout($.proxy(this.hide, this), this.opts.delay * 1000);
-			}
-
-			this.setCallback('opened');
-		},
-		hide: function()
-		{
-			if (!this.$message.hasClass('open')) return;
-
-			this.$message.off('click.tools.message');
-			this.$message.fadeOut('fast', $.proxy(function()
-			{
-				this.$message.removeClass('open');
-				this.setCallback('closed');
-
-			}, this));
-		}
-	};
-
-	// Constructor
-	Message.prototype.init.prototype = Message.prototype;
-
-	$(function()
-	{
-		$('[data-tools="message"]').message();
-	});
-
-})(jQuery);
-
-
-/*
-	Upload Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.upload = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'upload', {});
-			$.data(this, 'upload', Upload(this, options));
+			$.data(this, 'infinity-scroll', {});
+			$.data(this, 'infinity-scroll', InfinityScroll(this, options));
 		});
 	};
 
 	// Initialization
-	function Upload(el, options)
+	function InfinityScroll(el, options)
 	{
-		return new Upload.prototype.init(el, options);
+		return new InfinityScroll.prototype.init(el, options);
 	}
 
-	$.Upload = Upload;
-	$.Upload.NAME = 'upload';
-	$.Upload.VERSION = '1.0';
-	$.Upload.opts = {
+	$.InfinityScroll = InfinityScroll;
+	$.InfinityScroll.NAME = 'infinity-scroll';
+	$.InfinityScroll.VERSION = '1.0';
+	$.InfinityScroll.opts = {
 
 		url: false,
-		placeholder: 'Drop file here or ',
-		param: 'file'
+		offset: 0,
+		limit: 20,
+		tolerance: 50,
+		pagination: false
 
 	};
 
 	// Functionality
-	Upload.fn = $.Upload.prototype = {
+	InfinityScroll.fn = $.InfinityScroll.prototype = {
 
 		// Initialization
 		init: function(el, options)
@@ -1005,192 +1275,14 @@
 			this.$element = el !== false ? $(el) : false;
 			this.loadOptions(options);
 
-			this.load();
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Upload.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$element[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Upload.NAME || namespace == $.Upload.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		load: function()
-		{
-			this.$droparea = $('<div class="tools-droparea" />');
-			this.$placeholdler = $('<div class="tools-droparea-placeholder" />').text(this.opts.placeholder);
-
-			this.$droparea.append(this.$placeholdler);
-			this.$element.after(this.$droparea);
-			this.$placeholdler.append(this.$element);
-
-			this.$droparea.off('.tools.upload');
-			this.$element.off('.tools.upload');
-
-			this.$droparea.on('dragover.tools.upload', $.proxy(this.onDrag, this));
-			this.$droparea.on('dragleave.tools.upload', $.proxy(this.onDragLeave, this));
-
-			// change
-			this.$element.on('change.tools.upload', $.proxy(function(e)
-			{
-				e = e.originalEvent || e;
-				this.traverseFile(this.$element[0].files[0], e);
-			}, this));
-
-			// drop
-			this.$droparea.on('drop.tools.upload', $.proxy(function(e)
-			{
-				e.preventDefault();
-
-				this.$droparea.removeClass('drag-hover').addClass('drag-drop');
-				this.onDrop(e);
-
-			}, this));
-		},
-		onDrop: function(e)
-		{
-			e = e.originalEvent || e;
-			var files = e.dataTransfer.files;
-
-			this.traverseFile(files[0], e);
-		},
-		traverseFile: function(file, e)
-		{
-			var formData = !!window.FormData ? new FormData() : null;
-			if (window.FormData)
-			{
-				formData.append(this.opts.param, file);
-			}
-
-			if ($.progress) $.progress.show();
-			this.sendData(formData, e);
-		},
-		sendData: function(formData, e)
-		{
-			var xhr = new XMLHttpRequest();
-			xhr.open('POST', this.opts.url);
-
-			// complete
-			xhr.onreadystatechange = $.proxy(function()
-			{
-			    if (xhr.readyState == 4)
-			    {
-			        var data = xhr.responseText;
-
-					data = data.replace(/^\[/, '');
-					data = data.replace(/\]$/, '');
-
-					var json = (typeof data === 'string' ? $.parseJSON(data) : data);
-
-					if ($.progress) $.progress.hide();
-
-					this.$droparea.removeClass('drag-drop');
-					this.setCallback('success', json);
-			    }
-			}, this)
-
-			xhr.send(formData);
-		},
-		onDrag: function(e)
-		{
-			e.preventDefault();
-			this.$droparea.addClass('drag-hover');
-		},
-		onDragLeave: function(e)
-		{
-			e.preventDefault();
-			this.$droparea.removeClass('drag-hover');
-		}
-
-	};
-
-	// Constructor
-	Upload.prototype.init.prototype = Upload.prototype;
-
-	$(function()
-	{
-		$('[data-tools="upload"]').upload();
-	});
-
-})(jQuery);
-
-
-/*
-	Dropdown Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.dropdown = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'dropdown', {});
-			$.data(this, 'dropdown', Dropdown(this, options));
-		});
-
-	};
-
-
-	// Initialization
-	function Dropdown(el, options)
-	{
-		return new Dropdown.prototype.init(el, options);
-	}
-
-	$.Dropdown = Dropdown;
-	$.Dropdown.NAME = 'dropdown';
-	$.Dropdown.VERSION = '1.0';
-	$.Dropdown.opts = {
-
-		target: false
-
-	};
-
-	// Functionality
-	Dropdown.fn = $.Dropdown.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions(options);
-
+			this.hidePagination();
 			this.build();
 		},
 		loadOptions: function(options)
 		{
 			this.opts = $.extend(
 				{},
-				$.extend(true, {}, $.Dropdown.opts),
+				$.extend(true, {}, $.InfinityScroll.opts),
 				this.$element.data(),
 				options
 			);
@@ -1205,7 +1297,7 @@
 				for (var i = 0; i < len; i++)
 				{
 					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Dropdown.NAME || namespace == $.Dropdown.NAME + '.tools')
+					if (namespace == 'tools.' + $.InfinityScroll.NAME || namespace == $.InfinityScroll.NAME + '.tools')
 					{
 						var callback = events[type][i].handler;
 						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
@@ -1221,406 +1313,67 @@
 		},
 		build: function()
 		{
-			this.$dropdown = $(this.opts.target);
-			this.$dropdown.hide();
-
-			this.$caret = $('<b class="caret"></b>');
-			this.$element.append(this.$caret);
-
-			this.setCaretUp();
-
-			this.$element.click($.proxy(this.toggle, this));
-		},
-		setCaretUp: function()
-		{
-			var height =  this.$element.offset().top + this.$element.innerHeight() + this.$dropdown.innerHeight();
-			if ($(document).height() > height) return;
-
-			this.$caret.addClass('caret-up');
-		},
-		toggle: function(e)
-		{
-			e.preventDefault();
-			(this.$element.hasClass('dropdown-in')) ? this.hide() : this.show();
-		},
-		getPlacement: function(height)
-		{
-			return ($(document).height() < height) ? 'top' : 'bottom';
-		},
-		getPosition: function()
-		{
-			return (this.$element.closest('.navigation-fixed').size() != 0) ? 'fixed' : 'absolute';
-		},
-		setPosition: function()
-		{
-			var pos =  this.$element.offset();
-			var elementHeight = this.$element.innerHeight();
-			var elementWidth = this.$element.innerWidth();
-			var height = this.$dropdown.innerHeight();
-			var width = this.$dropdown.innerWidth();
-
-			var position = this.getPosition();
-			var placement = this.getPlacement(pos.top + height + elementHeight);
-
-			var leftFix = 0;
-			if ($(window).width() < (pos.left + width))
+			$(window).on('DOMContentLoaded.tools.infinite-scroll load.tools.infinite-scroll resize.tools.infinite-scroll scroll.tools.infinite-scroll', $.proxy(function()
 			{
-				leftFix = (width - elementWidth);
-			}
-
-			var top;
-			var	left = pos.left - leftFix;
-			if (placement == 'bottom')
-			{
-				this.$caret.removeClass('caret-up');
-				top = (position == 'fixed') ? elementHeight : pos.top + elementHeight;
-			}
-			else
-			{
-				this.$caret.addClass('caret-up');
-				top = (position == 'fixed') ? height : pos.top - height;
-			}
-
-			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' })
-		},
-		show: function()
-		{
-			$('.dropdown-in').removeClass('dropdown-in');
-			$('.dropdown').removeClass('dropdown-open').hide();
-
-			this.setPosition();
-
-			this.$dropdown.addClass('dropdown-open').show();
-			this.$element.addClass('dropdown-in');
-
-			$(document).on('scroll.tools.dropdown', $.proxy(this.setPosition, this));
-			$(window).on('resize.tools.dropdown', $.proxy(this.setPosition, this));
-			$(document).on('click.tools.dropdown', $.proxy(this.hide, this));
-			$(document).on('keydown.tools.dropdown', $.proxy(function(e)
-			{
-			   if (e.which === 27) // esc
-			   {
-				   this.hide();
-			   }
+				var $last = this.$element.children().last();
+				if (this.isElementInViewport($last[0]))
+				{
+					this.getData();
+				}
 
 			}, this));
-
-			this.setCallback('opened', this.$dropdown, this.$element);
-
 		},
-		hide: function(e)
-		{
-			if (e)
-			{
-				var $target = $(e.target);
-				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.hasClass('dropdown-open'))
-				{
-					return;
-				}
-			}
-
-			this.$dropdown.removeClass('dropdown-open').hide();
-			this.$element.removeClass('dropdown-in');
-
-			$(document).off('.tools.dropdown');
-			$(window).off('.tools.dropdown');
-
-			this.setCallback('closed', this.$dropdown, this.$element);
-		}
-	};
-
-	$(window).on('load.tools.dropdown', function()
-	{
-		$('[data-tools="dropdown"]').dropdown();
-	});
-
-	// constructor
-	Dropdown.prototype.init.prototype = Dropdown.prototype;
-
-
-})(jQuery);
-/*
-	Validate Tool
-*/
-(function($)
-{
-	"use strict";
-
-	// Plugin
-	$.fn.validate = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'validate', {});
-			$.data(this, 'validate', Validate(this, options));
-		});
-	};
-
-	// Initialization
-	function Validate(el, options)
-	{
-		return new Validate.prototype.init(el, options);
-	}
-
-	$.Validate = Validate;
-	$.Validate.NAME = 'validate';
-	$.Validate.VERSION = '1.0';
-	$.Validate.opts = {
-
-		url: false,
-		tooltip: false,
-		trigger: false,
-		delay: 10, // message delay - seconds or false
-		errorClassName: 'input-error',
-		spanClassName: 'error'
-
-	};
-
-	// Functionality
-	Validate.fn = $.Validate.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
-
-			this.build();
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Validate.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$element[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Validate.NAME || namespace == $.Validate.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		build: function()
-		{
-			// disable html5 validation
-			this.$element.attr('novalidate', 'novalidate');
-
-			if (this.opts.trigger === false)
-			{
-				// submit
-				this.$element.submit($.proxy(function()
-				{
-					this.send();
-					return false;
-
-				}, this));
-			}
-			else
-			{
-				// trigger
-				this.$element.submit(function() { return false });
-				$(this.opts.trigger).off('click.tools.validate');
-				$(this.opts.trigger).on('click.tools.validate', $.proxy(this.send, this));
-			}
-		},
-		send: function()
+		getData: function()
 		{
 			$.ajax({
 				url: this.opts.url,
 				type: 'post',
-				data: this.$element.serialize(),
-				success: $.proxy(this.parse, this)
-			});
-		},
-		parse: function(jsonString)
-		{
-			this.clear();
-
-			var obj = {};
-			if (jsonString != '')
-			{
-				jsonString = jsonString.replace(/^\[/, '');
-				jsonString = jsonString.replace(/\]$/, '');
-				obj = $.parseJSON(jsonString);
-			}
-
-			if (obj.type === 'error')
-			{
-				$.each(obj.errors, $.proxy(function(name, text)
+				data:  'limit=' + this.opts.limit + '&offset=' + this.opts.offset,
+				success: $.proxy(function(data)
 				{
-					var $el = $(this.$element.find('[name=' + name + ']'));
-					$el.addClass(this.opts.errorClassName);
-
-					if (text != '')
+					if (data == '')
 					{
-						if (this.opts.tooltip) this.showTooltip($el, text);
-						else this.showError($el, name, text);
+						$(window).off('.tools.infinite-scroll');
+						return;
 					}
 
-				}, this));
+					this.opts.offset = this.opts.offset + this.opts.limit;
+					this.$element.append(data);
 
-				this.setCallback('error', obj.errors);
-			}
-			else
-			{
-				if (obj.type === 'html')
-				{
-					$.each(obj.data, $.proxy(function(i, s)
-					{
-						$(i).html(this.stripslashes(this.urldecode(s)));
+					this.setCallback('loaded', data);
 
-					}, this));
-				}
-				else if (obj.type === 'location')
-				{
-					top.location.href = obj.data;
-				}
-				else if (obj.type === 'message')
-				{
-					this.showMessage(obj);
-				}
-
-				this.setCallback('success');
-			}
-		},
-		showMessage: function(obj)
-		{
-			var text = '';
-			if ($.isArray(obj.data))
-			{
-				text = '<ul>';
-				for (k in obj.data)
-				{
-					text += '<li>' + obj.data[k] + '</li>';
-				}
-				text += '</ul>';
-			}
-			else
-			{
-				text = obj.data;
-			}
-
-			var theme = '';
-			if (typeof obj.theme != 'undefined')
-			{
-				theme = ' tools-message-' + obj.theme;
-			}
-
-			var message = $('<div class="tools-message' + theme + '" />').html(text);
-			$('body').append(message);
-			message.on('click.tools.validate', function()
-			{
-				message.remove();
-				message.off('click.tools.validate');
+				}, this)
 			});
-
-			if (this.opts.delay)
-			{
-				setTimeout(function()
-				{
-					message.fadeOut();
-
-				}, this.opts.delay * 1000);
-			}
 		},
-		showError: function($el, name, text)
+		hidePagination: function()
 		{
-			$('#' + name + '-error').addClass(this.opts.spanClassName).html(text).show();
+			if (!this.opts.pagination) return;
 
-			var eventName = 'keyup';
-			var tag = $el.prop('tagName');
-			var type = $el.prop('type');
-
-			if (tag == 'SELECT' || type == 'checkbox' || type == 'radio')
-			{
-				eventName = 'change';
-			}
-
-			$el.on(eventName + '.tools.validate', $.proxy(function()
-			{
-				$el.removeClass(this.opts.errorClassName);
-				$('#' + name + '-error').removeClass('validate-error').html('').hide();
-				$el.off(eventName + '.tools.validate');
-
-			}, this));
+			$(this.opts.pagination).hide();
 		},
-		showTooltip: function($el, text)
+		isElementInViewport: function(el)
 		{
-			var size = $el.size();
-			if (size != 0)
-			{
-				if (size > 1)
-				{
-					$el = $el.last();
-				}
-
-				var tooltip = $('<div class="validate-tooltip tooltip tooltip-theme-red" />').html(text);
-				tooltip.css({ top: ($el.offset().top + $el.innerHeight() + 2) + 'px', left: $el.offset().left + 'px' });
-				$('body').append(tooltip);
-
-				var eventName = 'keyup';
-				var tag = $el.prop('tagName');
-				var type = $el.prop('type');
-
-				if (tag == 'SELECT' || type == 'checkbox' || type == 'radio')
-				{
-					eventName = 'change';
-				}
-
-				$el.on(eventName + '.tools.validate', function()
-				{
-					tooltip.remove();
-					$el.off(eventName + '.tools.validate');
-				});
-			}
-		},
-		clear: function()
-		{
-			this.$element.find('.' + this.opts.errorClassName).removeClass(this.opts.errorClassName);
-			$('.validate-error').removeClass('validate-error').html('').hide();
-			$('.validate-tooltip').remove();
-			$('.tools-message').remove();
-		},
-		urldecode: function(str)
-		{
-			return decodeURIComponent(str.replace(/\+/g, '%20'));
-		},
-		stripslashes: function(str)
-		{
-			return (str+'').replace(/\0/g, '0').replace(/\\([\\'"])/g, '$1');
+		    var rect = el.getBoundingClientRect();
+		    return (
+		        rect.top >= 0 &&
+		        rect.left >= 0 &&
+		        rect.bottom <= $(window).height() + this.opts.tolerance &&
+		        rect.right <= $(window).width()
+		    );
 		}
 	};
 
-	$(window).on('load.tools.validate', function()
+	$(window).on('load.tools.infinity-scroll', function()
 	{
-		$('[data-tools="validate"]').validate();
+		$('[data-tools="infinity-scroll"]').infinityScroll();
 	});
 
 	// constructor
-	Validate.prototype.init.prototype = Validate.prototype;
-
+	InfinityScroll.prototype.init.prototype = InfinityScroll.prototype;
 
 })(jQuery);
+
+
 /*
 	Livesearch Tool
 */
@@ -1782,6 +1535,168 @@
 
 
 })(jQuery);
+
+/*
+	Tabs Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.message = function(options)
+	{
+		var val = [];
+		var args = Array.prototype.slice.call(arguments, 1);
+
+		if (typeof options === 'string')
+		{
+			this.each(function()
+			{
+				var instance = $.data(this, 'message');
+				if (typeof instance !== 'undefined' && $.isFunction(instance[options]))
+				{
+					var methodVal = instance[options].apply(instance, args);
+					if (methodVal !== undefined && methodVal !== instance) val.push(methodVal);
+				}
+				else return $.error('No such method "' + options + '" for Message');
+			});
+		}
+		else
+		{
+			this.each(function()
+			{
+				$.data(this, 'message', {});
+				$.data(this, 'message', Message(this, options));
+			});
+		}
+
+		if (val.length === 0) return this;
+		else if (val.length === 1) return val[0];
+		else return val;
+	};
+
+	// Initialization
+	function Message(el, options)
+	{
+		return new Message.prototype.init(el, options);
+	}
+
+	$.Message = Message;
+	$.Message.NAME = 'message';
+	$.Message.VERSION = '1.0';
+	$.Message.opts = {
+
+		target: false,
+		delay: 10 // message delay - seconds or false
+
+	};
+
+	// Functionality
+	Message.fn = $.Message.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+
+			this.loadOptions(options);
+			this.build();
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Message.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		setCallback: function(type, e, data)
+		{
+			var events = $._data(this.$message[0], 'events');
+			if (events && typeof events[type] != 'undefined')
+			{
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.Message.NAME || namespace == $.Message.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
+			}
+
+			return (typeof data == 'undefined') ? e : data;
+
+		},
+		build: function()
+		{
+
+			if (!this.opts.target)
+			{
+				this.$message = this.$element;
+				this.show();
+			}
+			else
+			{
+				this.$message = $(this.opts.target);
+
+				this.$message.data('message', '');
+				this.$message.data('message', this);
+
+				this.$element.on('click', $.proxy(this.show, this));
+			}
+		},
+		show: function()
+		{
+			if (this.$message.hasClass('open'))
+			{
+				this.hide();
+				return;
+			}
+
+			$('.tools-message').hide().removeClass('open');
+			this.$message.addClass('open').fadeIn('fast').on('click.tools.message', $.proxy(this.hide, this));
+
+			if (this.opts.delay)
+			{
+				setTimeout($.proxy(this.hide, this), this.opts.delay * 1000);
+			}
+
+			this.setCallback('opened');
+		},
+		hide: function()
+		{
+			if (!this.$message.hasClass('open')) return;
+
+			this.$message.off('click.tools.message');
+			this.$message.fadeOut('fast', $.proxy(function()
+			{
+				this.$message.removeClass('open');
+				this.setCallback('closed');
+
+			}, this));
+		}
+	};
+
+	// Constructor
+	Message.prototype.init.prototype = Message.prototype;
+
+	$(function()
+	{
+		$('[data-tools="message"]').message();
+	});
+
+})(jQuery);
+
 
 /*
 	Modal Tool
@@ -2137,7 +2052,7 @@
 
 
 /*
-	Tooltip Tool
+	Navigation Fixed Tool
 */
 (function($)
 {
@@ -2145,100 +2060,109 @@
 	"use strict";
 
 	// Plugin
-	$.fn.tooltip = function(options)
+	$.fn.navigationFixed = function(options)
 	{
 		return this.each(function()
 		{
-			$.data(this, 'tooltip', {});
-			$.data(this, 'tooltip', Tooltip(this, options));
+			$.data(this, 'navigationFixed', {});
+			$.data(this, 'navigationFixed', NavigationFixed(this, options));
 		});
+
 	};
 
 	// Initialization
-	function Tooltip(el, options)
+	function NavigationFixed(el, options)
 	{
-		return new Tooltip.prototype.init(el, options);
+		return new NavigationFixed.prototype.init(el, options);
 	}
 
-	$.Tooltip = Tooltip;
-	$.Tooltip.NAME = 'tooltip';
-	$.Tooltip.VERSION = '1.0';
-	$.Tooltip.opts = {
+	$.NavigationFixed = NavigationFixed;
+	$.NavigationFixed.NAME = 'navigation-fixed';
+	$.NavigationFixed.VERSION = '1.0';
+	$.NavigationFixed.opts = {
 
-		theme: false
+		// settings
 
 	};
 
 	// Functionality
-	Tooltip.fn = $.Tooltip.prototype = {
+	NavigationFixed.fn = $.NavigationFixed.prototype = {
 
 		// Initialization
 		init: function(el, options)
 		{
-			this.$element = el !== false ? $(el) : false;
+			var mq = window.matchMedia("(max-width: 767px)");
+			if (mq.matches) return;
 
+			this.$element = el !== false ? $(el) : false;
 			this.loadOptions(options);
 
-			this.$element.on('mouseover', $.proxy(this.show, this));
-			this.$element.on('mouseout', $.proxy(this.hide, this));
+		    this.navBoxOffsetTop = this.$element.offset().top;
+
+		    this.build();
+		    $(window).scroll($.proxy(this.build, this));
+
 		},
 		loadOptions: function(options)
 		{
 			this.opts = $.extend(
 				{},
-				$.extend(true, {}, $.Tooltip.opts),
+				$.extend(true, {}, $.NavigationFixed.opts),
 				this.$element.data(),
 				options
 			);
 		},
-		show: function()
+		setCallback: function(type, e, data)
 		{
-			$('.tooltip').hide();
-
-			var text = this.$element.attr('title');
-			this.$element.data('cached-title', text);
-			this.$element.attr('title', '');
-
-			this.tooltip = $('<div class="tooltip" />').html(text).hide();
-
-			if (this.opts.theme !== false)
+			var events = $._data(this.$element[0], 'events');
+			if (events && typeof events[type] != 'undefined')
 			{
-				this.tooltip.addClass('tooltip-theme-' + this.opts.theme);
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.NavigationFixed.NAME || namespace == $.NavigationFixed.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
 			}
 
-			this.tooltip.css({
-				top: (this.$element.offset().top + this.$element.innerHeight()) + 'px',
-				left: this.$element.offset().left + 'px'
-			});
-
-			$('body').append(this.tooltip);
-
-			this.tooltip.show();
+			return (typeof data == 'undefined') ? e : data;
 
 		},
-		hide: function()
+		build: function()
 		{
-			this.tooltip.fadeOut('fast', $.proxy(function()
+			if ($(window).scrollTop() > this.navBoxOffsetTop)
 			{
-				this.tooltip.remove();
+				this.$element.addClass('navigation-fixed');
+				this.setCallback('fixed');
+			}
+			else
+			{
+				this.$element.removeClass('navigation-fixed');
+				this.setCallback('unfixed');
+			}
 
-			}, this));
 
-			this.$element.attr('title', this.$element.data('cached-title'));
-			this.$element.data('cached-title', '');
 		}
 	};
 
-	// Constructor
-	Tooltip.prototype.init.prototype = Tooltip.prototype;
-
-	$(function()
+	$(window).on('load.tools.navigation-fixed', function()
 	{
-		$('[data-tools="tooltip"]').tooltip();
+		$('[data-tools="navigation-fixed"]').navigationFixed();
 	});
 
-})(jQuery);
+	// constructor
+	NavigationFixed.prototype.init.prototype = NavigationFixed.prototype;
 
+
+})(jQuery);
 /*
 	Navigation Toggle Tool
 */
@@ -2375,7 +2299,40 @@
 
 })(jQuery);
 /*
-	CheckAll Tool
+	Progress Tool
+*/
+(function($)
+{
+	$.progress = {
+		show: function()
+		{
+			if ($('#tools-progress').length != 0)
+			{
+				$('#tools-progress').fadeIn();
+			}
+			else
+			{
+				var $progress = $('<div id="tools-progress"><span></span></div>').hide();
+				$(document.body).append($progress);
+				$('#tools-progress').fadeIn();
+			}
+		},
+		update: function(value)
+		{
+			this.show();
+			$('#tools-progress').find('span').css('width', value + '%');
+		},
+		hide: function()
+		{
+			$('#tools-progress').fadeOut(1500);
+		}
+	};
+
+
+})(jQuery);
+
+/*
+	Tabs Tool
 */
 (function($)
 {
@@ -2383,34 +2340,421 @@
 	"use strict";
 
 	// Plugin
-	$.fn.checkAll = function(options)
+	$.fn.tabs = function(options)
+	{
+		var val = [];
+		var args = Array.prototype.slice.call(arguments, 1);
+
+		if (typeof options === 'string')
+		{
+			this.each(function()
+			{
+				var instance = $.data(this, 'tabs');
+				if (typeof instance !== 'undefined' && $.isFunction(instance[options]))
+				{
+					var methodVal = instance[options].apply(instance, args);
+					if (methodVal !== undefined && methodVal !== instance) val.push(methodVal);
+				}
+				else return $.error('No such method "' + options + '" for Tabs');
+			});
+		}
+		else
+		{
+			this.each(function()
+			{
+				$.data(this, 'tabs', {});
+				$.data(this, 'tabs', Tabs(this, options));
+			});
+		}
+
+		if (val.length === 0) return this;
+		else if (val.length === 1) return val[0];
+		else return val;
+	};
+
+	// Initialization
+	function Tabs(el, options)
+	{
+		return new Tabs.prototype.init(el, options);
+	}
+
+	$.Tabs = Tabs;
+	$.Tabs.NAME = 'tabs';
+	$.Tabs.VERSION = '1.0';
+	$.Tabs.opts = {
+
+		equals: false,
+		active: false
+
+	};
+
+	// Functionality
+	Tabs.fn = $.Tabs.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+
+			this.loadOptions(options);
+
+			this.links = this.$element.find('a');
+			this.tabs = [];
+
+			this.links.each($.proxy(this.load, this));
+
+			this.setEquals();
+			this.setCallback('init');
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Tabs.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		setCallback: function(type, e, data)
+		{
+			var events = $._data(this.$element[0], 'events');
+			if (events && typeof events[type] != 'undefined')
+			{
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.Tabs.NAME || namespace == $.Tabs.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
+			}
+
+			return (typeof data == 'undefined') ? e : data;
+
+		},
+		load: function(i, el)
+		{
+			var $el = $(el);
+			var hash = $el.attr('href');
+			$el.attr('rel', hash);
+
+			this.tabs.push($(hash));
+
+			if (!$el.parent().hasClass('active'))
+			{
+				$(hash).hide();
+			}
+
+			// is hash in url
+			this.readLocationHash(hash);
+
+			// is active
+			if (this.opts.active !== false && this.opts.active === hash)
+			{
+				this.show(hash);
+			}
+
+			$el.on('click', $.proxy(this.onClick, this));
+		},
+		onClick: function(e)
+		{
+			e.preventDefault();
+
+			var hash = $(e.target).attr('rel');
+			top.location.hash = hash;
+			this.show(hash);
+		},
+		readLocationHash: function(hash)
+		{
+			if (top.location.hash == '' || top.location.hash != hash) return;
+
+			this.opts.active = top.location.hash;
+		},
+		setActive: function(hash)
+		{
+			this.activeHash = hash;
+			this.activeTab = $('[rel=' + hash + ']');
+
+			this.links.parent().removeClass('active');
+			this.activeTab.parent().addClass('active');
+		},
+		getActiveHash: function()
+		{
+			return this.activeHash;
+		},
+		getActiveTab: function()
+		{
+			return this.activeTab;
+		},
+		show: function(hash)
+		{
+			this.hideAll();
+			$(hash).show();
+			this.setActive(hash);
+
+			this.setCallback('show', $('[rel=' + hash + ']'), hash);
+		},
+		hideAll: function()
+		{
+			$.each(this.tabs, function()
+			{
+				$(this).hide();
+			});
+		},
+		setEquals: function()
+		{
+			if (!this.opts.equals) return;
+
+			this.setMaxHeight(this.getMaxHeight());
+		},
+		setMaxHeight: function(height)
+		{
+			$.each(this.tabs, function()
+			{
+				$(this).css('min-height', height + 'px');
+			});
+		},
+		getMaxHeight: function()
+		{
+			var max = 0;
+			$.each(this.tabs, function()
+			{
+				var h = $(this).height();
+				max = h > max ? h : max;
+			});
+
+			return max;
+		}
+	};
+
+	$(window).on('load.tools.tabs', function()
+	{
+		$('[data-tools="tabs"]').tabs();
+	});
+
+	// constructor
+	Tabs.prototype.init.prototype = Tabs.prototype;
+
+})(jQuery);
+
+
+/*
+	TextFit Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.textfit = function(options)
 	{
 		return this.each(function()
 		{
-			$.data(this, 'checkAll', {});
-			$.data(this, 'checkAll', CheckAll(this, options));
+			$.data(this, 'textfit', {});
+			$.data(this, 'textfit', Textfit(this, options));
 		});
 
 	};
 
 	// Initialization
-	function CheckAll(el, options)
+	function Textfit(el, options)
 	{
-		return new CheckAll.prototype.init(el, options);
+		return new Textfit.prototype.init(el, options);
 	}
 
-	$.CheckAll = CheckAll;
-	$.CheckAll.opts = {
+	$.Textfit = Textfit;
+	$.Textfit.NAME = 'textfit';
+	$.Textfit.VERSION = '1.0';
+	$.Textfit.opts = {
 
-		classname: false,
-		parent: false,
-		highlight: 'highlight',
-		target: false
+		min: '10px',
+		max: '100px',
+		compressor: 1
 
 	};
 
 	// Functionality
-	CheckAll.fn = $.CheckAll.prototype = {
+	Textfit.fn = $.Textfit.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+
+			this.$element = el !== false ? $(el) : false;
+			this.loadOptions(options);
+
+			this.$element.css('font-size', Math.max(Math.min(this.$element.width() / (this.opts.compressor*10), parseFloat(this.opts.max)), parseFloat(this.opts.min)));
+
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Textfit.opts),
+				this.$element.data(),
+				options
+			);
+		}
+	};
+
+	$(window).on('load.tools.textfit', function()
+	{
+		$('[data-tools="textfit"]').textfit();
+	});
+
+	// constructor
+	Textfit.prototype.init.prototype = Textfit.prototype;
+
+
+})(jQuery);
+/*
+	Tooltip Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.tooltip = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'tooltip', {});
+			$.data(this, 'tooltip', Tooltip(this, options));
+		});
+	};
+
+	// Initialization
+	function Tooltip(el, options)
+	{
+		return new Tooltip.prototype.init(el, options);
+	}
+
+	$.Tooltip = Tooltip;
+	$.Tooltip.NAME = 'tooltip';
+	$.Tooltip.VERSION = '1.0';
+	$.Tooltip.opts = {
+
+		theme: false
+
+	};
+
+	// Functionality
+	Tooltip.fn = $.Tooltip.prototype = {
+
+		// Initialization
+		init: function(el, options)
+		{
+			this.$element = el !== false ? $(el) : false;
+
+			this.loadOptions(options);
+
+			this.$element.on('mouseover', $.proxy(this.show, this));
+			this.$element.on('mouseout', $.proxy(this.hide, this));
+		},
+		loadOptions: function(options)
+		{
+			this.opts = $.extend(
+				{},
+				$.extend(true, {}, $.Tooltip.opts),
+				this.$element.data(),
+				options
+			);
+		},
+		show: function()
+		{
+			$('.tooltip').hide();
+
+			var text = this.$element.attr('title');
+			this.$element.data('cached-title', text);
+			this.$element.attr('title', '');
+
+			this.tooltip = $('<div class="tooltip" />').html(text).hide();
+
+			if (this.opts.theme !== false)
+			{
+				this.tooltip.addClass('tooltip-theme-' + this.opts.theme);
+			}
+
+			this.tooltip.css({
+				top: (this.$element.offset().top + this.$element.innerHeight()) + 'px',
+				left: this.$element.offset().left + 'px'
+			});
+
+			$('body').append(this.tooltip);
+
+			this.tooltip.show();
+
+		},
+		hide: function()
+		{
+			this.tooltip.fadeOut('fast', $.proxy(function()
+			{
+				this.tooltip.remove();
+
+			}, this));
+
+			this.$element.attr('title', this.$element.data('cached-title'));
+			this.$element.data('cached-title', '');
+		}
+	};
+
+	// Constructor
+	Tooltip.prototype.init.prototype = Tooltip.prototype;
+
+	$(function()
+	{
+		$('[data-tools="tooltip"]').tooltip();
+	});
+
+})(jQuery);
+
+/*
+	Upload Tool
+*/
+(function($)
+{
+
+	"use strict";
+
+	// Plugin
+	$.fn.upload = function(options)
+	{
+		return this.each(function()
+		{
+			$.data(this, 'upload', {});
+			$.data(this, 'upload', Upload(this, options));
+		});
+	};
+
+	// Initialization
+	function Upload(el, options)
+	{
+		return new Upload.prototype.init(el, options);
+	}
+
+	$.Upload = Upload;
+	$.Upload.NAME = 'upload';
+	$.Upload.VERSION = '1.0';
+	$.Upload.opts = {
+
+		url: false,
+		placeholder: 'Drop file here or ',
+		param: 'file'
+
+	};
+
+	// Functionality
+	Upload.fn = $.Upload.prototype = {
 
 		// Initialization
 		init: function(el, options)
@@ -2418,576 +2762,180 @@
 			this.$element = el !== false ? $(el) : false;
 			this.loadOptions(options);
 
-			this.$elements = $('.' + this.opts.classname);
-			this.$target = $(this.opts.target);
-
-			// load
-			this.$element.on('click', $.proxy(this.load, this));
-
-			this.setter = (this.opts.target) ? this.$target.val().split(',') : [];
-			this.$elements.each($.proxy(this.setOnStart, this));
+			this.load();
 		},
 		loadOptions: function(options)
 		{
 			this.opts = $.extend(
 				{},
-				$.extend(true, {}, $.CheckAll.opts),
+				$.extend(true, {}, $.Upload.opts),
 				this.$element.data(),
 				options
 			);
+		},
+		setCallback: function(type, e, data)
+		{
+			var events = $._data(this.$element[0], 'events');
+			if (events && typeof events[type] != 'undefined')
+			{
+				var value = [];
+				var len = events[type].length;
+				for (var i = 0; i < len; i++)
+				{
+					var namespace = events[type][i].namespace;
+					if (namespace == 'tools.' + $.Upload.NAME || namespace == $.Upload.NAME + '.tools')
+					{
+						var callback = events[type][i].handler;
+						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
+					}
+				}
+
+				if (value.length == 1) return value[0];
+				else return value;
+			}
+
+			return (typeof data == 'undefined') ? e : data;
+
 		},
 		load: function()
 		{
-			if (this.$element.prop('checked'))
+			this.$droparea = $('<div class="tools-droparea" />');
+			this.$placeholdler = $('<div class="tools-droparea-placeholder" />').text(this.opts.placeholder);
+
+			this.$droparea.append(this.$placeholdler);
+			this.$element.after(this.$droparea);
+			this.$placeholdler.append(this.$element);
+
+			this.$droparea.off('.tools.upload');
+			this.$element.off('.tools.upload');
+
+			this.$droparea.on('dragover.tools.upload', $.proxy(this.onDrag, this));
+			this.$droparea.on('dragleave.tools.upload', $.proxy(this.onDragLeave, this));
+
+			// change
+			this.$element.on('change.tools.upload', $.proxy(function(e)
 			{
-				this.$elements.prop('checked', true);
+				e = e.originalEvent || e;
+				this.traverseFile(this.$element[0].files[0], e);
+			}, this));
 
-				if (this.opts.parent || this.opts.target)
-				{
-					this.$elements.each($.proxy(function(i,s)
-					{
-						var $s = $(s);
-						this.setHighlight($s);
-						this.setValue($s.val());
-
-					}, this));
-				}
-			}
-			else
+			// drop
+			this.$droparea.on('drop.tools.upload', $.proxy(function(e)
 			{
-				this.$elements.prop('checked', false);
-				if (this.opts.parent) this.$elements.each($.proxy(this.removeHighlight, this));
-				if (this.opts.target) this.$target.val('');
-			}
-		},
-		setOnStart: function(i, el)
-		{
-			var $el = $(el);
-			if (this.$element.prop('checked') || (this.setter && ($.inArray($el.val(), this.setter) !== -1)))
-			{
-				$el.prop('checked', true);
-				this.setHighlight($el);
-			}
+				e.preventDefault();
 
-			$el.on('click', $.proxy(function()
-			{
-				var checkedSize = this.$elements.filter(':checked').size();
-
-				if ($el.prop('checked'))
-				{
-					this.setValue($el.val());
-					this.setHighlight($el);
-				}
-				else
-				{
-					this.removeValue($el.val());
-					this.removeHighlight($el);
-				}
-
-				var prop = (checkedSize !== this.$elements.size()) ? false : true;
-				this.$element.prop('checked', prop);
-
+				this.$droparea.removeClass('drag-hover').addClass('drag-drop');
+				this.onDrop(e);
 
 			}, this));
 		},
-		setHighlight: function($el)
+		onDrop: function(e)
 		{
-			if (!this.opts.parent) return;
+			e = e.originalEvent || e;
+			var files = e.dataTransfer.files;
 
-			$el.closest(this.opts.parent).addClass(this.opts.highlight);
+			this.traverseFile(files[0], e);
 		},
-		removeHighlight: function(i, $el)
+		traverseFile: function(file, e)
 		{
-			if (!this.opts.parent) return;
-
-			$($el).closest(this.opts.parent).removeClass(this.opts.highlight);
-		},
-		setValue: function(value)
-		{
-			if (!this.opts.target) return;
-
-			var str = this.$target.val();
-			var arr = str.split(',');
-			arr.push(value);
-
-			if (str === '')
+			var formData = !!window.FormData ? new FormData() : null;
+			if (window.FormData)
 			{
-				arr = [value];
+				formData.append(this.opts.param, file);
 			}
 
-			this.$target.val(arr.join(','));
+			if ($.progress) $.progress.show();
+			this.sendData(formData, e);
 		},
-		removeValue: function(value)
+		sendData: function(formData, e)
 		{
-			if (!this.opts.target) return;
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', this.opts.url);
 
-			var arr = this.$target.val().split(',');
+			// complete
+			xhr.onreadystatechange = $.proxy(function()
+			{
+			    if (xhr.readyState == 4)
+			    {
+			        var data = xhr.responseText;
 
-			var index = arr.indexOf(value);
-			arr.splice(index, 1);
+					data = data.replace(/^\[/, '');
+					data = data.replace(/\]$/, '');
 
-			this.$target.val(arr.join(','));
+					var json = (typeof data === 'string' ? $.parseJSON(data) : data);
+
+					if ($.progress) $.progress.hide();
+
+					this.$droparea.removeClass('drag-drop');
+					this.setCallback('success', json);
+			    }
+			}, this)
+
+			xhr.send(formData);
+		},
+		onDrag: function(e)
+		{
+			e.preventDefault();
+			this.$droparea.addClass('drag-hover');
+		},
+		onDragLeave: function(e)
+		{
+			e.preventDefault();
+			this.$droparea.removeClass('drag-hover');
 		}
+
 	};
 
+	// Constructor
+	Upload.prototype.init.prototype = Upload.prototype;
 
-	$(window).on('load.tools.buttons', function()
+	$(function()
 	{
-		$('[data-tools="check-all"]').checkAll();
+		$('[data-tools="upload"]').upload();
 	});
 
-	// constructor
-	CheckAll.prototype.init.prototype = CheckAll.prototype;
-
-
 })(jQuery);
+
+
 /*
-	Navigation Fixed Tool
+	Validate Tool
 */
 (function($)
 {
-
 	"use strict";
 
 	// Plugin
-	$.fn.navigationFixed = function(options)
+	$.fn.validate = function(options)
 	{
 		return this.each(function()
 		{
-			$.data(this, 'navigationFixed', {});
-			$.data(this, 'navigationFixed', NavigationFixed(this, options));
-		});
-
-	};
-
-	// Initialization
-	function NavigationFixed(el, options)
-	{
-		return new NavigationFixed.prototype.init(el, options);
-	}
-
-	$.NavigationFixed = NavigationFixed;
-	$.NavigationFixed.NAME = 'navigation-fixed';
-	$.NavigationFixed.VERSION = '1.0';
-	$.NavigationFixed.opts = {
-
-		// settings
-
-	};
-
-	// Functionality
-	NavigationFixed.fn = $.NavigationFixed.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			var mq = window.matchMedia("(max-width: 767px)");
-			if (mq.matches) return;
-
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions(options);
-
-		    this.navBoxOffsetTop = this.$element.offset().top;
-
-		    this.build();
-		    $(window).scroll($.proxy(this.build, this));
-
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.NavigationFixed.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$element[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.NavigationFixed.NAME || namespace == $.NavigationFixed.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		build: function()
-		{
-			if ($(window).scrollTop() > this.navBoxOffsetTop)
-			{
-				this.$element.addClass('navigation-fixed');
-				this.setCallback('fixed');
-			}
-			else
-			{
-				this.$element.removeClass('navigation-fixed');
-				this.setCallback('unfixed');
-			}
-
-
-		}
-	};
-
-	$(window).on('load.tools.navigation-fixed', function()
-	{
-		$('[data-tools="navigation-fixed"]').navigationFixed();
-	});
-
-	// constructor
-	NavigationFixed.prototype.init.prototype = NavigationFixed.prototype;
-
-
-})(jQuery);
-/*
-	Buttons Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.buttons = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'buttons', {});
-			$.data(this, 'buttons', Buttons(this, options));
-		});
-
-	};
-
-	// Initialization
-	function Buttons(el, options)
-	{
-		return new Buttons.prototype.init(el, options);
-	}
-
-	$.Buttons = Buttons;
-	$.Buttons.NAME = 'buttons';
-	$.Buttons.VERSION = '1.0';
-	$.Buttons.opts = {
-
-		className: 'btn',
-		activeClassName: 'btn-active',
-		target: false,
-		type: 'switch' // switch, toggle, segmented
-
-	};
-
-	// Functionality
-	Buttons.fn = $.Buttons.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions(options);
-
-			this.buttons = this.getButtons();
-			this.value = this.getValue();
-
-			this.buttons.each($.proxy(function(i,s)
-			{
-				var $s = $(s);
-
-				this.setDefault($s);
-
-				$s.click($.proxy(function(e)
-				{
-					e.preventDefault();
-
-					if (this.opts.type === 'segmented') this.setSegmented($s);
-					else if (this.opts.type === 'toggle') this.setToggle($s);
-					else this.setBasic($s);
-
-				}, this));
-
-			}, this));
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.Buttons.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		getButtons: function()
-		{
-			return (this.opts.type === 'toggle') ? this.$element : this.$element.find('.' + this.opts.className);
-		},
-		getValue: function()
-		{
-			return (this.opts.type === 'segmented') ? $(this.opts.target).val().split(',') : $(this.opts.target).val();
-		},
-		setDefault: function($el)
-		{
-			if (this.opts.type === 'segmented' && $.inArray($el.val(), this.value) !== -1)
-			{
-				this.setActive($el);
-			}
-			else if ((this.opts.type === 'toggle' && this.value === 1) || this.value === $el.val())
-			{
-				this.setActive($el);
-			}
-		},
-		setBasic: function($el)
-		{
-			this.setInActive(this.buttons);
-			this.setActive($el);
-			$(this.opts.target).val($el.val());
-		},
-		setSegmented: function($el)
-		{
-			var $target = $(this.opts.target);
-			this.value = $target.val().split(',');
-
-			if (!$el.hasClass(this.opts.activeClassName))
-			{
-				this.setActive($el);
-				this.value.push($el.val());
-			}
-			else
-			{
-				this.setInActive($el);
-				this.value.splice(this.value.indexOf($el.val()), 1);
-			}
-
-			$target.val(this.value.join(',').replace(/^,/, ''));
-		},
-		setToggle: function($el)
-		{
-			if ($el.hasClass(this.opts.activeClassName))
-			{
-				this.setInActive($el);
-				$(this.opts.target).val(0);
-			}
-			else
-			{
-				this.setActive($el);
-				$(this.opts.target).val(1);
-			}
-		},
-		setActive: function($el)
-		{
-			$el.addClass(this.opts.activeClassName);
-		},
-		setInActive: function($el)
-		{
-			$el.removeClass(this.opts.activeClassName);
-		}
-	};
-
-	$(window).on('load.tools.buttons', function()
-	{
-		$('[data-tools="buttons"]').buttons();
-	});
-
-	// constructor
-	Buttons.prototype.init.prototype = Buttons.prototype;
-
-
-})(jQuery);
-/*
-	Infinity Scroll Tool
-*/
-(function($)
-{
-
-	"use strict";
-
-	// Plugin
-	$.fn.infinityScroll = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'infinity-scroll', {});
-			$.data(this, 'infinity-scroll', InfinityScroll(this, options));
+			$.data(this, 'validate', {});
+			$.data(this, 'validate', Validate(this, options));
 		});
 	};
 
 	// Initialization
-	function InfinityScroll(el, options)
+	function Validate(el, options)
 	{
-		return new InfinityScroll.prototype.init(el, options);
+		return new Validate.prototype.init(el, options);
 	}
 
-	$.InfinityScroll = InfinityScroll;
-	$.InfinityScroll.NAME = 'infinity-scroll';
-	$.InfinityScroll.VERSION = '1.0';
-	$.InfinityScroll.opts = {
+	$.Validate = Validate;
+	$.Validate.NAME = 'validate';
+	$.Validate.VERSION = '1.0';
+	$.Validate.opts = {
 
 		url: false,
-		offset: 0,
-		limit: 20,
-		tolerance: 50,
-		pagination: false
+		tooltip: false,
+		trigger: false,
+		delay: 10, // message delay - seconds or false
+		errorClassName: 'input-error',
+		spanClassName: 'error'
 
 	};
 
 	// Functionality
-	InfinityScroll.fn = $.InfinityScroll.prototype = {
-
-		// Initialization
-		init: function(el, options)
-		{
-			this.$element = el !== false ? $(el) : false;
-			this.loadOptions(options);
-
-			this.hidePagination();
-			this.build();
-		},
-		loadOptions: function(options)
-		{
-			this.opts = $.extend(
-				{},
-				$.extend(true, {}, $.InfinityScroll.opts),
-				this.$element.data(),
-				options
-			);
-		},
-		setCallback: function(type, e, data)
-		{
-			var events = $._data(this.$element[0], 'events');
-			if (events && typeof events[type] != 'undefined')
-			{
-				var value = [];
-				var len = events[type].length;
-				for (var i = 0; i < len; i++)
-				{
-					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.InfinityScroll.NAME || namespace == $.InfinityScroll.NAME + '.tools')
-					{
-						var callback = events[type][i].handler;
-						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
-					}
-				}
-
-				if (value.length == 1) return value[0];
-				else return value;
-			}
-
-			return (typeof data == 'undefined') ? e : data;
-
-		},
-		build: function()
-		{
-			$(window).on('DOMContentLoaded.tools.infinite-scroll load.tools.infinite-scroll resize.tools.infinite-scroll scroll.tools.infinite-scroll', $.proxy(function()
-			{
-				var $last = this.$element.children().last();
-				if (this.isElementInViewport($last[0]))
-				{
-					this.getData();
-				}
-
-			}, this));
-		},
-		getData: function()
-		{
-			$.ajax({
-				url: this.opts.url,
-				type: 'post',
-				data:  'limit=' + this.opts.limit + '&offset=' + this.opts.offset,
-				success: $.proxy(function(data)
-				{
-					if (data == '')
-					{
-						$(window).off('.tools.infinite-scroll');
-						return;
-					}
-
-					this.opts.offset = this.opts.offset + this.opts.limit;
-					this.$element.append(data);
-
-					this.setCallback('loaded', data);
-
-				}, this)
-			});
-		},
-		hidePagination: function()
-		{
-			if (!this.opts.pagination) return;
-
-			$(this.opts.pagination).hide();
-		},
-		isElementInViewport: function(el)
-		{
-		    var rect = el.getBoundingClientRect();
-		    return (
-		        rect.top >= 0 &&
-		        rect.left >= 0 &&
-		        rect.bottom <= $(window).height() + this.opts.tolerance &&
-		        rect.right <= $(window).width()
-		    );
-		}
-	};
-
-	$(window).on('load.tools.infinity-scroll', function()
-	{
-		$('[data-tools="infinity-scroll"]').infinityScroll();
-	});
-
-	// constructor
-	InfinityScroll.prototype.init.prototype = InfinityScroll.prototype;
-
-})(jQuery);
-
-
-/*
-	Autocomplete Tool
-*/
-(function($)
-{
-	"use strict";
-
-	// Plugin
-	$.fn.autocomplete = function(options)
-	{
-		return this.each(function()
-		{
-			$.data(this, 'autocomplete', {});
-			$.data(this, 'autocomplete', Autocomplete(this, options));
-		});
-
-	};
-
-	// Initialization
-	function Autocomplete(el, options)
-	{
-		return new Autocomplete.prototype.init(el, options);
-	}
-
-	$.Autocomplete = Autocomplete;
-	$.Autocomplete.NAME = 'autocomplete';
-	$.Autocomplete.VERSION = '1.0';
-	$.Autocomplete.opts = {
-
-		url: false,
-		min: 2,
-		set: 'value' // value or id
-
-	};
-
-	// Functionality
-	Autocomplete.fn = $.Autocomplete.prototype = {
+	Validate.fn = $.Validate.prototype = {
 
 		// Initialization
 		init: function(el, options)
@@ -3001,7 +2949,7 @@
 		{
 			this.opts = $.extend(
 				{},
-				$.extend(true, {}, $.Autocomplete.opts),
+				$.extend(true, {}, $.Validate.opts),
 				this.$element.data(),
 				options
 			);
@@ -3016,7 +2964,7 @@
 				for (var i = 0; i < len; i++)
 				{
 					var namespace = events[type][i].namespace;
-					if (namespace == 'tools.' + $.Autocomplete.NAME || namespace == $.Autocomplete.NAME + '.tools')
+					if (namespace == 'tools.' + $.Validate.NAME || namespace == $.Validate.NAME + '.tools')
 					{
 						var callback = events[type][i].handler;
 						value.push((typeof data == 'undefined') ? callback.call(this, e) : callback.call(this, e, data));
@@ -3032,151 +2980,202 @@
 		},
 		build: function()
 		{
-			this.result = $('<ul class="autocomplete">').hide();
+			// disable html5 validation
+			this.$element.attr('novalidate', 'novalidate');
 
-			this.pos = this.$element.offset();
-			this.elementHeight = this.$element.innerHeight();
-
-			$('body').append(this.result);
-
-			this.placement = (($(document).height() - (this.pos.top + this.elementHeight)) < this.result.height()) ? 'top' : 'bottom';
-			$(document).on('click', $.proxy(this.hide, this));
-
-			this.$element.on('keyup', $.proxy(function(e)
+			if (this.opts.trigger === false)
 			{
-				var value = this.$element.val();
-				if (value.length >= this.opts.min)
+				// submit
+				this.$element.submit($.proxy(function()
 				{
-					this.$element.addClass('autocomplete-in');
-					this.result.addClass('autocomplete-open');
+					this.send();
+					return false;
 
-					this.listen(e);
-				}
-				else
-				{
-					this.hide();
-				}
-
-			}, this));
+				}, this));
+			}
+			else
+			{
+				// trigger
+				this.$element.submit(function() { return false });
+				$(this.opts.trigger).off('click.tools.validate');
+				$(this.opts.trigger).on('click.tools.validate', $.proxy(this.send, this));
+			}
 		},
-		lookup: function()
+		send: function()
 		{
 			$.ajax({
 				url: this.opts.url,
 				type: 'post',
-				data: this.$element.attr('name') + '=' + this.$element.val(),
-				success: $.proxy(function(json)
+				data: this.$element.serialize(),
+				success: $.proxy(this.parse, this)
+			});
+		},
+		parse: function(jsonString)
+		{
+			this.clear();
+
+			var obj = {};
+			if (jsonString != '')
+			{
+				jsonString = jsonString.replace(/^\[/, '');
+				jsonString = jsonString.replace(/\]$/, '');
+				obj = $.parseJSON(jsonString);
+			}
+
+			if (obj.type === 'error')
+			{
+				$.each(obj.errors, $.proxy(function(name, text)
 				{
-					var data = $.parseJSON(json);
+					var $el = $(this.$element.find('[name=' + name + ']'));
+					$el.addClass(this.opts.errorClassName);
 
-					this.result.html('');
-
-					$.each(data, $.proxy(function(i,s)
+					if (text != '')
 					{
-						var li = $('<li>');
-						var a = $('<a href="#" rel="' + s.id + '">').html(s.value).on('click', $.proxy(this.set, this));
+						if (this.opts.tooltip) this.showTooltip($el, text);
+						else this.showError($el, name, text);
+					}
 
-						li.append(a);
-						this.result.append(li);
+				}, this));
+
+				this.setCallback('error', obj.errors);
+			}
+			else
+			{
+				if (obj.type === 'html')
+				{
+					$.each(obj.data, $.proxy(function(i, s)
+					{
+						$(i).html(this.stripslashes(this.urldecode(s)));
 
 					}, this));
+				}
+				else if (obj.type === 'location')
+				{
+					top.location.href = obj.data;
+				}
+				else if (obj.type === 'message')
+				{
+					this.showMessage(obj);
+				}
 
-					var top = (this.placement === 'top') ? (this.pos.top - this.result.height() - this.elementHeight) : (this.pos.top + this.elementHeight);
+				this.setCallback('success');
+			}
+		},
+		showMessage: function(obj)
+		{
+			var text = '';
+			if ($.isArray(obj.data))
+			{
+				text = '<ul>';
+				for (k in obj.data)
+				{
+					text += '<li>' + obj.data[k] + '</li>';
+				}
+				text += '</ul>';
+			}
+			else
+			{
+				text = obj.data;
+			}
 
-					this.result.css({ top: top + 'px', left: this.pos.left + 'px' });
-					this.result.show();
-					this.active = false;
+			var theme = '';
+			if (typeof obj.theme != 'undefined')
+			{
+				theme = ' tools-message-' + obj.theme;
+			}
 
-				}, this)
+			var message = $('<div class="tools-message' + theme + '" />').html(text);
+			$('body').append(message);
+			message.on('click.tools.validate', function()
+			{
+				message.remove();
+				message.off('click.tools.validate');
 			});
 
-		},
-		listen: function(e)
-		{
-			if (!this.$element.hasClass('autocomplete-in')) return;
-
-			e.stopPropagation();
-			e.preventDefault();
-
-			switch(e.keyCode)
+			if (this.opts.delay)
 			{
-				case 40: // down arrow
-					this.select('next');
-				break;
+				setTimeout(function()
+				{
+					message.fadeOut();
 
-				case 38: // up arrow
-					this.select('prev');
-				break;
+				}, this.opts.delay * 1000);
+			}
+		},
+		showError: function($el, name, text)
+		{
+			$('#' + name + '-error').addClass(this.opts.spanClassName).html(text).show();
 
-				case 13: // enter
-					this.set();
-				break;
+			var eventName = 'keyup';
+			var tag = $el.prop('tagName');
+			var type = $el.prop('type');
 
-				case 27: // escape
-					this.hide()
-				break;
-
-				default:
-					this.lookup();
-				break;
+			if (tag == 'SELECT' || type == 'checkbox' || type == 'radio')
+			{
+				eventName = 'change';
 			}
 
-		},
-		select: function(type)
-		{
-			var $links = this.result.find('a');
-			var size = $links.size();
-
-			var $active = this.result.find('a.active');
-			$active.removeClass('active');
-
-			var $item = (type === 'next') ? $active.parent().next().children('a') : $active.parent().prev().children('a');
-			if ($item.size() == 0)
+			$el.on(eventName + '.tools.validate', $.proxy(function()
 			{
-				$item = (type === 'next') ? $links.eq(0) : $links.eq(size-1);
-			}
+				$el.removeClass(this.opts.errorClassName);
+				$('#' + name + '-error').removeClass('validate-error').html('').hide();
+				$el.off(eventName + '.tools.validate');
 
-			$item.addClass('active');
-			this.active = $item;
+			}, this));
 		},
-		set: function(e)
+		showTooltip: function($el, text)
 		{
-			var $el = $(this.active);
-			if (e)
+			var size = $el.size();
+			if (size != 0)
 			{
-				e.preventDefault();
-				$el = $(e.target);
+				if (size > 1)
+				{
+					$el = $el.last();
+				}
+
+				var tooltip = $('<div class="validate-tooltip tooltip tooltip-theme-red" />').html(text);
+				tooltip.css({ top: ($el.offset().top + $el.innerHeight() + 2) + 'px', left: $el.offset().left + 'px' });
+				$('body').append(tooltip);
+
+				var eventName = 'keyup';
+				var tag = $el.prop('tagName');
+				var type = $el.prop('type');
+
+				if (tag == 'SELECT' || type == 'checkbox' || type == 'radio')
+				{
+					eventName = 'change';
+				}
+
+				$el.on(eventName + '.tools.validate', function()
+				{
+					tooltip.remove();
+					$el.off(eventName + '.tools.validate');
+				});
 			}
-
-			var id = $el.attr('rel');
-			var value = $el.html();
-
-			(this.opts.set == 'value') ? this.$element.val(value) : this.$element.val(id);
-			this.setCallback('set', id, value);
-
-
-			this.hide();
 		},
-		hide: function(e)
+		clear: function()
 		{
-			if (e && ($(e.target).hasClass('autocomplete-in') || $(e.target).hasClass('autocomplete-open') || $(e.target).parents().hasClass('autocomplete-open')))
-			{
-				return;
-			}
-
-			this.$element.removeClass('autocomplete-in');
-			this.result.removeClass('autocomplete-open');
-			this.result.hide();
+			this.$element.find('.' + this.opts.errorClassName).removeClass(this.opts.errorClassName);
+			$('.validate-error').removeClass('validate-error').html('').hide();
+			$('.validate-tooltip').remove();
+			$('.tools-message').remove();
+		},
+		urldecode: function(str)
+		{
+			return decodeURIComponent(str.replace(/\+/g, '%20'));
+		},
+		stripslashes: function(str)
+		{
+			return (str+'').replace(/\0/g, '0').replace(/\\([\\'"])/g, '$1');
 		}
 	};
 
-	$(window).on('load.tools.autocomplete', function()
+	$(window).on('load.tools.validate', function()
 	{
-		$('[data-tools="autocomplete"]').autocomplete();
-	})
+		$('[data-tools="validate"]').validate();
+	});
 
 	// constructor
-	Autocomplete.prototype.init.prototype = Autocomplete.prototype;
+	Validate.prototype.init.prototype = Validate.prototype;
 
 
 })(jQuery);

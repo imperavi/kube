@@ -19,8 +19,7 @@
 		},
 		update: function(value)
 		{
-			if ($('#tools-progress').length == 0) this.show();
-
+			this.show();
 			$('#tools-progress').find('span').css('width', value + '%');
 		},
 		hide: function()
