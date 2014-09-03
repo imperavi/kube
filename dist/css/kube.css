@@ -3353,8 +3353,10 @@ input[type="submit"].btn-smaller {
   }
   .fullwidth ul,
   .fullwidth li {
-    display: block;
     width: auto;
+  }
+  .fullwidth li {
+    display: block;
   }
 }
 /* =Forms Responsive
