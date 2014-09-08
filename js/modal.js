@@ -1,11 +1,12 @@
 /*
 	Modal Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.modal = function(options)
 	{
@@ -66,7 +67,6 @@
 			this.loadOptions(options);
 
 			this.$element.on('click.tools.modal', $.proxy(this.load, this));
-
 
 		},
 		loadOptions: function(options)
@@ -147,7 +147,14 @@
 			this.bodyOveflow = $(document.body).css('overflow');
 			$(document.body).css('overflow', 'hidden');
 
-			(this.isMobile()) ? this.showOnMobile() : this.showOnDesktop();
+			if (this.isMobile())
+			{
+				this.showOnMobile();
+			}
+			else
+			{
+				this.showOnDesktop();
+			}
 
 			this.$modalOverlay.show();
 			this.$modalBox.show();
@@ -208,7 +215,14 @@
 		},
 		resize: function()
 		{
-			(this.isMobile()) ? this.showOnMobile() : this.showOnDesktop();
+			if (this.isMobile())
+			{
+				this.showOnMobile();
+			}
+			else
+			{
+				this.showOnDesktop();
+			}
 		},
 		setTitle: function()
 		{
@@ -216,7 +230,7 @@
 		},
 		setContent: function()
 		{
-			if (typeof this.opts.content == 'object' || this.opts.content.search('#') == 0)
+			if (typeof this.opts.content == 'object' || this.opts.content.search('#') === 0)
 			{
 				this.type = 'html';
 
@@ -277,7 +291,7 @@
 		{
 			var buttons = this.$modalFooter.find('button');
 			var buttonsSize = buttons.size();
-			if (buttonsSize == 0) return;
+			if (buttonsSize === 0) return;
 
 			buttons.css('width', (100/buttonsSize) + '%');
 		},

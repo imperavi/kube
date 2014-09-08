@@ -1,11 +1,12 @@
 /*
 	Accordion Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.accordion = function(options)
 	{
@@ -43,11 +44,18 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 
-			(this.opts.collapse) ? this.closeAll() : this.openAll();
+			if (this.opts.collapse)
+			{
+				this.closeAll();
+			}
+			else
+			{
+				this.openAll();
+			}
 
 			this.loadFromHash();
 		},
@@ -108,9 +116,9 @@
 		},
 		loadFromHash: function()
 		{
-			if (top.location.hash == '') return;
+			if (top.location.hash === '') return;
 			if (!this.opts.scroll) return;
-			if (this.$element.find('[rel=' + top.location.hash +']').size() == 0) return;
+			if (this.$element.find('[rel=' + top.location.hash +']').size() === 0) return;
 
 			this.open(top.location.hash);
 			this.scrollTo(top.location.hash);
@@ -134,7 +142,14 @@
 			}
 			else
 			{
-				($('[rel=' + hash + ']').hasClass('accordion-title-opened')) ? this.close(hash) : this.open(hash);
+				if ($('[rel=' + hash + ']').hasClass('accordion-title-opened'))
+				{
+					this.close(hash);
+				}
+				else
+				{
+					this.open(hash);
+				}
 			}
 		},
 		open: function(hash)
@@ -196,6 +211,7 @@
 			$('html, body').animate(
 			{
 				scrollTop: $(id).offset().top - 50
+
 			}, 500);
 		}
 	};
@@ -203,7 +219,7 @@
 	$(window).on('load.tools.accordion', function()
 	{
 		$('[data-tools="accordion"]').accordion();
-	})
+	});
 
 	// constructor
 	Accordion.prototype.init.prototype = Accordion.prototype;

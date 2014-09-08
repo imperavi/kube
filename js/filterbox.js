@@ -1,12 +1,12 @@
 /*
 	FilterBox Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
-
 	// Plugin
 	$.fn.filterbox = function(options)
 	{
@@ -120,6 +120,7 @@
 			{
 			   var key = e.which;
 			   var $el;
+			   var item;
 
 			   if (key === 38) // up
 			   {
@@ -127,11 +128,11 @@
 
 				   if (items.hasClass('active'))
 				   {
-					   	var item = items.filter('li.active');
+					   	item = items.filter('li.active');
 				   		item.removeClass('active');
 
 				   		var prev = item.prev();
-				   		$el = (prev.size() != 0) ? $el = prev : items.last();
+				   		$el = (prev.size() !== 0) ? $el = prev : items.last();
 				   }
 				   else
 				   {
@@ -147,11 +148,11 @@
 
 				   if (items.hasClass('active'))
 				   {
-				   		var item = items.filter('li.active');
+				   		item = items.filter('li.active');
 				   		item.removeClass('active');
 
 				   		var next = item.next();
-				   		$el = (next.size() != 0) ? next : items.first();
+				   		$el = (next.size() !== 0) ? next : items.first();
 				   }
 				   else
 				   {
@@ -166,7 +167,7 @@
 			   {
 			   		if (!items.hasClass('active')) return;
 
-				   	var item = items.filter('li.active');
+				   	item = items.filter('li.active');
 					this.onItemClick(e, item);
 			   }
 			   else if (key === 27) // esc
@@ -179,12 +180,12 @@
 		},
 		clearSelected: function()
 		{
-			if (this.$source.val().length == 0) this.$element.val(0);
+			if (this.$source.val().length === 0) this.$element.val(0);
 		},
 		setSelectedItem: function(items, value)
 		{
 			var selectEl = items.filter('[rel=' + value + ']');
-			if (selectEl.size() == 0)
+			if (selectEl.size() === 0)
 			{
 				selectEl = false;
 
@@ -213,7 +214,7 @@
 		{
 			var $el = $(s);
 			var val = $el.val();
-			if (val == 0) return;
+			if (val === 0) return;
 
 			var item = $('<li />');
 

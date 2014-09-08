@@ -333,6 +333,33 @@ input[type="datetime-local"] {
 	z-index: 2;
 	-webkit-appearance: none;
 }
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
+input[type="search"],
+input[type="datetime-local"] {
+	&[disabled] {
+		resize: none;
+		color: rgba(0, 0, 0, .5);
+	}
+}
+select,
+input[type="checkbox"],
+input[type="radio"] {
+	&[disabled] {
+		cursor: default;
+	}
+}
 input::-moz-focus-inner,
 button::-moz-focus-inner {
 	border: 0;

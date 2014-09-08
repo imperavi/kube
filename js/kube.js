@@ -1,11 +1,12 @@
 /*
 	Accordion Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.accordion = function(options)
 	{
@@ -43,11 +44,18 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 
-			(this.opts.collapse) ? this.closeAll() : this.openAll();
+			if (this.opts.collapse)
+			{
+				this.closeAll();
+			}
+			else
+			{
+				this.openAll();
+			}
 
 			this.loadFromHash();
 		},
@@ -108,9 +116,9 @@
 		},
 		loadFromHash: function()
 		{
-			if (top.location.hash == '') return;
+			if (top.location.hash === '') return;
 			if (!this.opts.scroll) return;
-			if (this.$element.find('[rel=' + top.location.hash +']').size() == 0) return;
+			if (this.$element.find('[rel=' + top.location.hash +']').size() === 0) return;
 
 			this.open(top.location.hash);
 			this.scrollTo(top.location.hash);
@@ -134,7 +142,14 @@
 			}
 			else
 			{
-				($('[rel=' + hash + ']').hasClass('accordion-title-opened')) ? this.close(hash) : this.open(hash);
+				if ($('[rel=' + hash + ']').hasClass('accordion-title-opened'))
+				{
+					this.close(hash);
+				}
+				else
+				{
+					this.open(hash);
+				}
 			}
 		},
 		open: function(hash)
@@ -196,6 +211,7 @@
 			$('html, body').animate(
 			{
 				scrollTop: $(id).offset().top - 50
+
 			}, 500);
 		}
 	};
@@ -203,7 +219,7 @@
 	$(window).on('load.tools.accordion', function()
 	{
 		$('[data-tools="accordion"]').accordion();
-	})
+	});
 
 	// constructor
 	Accordion.prototype.init.prototype = Accordion.prototype;
@@ -212,11 +228,13 @@
 })(jQuery);
 /*
 	Autocomplete Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-	"use strict";
-
 	// Plugin
 	$.fn.autocomplete = function(options)
 	{
@@ -252,7 +270,7 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 		},
@@ -372,7 +390,7 @@
 				break;
 
 				case 27: // escape
-					this.hide()
+					this.hide();
 				break;
 
 				default:
@@ -390,7 +408,7 @@
 			$active.removeClass('active');
 
 			var $item = (type === 'next') ? $active.parent().next().children('a') : $active.parent().prev().children('a');
-			if ($item.size() == 0)
+			if ($item.size() === 0)
 			{
 				$item = (type === 'next') ? $links.eq(0) : $links.eq(size-1);
 			}
@@ -410,7 +428,15 @@
 			var id = $el.attr('rel');
 			var value = $el.html();
 
-			(this.opts.set == 'value') ? this.$element.val(value) : this.$element.val(id);
+			if (this.opts.set == 'value')
+			{
+				this.$element.val(value);
+			}
+			else
+			{
+				this.$element.val(id);
+			}
+
 			this.setCallback('set', id, value);
 
 
@@ -432,7 +458,7 @@
 	$(window).on('load.tools.autocomplete', function()
 	{
 		$('[data-tools="autocomplete"]').autocomplete();
-	})
+	});
 
 	// constructor
 	Autocomplete.prototype.init.prototype = Autocomplete.prototype;
@@ -441,12 +467,13 @@
 })(jQuery);
 /*
 	Buttons Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.buttons = function(options)
 	{
@@ -594,12 +621,13 @@
 })(jQuery);
 /*
 	CheckAll Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.checkAll = function(options)
 	{
@@ -761,11 +789,13 @@
 })(jQuery);
 /*
 	Dropdown Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
 
 	// Plugin
 	$.fn.dropdown = function(options)
@@ -790,7 +820,10 @@
 	$.Dropdown.VERSION = '1.0';
 	$.Dropdown.opts = {
 
-		target: false
+		target: false,
+		targetClose: false,
+		height: false, // number
+		width: false // number
 
 	};
 
@@ -847,6 +880,7 @@
 			this.$element.append(this.$caret);
 
 			this.setCaretUp();
+			this.preventBodyScroll();
 
 			this.$element.click($.proxy(this.toggle, this));
 		},
@@ -860,7 +894,14 @@
 		toggle: function(e)
 		{
 			e.preventDefault();
-			(this.$element.hasClass('dropdown-in')) ? this.hide() : this.show();
+			if (this.$element.hasClass('dropdown-in'))
+			{
+				this.hide();
+			}
+			else
+			{
+				this.show();
+			}
 		},
 		getPlacement: function(height)
 		{
@@ -868,11 +909,11 @@
 		},
 		getPosition: function()
 		{
-			return (this.$element.closest('.navigation-fixed').size() != 0) ? 'fixed' : 'absolute';
+			return (this.$element.closest('.navigation-fixed').size() !== 0) ? 'fixed' : 'absolute';
 		},
 		setPosition: function()
 		{
-			var pos =  this.$element.offset();
+			var pos =  this.$element.position();
 			var elementHeight = this.$element.innerHeight();
 			var elementWidth = this.$element.innerWidth();
 			var height = this.$dropdown.innerHeight();
@@ -900,12 +941,15 @@
 				top = (position == 'fixed') ? height : pos.top - height;
 			}
 
-			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' })
+			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' });
 		},
 		show: function()
 		{
 			$('.dropdown-in').removeClass('dropdown-in');
 			$('.dropdown').removeClass('dropdown-open').hide();
+
+			if (this.opts.height) this.$dropdown.css('min-height', this.opts.height + 'px');
+			if (this.opts.width) this.$dropdown.width(this.opts.width);
 
 			this.setPosition();
 
@@ -914,25 +958,42 @@
 
 			$(document).on('scroll.tools.dropdown', $.proxy(this.setPosition, this));
 			$(window).on('resize.tools.dropdown', $.proxy(this.setPosition, this));
-			$(document).on('click.tools.dropdown', $.proxy(this.hide, this));
+			$(document).on('click.tools.dropdown touchstart.tools.dropdown', $.proxy(this.hide, this));
+
+			if (this.opts.targetClose)
+			{
+				$(this.opts.targetClose).on('click.tools.dropdown', $.proxy(function(e)
+				{
+					e.preventDefault();
+
+					this.hide(false);
+
+				}, this));
+			}
+
 			$(document).on('keydown.tools.dropdown', $.proxy(function(e)
 			{
-			   if (e.which === 27) // esc
-			   {
-				   this.hide();
-			   }
+				// esc
+			   if (e.which === 27) this.hide();
 
 			}, this));
 
 			this.setCallback('opened', this.$dropdown, this.$element);
 
 		},
+		preventBodyScroll: function()
+		{
+			this.$dropdown.on('mouseover', function() { $('html').css('overflow', 'hidden'); });
+			this.$dropdown.on('mouseout', function() { $('html').css('overflow', ''); });
+		},
 		hide: function(e)
 		{
 			if (e)
 			{
+				e = e.originalEvent || e;
+
 				var $target = $(e.target);
-				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.hasClass('dropdown-open'))
+				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.closest('.dropdown-open').size() !== 0)
 				{
 					return;
 				}
@@ -960,13 +1021,13 @@
 })(jQuery);
 /*
 	FilterBox Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
-
 	// Plugin
 	$.fn.filterbox = function(options)
 	{
@@ -1080,6 +1141,7 @@
 			{
 			   var key = e.which;
 			   var $el;
+			   var item;
 
 			   if (key === 38) // up
 			   {
@@ -1087,11 +1149,11 @@
 
 				   if (items.hasClass('active'))
 				   {
-					   	var item = items.filter('li.active');
+					   	item = items.filter('li.active');
 				   		item.removeClass('active');
 
 				   		var prev = item.prev();
-				   		$el = (prev.size() != 0) ? $el = prev : items.last();
+				   		$el = (prev.size() !== 0) ? $el = prev : items.last();
 				   }
 				   else
 				   {
@@ -1107,11 +1169,11 @@
 
 				   if (items.hasClass('active'))
 				   {
-				   		var item = items.filter('li.active');
+				   		item = items.filter('li.active');
 				   		item.removeClass('active');
 
 				   		var next = item.next();
-				   		$el = (next.size() != 0) ? next : items.first();
+				   		$el = (next.size() !== 0) ? next : items.first();
 				   }
 				   else
 				   {
@@ -1126,7 +1188,7 @@
 			   {
 			   		if (!items.hasClass('active')) return;
 
-				   	var item = items.filter('li.active');
+				   	item = items.filter('li.active');
 					this.onItemClick(e, item);
 			   }
 			   else if (key === 27) // esc
@@ -1139,12 +1201,12 @@
 		},
 		clearSelected: function()
 		{
-			if (this.$source.val().length == 0) this.$element.val(0);
+			if (this.$source.val().length === 0) this.$element.val(0);
 		},
 		setSelectedItem: function(items, value)
 		{
 			var selectEl = items.filter('[rel=' + value + ']');
-			if (selectEl.size() == 0)
+			if (selectEl.size() === 0)
 			{
 				selectEl = false;
 
@@ -1173,7 +1235,7 @@
 		{
 			var $el = $(s);
 			var val = $el.val();
-			if (val == 0) return;
+			if (val === 0) return;
 
 			var item = $('<li />');
 
@@ -1231,12 +1293,13 @@
 })(jQuery);
 /*
 	Infinity Scroll Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.infinityScroll = function(options)
 	{
@@ -1331,7 +1394,7 @@
 				data:  'limit=' + this.opts.limit + '&offset=' + this.opts.offset,
 				success: $.proxy(function(data)
 				{
-					if (data == '')
+					if (data === '')
 					{
 						$(window).off('.tools.infinite-scroll');
 						return;
@@ -1376,12 +1439,13 @@
 
 /*
 	Livesearch Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.livesearch = function(options)
 	{
@@ -1457,13 +1521,16 @@
 		},
 		build: function()
 		{
-			this.$box = $('<span class="livesearch-box" />')
+			this.$box = $('<span class="livesearch-box" />');
 
 			this.$element.after(this.$box);
 			this.$box.append(this.$element);
 
 			this.$element.off('keyup.tools.livesearch');
 			this.$element.on('keyup.tools.livesearch', $.proxy(this.load, this));
+
+			this.$icon = $('<span class="livesearch-icon" />');
+			this.$box.append(this.$icon);
 
 			this.$close = $('<span class="close" />').hide();
 			this.$box.append(this.$close);
@@ -1480,7 +1547,7 @@
 		},
 		toggleClose: function(length)
 		{
-			if (length == 0) this.$close.hide();
+			if (length === 0) this.$close.hide();
 			else this.$close.show();
 		},
 		load: function()
@@ -1490,7 +1557,10 @@
 
 			if (value.length > this.opts.min)
 			{
-				data += '&' + this.$element.attr('name') + '=' + value;
+				var name = 'q';
+				if (typeof this.$element.attr('name') != 'undefined') name = this.$element.attr('name');
+
+				data += '&' + name + '=' + value;
 				data = this.appendForms(data);
 			}
 
@@ -1538,12 +1608,13 @@
 
 /*
 	Tabs Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.message = function(options)
 	{
@@ -1700,12 +1771,13 @@
 
 /*
 	Modal Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.modal = function(options)
 	{
@@ -1766,7 +1838,6 @@
 			this.loadOptions(options);
 
 			this.$element.on('click.tools.modal', $.proxy(this.load, this));
-
 
 		},
 		loadOptions: function(options)
@@ -1847,7 +1918,14 @@
 			this.bodyOveflow = $(document.body).css('overflow');
 			$(document.body).css('overflow', 'hidden');
 
-			(this.isMobile()) ? this.showOnMobile() : this.showOnDesktop();
+			if (this.isMobile())
+			{
+				this.showOnMobile();
+			}
+			else
+			{
+				this.showOnDesktop();
+			}
 
 			this.$modalOverlay.show();
 			this.$modalBox.show();
@@ -1908,7 +1986,14 @@
 		},
 		resize: function()
 		{
-			(this.isMobile()) ? this.showOnMobile() : this.showOnDesktop();
+			if (this.isMobile())
+			{
+				this.showOnMobile();
+			}
+			else
+			{
+				this.showOnDesktop();
+			}
 		},
 		setTitle: function()
 		{
@@ -1916,7 +2001,7 @@
 		},
 		setContent: function()
 		{
-			if (typeof this.opts.content == 'object' || this.opts.content.search('#') == 0)
+			if (typeof this.opts.content == 'object' || this.opts.content.search('#') === 0)
 			{
 				this.type = 'html';
 
@@ -1977,7 +2062,7 @@
 		{
 			var buttons = this.$modalFooter.find('button');
 			var buttonsSize = buttons.size();
-			if (buttonsSize == 0) return;
+			if (buttonsSize === 0) return;
 
 			buttons.css('width', (100/buttonsSize) + '%');
 		},
@@ -2053,12 +2138,13 @@
 
 /*
 	Navigation Fixed Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.navigationFixed = function(options)
 	{
@@ -2165,12 +2251,13 @@
 })(jQuery);
 /*
 	Navigation Toggle Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.navigationToggle = function(options)
 	{
@@ -2300,13 +2387,17 @@
 })(jQuery);
 /*
 	Progress Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
 	$.progress = {
 		show: function()
 		{
-			if ($('#tools-progress').length != 0)
+			if ($('#tools-progress').length !== 0)
 			{
 				$('#tools-progress').fadeIn();
 			}
@@ -2333,12 +2424,13 @@
 
 /*
 	Tabs Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.tabs = function(options)
 	{
@@ -2473,7 +2565,7 @@
 		},
 		readLocationHash: function(hash)
 		{
-			if (top.location.hash == '' || top.location.hash != hash) return;
+			if (top.location.hash === '' || top.location.hash != hash) return;
 
 			this.opts.active = top.location.hash;
 		},
@@ -2547,12 +2639,13 @@
 
 /*
 	TextFit Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.textfit = function(options)
 	{
@@ -2617,12 +2710,13 @@
 })(jQuery);
 /*
 	Tooltip Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.tooltip = function(options)
 	{
@@ -2720,12 +2814,13 @@
 
 /*
 	Upload Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.upload = function(options)
 	{
@@ -2869,7 +2964,7 @@
 					this.$droparea.removeClass('drag-drop');
 					this.setCallback('success', json);
 			    }
-			}, this)
+			}, this);
 
 			xhr.send(formData);
 		},
@@ -2899,11 +2994,13 @@
 
 /*
 	Validate Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-	"use strict";
-
 	// Plugin
 	$.fn.validate = function(options)
 	{
@@ -2941,7 +3038,7 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 		},
@@ -2996,7 +3093,7 @@
 			else
 			{
 				// trigger
-				this.$element.submit(function() { return false });
+				this.$element.submit(function() { return false; });
 				$(this.opts.trigger).off('click.tools.validate');
 				$(this.opts.trigger).on('click.tools.validate', $.proxy(this.send, this));
 			}
@@ -3015,7 +3112,7 @@
 			this.clear();
 
 			var obj = {};
-			if (jsonString != '')
+			if (jsonString !== '')
 			{
 				jsonString = jsonString.replace(/^\[/, '');
 				jsonString = jsonString.replace(/\]$/, '');
@@ -3029,7 +3126,7 @@
 					var $el = $(this.$element.find('[name=' + name + ']'));
 					$el.addClass(this.opts.errorClassName);
 
-					if (text != '')
+					if (text !== '')
 					{
 						if (this.opts.tooltip) this.showTooltip($el, text);
 						else this.showError($el, name, text);
@@ -3067,9 +3164,10 @@
 			if ($.isArray(obj.data))
 			{
 				text = '<ul>';
-				for (k in obj.data)
+				var len = obj.data.length;
+				for (var i = 0; i < len; i++)
 				{
-					text += '<li>' + obj.data[k] + '</li>';
+					text += '<li>' + obj.data[i] + '</li>';
 				}
 				text += '</ul>';
 			}
@@ -3125,7 +3223,7 @@
 		showTooltip: function($el, text)
 		{
 			var size = $el.size();
-			if (size != 0)
+			if (size !== 0)
 			{
 				if (size > 1)
 				{

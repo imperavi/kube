@@ -1,11 +1,12 @@
 /*
 	Tabs Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.tabs = function(options)
 	{
@@ -140,7 +141,7 @@
 		},
 		readLocationHash: function(hash)
 		{
-			if (top.location.hash == '' || top.location.hash != hash) return;
+			if (top.location.hash === '' || top.location.hash != hash) return;
 
 			this.opts.active = top.location.hash;
 		},

@@ -1,11 +1,12 @@
 /*
 	Infinity Scroll Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.infinityScroll = function(options)
 	{
@@ -100,7 +101,7 @@
 				data:  'limit=' + this.opts.limit + '&offset=' + this.opts.offset,
 				success: $.proxy(function(data)
 				{
-					if (data == '')
+					if (data === '')
 					{
 						$(window).off('.tools.infinite-scroll');
 						return;

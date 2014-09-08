@@ -1,10 +1,12 @@
 /*
 	Autocomplete Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-	"use strict";
-
 	// Plugin
 	$.fn.autocomplete = function(options)
 	{
@@ -40,7 +42,7 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 		},
@@ -160,7 +162,7 @@
 				break;
 
 				case 27: // escape
-					this.hide()
+					this.hide();
 				break;
 
 				default:
@@ -178,7 +180,7 @@
 			$active.removeClass('active');
 
 			var $item = (type === 'next') ? $active.parent().next().children('a') : $active.parent().prev().children('a');
-			if ($item.size() == 0)
+			if ($item.size() === 0)
 			{
 				$item = (type === 'next') ? $links.eq(0) : $links.eq(size-1);
 			}
@@ -198,7 +200,15 @@
 			var id = $el.attr('rel');
 			var value = $el.html();
 
-			(this.opts.set == 'value') ? this.$element.val(value) : this.$element.val(id);
+			if (this.opts.set == 'value')
+			{
+				this.$element.val(value);
+			}
+			else
+			{
+				this.$element.val(id);
+			}
+
 			this.setCallback('set', id, value);
 
 
@@ -220,7 +230,7 @@
 	$(window).on('load.tools.autocomplete', function()
 	{
 		$('[data-tools="autocomplete"]').autocomplete();
-	})
+	});
 
 	// constructor
 	Autocomplete.prototype.init.prototype = Autocomplete.prototype;

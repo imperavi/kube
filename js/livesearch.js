@@ -1,11 +1,12 @@
 /*
 	Livesearch Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
-
 	// Plugin
 	$.fn.livesearch = function(options)
 	{
@@ -81,13 +82,16 @@
 		},
 		build: function()
 		{
-			this.$box = $('<span class="livesearch-box" />')
+			this.$box = $('<span class="livesearch-box" />');
 
 			this.$element.after(this.$box);
 			this.$box.append(this.$element);
 
 			this.$element.off('keyup.tools.livesearch');
 			this.$element.on('keyup.tools.livesearch', $.proxy(this.load, this));
+
+			this.$icon = $('<span class="livesearch-icon" />');
+			this.$box.append(this.$icon);
 
 			this.$close = $('<span class="close" />').hide();
 			this.$box.append(this.$close);
@@ -104,7 +108,7 @@
 		},
 		toggleClose: function(length)
 		{
-			if (length == 0) this.$close.hide();
+			if (length === 0) this.$close.hide();
 			else this.$close.show();
 		},
 		load: function()
@@ -114,7 +118,10 @@
 
 			if (value.length > this.opts.min)
 			{
-				data += '&' + this.$element.attr('name') + '=' + value;
+				var name = 'q';
+				if (typeof this.$element.attr('name') != 'undefined') name = this.$element.attr('name');
+
+				data += '&' + name + '=' + value;
 				data = this.appendForms(data);
 			}
 

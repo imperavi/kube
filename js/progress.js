@@ -1,12 +1,16 @@
 /*
 	Progress Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
 	$.progress = {
 		show: function()
 		{
-			if ($('#tools-progress').length != 0)
+			if ($('#tools-progress').length !== 0)
 			{
 				$('#tools-progress').fadeIn();
 			}

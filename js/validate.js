@@ -1,10 +1,12 @@
 /*
 	Validate Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-	"use strict";
-
 	// Plugin
 	$.fn.validate = function(options)
 	{
@@ -42,7 +44,7 @@
 		init: function(el, options)
 		{
 			this.$element = el !== false ? $(el) : false;
-			this.loadOptions();
+			this.loadOptions(options);
 
 			this.build();
 		},
@@ -97,7 +99,7 @@
 			else
 			{
 				// trigger
-				this.$element.submit(function() { return false });
+				this.$element.submit(function() { return false; });
 				$(this.opts.trigger).off('click.tools.validate');
 				$(this.opts.trigger).on('click.tools.validate', $.proxy(this.send, this));
 			}
@@ -116,7 +118,7 @@
 			this.clear();
 
 			var obj = {};
-			if (jsonString != '')
+			if (jsonString !== '')
 			{
 				jsonString = jsonString.replace(/^\[/, '');
 				jsonString = jsonString.replace(/\]$/, '');
@@ -130,7 +132,7 @@
 					var $el = $(this.$element.find('[name=' + name + ']'));
 					$el.addClass(this.opts.errorClassName);
 
-					if (text != '')
+					if (text !== '')
 					{
 						if (this.opts.tooltip) this.showTooltip($el, text);
 						else this.showError($el, name, text);
@@ -168,9 +170,10 @@
 			if ($.isArray(obj.data))
 			{
 				text = '<ul>';
-				for (k in obj.data)
+				var len = obj.data.length;
+				for (var i = 0; i < len; i++)
 				{
-					text += '<li>' + obj.data[k] + '</li>';
+					text += '<li>' + obj.data[i] + '</li>';
 				}
 				text += '</ul>';
 			}
@@ -226,7 +229,7 @@
 		showTooltip: function($el, text)
 		{
 			var size = $el.size();
-			if (size != 0)
+			if (size !== 0)
 			{
 				if (size > 1)
 				{

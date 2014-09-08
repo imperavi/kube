@@ -86,6 +86,13 @@
 	-ms-filter: blur(@radius);
 	filter: blur(@radius);
 }
+.rotate(@deg) {
+    -webkit-transform: rotate(@deg);
+    -moz-transform: rotate(@deg);
+    -ms-transform: rotate(@deg);
+    -o-transform: rotate(@deg);
+    transform: rotate(@deg);
+}
 .arrow-top(@color: #fff, @size: 5px, @left: 5px) {
 	&:after {
 		bottom: 100%;

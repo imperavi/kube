@@ -1,10 +1,12 @@
 /*
 	Dropdown Tool
+
+	http://imperavi.com/kube/
+
+	Copyright (c) 2009-2014, Imperavi LLC.
 */
 (function($)
 {
-
-	"use strict";
 
 	// Plugin
 	$.fn.dropdown = function(options)
@@ -29,7 +31,10 @@
 	$.Dropdown.VERSION = '1.0';
 	$.Dropdown.opts = {
 
-		target: false
+		target: false,
+		targetClose: false,
+		height: false, // number
+		width: false // number
 
 	};
 
@@ -86,6 +91,7 @@
 			this.$element.append(this.$caret);
 
 			this.setCaretUp();
+			this.preventBodyScroll();
 
 			this.$element.click($.proxy(this.toggle, this));
 		},
@@ -99,7 +105,14 @@
 		toggle: function(e)
 		{
 			e.preventDefault();
-			(this.$element.hasClass('dropdown-in')) ? this.hide() : this.show();
+			if (this.$element.hasClass('dropdown-in'))
+			{
+				this.hide();
+			}
+			else
+			{
+				this.show();
+			}
 		},
 		getPlacement: function(height)
 		{
@@ -107,11 +120,11 @@
 		},
 		getPosition: function()
 		{
-			return (this.$element.closest('.navigation-fixed').size() != 0) ? 'fixed' : 'absolute';
+			return (this.$element.closest('.navigation-fixed').size() !== 0) ? 'fixed' : 'absolute';
 		},
 		setPosition: function()
 		{
-			var pos =  this.$element.offset();
+			var pos =  this.$element.position();
 			var elementHeight = this.$element.innerHeight();
 			var elementWidth = this.$element.innerWidth();
 			var height = this.$dropdown.innerHeight();
@@ -139,12 +152,15 @@
 				top = (position == 'fixed') ? height : pos.top - height;
 			}
 
-			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' })
+			this.$dropdown.css({ position: position, top: top + 'px', left: left + 'px' });
 		},
 		show: function()
 		{
 			$('.dropdown-in').removeClass('dropdown-in');
 			$('.dropdown').removeClass('dropdown-open').hide();
+
+			if (this.opts.height) this.$dropdown.css('min-height', this.opts.height + 'px');
+			if (this.opts.width) this.$dropdown.width(this.opts.width);
 
 			this.setPosition();
 
@@ -153,25 +169,42 @@
 
 			$(document).on('scroll.tools.dropdown', $.proxy(this.setPosition, this));
 			$(window).on('resize.tools.dropdown', $.proxy(this.setPosition, this));
-			$(document).on('click.tools.dropdown', $.proxy(this.hide, this));
+			$(document).on('click.tools.dropdown touchstart.tools.dropdown', $.proxy(this.hide, this));
+
+			if (this.opts.targetClose)
+			{
+				$(this.opts.targetClose).on('click.tools.dropdown', $.proxy(function(e)
+				{
+					e.preventDefault();
+
+					this.hide(false);
+
+				}, this));
+			}
+
 			$(document).on('keydown.tools.dropdown', $.proxy(function(e)
 			{
-			   if (e.which === 27) // esc
-			   {
-				   this.hide();
-			   }
+				// esc
+			   if (e.which === 27) this.hide();
 
 			}, this));
 
 			this.setCallback('opened', this.$dropdown, this.$element);
 
 		},
+		preventBodyScroll: function()
+		{
+			this.$dropdown.on('mouseover', function() { $('html').css('overflow', 'hidden'); });
+			this.$dropdown.on('mouseout', function() { $('html').css('overflow', ''); });
+		},
 		hide: function(e)
 		{
 			if (e)
 			{
+				e = e.originalEvent || e;
+
 				var $target = $(e.target);
-				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.hasClass('dropdown-open'))
+				if ($target.hasClass('caret') || $target.hasClass('dropdown-in') || $target.closest('.dropdown-open').size() !== 0)
 				{
 					return;
 				}

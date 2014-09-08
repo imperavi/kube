@@ -6,21 +6,31 @@
 	z-index: 102;
 	top: 0;
 	right: 0;
-	list-style: none;
-	margin: 0;
 	width: 250px;
-	max-height: 300px;
-	overflow: auto;
-	line-height: 1.5;
-	font-size: 95%;
-	padding: 0;
 	color: @color-black;
 	background: @color-white;
 	box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+	overflow: auto;
 
-	& li.divider {
-		border-bottom: 1px solid #e2e2e2;
+	& section {
+		max-height: 250px;
+		overflow: auto;
+		padding: 20px;
 	}
+	& footer {
+		padding: 20px;
+	}
+
+}
+ul.dropdown {
+
+	max-height: 300px;
+	list-style: none;
+	margin: 0;
+	line-height: 1.5;
+	font-size: 95%;
+	padding: 0;
+
 	& a {
 		display: block;
 		padding: 7px 15px;
@@ -30,6 +40,11 @@
 			background: #eee;
 		}
 	}
+
+	& li.divider {
+		border-bottom: 1px solid #e2e2e2;
+	}
+
 }
 .caret {
 	display: inline-block;
