@@ -33,6 +33,7 @@
 		url: false,
 		target: false,
 		min: 2,
+		params: false,
 		appendForms: false
 	};
 
@@ -123,6 +124,30 @@
 
 				data += '&' + name + '=' + value;
 				data = this.appendForms(data);
+
+				var str = '';
+				if (this.opts.params)
+				{
+					this.opts.params = $.trim(this.opts.params.replace('{', '').replace('}', ''))
+					var properties = this.opts.params.split(',');
+					var obj = {};
+					$.each(properties, function(k, v)
+					{
+					    var tup = v.split(':');
+					    obj[$.trim(tup[0])] = $.trim(tup[1]);
+					});
+
+					str = [];
+					$.each(obj, $.proxy(function(k, v)
+					{
+						str.push(k + "=" + v);
+
+					}, this));
+
+					str = str.join("&");
+
+					data += '&' + str;
+				}
 			}
 
 			this.toggleClose(value.length);
