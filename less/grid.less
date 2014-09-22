@@ -102,6 +102,15 @@
 .units-row .unit-push-right {
 	float: right;
 }
+.units-row {
+	& .unit-role-right {
+		margin-left: @grid-gutter-width/(@grid-width/100)*1%;
+		float: right;
+	}
+	& .unit-role-left {
+		margin-left: 0;
+	}
+}
 
 .centered,
 .unit-centered {

@@ -51,7 +51,8 @@ input[type="submit"].btn-smaller {
 .btn-round {
 	border-radius: 15px;
 }
-.btn-outline {
+.btn-outline,
+input[type="submit"].btn-outline {
 	background: none;
 	padding: @padding-btn-outline;
 	border: 1px solid @color-black;
@@ -100,12 +101,30 @@ input[type="submit"].btn-smaller {
 }
 
 
-.btn-blue 	{ .make-color-btn(@color-blue, @color-blue-dark, #fff); 	}
-.btn-red 	{ .make-color-btn(@color-red, @color-red-dark, #fff); 	    }
-.btn-green 	{ .make-color-btn(@color-green, @color-green-dark, #fff);   }
-.btn-black 	{ .make-color-btn(@color-black, @color-black-light, #fff, .7);  }
-.btn-yellow	{ .make-color-btn(@color-yellow, @color-yellow-dark, #000); }
-.btn-white	{ .make-color-btn(@color-white, darken(#fff, 7%), #000, .2); }
+.btn-blue,
+input[type="submit"].btn-blue {
+	.make-color-btn(@color-blue, @color-blue-dark, #fff);
+}
+.btn-red,
+input[type="submit"].btn-red {
+	.make-color-btn(@color-red, @color-red-dark, #fff);
+}
+.btn-green,
+input[type="submit"].btn-green {
+	.make-color-btn(@color-green, @color-green-dark, #fff);
+}
+.btn-black,
+input[type="submit"].btn-black {
+	.make-color-btn(@color-black, @color-black-light, #fff, .7);
+}
+.btn-yellow,
+input[type="submit"].btn-yellow {
+	.make-color-btn(@color-yellow, @color-yellow-dark, #000);
+}
+.btn-white,
+input[type="submit"].btn-white {
+	.make-color-btn(@color-white, darken(#fff, 7%), #000, .2);
+}
 
 .btn-white {
 	&.btn-outline.btn-active {

@@ -129,6 +129,8 @@
 			$('.tools-message').hide().removeClass('open');
 			this.$message.addClass('open').fadeIn('fast').on('click.tools.message', $.proxy(this.hide, this));
 
+			$(document).on('keyup.tools.message', $.proxy(this.hideHandler, this));
+
 			if (this.opts.delay)
 			{
 				setTimeout($.proxy(this.hide, this), this.opts.delay * 1000);
@@ -136,11 +138,18 @@
 
 			this.setCallback('opened');
 		},
+		hideHandler: function(e)
+		{
+			if (e.which != 27) return;
+
+			this.hide();
+		},
 		hide: function()
 		{
 			if (!this.$message.hasClass('open')) return;
 
 			this.$message.off('click.tools.message');
+			$(document).off('keyup.tools.message');
 			this.$message.fadeOut('fast', $.proxy(function()
 			{
 				this.$message.removeClass('open');
