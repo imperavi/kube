@@ -23,3 +23,6 @@ less/master.less
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Bower Files
+bower_components
