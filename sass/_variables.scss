@@ -127,7 +127,7 @@ $padding-btn-side-in-forms-base: 1.3em;
 
 $padding-input: $padding-input-base .35em;
 $padding-btn: $padding-btn-base $padding-btn-side-base;
-$padding-btn-outline: $padding-btn-base - (1/16em*1) $padding-btn-side-base;
+$padding-btn-outline: $padding-btn-base - (1em/16*1) $padding-btn-side-base;
 $padding-btn-outline-bold: $padding-btn-base - (1em/16*2) $padding-btn-side-base;
 $padding-btn-in-forms: $padding-input-base + (1em/16*1) $padding-btn-side-in-forms-base;
 $padding-btn-outline-in-forms: $padding-input-base $padding-btn-side-in-forms-base;
