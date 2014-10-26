@@ -166,7 +166,7 @@
 		@include opacity(100);
 	}
 }
-@mixin striped($color: rgba(255, 255, 255, .2); $angle: 45deg) {
+@mixin striped($color: rgba(255, 255, 255, .2), $angle: 45deg) {
 	background-image: -webkit-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
 	background-image: -o-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
 	background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
