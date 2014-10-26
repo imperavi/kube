@@ -33,12 +33,12 @@
 @mixin gradient($start: #555, $end: #333) {
 	background-color: mix($start, $end, 60%);
 	background-image: -moz-linear-gradient(top, $start, $end); // FF 3.6+
-	background-image: -ms-linear-gradient(top, $start, $end); // IE10
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($start), to($end)); // Safari 4+, Chrome 2+
-	background-image: -webkit-linear-gradient(top, $start, $end); // Safari 5.1+, Chrome 10+
-	background-image: -o-linear-gradient(top, $start, $end); // Opera 11.10
-	background-image: linear-gradient(top, $start, $end); // The standard
-	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$start,$end)); // IE9 and down
+	background-image: -webkit-linear-gradient(top, $start, $end);  // Safari 5.1-6, Chrome 10+
+	background-image: -o-linear-gradient(top, $start, $end);  // Opera 12
+	background-image: linear-gradient(to bottom, $start, $end); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start)}', endColorstr='#{ie-hex-str($end)}', GradientType=0); // IE9 and down
 }
 @mixin border-top-radius($radius) {
 	border-top-right-radius: $radius;
