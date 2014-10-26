@@ -2,7 +2,7 @@
 -----------------------------------------------------------------------------*/
 .units-container,
 .units-row {
-  .clearfix;
+  @include clearfix;
 }
 .units-container { /* it's the trick to not collapse padding-top in the child element */
 	padding-top: 1px;
