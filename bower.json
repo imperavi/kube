@@ -1,0 +1,29 @@
+{
+  "name": "kube",
+  "version": "4.0.2",
+  "homepage": "http://imperavi.com/kube/",
+  "authors": [
+    "imperavi <ab@imperavi.com>"
+  ],
+  "description": "Kube is a minimalistic Web framework for professional developers and designers.",
+  "main": "css/kube.min.css", "js/kube.min.js",
+  "keywords": [
+    "HTML5",
+    "Framework",
+    "CSS",
+    "LESS",
+    "Web",
+    "Controls"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}
