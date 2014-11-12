@@ -9,6 +9,7 @@
     "css",
     "framework"
   ],
+  "main":"js/kube.js"
   "license": "MIT",
   "homepage": "http://imperavi.com/kube",
   "private": true,
