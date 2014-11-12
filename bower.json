@@ -5,7 +5,6 @@
     "imperavi"
   ],
   "description": "Kube CSS Framework repo",
-  "main": "css/kube.css",
   "keywords": [
     "css",
     "framework"
