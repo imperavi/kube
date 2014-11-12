@@ -9,7 +9,7 @@
     "css",
     "framework"
   ],
-  "main":"js/kube.js"
+  "main":"js/kube.js",
   "license": "MIT",
   "homepage": "http://imperavi.com/kube",
   "private": true,
@@ -19,7 +19,7 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
   "dependencies": {
   "jquery": "~2.1.1"
  }
