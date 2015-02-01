@@ -81,16 +81,24 @@
 			this.$sourceBox = $('<div class="filterbox" />');
 			this.$sourceSelect = $('<span class="filterbox-toggle" />');
 			this.$sourceLayer = $('<ul class="filterbox-list hide" />');
+			this.$sourceResult = $('<select name="' + this.$element.attr('name') + '" id="' + this.$element.attr('id') + '" />').hide();
 			this.$source = $('<input type="text" id="' + this.$element.attr('id') + '-input" class="' + this.$element.attr('class') + '" />');
 
+			this.$sourceBox.append(this.$sourceResult);
 			this.$sourceBox.append(this.$source);
 			this.$sourceBox.append(this.$sourceSelect);
 			this.$sourceBox.append(this.$sourceLayer);
 
 			this.setPlaceholder();
 
+			// set default
+			var key = this.$element.val();
+			var value = this.$element.find('option:selected').text();
+			this.setResult(key, value);
+
 			this.$element.hide().after(this.$sourceBox);
 			this.$element.find('option').each($.proxy(this.buildListItemsFromOptions, this));
+			this.$element.removeAttr('id').removeAttr('name');
 
 			this.$source.on('keyup', $.proxy(this.clearSelected, this));
 			this.$sourceSelect.on('click', $.proxy(this.load, this));
@@ -180,6 +188,9 @@
 		},
 		clearSelected: function()
 		{
+			var value = this.$source.val();
+			this.setResult(value, value);
+
 			if (this.$source.val().length === 0) this.$element.val(0);
 		},
 		setSelectedItem: function(items, value)
@@ -236,7 +247,14 @@
 
 			this.close();
 
+			this.setResult(rel, text);
 			this.setCallback('select', { id: rel, value: text });
+		},
+		setResult: function(key, value)
+		{
+			var option = $('<option value="' + key + '" selected="selected">' + value + '</option>');
+
+			this.$sourceResult.html(option);
 		},
 		preventBodyScroll: function()
 		{
@@ -245,8 +263,8 @@
 		},
 		setPlaceholder: function()
 		{
-			if (!this.opts.placeholder) return;
-			this.$source.attr('placeholder', this.opts.placeholder);
+			if (!this.opts.placeholder && !this.$element.attr('placeholder')) return;
+			this.$source.attr('placeholder', (this.opts.placeholder) ? this.opts.placeholder : this.$element.attr('placeholder'));
 		},
 		close: function(e)
 		{

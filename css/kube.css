@@ -578,7 +578,7 @@ input[type="time"][disabled],
 input[type="search"][disabled],
 input[type="datetime-local"][disabled] {
   resize: none;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.8);
 }
 select[disabled],
 input[type="checkbox"][disabled],
@@ -1463,18 +1463,18 @@ input.input-smaller {
   margin-left: 1px;
 }
 /* Fullwidth */
-.fullwidth ul {
+.nav-fullwidth ul {
   width: 100%;
 }
-.fullwidth li {
+.nav-fullwidth li {
   float: none !important;
   margin: 0;
   display: table-cell;
   width: 1%;
   text-align: center;
 }
-.fullwidth li a,
-.fullwidth li span {
+.nav-fullwidth li a,
+.nav-fullwidth li span {
   display: block;
 }
 /* Vertical */
@@ -1723,7 +1723,6 @@ input[type="submit"].btn {
   line-height: 1.65em;
   text-align: center;
   text-decoration: none;
-  color: #222222;
   -webkit-appearance: none;
   outline: none;
   margin: 0;
@@ -1731,8 +1730,9 @@ input[type="submit"].btn {
   border-radius: 2px;
   box-shadow: none;
   cursor: pointer;
-  background: #e0e3e5;
   padding: 0.55em 2.5em;
+  color: #222222;
+  background: #e0e3e5;
 }
 .btn:hover,
 input[type="submit"].btn:hover {
@@ -2538,7 +2538,7 @@ input[type="submit"].btn-white.btn-outline.btn-active {
 .tools-message {
   display: none;
   position: fixed;
-  z-index: 100;
+  z-index: 2000;
   top: 10px;
   right: 10px;
   max-width: 350px;
@@ -2601,6 +2601,7 @@ input[type="submit"].btn-white.btn-outline.btn-active {
   text-align: center;
   font-weight: normal;
   text-transform: uppercase;
+  text-decoration: none;
 }
 .label-outline {
   background: none;
@@ -3029,6 +3030,9 @@ ul.dropdown li.divider {
   text-align: center;
   font-size: 11px;
   color: rgba(0, 0, 0, 0.5);
+}
+.tools-droparea-placeholder input[type="file"] {
+  display: inline-block;
 }
 /* =Autocomplete
 -----------------------------------------------------------------------------*/
@@ -3568,11 +3572,11 @@ ul.dropdown li.divider {
     margin-left: 0;
     margin-right: 0;
   }
-  .fullwidth ul,
-  .fullwidth li {
+  .nav-fullwidth ul,
+  .nav-fullwidth li {
     width: auto;
   }
-  .fullwidth li {
+  .nav-fullwidth li {
     display: block;
   }
 }

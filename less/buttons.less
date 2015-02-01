@@ -13,7 +13,6 @@ input[type="submit"].btn {
 
     text-align: center;
 	text-decoration: none;
-	color: @color-body;
 
 	-webkit-appearance: none;
 
@@ -23,8 +22,10 @@ input[type="submit"].btn {
 	border-radius: 2px;
 	box-shadow: none;
 	cursor: pointer;
-	background: @color-gray;
 	padding: @padding-btn;
+
+	color: @color-body;
+	background: @color-gray;
 
 	&:hover {
 		color: rgba(0, 0, 0, .5);
@@ -53,6 +54,7 @@ input[type="submit"].btn-smaller {
 }
 .btn-outline,
 input[type="submit"].btn-outline {
+
 	background: none;
 	padding: @padding-btn-outline;
 	border: 1px solid @color-black;

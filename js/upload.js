@@ -30,7 +30,10 @@
 
 		url: false,
 		placeholder: 'Drop file here or ',
-		param: 'file'
+		param: false,
+		module: false,
+		padding: false,
+		appendForm: false
 
 	};
 
@@ -93,6 +96,11 @@
 			this.$droparea.on('dragover.tools.upload', $.proxy(this.onDrag, this));
 			this.$droparea.on('dragleave.tools.upload', $.proxy(this.onDragLeave, this));
 
+			if (this.opts.padding)
+			{
+				this.$droparea.css({ 'padding-top': this.opts.padding + 'px', 'padding-bottom': this.opts.padding + 'px' });
+			}
+
 			// change
 			this.$element.on('change.tools.upload', $.proxy(function(e)
 			{
@@ -122,10 +130,28 @@
 			var formData = !!window.FormData ? new FormData() : null;
 			if (window.FormData)
 			{
-				formData.append(this.opts.param, file);
+				var param = (this.opts.param === false) ? this.$element.attr('name') : this.opts.param;
+				formData.append(param, file);
+
+				// append forms
+				if (this.opts.appendForm)
+				{
+					var data = $(this.opts.appendForm).serializeArray();
+					$.each(data, function(i,s)
+					{
+						formData.append(s.name, s.value);
+					});
+				}
+
+				if (this.opts.module)
+				{
+					formData.append('module', this.opts.module);
+				}
 			}
 
 			if ($.progress) $.progress.show();
+
+			this.setCallback('start');
 			this.sendData(formData, e);
 		},
 		sendData: function(formData, e)
@@ -149,6 +175,7 @@
 
 					this.$droparea.removeClass('drag-drop');
 					this.setCallback('success', json);
+					this.$element.val('');
 			    }
 			}, this);
 
@@ -176,4 +203,3 @@
 	});
 
 })(jQuery);
-

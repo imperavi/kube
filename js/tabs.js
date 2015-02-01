@@ -136,7 +136,6 @@
 			e.preventDefault();
 
 			var hash = $(e.target).attr('rel');
-			top.location.hash = hash;
 			this.show(hash);
 		},
 		readLocationHash: function(hash)
@@ -175,6 +174,8 @@
 			{
 				$(this).hide();
 			});
+
+			this.links.parent().removeClass('active');
 		},
 		setEquals: function()
 		{

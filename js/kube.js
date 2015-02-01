@@ -1,3 +1,5 @@
+
+/* File: accordion.js */
 /*
 	Accordion Tool
 
@@ -226,6 +228,7 @@
 
 
 })(jQuery);
+/* File: autocomplete.js */
 /*
 	Autocomplete Tool
 
@@ -465,6 +468,7 @@
 
 
 })(jQuery);
+/* File: buttons.js */
 /*
 	Buttons Tool
 
@@ -619,6 +623,7 @@
 
 
 })(jQuery);
+/* File: check-all.js */
 /*
 	CheckAll Tool
 
@@ -787,6 +792,7 @@
 
 
 })(jQuery);
+/* File: dropdown.js */
 /*
 	Dropdown Tool
 
@@ -1019,6 +1025,7 @@
 
 
 })(jQuery);
+/* File: filterbox.js */
 /*
 	FilterBox Tool
 
@@ -1102,16 +1109,24 @@
 			this.$sourceBox = $('<div class="filterbox" />');
 			this.$sourceSelect = $('<span class="filterbox-toggle" />');
 			this.$sourceLayer = $('<ul class="filterbox-list hide" />');
+			this.$sourceResult = $('<select name="' + this.$element.attr('name') + '" id="' + this.$element.attr('id') + '" />').hide();
 			this.$source = $('<input type="text" id="' + this.$element.attr('id') + '-input" class="' + this.$element.attr('class') + '" />');
 
+			this.$sourceBox.append(this.$sourceResult);
 			this.$sourceBox.append(this.$source);
 			this.$sourceBox.append(this.$sourceSelect);
 			this.$sourceBox.append(this.$sourceLayer);
 
 			this.setPlaceholder();
 
+			// set default
+			var key = this.$element.val();
+			var value = this.$element.find('option:selected').text();
+			this.setResult(key, value);
+
 			this.$element.hide().after(this.$sourceBox);
 			this.$element.find('option').each($.proxy(this.buildListItemsFromOptions, this));
+			this.$element.removeAttr('id').removeAttr('name');
 
 			this.$source.on('keyup', $.proxy(this.clearSelected, this));
 			this.$sourceSelect.on('click', $.proxy(this.load, this));
@@ -1201,6 +1216,9 @@
 		},
 		clearSelected: function()
 		{
+			var value = this.$source.val();
+			this.setResult(value, value);
+
 			if (this.$source.val().length === 0) this.$element.val(0);
 		},
 		setSelectedItem: function(items, value)
@@ -1257,7 +1275,14 @@
 
 			this.close();
 
+			this.setResult(rel, text);
 			this.setCallback('select', { id: rel, value: text });
+		},
+		setResult: function(key, value)
+		{
+			var option = $('<option value="' + key + '" selected="selected">' + value + '</option>');
+
+			this.$sourceResult.html(option);
 		},
 		preventBodyScroll: function()
 		{
@@ -1266,8 +1291,8 @@
 		},
 		setPlaceholder: function()
 		{
-			if (!this.opts.placeholder) return;
-			this.$source.attr('placeholder', this.opts.placeholder);
+			if (!this.opts.placeholder && !this.$element.attr('placeholder')) return;
+			this.$source.attr('placeholder', (this.opts.placeholder) ? this.opts.placeholder : this.$element.attr('placeholder'));
 		},
 		close: function(e)
 		{
@@ -1291,6 +1316,7 @@
 
 
 })(jQuery);
+/* File: infinite-scroll.js */
 /*
 	Infinity Scroll Tool
 
@@ -1437,6 +1463,7 @@
 })(jQuery);
 
 
+/* File: livesearch.js */
 /*
 	Livesearch Tool
 
@@ -1631,6 +1658,7 @@
 
 })(jQuery);
 
+/* File: message.js */
 /*
 	Tabs Tool
 
@@ -1803,6 +1831,7 @@
 })(jQuery);
 
 
+/* File: modal.js */
 /*
 	Modal Tool
 
@@ -2170,6 +2199,7 @@
 })(jQuery);
 
 
+/* File: navigation-fixed.js */
 /*
 	Navigation Fixed Tool
 
@@ -2283,6 +2313,7 @@
 
 
 })(jQuery);
+/* File: navigation-toggle.js */
 /*
 	Navigation Toggle Tool
 
@@ -2423,6 +2454,7 @@
 
 
 })(jQuery);
+/* File: progress.js */
 /*
 	Progress Tool
 
@@ -2460,6 +2492,7 @@
 
 })(jQuery);
 
+/* File: tabs.js */
 /*
 	Tabs Tool
 
@@ -2598,7 +2631,6 @@
 			e.preventDefault();
 
 			var hash = $(e.target).attr('rel');
-			top.location.hash = hash;
 			this.show(hash);
 		},
 		readLocationHash: function(hash)
@@ -2637,6 +2669,8 @@
 			{
 				$(this).hide();
 			});
+
+			this.links.parent().removeClass('active');
 		},
 		setEquals: function()
 		{
@@ -2675,6 +2709,7 @@
 })(jQuery);
 
 
+/* File: textfit.js */
 /*
 	TextFit Tool
 
@@ -2746,6 +2781,7 @@
 
 
 })(jQuery);
+/* File: tooltip.js */
 /*
 	Tooltip Tool
 
@@ -2850,6 +2886,7 @@
 
 })(jQuery);
 
+/* File: upload.js */
 /*
 	Upload Tool
 
@@ -2882,7 +2919,10 @@
 
 		url: false,
 		placeholder: 'Drop file here or ',
-		param: 'file'
+		param: false,
+		module: false,
+		padding: false,
+		appendForm: false
 
 	};
 
@@ -2945,6 +2985,11 @@
 			this.$droparea.on('dragover.tools.upload', $.proxy(this.onDrag, this));
 			this.$droparea.on('dragleave.tools.upload', $.proxy(this.onDragLeave, this));
 
+			if (this.opts.padding)
+			{
+				this.$droparea.css({ 'padding-top': this.opts.padding + 'px', 'padding-bottom': this.opts.padding + 'px' });
+			}
+
 			// change
 			this.$element.on('change.tools.upload', $.proxy(function(e)
 			{
@@ -2974,10 +3019,28 @@
 			var formData = !!window.FormData ? new FormData() : null;
 			if (window.FormData)
 			{
-				formData.append(this.opts.param, file);
+				var param = (this.opts.param === false) ? this.$element.attr('name') : this.opts.param;
+				formData.append(param, file);
+
+				// append forms
+				if (this.opts.appendForm)
+				{
+					var data = $(this.opts.appendForm).serializeArray();
+					$.each(data, function(i,s)
+					{
+						formData.append(s.name, s.value);
+					});
+				}
+
+				if (this.opts.module)
+				{
+					formData.append('module', this.opts.module);
+				}
 			}
 
 			if ($.progress) $.progress.show();
+
+			this.setCallback('start');
 			this.sendData(formData, e);
 		},
 		sendData: function(formData, e)
@@ -3001,6 +3064,7 @@
 
 					this.$droparea.removeClass('drag-drop');
 					this.setCallback('success', json);
+					this.$element.val('');
 			    }
 			}, this);
 
@@ -3028,5 +3092,3 @@
 	});
 
 })(jQuery);
-
-
