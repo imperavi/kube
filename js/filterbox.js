@@ -195,7 +195,7 @@
 		},
 		setSelectedItem: function(items, value)
 		{
-			var selectEl = items.filter('[rel=' + value + ']');
+			var selectEl = items.filter('[rel="' + value + '"]');
 			if (selectEl.size() === 0)
 			{
 				selectEl = false;
