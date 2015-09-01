@@ -1,0 +1,32 @@
+/* =Navigation Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+
+	.navbar {
+		&.navbar-left,
+		&.navbar-right,
+		& li,
+		&.navbar-left li,
+		&.navbar-right li {
+			float: none;
+			text-align: left;
+			width: auto;
+		}
+	}
+	.navbar {
+		& li,
+		&.navbar-right li {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+	.fullwidth {
+		& ul,
+		& li {
+			width: auto;
+		}
+		& li {
+			display: block;
+		}
+	}
+}

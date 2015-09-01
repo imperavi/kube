@@ -1,0 +1,173 @@
+/* =Buttons
+-----------------------------------------------------------------------------*/
+.btn,
+input[type="submit"].btn {
+	display: inline-block;
+	vertical-align: top;
+
+	font-family: $font-family-controls;
+	font-size: 1em;
+	font-weight: 400;
+
+	line-height: $base-line;
+
+    text-align: center;
+	text-decoration: none;
+	color: $color-body;
+
+	-webkit-appearance: none;
+
+	outline: none;
+	margin: 0;
+	border: none;
+	border-radius: 2px;
+	box-shadow: none;
+	cursor: pointer;
+	background: $color-gray;
+	padding: $padding-btn;
+
+	&:hover {
+		color: rgba(0, 0, 0, .5);
+		background: $color-gray-dark;
+	}
+}
+.btn::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+.btn-big,
+input[type="submit"].btn-big {
+	font-size: $font-size-big;
+}
+.btn-small,
+input[type="submit"].btn-small {
+	font-size: $font-size-small;
+}
+.btn-smaller,
+input[type="submit"].btn-smaller {
+	font-size: $font-size-smaller;
+	vertical-align: baseline;
+}
+.btn-round {
+	border-radius: 15px;
+}
+.btn-outline,
+input[type="submit"].btn-outline {
+	background: none;
+	padding: $padding-btn-outline;
+	border: 1px solid $color-black;
+	&:hover {
+		border-color: $color-gray-dark;
+	}
+}
+.btn-outline.btn-active {
+	padding: $padding-btn;
+}
+.btn-outline.bold {
+	border-width: 2px;
+	padding: $padding-btn-outline-bold;
+}
+.btn-active,
+.btn[disabled],
+.btn-disabled {
+	background: none;
+	background: $color-gray-dark;
+	color: rgba(0, 0, 0, .5);
+	&:hover {
+		color: rgba(0, 0, 0, .5);
+		background: $color-gray-dark;
+	}
+}
+.btn-active {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .4) inset;
+}
+.btn-outline.btn[disabled],
+.btn-outline.btn-disabled {
+	background: none;
+	box-shadow: none;
+	color: rgba(0, 0, 0, .3);
+	border: 1px solid rgba(0, 0, 0, .1);
+}
+.btn-outline.btn-active {
+	background: none;
+	color: rgba(0, 0, 0, .4);
+	border: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
+}
+.btn[disabled],
+.btn-disabled {
+	cursor: default;
+	box-shadow: none;
+}
+
+
+.btn-blue,
+input[type="submit"].btn-blue {
+	@include make-color-btn($color-blue, $color-blue-dark, #fff);
+}
+.btn-red,
+input[type="submit"].btn-red {
+	@include make-color-btn($color-red, $color-red-dark, #fff);
+}
+.btn-green,
+input[type="submit"].btn-green {
+	@include make-color-btn($color-green, $color-green-dark, #fff);
+}
+.btn-black,
+input[type="submit"].btn-black {
+	@include make-color-btn($color-black, $color-black-light, #fff, .7);
+}
+.btn-yellow,
+input[type="submit"].btn-yellow {
+	@include make-color-btn($color-yellow, $color-yellow-dark, #000);
+}
+.btn-white,
+input[type="submit"].btn-white {
+	@include make-color-btn($color-white, darken(#fff, 7%), #000, .2);
+}
+
+.btn-white {
+	&.btn-outline.btn-active {
+		box-shadow: none;
+		border: 1px solid rgba(255, 255, 255, .3);
+		padding: $padding-btn-outline;
+	}
+}
+
+
+/*
+	Buttons Group
+*/
+.btn-single,
+.btn-group {
+	display: inline-block;
+	margin-right: 2px;
+	@include clearfix;
+	vertical-align: bottom;
+}
+.btn-single > .btn,
+.btn-single > input,
+.btn-group > .btn,
+.btn-group > input {
+	float: left;
+	border-radius: 0;
+	margin-left: -1px;
+}
+.btn-single > .btn {
+	border-radius: 2px;
+}
+.btn-group > .btn:first-child {
+	border-radius: 2px 0 0 2px;
+}
+.btn-group > .btn:last-child {
+	border-radius: 0 2px 2px 0;
+}
+.btn-group > .btn.btn-round:first-child,
+.btn-group > .input-search:first-child {
+	border-radius: 15px 0 0 15px;
+}
+.btn-group > .btn.btn-round:last-child,
+.btn-group > .input-search:last-child {
+	border-radius: 0 15px 15px 0;
+}
+

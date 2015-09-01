@@ -1,0 +1,86 @@
+/* string content */
+.str {
+	color: #dd1144;
+}
+
+/* a keyword */
+.kwd {
+	color: #333333;
+}
+
+/* a comment */
+.com {
+	color: #999988;
+}
+
+/* a type name */
+.typ {
+	color: #445588;
+}
+
+/* a literal value */
+.lit {
+	color: #445588;
+}
+
+/* punctuation */
+.pun {
+	color: #888;
+}
+
+/* lisp open bracket */
+.opn {
+	color: #333333;
+}
+
+/* lisp close bracket */
+.clo {
+	color: #333333;
+}
+
+/* a markup tag name */
+.tag {
+	color: #367ac3;
+}
+
+/* a markup attribute name */
+.atn {
+	color: #51a7c9;
+}
+
+/* a markup attribute value */
+.atv {
+	color: #709c1a;
+}
+
+/* a declaration */
+.dec {
+	color: #666;
+}
+
+/* a variable name */
+.var {
+	color: teal;
+}
+
+/* a function name */
+.fun {
+	color: #990000;
+}
+.linenums ol li {
+    list-style-type: none;
+    counter-increment: list;
+    position: relative;
+}
+
+.linenums ol li:after {
+    content: counter(list);
+    position: absolute;
+    left: -3.3em;
+    border-right: 1px solid #e5e5e5;
+    padding-right: 9px;
+    width: 2.45em;
+    text-align: right;
+    color: rgba(0, 0, 0, .3);
+    font-size: 12px;
+}

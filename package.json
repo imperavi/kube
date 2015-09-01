@@ -1,0 +1,15 @@
+{
+  "name": "Kube Sass",
+  "version": "0.0.0",
+  "description": "Kube Web Framework 4 ====",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thatgibbyguy/kube.git"
+  },
+  "homepage": "https://github.com/thatgibbyguy/kube",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4"
+  }
+}
