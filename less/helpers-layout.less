@@ -1,0 +1,78 @@
+/* =Layout Helpers
+-----------------------------------------------------------------------------*/
+[layout~=group] {
+	.clearfix;
+}
+[layout~=clearfix] {
+	.clearfix;
+}
+[layout~=hide] {
+	display: none;
+}
+[layout~=highlight] {
+	background-color: #f7f3e2;
+}
+[layout~=last] {
+	margin-right: 0 !important;
+}
+[layout~=pause] {
+	margin-bottom: @base-line / 2 !important;
+}
+[layout~=end] {
+	margin-bottom: 0 !important;
+}
+[layout~=left] {
+	float: left;
+}
+[layout~=right] {
+	float: right;
+}
+[layout~=circle] {
+  border-radius: 50%;
+}
+[layout~=rounded] {
+  border-radius: 6px;
+}
+[layout~=block] { display:block }
+[layout~=clear] { clear:both!important }
+[layout~=absolute] { position:absolute!important }
+[layout~=fixed] { position:fixed!important }
+[layout~=static] { position:static!important }
+
+[layout~='no-padding'] { padding:0!important }
+[layout~='no-margin'] { margin:0!important }
+[layout~='no-border'] { border:0!important }
+[layout~='no-radius'] { border-radius:0!important }
+
+[layout~='full-height'] { height:100%!important }
+[layout~='full-width'], [layout~='fluid'] { width:100%!important }
+
+/* Responsive embedded objects */
+[layout~='video-wrapper'] {
+	height: 0;
+	padding-bottom: 56.25%; // ratio 16:9
+	position: relative;
+	margin-bottom: @base-line;
+	& iframe,
+	& object,
+	& embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+	[layout~=left],
+	[layout~=right] {
+		float: none;
+	}
+	[layout~='hide-on-mobile'] {
+		display: none;
+	}
+}
