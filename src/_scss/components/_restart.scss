@@ -1,0 +1,49 @@
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+a:active,
+a:hover {
+    outline: 0;
+}
+::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+img,
+video,
+audio {
+	max-width: 100%;
+}
+img,
+video {
+	height: auto;
+}
+input[type="radio"],
+input[type="checkbox"] {
+	cursor: pointer;
+	font-size: 110%;
+	position: relative;
+	margin-right: 3px;
+	padding: 0;
+}
+input[type="search"] {
+	-webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}

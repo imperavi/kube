@@ -1,0 +1,72 @@
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	max-width: 100%;
+	width: 100%;
+	empty-cells: show;
+	font-size: $font-size-regular - 1px;
+}
+
+th {
+	text-align: left;
+	font-weight: 700;
+	vertical-align: bottom;
+}
+td {
+	vertical-align: top;
+}
+th,
+td {
+	padding: ($base-unit * 4);
+	padding-bottom: ($base-unit * 4) - 1px;
+	border-bottom: $table-border;
+	&:first-child {
+		padding-left: 0;
+	}
+	&:last-child {
+		padding-right: 0;
+	}
+}
+tfoot th,
+tfoot td {
+	color: rgba(0, 0, 0, .5);
+}
+
+// Bordered
+table.bordered {
+
+	margin-top: -1px;
+
+	& td,
+	& th {
+		border: $table-border;
+	}
+
+}
+
+// Striped
+table.striped tr:nth-child(odd) td {
+	background: $table-striped-background-color;
+}
+
+table.bordered,
+table.striped {
+	& td,
+	& th {
+		&:first-child {
+			padding-left: ($base-unit * 4);
+		}
+		&:last-child {
+			padding-right: ($base-unit * 4);
+		}
+	}
+}
+
+// Flat
+table.flat {
+	& td,
+	& th {
+		border: none;
+		padding: 0;
+	}
+}

@@ -1,0 +1,142 @@
+.row {
+    @include grid-row;
+
+	&.centered {
+		@include flex-center;
+		& .col {
+    		padding-left: $grid-gap/2;
+    		padding-right: $grid-gap/2;
+		}
+	}
+	&.right {
+		@include flex-right;
+	}
+	&.bottom {
+		@include flex-bottom;
+	}
+	&.around {
+		@include flex-space-around;
+	}
+	&.between {
+		@include flex-space-between;
+	}
+	&.equal .col {
+    	@include flex;
+
+    	& > div {
+        	@include flex-grow(1);
+
+    	}
+	}
+	&.splice {
+
+    	margin-left: 0;
+
+		.col {
+			padding-left: 0;
+		}
+	}
+}
+.col {
+
+    @include flex-grow(1);
+    @include flex-basis(0);
+
+    max-width: 100%;
+    padding-left: $grid-gap;
+
+    &.first {
+        order: -1;
+    }
+    &.last {
+        order: 1;
+    }
+}
+@media (max-width: $breakpoint-small) {
+	.col.first-on-small {
+		order: -1;
+	}
+	.col.last-on-small {
+		order: 1;
+	}
+}
+
+.pull-right {
+    margin-left: auto;
+}
+
+.col-1 {  @include grid-column(1); }
+.col-2 {  @include grid-column(2); }
+.col-3 {  @include grid-column(3); }
+.col-4 {  @include grid-column(4); }
+.col-5 {  @include grid-column(5); }
+.col-6 {  @include grid-column(6); }
+.col-7 {  @include grid-column(7); }
+.col-8 {  @include grid-column(8); }
+.col-9 {  @include grid-column(9); }
+.col-10 { @include grid-column(10); }
+.col-11 { @include grid-column(11); }
+.col-12 { @include grid-column(12); }
+
+.offset-1 {  @include grid-column-offset(1); }
+.offset-2 {  @include grid-column-offset(2); }
+.offset-3 {  @include grid-column-offset(3); }
+.offset-4 {  @include grid-column-offset(4); }
+.offset-5 {  @include grid-column-offset(5); }
+.offset-6 {  @include grid-column-offset(6); }
+.offset-7 {  @include grid-column-offset(7); }
+.offset-8 {  @include grid-column-offset(8); }
+.offset-9 {  @include grid-column-offset(9); }
+.offset-10 { @include grid-column-offset(10); }
+.offset-11 { @include grid-column-offset(11); }
+
+// Fixed Width
+.row-layout {
+    @include flex;
+    @include flex-nowrap;
+    @include flex-center;
+}
+.col-fluid {
+    @include flex-grow(1);
+    width: 100%;
+}
+@media (max-width: $breakpoint-small) {
+    .row-layout {
+        display: block;
+    }
+    .col-fixed {
+    	-ms-flex: 1 !important;
+        -webkit-flex: 1 !important;
+        flex: 1 !important;
+    }
+    .row-layout > .col-fixed {
+        order: 1;
+    }
+    .row-layout > .col-fluid {
+        order: 2;
+    }
+}
+
+// Responsive
+@media (max-width: $breakpoint-small) {
+
+	.row {
+    	margin-left: 0;
+    }
+    .col,
+	[class^="col-"],
+	[class*=" col-"] {
+    	flex-basis: 100%;
+		max-width: 100%;
+		width: 100%;
+	}
+	.col {
+    	@include flex-column;
+		padding-left: 0;
+	}
+	.pull-right,
+	[class^="offset-"],
+	[class*=" offset-"] {
+		margin-left: 0;
+    }
+}

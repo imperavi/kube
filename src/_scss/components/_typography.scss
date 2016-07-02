@@ -1,0 +1,212 @@
+body {
+	font-family: $font-family;
+	line-height: $base-line;
+	font-size: $font-size-regular;
+	color: $body-text-color;
+	background-color: $body-background-color;
+}
+
+
+// Links
+a {
+	color: $link-color;
+}
+a:hover {
+	color: $link-hover-color;
+}
+
+
+// Headings
+h1.title, h1, h2, h3, h4, h5, h6 {
+	font-family: $heading-font-family;
+	font-weight: bold;
+	text-rendering: optimizeLegibility;
+	color: $heading-text-color;
+	margin-bottom: $heading-margin-bottom;
+}
+h1.title {
+	font-size: $title-font-size;
+	line-height: $title-line-height;
+}
+h1,
+.h1 {
+	font-size: $h1-font-size;
+	line-height: $h1-line-height;
+}
+h2,
+.h2 {
+	font-size: $h2-font-size;
+	line-height: $h2-line-height;
+}
+h3,
+.h3 {
+	font-size: $h3-font-size;
+	line-height: $h3-line-height;
+}
+h4,
+.h4 {
+	font-size: $h4-font-size;
+	line-height: $h4-line-height;
+}
+h5,
+.h5 {
+	font-size: $h5-font-size;
+	line-height: $h5-line-height;
+}
+h6,
+.h6 {
+	font-size: $h6-font-size;
+	line-height: $h6-line-height;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+}
+p,
+ul,
+ol,
+dl,
+blockquote,
+hr,
+pre,
+table,
+form,
+figure {
+	+ h2,
+	+ h3,
+	+ h4,
+	+ h5,
+	+ h6 {
+		margin-top: $base-unit * 8;
+	}
+}
+
+// Subheadings
+.subheading {
+	margin-top: -($heading-margin-bottom - $base-unit);
+	margin-bottom: ($base-unit*2);
+	font-weight: 300;
+}
+
+
+// Lists
+ul, ol,
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+	margin: 0 0 0 $base-line;
+}
+ol ol li {
+	list-style-type: lower-alpha;
+}
+ol ol ol li {
+	list-style-type: lower-roman;
+}
+nav ul, nav ol {
+	margin: 0;
+	list-style: none;
+}
+dl dt {
+	font-weight: 700;
+}
+dd {
+	margin-left: $base-line;
+}
+
+// Block
+p, blockquote, hr, pre, ol, ul, dl, table, fieldset, figure, address, form {
+	margin-bottom: $paragraph-margin-bottom;
+}
+hr {
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	margin-top: -1px;
+}
+blockquote {
+	padding-left: $base-line;
+	border-left: 2px solid rgba(0, 0, 0, .125);
+	font-style: italic;
+	color: rgba(0, 0, 0, .65);
+}
+
+// Preformatted
+pre, code, samp, var, kbd {
+	font-family: $monospace-font-family;
+	font-size: $font-size-small;
+}
+pre {
+	color: rgba(0, 0, 0, .85);
+	background: $pre-background-color;
+	padding: 20px;
+	border-radius: 4px;
+	line-height: $base-line-small;
+	overflow: none;
+	white-space: pre-wrap;
+}
+
+// Inline
+.small, time, cite, small, figcaption {
+	font-size: $font-size-smaller;
+	line-height: $base-line-smaller;
+}
+cite {
+	color: rgba(0, 0, 0, .5);
+}
+figcaption {
+	font-style: italic;
+	padding-top: $base-unit;
+	padding-bottom: $base-unit;
+}
+figure figcaption {
+    position: relative;
+    top: -$base-unit;
+}
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted rgba(0, 0, 0, .5);
+	cursor: help;
+}
+mark, code, samp, kbd {
+	padding: 4px 8px 2px 8px;
+	display: inline-block;
+	line-height: 1;
+	border-radius: $base-unit;
+	color: rgba(0, 0, 0, .85);
+}
+pre code {
+	font-size: 100%;
+	white-space: pre;
+	padding: 0;
+	background: none;
+	line-height: $base-line;
+}
+mark {
+	background-color: $mark-background-color;
+}
+code {
+	background: $code-background-color;
+}
+var {
+	color: rgba(0, 0, 0, .6);
+	font-style: normal;
+}
+strong, b {
+	line-height: 1;
+}
+samp {
+	color: $samp-text-color;
+	background: $samp-background-color;
+}
+kbd {
+	border: $kbd-border;
+}
+sub,
+sup {
+    font-size: x-small;
+	line-height: 0;
+	margin-left: $base-unit;
+	position: relative;
+}
+sup {
+	top: -4px;
+}
+sub {
+	bottom: -2px;
+}

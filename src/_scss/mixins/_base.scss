@@ -1,0 +1,186 @@
+// clearfix
+@mixin clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+
+// transition
+@mixin transition($transition: all linear .2s) {
+	-moz-transition: $transition;
+	transition: $transition;
+}
+
+// keyframe
+@mixin keyframe($animation) {
+	@-webkit-keyframes #{$animation} {
+		@content;
+	}
+
+	@keyframes #{$animation} {
+		@content;
+	}
+}
+
+// blur
+@mixin blur($radius) {
+	-webkit-filter: blur($radius);
+	-moz-filter: blur($radius);
+	-ms-filter: blur($radius);
+	filter: blur($radius);
+}
+
+// rotate
+@mixin rotate($deg) {
+    -webkit-transform: rotate($deg);
+    -moz-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+// striped
+@mixin striped($color: rgba(255, 255, 255, .2), $angle: 45deg) {
+	background-image: -webkit-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+	background-image: -o-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+	background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}
+
+// animation
+@mixin animation($animation) {
+	-webkit-animation: $animation;
+	animation: $animation;
+}
+
+// close
+@mixin close($color: #000) {
+    font-weight: normal;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	color: $color;
+	text-decoration: none;
+	opacity: 0.5;
+	border: none;
+	&:before {
+		content: '\00D7';
+	}
+	&:hover {
+		opacity: 1;
+		text-decoration: none !important;
+	}
+}
+@mixin close-size($size: 20px) {
+	line-height: $size - ($size / 10);
+	height: $size;
+	width: $size;
+	font-size: $size;
+}
+
+@mixin retina-background-image($file, $type, $width:  auto, $height:  auto) {
+
+	background-repeat: no-repeat;
+	background-image: url($file + '.' + $type);
+
+	@media
+	  only screen and (-webkit-min-device-pixel-ratio: 2),
+	  only screen and (min--moz-device-pixel-ratio: 2),
+	  only screen and (-o-min-device-pixel-ratio: 2/1),
+	  only screen and (min-device-pixel-ratio: 2),
+	  only screen and (min-resolution: 192dpi),
+	  only screen and (min-resolution: 2dppx) {
+		background-image: url($file + '-2x.' + $type);
+		background-size: $width $height;
+	}
+}
+
+
+// border top radius
+@mixin border-top-radius($radius) {
+	border-top-right-radius: $radius;
+	border-top-left-radius: $radius;
+}
+
+// border right radius
+@mixin border-right-radius($radius) {
+	border-bottom-right-radius: $radius;
+	border-top-right-radius: $radius;
+}
+
+// border bottom radius
+@mixin border-bottom-radius($radius) {
+	border-bottom-right-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+// border left radius
+@mixin border-left-radius($radius) {
+	border-bottom-left-radius: $radius;
+	border-top-left-radius: $radius;
+}
+
+// arrow top
+@mixin arrow-top($color: #fff, $size: 5px, $left: 5px) {
+	&:after {
+		bottom: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-bottom-color: $color;
+		border-width: $size;
+		left: $left;
+	}
+}
+
+// arrow bottom
+@mixin arrow-bottom($color: #fff, $size: 5px, $left: 5px) {
+	&:after {
+		top: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-top-color: $color;
+		border-width: $size;
+		left: $left;
+	}
+}
+
+// arrow left
+@mixin arrow-left($color: #fff, $size: 5px, $top: 5px) {
+	&:after {
+		right: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-right-color: $color;
+		border-width: $size;
+		top: $top;
+	}
+}
+
+// arrow right
+@mixin arrow-right($color: #fff, $size: 5px, $top: 5px) {
+	&:after {
+		left: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-left-color: $color;
+		border-width: $size;
+		top: $top;
+	}
+}

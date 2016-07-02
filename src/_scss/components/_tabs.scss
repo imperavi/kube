@@ -1,0 +1,47 @@
+.tabs {
+    margin-bottom: $base-line;
+    font-size: $ui-font-size;
+}
+.tabs li em,
+.tabs li.active a {
+	color: #000;
+	border: 1px solid rgba(0, 0, 0, .1);
+	cursor: default;
+	text-decoration: none;
+	background: none;
+
+}
+.tabs em,
+.tabs a {
+	position: relative;
+	top: 1px;
+	font-style: normal;
+	display: block;
+	padding: 7px $base-line;
+	border: 1px solid transparent;
+	color: rgba(0, 0, 0, .5);
+	text-decoration: none;
+	@include border-top-radius(4px);
+}
+.tabs a {
+	&:hover {
+		@include transition;
+		color: #000;
+		text-decoration: underline;
+		background-color: #f2f2f2;
+	}
+}
+
+@media (min-width: $breakpoint-small) {
+
+    .tabs ul {
+        @include flex;
+
+        margin-top: -1px;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+    .tabs li em,
+    .tabs li.active a {
+        border-bottom: 1px solid #fff;
+    }
+}

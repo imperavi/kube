@@ -1,0 +1,80 @@
+.message {
+    display: none;
+    position: fixed;
+	border-radius: 4px;
+	z-index: $z-over-all;
+	top: 16px;
+	right: 16px;
+	width: 320px;
+	line-height: 20px;
+	font-size: $ui-font-size;
+	padding: 16px 20px;
+	color: rgba(0, 0, 0, .9);
+	background: $color-default;
+	& .close {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+	}
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+        color: inherit;
+    }
+}
+.message ul,
+.message ol {
+    margin-bottom: 0;
+}
+.message.line {
+	top: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	max-width: none;
+	border-radius: 0;
+	padding-right: 56px;
+	& .close {
+		top: 16px;
+		right: 16px;
+	}
+}
+.message .buttons {
+    margin-top: 16px;
+}
+.message .buttons a {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: $ui-font-size-small;
+    margin-right: 8px;
+}
+.message.line .buttons {
+    margin-top: 0;
+    display: inline-block;
+}
+.message.primary {
+    background: $color-primary;
+    color: rgba(255, 255, 255, .9);
+}
+.message.error {
+    background: $color-error;
+    color: rgba(255, 255, 255, .9);
+}
+.message.success {
+    background: $color-success;
+    color: rgba(255, 255, 255, .9);
+}
+.message.warning {
+    background: $color-warning;
+}
+.message.primary a,
+.message.error a,
+.message.success a {
+	color: rgba(255, 255, 255, .9);
+	&:hover {
+		color: rgba(255, 255, 255, .7);
+	}
+}

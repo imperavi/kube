@@ -1,0 +1,82 @@
+.pagination {
+    margin: $base-line 0;
+    font-size: $ui-font-size;
+}
+.pagination ul {
+    @include flex;
+}
+.pagination.centered  ul {
+    @include flex-center;
+}
+.pagination em,
+.pagination a {
+    display: inline-block;
+    font-style: normal;
+	padding: 8px 16px;
+	line-height: 1;
+	border-radius: 4px;
+	white-space: nowrap;
+	border: 1px solid transparent;
+}
+.pagination a {
+	text-decoration: none;
+	color: #000;
+	&:hover {
+		color: rgba(0, 0, 0, .5);
+		background: #f4f4f4;
+	}
+}
+.pagination em,
+.pagination li.active a {
+	color: rgba(0, 0, 0, .5);
+	background: #f4f4f4;
+	cursor: text;
+}
+.pagination.upper {
+	font-size: 11px;
+}
+
+// Pager
+.pager em,
+.pager a {
+	border-radius: $base-line;
+	border-color: rgba(0, 0, 0, .1);
+}
+.pager li {
+    @include flex-basis(50%);
+}
+.pager li.next {
+	text-align: right;
+}
+.pager.centered li {
+    @include flex-basis(auto);
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.pager.flat em,
+.pager.flat a {
+    border: none;
+    display: block;
+    padding: 0;
+}
+.pager.flat a {
+    font-weight: bold;
+    &:hover {
+        background: none;
+        text-decoration: underline;
+    }
+}
+
+// Responsive
+@media (max-width: $breakpoint-small) {
+    .pager.flat ul {
+        @include flex-column;
+    }
+    .pager.flat li {
+        @include flex-basis(100%);
+
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+}

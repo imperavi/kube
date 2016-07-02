@@ -1,0 +1,48 @@
+.breadcrumb {
+	font-size: $ui-font-size-small;
+	margin-bottom: $base-line;
+}
+.breadcrumb ul {
+    @include flex;
+    @include flex-middle;
+}
+.breadcrumb.centered ul {
+    @include flex-center;
+}
+.breadcrumb em,
+.breadcrumb a {
+	font-style: normal;
+	padding: 0 10px;
+	display: inline-block;
+	white-space: nowrap;
+}
+.breadcrumb em {
+    color: rgba(0, 0, 0, .5);
+}
+.breadcrumb a {
+	color: #000;
+	text-decoration: none;
+	&:hover {
+		@include transition;
+		color: rgba(0, 0, 0, .6);
+		text-decoration: underline;
+	}
+}
+.breadcrumb li:after {
+	display: inline-block;
+	content: '/';
+	color: rgba(0, 0, 0, .4);
+}
+.breadcrumb	li:last-child:after {
+	display: none;
+}
+.breadcrumb	li:first-child em,
+.breadcrumb	li:first-child a {
+    padding-left: 0;
+}
+.breadcrumb	li.active em,
+.breadcrumb	li.active a {
+	text-decoration: none;
+	cursor: text;
+	color: rgba(0, 0, 0, .4);
+}

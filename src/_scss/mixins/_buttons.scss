@@ -1,0 +1,27 @@
+// colorful
+@mixin button($text-color, $back-color) {
+
+	background: $back-color;
+	color: $text-color;
+
+    &:focus,
+	&:hover {
+		color: rgba($text-color, .6);
+		&:disabled,
+		&.disabled {
+			color: $text-color;
+			background: $back-color;
+		}
+	}
+    &.outline:hover {
+    	color: rgba($back-color,.6);
+    	border-color: rgba($back-color,.4);
+    }
+    &.outline,
+    &.outline:disabled:hover,
+    &.outline.disabled:hover {
+    	color: rgba($back-color,1);
+    	border-color: rgba($back-color,1);
+        background: none;
+    }
+}

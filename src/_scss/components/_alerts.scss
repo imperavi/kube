@@ -1,0 +1,42 @@
+.alert {
+	position: relative;
+	padding: 15px 24px;
+	padding-right: 40px;
+	line-height: 20px;
+	font-size: $ui-font-size;
+	color: #000;
+	background: $color-default;
+	border: 1px solid darken($color-default, 10);
+	display: block;
+	font-weight: normal;
+	border-radius: 4px;
+	margin-bottom: $base-line;
+	& a {
+		color: #000;
+		font-weight: bold;
+		&:hover {
+			@include transition;
+			color: rgba(0, 0, 0, .6);
+		}
+	}
+	& h5 {
+    	margin-bottom: $base-unit;
+	}
+	& p,
+	& ul,
+	& ol {
+    	margin-bottom: 0;
+	}
+	& .close {
+    	position: absolute;
+    	top: 15px;
+    	right: 8px;
+	}
+}
+.alert.primary { @include alert($color-primary); }
+.alert.error   { @include alert($color-error);   }
+.alert.success { @include alert($color-success); }
+.alert.warning {
+    @include alert($color-warning, darken($color-warning, 25));
+    border-color: rgba($color-warning, .5);
+}

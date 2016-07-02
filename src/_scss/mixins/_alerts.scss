@@ -1,0 +1,12 @@
+@mixin alert($color, $text-color: $color) {
+    color: $text-color;
+    background-color: rgba($color, .15);
+    border: 1px solid rgba($color, .15);
+	& a,
+	& h5 {
+		color: $text-color;
+	}
+	& a:hover {
+    	color: #000;
+	}
+}
