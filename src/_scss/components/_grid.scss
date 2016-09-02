@@ -123,13 +123,15 @@
 	.row {
     	margin-left: 0;
     }
-    .col,
-	[class^="col-"],
-	[class*=" col-"] {
+    .col:not(th):not(td),
+    [class^="col-"]:not(th):not(td),
+    [class*=" col-"]:not(th):not(td) {
     	flex-basis: 100%;
 		max-width: 100%;
 		width: 100%;
 	}
+
+
 	.col {
     	@include flex-column;
 		padding-left: 0;

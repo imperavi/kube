@@ -51,9 +51,9 @@ Kube supports the latest, stable releases of all major browsers:
 - Internet Explorer 11
 
 ##Quick Start
-- [Quick Start Guide](https://imperavi.com/kube/docs/quick-start/) — Setup in under a minute
-- [Developing with Kube](https://imperavi.com/kube/docs/quick-start/#h-development) — Getting started with custom development
-- [Theming](https://imperavi.com/kube/docs/quick-start/#h-theming) — Easily create custom styles and themes
+- [Quick Start Guide](https://imperavi.com/kube/docs/started/) — Setup in under a minute
+- [Developing with Kube](https://imperavi.com/kube/docs/started/#h-development) — Getting started with custom development
+- [Theming](https://imperavi.com/kube/docs/started/#h-theming) — Easily create custom styles and themes
 
 ##License
-You have our permission to use Kube in whatever projects you wish commercial, for sale, or otherwise, in whichever way you like. Official license information can be found in [LICENSE.md](LICENSE.md) (spoiler: it's the MIT License)
+You have our permission to use Kube in whatever projects you wish commercial, for sale, or otherwise, in whichever way you like. Official license information can be find in [LICENSE.md](LICENSE.md) (spoiler: it's the MIT License)

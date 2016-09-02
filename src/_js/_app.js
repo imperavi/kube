@@ -243,6 +243,9 @@
     var SuperKube = {
     	pluginsByClass: {},
         classByPlugin: {},
+        directLoad: {
+            'message': 'open'
+        },
         plugin: function(name, obj)
         {
             obj.pluginName = name;
@@ -297,7 +300,20 @@
                         }
                         else
                         {
-                            return $.error('No such method "' + options + '" for ' + name);
+                            var direct = false;
+                            for (var key in SuperKube.directLoad)
+                            {
+                                if (name === key && options === SuperKube.directLoad[key])
+                                {
+                                    direct = true;
+                                    SuperKube.directPluginLoad(this, name);
+                                }
+                            }
+
+                            if (!direct)
+                            {
+                                return $.error('No such method "' + options + '" for ' + name);
+                            }
                         }
                     });
                 }
@@ -341,6 +357,11 @@
             });
 
             return plugin;
+        },
+        directPluginLoad: function(target, name)
+        {
+            var element = document.createElement('span');
+            $(element)[name]({ target: target, show: true });
         }
     };
 

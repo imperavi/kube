@@ -7,6 +7,10 @@
 	}
 }
 
+// font family
+@mixin font($font) {
+    font-family: #{$font};
+}
 
 // transition
 @mixin transition($transition: all linear .2s) {

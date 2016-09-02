@@ -15,6 +15,10 @@ th {
 td {
 	vertical-align: top;
 }
+tr.align-middle td,
+td.align-middle {
+    vertical-align: middle;
+}
 th,
 td {
 	padding: ($base-unit * 4);

@@ -30,6 +30,7 @@
 
             this.text = this.$element.text();
             this.$target = this.getTarget();
+            this.hideOnSmall = this.$target.hasClass('hide-on-small');
             this.$element.on('click.component.toggleme', $.proxy(this.toggle, this));
         },
         getTarget: function()
@@ -69,7 +70,7 @@
         {
             return !this.$target.hasClass('open');
         },
-        open: function(e)
+        open: function()
         {
             if (this.isOpened())
             {
@@ -80,7 +81,7 @@
             this.$target.removeClass('hide-on-small').animation(this.opts.animation.open, $.proxy(this.opened, this));
 
             // changes the text of $element with a less delay to smooth
-    		setTimeout($.proxy(this.setOpenedText, this), this.opts.animation.open.duration * 500);
+            setTimeout($.proxy(this.setOpenedText, this), this.opts.animation.open.duration * 500);
         },
         opened: function()
         {
@@ -94,7 +95,7 @@
                 this.$element.text(this.opts.text);
             }
         },
-        close: function(e)
+        close: function()
         {
             if (this.isClosed())
             {
@@ -102,12 +103,28 @@
     		}
 
             this.callback('close');
+
+            if (this.opts.animation.close === 'hide')
+            {
+                this.setClosedText();
+            }
+
             this.$target.animation(this.opts.animation.close, $.proxy(this.closed, this));
         },
         closed: function()
         {
             this.$target.removeClass('open');
-            this.setClosedText();
+
+            if (this.opts.animation.close !== 'hide')
+            {
+                this.setClosedText();
+            }
+
+            if (this.hideOnSmall)
+            {
+                this.$target.addClass('hide-on-small').show();
+            }
+
         	this.callback('closed');
         },
         setClosedText: function()

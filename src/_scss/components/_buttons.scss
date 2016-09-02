@@ -7,8 +7,8 @@ button,
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-block;
-	line-height: $ui-line-height;
-	height: $ui-height;
+	line-height: 1.125rem;
+	min-height: $ui-height;
 	padding: $button-padding;
 	border: $button-outline-border-size solid transparent;
 	vertical-align: middle;
@@ -17,12 +17,15 @@ button,
 	background-color: $button-background-color;
 	border-radius: 4px;
 }
+input.button {
+	height: auto;
+}
 button:hover,
 .button:hover {
     outline: none;
 	color: rgba(0, 0, 0, .6);
 	text-decoration: none;
-	box-shadow: inset 0 0 0 30px rgba(0, 0, 0, .1);
+	box-shadow: inset 0 0 0 40px rgba(0, 0, 0, .125);
 }
 
 .button:disabled,
@@ -56,8 +59,7 @@ button:hover,
 // Sizes
 .button.small {
 	font-size: $ui-font-size-small;
-	line-height: $ui-line-height-small;
-	height: $ui-height-small;
+	min-height: $ui-height-small;
 	padding: $button-padding-small;
 	&.upper {
 		font-size: $ui-font-size-small - 2px;
@@ -65,8 +67,7 @@ button:hover,
 }
 .button.big {
 	font-size: $ui-font-size-big;
-	line-height: $ui-line-height-big;
-	height: $ui-height-big;
+	min-height: $ui-height-big;
 	padding: $button-padding-big;
 	&.upper {
 		font-size: $ui-font-size-big - 5px;

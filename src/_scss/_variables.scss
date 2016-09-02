@@ -1,137 +1,137 @@
 // Breakpoints
-$breakpoint-small: 768px;
-$breakpoint-medium: 1024px;
-$breakpoint-large: 1200px;
+$breakpoint-small: 768px !default;
+$breakpoint-medium: 1024px !default;
+$breakpoint-large: 1200px !default;
 
 // FontFamily
-$font-family: 'Helvetica Neue', Helvetica, sans-serif;
-$heading-font-family: $font-family;
-$monospace-font-family: Consolas, Monaco, "Courier New", monospace;
+$font-family: 'Helvetica Neue', Helvetica, sans-serif !default;
+$heading-font-family: $font-family !default;
+$monospace-font-family: Consolas, Monaco, "Courier New", monospace !default;
 
 // Baseline
-$base-unit: 4px;
-$base-line: 24px;
-$base-line-small: 20px;
-$base-line-smaller: 16px;
+$base-unit: 4px !default;
+$base-line: 24px !default;
+$base-line-small: 20px !default;
+$base-line-smaller: 16px !default;
 
 // Grid
-$grid-columns: 12;
-$grid-width: 1128; // pixels
-$grid-gutter: $base-line;
-$grid-gutter-integer: ($grid-gutter / ($grid-gutter * 0 + 1));
-$grid-gap: ($grid-gutter-integer / ($grid-width / 100)) * 1%;
+$grid-columns: 12 !default;
+$grid-width: 1128 !default; // pixels
+$grid-gutter: $base-line !default;
+$grid-gutter-integer: ($grid-gutter / ($grid-gutter * 0 + 1)) !default;
+$grid-gap: ($grid-gutter-integer / ($grid-width / 100)) * 1% !default;
 
 // Z Indexes
-$z-over-content: 100;
-$z-over-control: 200;
-$z-over-page: 300;
-$z-over-screen: 400;
-$z-over-all: 500;
+$z-over-content: 100 !default;
+$z-over-control: 200 !default;
+$z-over-page: 300 !default;
+$z-over-screen: 400 !default;
+$z-over-all: 500 !default;
 
 // Text font size
-$font-size-regular: 16px;
+$font-size-regular: 16px !default;
 
-$font-size-big: $font-size-regular + 2px;
-$font-size-small: $font-size-regular - 2px;
-$font-size-smaller: $font-size-regular - 4px;
+$font-size-big: $font-size-regular + 2px !default;
+$font-size-small: $font-size-regular - 2px !default;
+$font-size-smaller: $font-size-regular - 4px !default;
 
 // UI font size
-$ui-font-size: $font-size-small;
-$ui-font-size-small: $font-size-smaller;
-$ui-font-size-big: $font-size-big;
+$ui-font-size: $font-size-small !default;
+$ui-font-size-small: $font-size-smaller !default;
+$ui-font-size-big: $font-size-big !default;
 
 // Headings
-$title-font-size: 60px;
-$h1-font-size: 48px;
-$h2-font-size: 36px;
-$h3-font-size: 24px;
-$h4-font-size: 18px;
-$h5-font-size: 16px;
-$h6-font-size: 12px;
+$title-font-size: 60px !default;
+$h1-font-size: 48px !default;
+$h2-font-size: 36px !default;
+$h3-font-size: 24px !default;
+$h4-font-size: 18px !default;
+$h5-font-size: 16px !default;
+$h6-font-size: 12px !default;
 
-$title-line-height: 64px;
-$h1-line-height: 52px;
-$h2-line-height: 40px;
-$h3-line-height: 32px;
-$h4-line-height: $base-line;
-$h5-line-height: $base-line;
-$h6-line-height: 20px;
+$title-line-height: 64px !default;
+$h1-line-height: 52px !default;
+$h2-line-height: 40px !default;
+$h3-line-height: 32px !default;
+$h4-line-height: $base-line !default;
+$h5-line-height: $base-line !default;
+$h6-line-height: 20px !default;
 
 // Spaces
-$heading-margin-bottom: 12px;
-$paragraph-margin-bottom: 16px;
+$heading-margin-bottom: 12px !default;
+$paragraph-margin-bottom: 16px !default;
 
 // Color
-$body-text-color: #333;
-$heading-text-color: #000;
-$samp-text-color: #fff;
-$input-text-color: #333;
-$input-append-text-color: #555;
+$body-text-color: #333 !default;
+$heading-text-color: #000 !default;
+$samp-text-color: #fff !default;
+$input-text-color: #333 !default;
+$input-append-text-color: #555 !default;
 
 // Color States
-$color-default: #f4f4f4;
-$color-primary: #3c74d9;
-$color-success: #60ae4d;
-$color-error:   #f34248;
-$color-warning: #fed443;
+$color-default: #f4f4f4 !default;
+$color-primary: #3c74d9 !default;
+$color-success: #60ae4d !default;
+$color-error:   #f34248 !default;
+$color-warning: #fed443 !default;
 
 // Links
-$link-color: darken($color-primary, 10%);
-$link-hover-color: $color-error;
+$link-color: darken($color-primary, 10%) !default;
+$link-hover-color: $color-error !default;
 
 
 // Background
-$body-background-color: #fff;
-$pre-background-color: #f8f8f8;
-$mark-background-color: $color-warning;
-$code-background-color: $color-default;
-$samp-background-color: lighten($color-primary, 7%);
-$highlight-background-color: rgba($color-primary, .075);
+$body-background-color: #fff !default;
+$pre-background-color: #f8f8f8 !default;
+$mark-background-color: $color-warning !default;
+$code-background-color: $color-default !default;
+$samp-background-color: lighten($color-primary, 7%) !default;
+$highlight-background-color: rgba($color-primary, .075) !default;
 
 // Kbd
-$kbd-border: 1px solid rgba(0, 0, 0, .1);
+$kbd-border: 1px solid rgba(0, 0, 0, .1) !default;
 
 // Table
-$table-striped-background-color: #f4f4f4;
-$table-border: 1px solid #eee;
+$table-striped-background-color: #f4f4f4 !default;
+$table-border: 1px solid #eee !default;
 
 // Label
-$label-font-size: $ui-font-size;
-$label-color: #111;
-$label-font-weight: normal;
+$label-font-size: $ui-font-size !default;
+$label-color: #111 !default;
+$label-font-weight: normal !default;
 
 // Input
-$input-disabled-opacity: 0.75;
-$input-disabled-color: rgba(0, 0, 0, .5);
-$input-border-size: 1px;
-$input-border-color: #dfdfdf;
-$input-focus-border-color: #bbb;
-$input-background-color: #fff;
-$input-focus-background-color: #fff;
-$input-append-background-color: #eee;
-$input-padding: 8px 10px;
-$input-padding-big: 16px 10px;
+$input-disabled-opacity: 0.75 !default;
+$input-disabled-color: rgba(0, 0, 0, .5) !default;
+$input-border-size: 1px !default;
+$input-border-color: #dfdfdf !default;
+$input-focus-border-color: #bbb !default;
+$input-background-color: #fff !default;
+$input-focus-background-color: #fff !default;
+$input-append-background-color: #eee !default;
+$input-padding: 8px 10px !default;
+$input-padding-big: 16px 10px !default;
 
 // Fieldset
-$fieldset-border-color: rgba(0, 0, 0, .1);
-$fieldset-border-size: 1px;
+$fieldset-border-color: rgba(0, 0, 0, .1) !default;
+$fieldset-border-size: 1px !default;
 
 // Button
-$button-background-color: #eee;
-$button-font-weight: normal;
-$button-outline-font-weight: normal;
-$button-outline-border-size: 1px;
-$button-padding-small: 0 20px;
-$button-padding: 0 28px;
-$button-padding-big: 0 48px;
+$button-background-color: #eee !default;
+$button-font-weight: normal !default;
+$button-outline-font-weight: normal !default;
+$button-outline-border-size: 1px !default;
+$button-padding-small: 6px 20px !default;
+$button-padding: 10px 28px !default;
+$button-padding-big: 14px 48px !default;
 
 // Height
-$ui-height-small: 32px;
-$ui-line-height-small: 32px;
-$ui-height: 40px;
-$ui-line-height: 38px;
-$ui-height-big: 48px;
-$ui-line-height-big: 46px;
+$ui-height-small: 32px !default;
+$ui-line-height-small: 32px !default;
+$ui-height: 40px !default;
+$ui-line-height: 38px !default;
+$ui-height-big: 48px !default;
+$ui-line-height-big: 46px !default;
 
 // Overlay
-$overlay-background-color: rgba(255, 255, 255, .9);
+$overlay-background-color: rgba(255, 255, 255, .9) !default;

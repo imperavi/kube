@@ -10,10 +10,10 @@
 	background: #fff;
     box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
     border-radius: 8px;
-	overflow: auto;
 	max-height: 300px;
 	margin: 0;
 	padding: 0;
+    overflow: hidden;
 }
 .dropdown.dropdown-mobile {
     position: fixed;
@@ -27,6 +27,9 @@
 }
 .dropdown .close {
     margin: 20px auto;
+}
+.dropdown.open {
+    overflow: auto;
 }
 .dropdown ul {
 

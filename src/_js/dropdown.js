@@ -198,14 +198,14 @@
     		this.setPosition();
     		this.toggleCaretOpen();
 
-    		this.$target.addClass('open').animation(this.opts.animation.open, $.proxy(this.opened, this));
+    		this.$target.animation(this.opts.animation.open, $.proxy(this.opened, this));
 
     	},
     	opened: function()
     	{
     		this.enableEvents();
+    		this.$target.addClass('open');
     		this.callback('opened');
-
     	},
     	handleKeyboard: function(e)
     	{
@@ -226,7 +226,6 @@
     	},
     	close: function(e)
     	{
-
             if (this.isClosed())
     		{
     			return;
@@ -234,7 +233,6 @@
 
     		if (e)
     		{
-
     			if (this.shouldNotBeClosed(e.target))
     			{
     				return;

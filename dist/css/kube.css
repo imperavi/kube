@@ -467,7 +467,7 @@ h6,
   font-size: 12px;
   line-height: 20px;
   text-transform: uppercase;
-  letter-spacing: .08em; }
+  letter-spacing: 0.05em; }
 
 p + h2,
 p + h3,
@@ -834,9 +834,9 @@ sub {
 @media (max-width: 768px) {
   .row {
     margin-left: 0; }
-  .col,
-  [class^="col-"],
-  [class*=" col-"] {
+  .col:not(th):not(td),
+  [class^="col-"]:not(th):not(td),
+  [class*=" col-"]:not(th):not(td) {
     flex-basis: 100%;
     max-width: 100%;
     width: 100%; }
@@ -865,6 +865,10 @@ th {
 
 td {
   vertical-align: top; }
+
+tr.align-middle td,
+td.align-middle {
+  vertical-align: middle; }
 
 th,
 td {
@@ -1069,7 +1073,7 @@ select.big {
   margin-top: 4px;
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
-  line-height: 20px;
+  line-height: 16px;
   font-weight: normal; }
 
 ul.desc {
@@ -1138,9 +1142,9 @@ button,
   text-decoration: none;
   cursor: pointer;
   display: inline-block;
-  line-height: 38px;
-  height: 40px;
-  padding: 0 28px;
+  line-height: 1.125rem;
+  min-height: 40px;
+  padding: 10px 28px;
   border: 1px solid transparent;
   vertical-align: middle;
   -webkit-appearance: none;
@@ -1148,12 +1152,15 @@ button,
   background-color: #eee;
   border-radius: 4px; }
 
+input.button {
+  height: auto; }
+
 button:hover,
 .button:hover {
   outline: none;
   color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
-  box-shadow: inset 0 0 0 30px rgba(0, 0, 0, 0.1); }
+  box-shadow: inset 0 0 0 40px rgba(0, 0, 0, 0.125); }
 
 .button:disabled,
 .button.disabled {
@@ -1182,17 +1189,15 @@ button:hover,
 
 .button.small {
   font-size: 12px;
-  line-height: 32px;
-  height: 32px;
-  padding: 0 20px; }
+  min-height: 32px;
+  padding: 6px 20px; }
   .button.small.upper {
     font-size: 10px; }
 
 .button.big {
   font-size: 18px;
-  line-height: 46px;
-  height: 48px;
-  padding: 0 48px; }
+  min-height: 48px;
+  padding: 14px 48px; }
   .button.big.upper {
     font-size: 13px; }
 
@@ -1734,10 +1739,10 @@ h6 .label {
   background: #fff;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  overflow: auto;
   max-height: 300px;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  overflow: hidden; }
 
 .dropdown.dropdown-mobile {
   position: fixed;
@@ -1751,6 +1756,9 @@ h6 .label {
 
 .dropdown .close {
   margin: 20px auto; }
+
+.dropdown.open {
+  overflow: auto; }
 
 .dropdown ul {
   list-style: none;
@@ -1880,6 +1888,9 @@ h6 .label {
 
 .visible {
   visibility: visible; }
+
+.black {
+  color: #000; }
 
 .muted {
   color: rgba(0, 0, 0, 0.5) !important; }

@@ -8,6 +8,7 @@
             right: '16px',
             position: 'right', // center
             click: true,
+            show: false,
             delay: 3, // message autohide delay - seconds or false
             animation: {
                 open: {
@@ -38,6 +39,12 @@
             // close link
     		this.$close = this.getCloseLink();
     		this.$close.on('click.component.message', $.proxy(this.close, this));
+
+            // direct call
+    		if (this.opts.show)
+    		{
+        		this.open();
+    		}
     	},
     	getCloseLink: function()
     	{

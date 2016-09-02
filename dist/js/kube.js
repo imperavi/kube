@@ -243,6 +243,9 @@
     var SuperKube = {
     	pluginsByClass: {},
         classByPlugin: {},
+        directLoad: {
+            'message': 'open'
+        },
         plugin: function(name, obj)
         {
             obj.pluginName = name;
@@ -297,7 +300,20 @@
                         }
                         else
                         {
-                            return $.error('No such method "' + options + '" for ' + name);
+                            var direct = false;
+                            for (var key in SuperKube.directLoad)
+                            {
+                                if (name === key && options === SuperKube.directLoad[key])
+                                {
+                                    direct = true;
+                                    SuperKube.directPluginLoad(this, name);
+                                }
+                            }
+
+                            if (!direct)
+                            {
+                                return $.error('No such method "' + options + '" for ' + name);
+                            }
                         }
                     });
                 }
@@ -341,6 +357,11 @@
             });
 
             return plugin;
+        },
+        directPluginLoad: function(target, name)
+        {
+            var element = document.createElement('span');
+            $(element)[name]({ target: target, show: true });
         }
     };
 
@@ -614,6 +635,8 @@
                 this.$element.hide();
             }
 
+
+
 			if (this.opts.name === 'show' || this.opts.name === 'hide')
 			{
 				this.opts.timing = 'linear';
@@ -670,7 +693,9 @@
 		},
 		complete: function(type, make, callback)
 		{
-			this.$element.one(type.toLowerCase() + ' webkit' + type + ' o' + type + ' MS' + type, $.proxy(function()
+    		var event = type.toLowerCase() + ' webkit' + type + ' o' + type + ' MS' + type;
+
+			this.$element.one(event, $.proxy(function()
 			{
 				if (typeof make === 'function')
 				{
@@ -694,6 +719,8 @@
 				{
 					callback(this);
 				}
+
+				this.$element.off(event);
 
 			}, this));
 		}
@@ -1126,14 +1153,14 @@
     		this.setPosition();
     		this.toggleCaretOpen();
 
-    		this.$target.addClass('open').animation(this.opts.animation.open, $.proxy(this.opened, this));
+    		this.$target.animation(this.opts.animation.open, $.proxy(this.opened, this));
 
     	},
     	opened: function()
     	{
     		this.enableEvents();
+    		this.$target.addClass('open');
     		this.callback('opened');
-
     	},
     	handleKeyboard: function(e)
     	{
@@ -1154,7 +1181,6 @@
     	},
     	close: function(e)
     	{
-
             if (this.isClosed())
     		{
     			return;
@@ -1162,7 +1188,6 @@
 
     		if (e)
     		{
-
     			if (this.shouldNotBeClosed(e.target))
     			{
     				return;
@@ -1206,6 +1231,7 @@
             right: '16px',
             position: 'right', // center
             click: true,
+            show: false,
             delay: 3, // message autohide delay - seconds or false
             animation: {
                 open: {
@@ -1236,6 +1262,12 @@
             // close link
     		this.$close = this.getCloseLink();
     		this.$close.on('click.component.message', $.proxy(this.close, this));
+
+            // direct call
+    		if (this.opts.show)
+    		{
+        		this.open();
+    		}
     	},
     	getCloseLink: function()
     	{
@@ -1335,7 +1367,6 @@
     });
 
 }(Kube));
-
 // Direct Load
 (function($)
 {
@@ -1356,7 +1387,6 @@
 		{
 			options.show = true;
 			$(this.element).modal(options);
-
 		}
 	};
 
@@ -2311,6 +2341,7 @@
 
             this.text = this.$element.text();
             this.$target = this.getTarget();
+            this.hideOnSmall = this.$target.hasClass('hide-on-small');
             this.$element.on('click.component.toggleme', $.proxy(this.toggle, this));
         },
         getTarget: function()
@@ -2350,7 +2381,7 @@
         {
             return !this.$target.hasClass('open');
         },
-        open: function(e)
+        open: function()
         {
             if (this.isOpened())
             {
@@ -2361,7 +2392,7 @@
             this.$target.removeClass('hide-on-small').animation(this.opts.animation.open, $.proxy(this.opened, this));
 
             // changes the text of $element with a less delay to smooth
-    		setTimeout($.proxy(this.setOpenedText, this), this.opts.animation.open.duration * 500);
+            setTimeout($.proxy(this.setOpenedText, this), this.opts.animation.open.duration * 500);
         },
         opened: function()
         {
@@ -2375,7 +2406,7 @@
                 this.$element.text(this.opts.text);
             }
         },
-        close: function(e)
+        close: function()
         {
             if (this.isClosed())
             {
@@ -2383,12 +2414,28 @@
     		}
 
             this.callback('close');
+
+            if (this.opts.animation.close === 'hide')
+            {
+                this.setClosedText();
+            }
+
             this.$target.animation(this.opts.animation.close, $.proxy(this.closed, this));
         },
         closed: function()
         {
             this.$target.removeClass('open');
-            this.setClosedText();
+
+            if (this.opts.animation.close !== 'hide')
+            {
+                this.setClosedText();
+            }
+
+            if (this.hideOnSmall)
+            {
+                this.$target.addClass('hide-on-small').show();
+            }
+
         	this.callback('closed');
         },
         setClosedText: function()
