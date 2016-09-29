@@ -1,0 +1,20 @@
+{
+  "name": "kube",
+  "version": "3.0.2",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/imperavi/kube.git"
+  },
+  "description": "Kube Web Framework 4",
+  "bugs": {
+    "url": "https://github.com/smussell/kube/issues"
+  },
+  "homepage": "https://github.com/smussell/kube",
+  "keywords": [
+    "css",
+    "less"
+  ],
+  "author": "imperavi",
+  "license": "MIT"
+}
