@@ -1,0 +1,26 @@
+{
+  "name": "kube",
+  "version": "6.0.1",
+  "description": "A web framework for professional developers and designers alike.",
+  "main": "dist/css/kube.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitoravelino/kube.git"
+  },
+  "keywords": [
+    "css",
+    "kube",
+    "framework",
+    "imperavi",
+    "sass"
+  ],
+  "author": "Imperavi LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vitoravelino/kube/issues"
+  },
+  "homepage": "https://github.com/vitoravelino/kube#readme"
+}
