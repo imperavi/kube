@@ -635,8 +635,6 @@
                 this.$element.hide();
             }
 
-
-
 			if (this.opts.name === 'show' || this.opts.name === 'hide')
 			{
 				this.opts.timing = 'linear';
@@ -693,9 +691,7 @@
 		},
 		complete: function(type, make, callback)
 		{
-    		var event = type.toLowerCase() + ' webkit' + type + ' o' + type + ' MS' + type;
-
-			this.$element.one(event, $.proxy(function()
+			this.$element.one(type.toLowerCase() + ' webkit' + type + ' o' + type + ' MS' + type, $.proxy(function()
 			{
 				if (typeof make === 'function')
 				{
@@ -719,8 +715,6 @@
 				{
 					callback(this);
 				}
-
-				this.$element.off(event);
 
 			}, this));
 		}
@@ -910,8 +904,10 @@
     		var item = this.getItemBy(num);
 
     		this.callback('close', item);
-    		item.$box.animation(this.opts.animation.close, $.proxy(this.closed, this));
 
+    		this.opts.currentItem = item;
+
+    		item.$box.animation(this.opts.animation.close, $.proxy(this.closed, this));
         },
         closed: function()
         {
@@ -1367,6 +1363,7 @@
     });
 
 }(Kube));
+
 // Direct Load
 (function($)
 {
@@ -1387,6 +1384,7 @@
 		{
 			options.show = true;
 			$(this.element).modal(options);
+
 		}
 	};
 

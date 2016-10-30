@@ -181,8 +181,10 @@
     		var item = this.getItemBy(num);
 
     		this.callback('close', item);
-    		item.$box.animation(this.opts.animation.close, $.proxy(this.closed, this));
 
+    		this.opts.currentItem = item;
+
+    		item.$box.animation(this.opts.animation.close, $.proxy(this.closed, this));
         },
         closed: function()
         {
