@@ -12,9 +12,9 @@
 
 	$width: (100% / $grid-columns) * $num;
 
-    flex-basis: $width;
-    max-width: $width;
-    width: $width;
+	@include flex-basis($width);
+    	max-width: $width;
+    	width: $width;
 }
 
 // column offset
