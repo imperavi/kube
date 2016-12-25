@@ -33,6 +33,13 @@
     flex-direction: column;
 }
 
+// items rows
+@mixin flex-direction($direction) {
+	-ms-flex-direction: $direction;
+	-webkit-flex-direction: $direction;
+	flex-direction: $direction;
+}
+
 // items grow
 @mixin flex-grow($grow: 0) {
     -ms-flex-grow: $grow;
