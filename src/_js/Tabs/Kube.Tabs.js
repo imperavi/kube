@@ -1,22 +1,33 @@
+/**
+ * @library Kube Tabs
+ * @author Imperavi LLC
+ * @license MIT
+ */
 (function(Kube)
 {
-    Kube.Tabs = SuperKube.plugin('tabs', {
-
-        opts: {
+    Kube.Tabs = function(element, options)
+    {
+        this.namespace = 'tabs';
+        this.defaults = {
     		equals: false,
     		active: false, // string (hash = tab id selector)
     		live: false, // class selector
     		hash: true, //boolean
     		callbacks: ['init', 'next', 'prev', 'open', 'opened', 'close', 'closed']
-        },
-    	init: function()
-    	{
-        	Kube.apply(this, arguments);
+        };
 
-            if (this.opts.live !== false)
-            {
-    			this.buildLiveTabs();
-    		}
+        // Parent Constructor
+        Kube.apply(this, arguments);
+
+        // Initialization
+        this.start();
+    };
+
+    // Functionality
+    Kube.Tabs.prototype = {
+        start: function()
+        {
+            if (this.opts.live !== false) this.buildLiveTabs();
 
             this.tabsCollection = [];
             this.hashesCollection = [];
@@ -73,7 +84,7 @@
     		}
 
     		// event
-    		item.$el.on('click.component.tabs', $.proxy(this.open, this));
+    		item.$el.on('click.tabs', $.proxy(this.open, this));
 
     	},
     	collectItem: function(item)
@@ -139,23 +150,20 @@
     	addActive: function(item)
     	{
     		item.$parent.addClass('active');
-    		item.$tab.removeClass('hide').show().addClass('open');
+    		item.$tab.removeClass('hide').addClass('open');
 
     		this.currentItem = item;
     	},
     	removeActive: function(item)
     	{
     		item.$parent.removeClass('active');
-    		item.$tab.hide().removeClass('open');
+    		item.$tab.addClass('hide').removeClass('open');
 
     		this.currentItem = false;
     	},
     	next: function(e)
     	{
-    		if (e)
-    		{
-    			e.preventDefault();
-    		}
+    		if (e) e.preventDefault();
 
     		var item = this.getItem(this.fetchElement('next'));
 
@@ -165,10 +173,7 @@
     	},
     	prev: function(e)
     	{
-    		if (e)
-    		{
-    			e.preventDefault();
-    		}
+    		if (e) e.preventDefault();
 
     		var item = this.getItem(this.fetchElement('prev'));
 
@@ -198,15 +203,8 @@
     	},
     	open: function(e, push)
     	{
-        	if (typeof e === 'undefined')
-        	{
-            	return;
-        	}
-
-    		if (typeof e === 'object')
-    		{
-    			e.preventDefault();
-            }
+        	if (typeof e === 'undefined') return;
+    		if (typeof e === 'object') e.preventDefault();
 
     		var item = (typeof e === 'object') ? this.getItem(e.target) : this.getItemBy(e);
     		this.closeAll();
@@ -249,7 +247,7 @@
     	},
     	closeAll: function()
     	{
-    		this.$tabs.removeClass('open').hide();
+    		this.$tabs.removeClass('open').addClass('hide');
     		this.$items.parent().removeClass('active');
     	},
     	getItem: function(element)
@@ -300,13 +298,14 @@
     		});
 
     		return max;
-    	},
-    	destroy: function()
-    	{
-    		this.$tabs.removeClass('open').show();
-    		this.$items.off('.component.tabs').parent().removeClass('active');
-        	this.$element.removeData();
     	}
-    });
+    };
+
+    // Inheritance
+    Kube.Tabs.inherits(Kube);
+
+    // Plugin
+    Kube.Plugin.create('Tabs');
+    Kube.Plugin.autoload('Tabs');
 
 }(Kube));

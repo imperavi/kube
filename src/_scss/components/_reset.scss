@@ -9,36 +9,35 @@ html {
 * {
     margin: 0;
     padding: 0;
-    border: 0;
     outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-}
-a:active,
-a:hover {
-    outline: 0;
-}
-::-moz-focus-inner {
-	border: 0;
-	padding: 0;
+    -webkit-overflow-scrolling: touch;
 }
 img,
 video,
 audio {
-	max-width: 100%;
+    max-width: 100%;
 }
 img,
 video {
 	height: auto;
 }
+svg {
+    max-height: 100%;
+}
+iframe {
+    border: none;
+}
+::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
 input[type="radio"],
 input[type="checkbox"] {
-	cursor: pointer;
-	font-size: 110%;
-	position: relative;
-	margin-right: 3px;
-	padding: 0;
+    vertical-align: middle;
+    position: relative;
+    bottom: 0.15rem;
+    font-size: 115%;
+    margin-right: 3px;
 }
 input[type="search"] {
 	-webkit-appearance: textfield;

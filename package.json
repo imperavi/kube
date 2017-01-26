@@ -1,6 +1,6 @@
 {
   "name": "kube",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "description": "A web framework for professional developers and designers alike.",
   "main": "dist/css/kube.css",
   "scripts": {

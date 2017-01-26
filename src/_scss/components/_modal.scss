@@ -1,4 +1,3 @@
-
 .modal-box {
 	position: fixed;
 	top: 0;
@@ -19,43 +18,39 @@
     border-radius: 8px;
 	color: #000;
 
-	& input[type="text"],
-	& input[type="password"],
-	& input[type="email"],
-	& input[type="url"],
+	& input,
 	& textarea {
-		@media (max-width: $breakpoint-small) {
+		@media (max-width: $sm) {
 		    font-size: 16px;
 		}
 	}
+    & .close {
+    	position: absolute;
+    	top: 18px;
+    	right: 16px;
+    	opacity: .3;
+    	&:hover {
+        	opacity: 1;
+    	}
+    }
 }
 .modal-header {
-	@include border-top-radius(4px);
 	padding: 24px 32px;
 	font-size: 18px;
 	font-weight: bold;
 	border-bottom: 1px solid rgba(0, 0, 0, .05);
-}
-.modal-header:empty {
-    display: none;
+    &:empty {
+        display: none;
+    }
 }
 .modal-body {
     padding: 36px 56px;
 }
-.modal .close {
-    @include close-size(36px);
-	position: absolute;
-	top: 18px;
-	right: 16px;
-	opacity: .3;
-	&:hover {
-    	opacity: 1;
-	}
-}
+
 
 
 // Responsive
-@media (max-width: $breakpoint-small) {
+@media (max-width: $sm) {
     .modal-header,
     .modal-body {
         padding: 24px;

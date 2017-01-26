@@ -5,7 +5,7 @@
 }
 
 // vertical to opacity
-@mixin gradient-vertical-to-opacity($color, $opacity: 1) {
+@mixin gradient-vertical-to-opacity($color, $opacity: 0) {
 	$rgba: rgba(red($color), green($color), blue($color), $opacity);
 	background: linear-gradient(to bottom, $color 0%, $rgba 100%);
 }
@@ -17,9 +17,9 @@
 }
 
 // horizontal to opacity
-@mixin gradient-horizontal-to-opacity($color: #555, $opacity: 1) {
+@mixin gradient-horizontal-to-opacity($color: #555, $opacity: 0) {
     $rgba: rgba(red($color), green($color), blue($color), $opacity);
-    background: linear-gradient(to right, $rgba 0%, $color 100%);
+    background: linear-gradient(to right, $color 0%, $rgba 100%);
 }
 
 // radial

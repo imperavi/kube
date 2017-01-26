@@ -1,110 +1,122 @@
-// Default
 button,
-.button {
-	font-family: $font-family;
-	font-size: $ui-font-size;
+.button, {
+	font-family: $text-font-family;
+	font-size: $button-font-size;
+	color: $color-button-primary-text;
+	background-color: $color-button-primary;
+	border-radius: $button-border-radius;
+	min-height: $button-height;
+	padding: $button-padding-tb $button-padding-rl;
 	font-weight: $button-font-weight;
 	text-decoration: none;
 	cursor: pointer;
 	display: inline-block;
-	line-height: 1.125rem;
-	min-height: $ui-height;
-	padding: $button-padding;
-	border: $button-outline-border-size solid transparent;
+	line-height: $button-base-line;
+	border: 1px solid transparent;
 	vertical-align: middle;
 	-webkit-appearance: none;
-	color: #000;
-	background-color: $button-background-color;
-	border-radius: 4px;
-}
-input.button {
-	height: auto;
+
+	& i {
+        position: relative;
+        top: 1px;
+        margin: 0 2px;
+	}
 }
 button:hover,
 .button:hover {
     outline: none;
-	color: rgba(0, 0, 0, .6);
 	text-decoration: none;
-	box-shadow: inset 0 0 0 40px rgba(0, 0, 0, .125);
+	color: $color-button-primary-text;
+	background-color: lighten($color-button-primary, 10%);
 }
 
+// Disabled
 .button:disabled,
 .button.disabled {
 	cursor: default;
 	font-style: normal;
-	opacity: .5;
-	&:hover {
-		color: #000;
-		box-shadow: none;
-	}
+	color: rgba($color-button-primary-text, .7);
+	background-color: rgba($color-button-primary, .7);
 }
+
+// Size
+.button.small {
+    font-size: $button-font-size-small;
+    min-height: $button-height-small;
+    padding: $button-padding-small-tb $button-padding-small-rl;
+    border-radius: $button-border-radius;
+}
+.button.big {
+    font-size: $button-font-size-big;
+    min-height: $button-height-big;
+    padding: $button-padding-big-tb $button-padding-big-rl;
+    border-radius: $button-border-radius;
+}
+.button.large {
+    font-size: $button-font-size-large;
+    min-height: $button-height-large;
+    padding: $button-padding-large-tb $button-padding-large-rl;
+    border-radius: $button-border-radius;
+}
+
 
 // Outline
 .button.outline {
-	background: none;
-	font-weight: $button-outline-font-weight;
-}
-.button.outline:hover {
-	color: rgba(0,0,0,.6);
-	border-color: rgba(0,0,0,.2);
-	box-shadow: none;
-}
-.button.outline,
-.button.outline:disabled:hover,
-.button.outline.disabled:hover {
-	color: rgba(0,0,0,.8);
-	border-color: rgba(0,0,0,.4);
+    background: none;
+    border-width: 2px;
+    border-color: $color-button-primary;
+    color: $color-button-primary;
+
+    &:hover {
+        background: none;
+        color: rgba($color-button-primary, .6);
+        border-color: rgba($color-button-primary, .5);
+    }
+    &:disabled,
+    &.disabled {
+        background: none;
+        color: rgba($color-button-primary, .7);
+    	border-color: rgba($color-button-primary, .5);
+    }
 }
 
-// Sizes
-.button.small {
-	font-size: $ui-font-size-small;
-	min-height: $ui-height-small;
-	padding: $button-padding-small;
-	&.upper {
-		font-size: $ui-font-size-small - 2px;
-	}
+// White
+.button.inverted {
+    @include button(#000, #fff);
+
+    &:hover {
+        opacity: .7;
+    }
 }
-.button.big {
-	font-size: $ui-font-size-big;
-	min-height: $ui-height-big;
-	padding: $button-padding-big;
-	&.upper {
-		font-size: $ui-font-size-big - 5px;
-	}
+
+// Round
+.button.round {
+    border-radius: $button-height-large;
+}
+
+// Raised
+.button.raised {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
 }
 
 // Upper
 .button.upper {
-	font-size: $ui-font-size - 3px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: $button-font-size-small;
+
+    &.small {
+        font-size: $button-font-size-smaller;
+    }
+    &.big {
+        font-size: $button-font-size-small;
+    }
+    &.large {
+        font-size: $button-font-size;
+    }
 }
 
-// Primary
-.button.primary {
-	@include button(#fff, $color-primary);
-}
-
-// Inverted
-.button.inverted {
-	@include button(#000, #fff);
-}
-
-// Grouped
-.buttons.group {
-
-	display: inline-block;
-	vertical-align: bottom;
-
-	& .button {
-		float: left;
-		margin-left: -1px;
-		border-radius: 0;
-
-		&:first-child {
-			border-radius: 4px 0 0 4px;
-		}
-		&:last-child {
-			border-radius: 0 4px 4px 0;
-		}
-	}
+// Secondary
+.button.secondary {
+	@include button($color-button-secondary-text, $color-button-secondary);
 }

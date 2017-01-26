@@ -1,27 +1,31 @@
-// colorful
-@mixin button($text-color, $back-color) {
+@mixin button($color-text, $color-back)
+{
+	color: $color-text;
+	background-color: $color-back;
 
-	background: $back-color;
-	color: $text-color;
-
-    &:focus,
 	&:hover {
-		color: rgba($text-color, .6);
-		&:disabled,
-		&.disabled {
-			color: $text-color;
-			background: $back-color;
-		}
+	    color: $color-text;
+	    background-color: lighten($color-back, 20%);
 	}
-    &.outline:hover {
-    	color: rgba($back-color,.6);
-    	border-color: rgba($back-color,.4);
+    &:disabled,
+    &.disabled {
+	    color: rgba($color-text, .7);
+	    background-color: rgba($color-back, .7);
     }
-    &.outline,
-    &.outline:disabled:hover,
-    &.outline.disabled:hover {
-    	color: rgba($back-color,1);
-    	border-color: rgba($back-color,1);
+    &.outline {
         background: none;
+        color: $color-back;
+        border-color: $color-back;
+
+        &:hover {
+            color: rgba($color-back, .6);
+            border-color: rgba($color-back, .5);
+        }
+        &:disabled,
+        &.disabled {
+            background: none;
+    	    color: rgba($color-back, .7);
+    	    border-color: rgba($color-back, .5);
+        }
     }
 }

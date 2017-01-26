@@ -1,137 +1,233 @@
-// Breakpoints
-$breakpoint-small: 768px !default;
-$breakpoint-medium: 1024px !default;
-$breakpoint-large: 1200px !default;
+// BREAKPOINTS
+// ---------------------------------------------------------------------------
+$sm: 768px !default;
+$md: 1024px !default;
+$lg: 1200px !default;
 
-// FontFamily
-$font-family: 'Helvetica Neue', Helvetica, sans-serif !default;
-$heading-font-family: $font-family !default;
-$monospace-font-family: Consolas, Monaco, "Courier New", monospace !default;
 
-// Baseline
-$base-unit: 4px !default;
-$base-line: 24px !default;
-$base-line-small: 20px !default;
-$base-line-smaller: 16px !default;
+// WIDTH
+// ---------------------------------------------------------------------------
+$w-small: 480px !default;
+$w-medium: 600px !default;
+$w-big: 740px !default;
+$w-large: 840px !default;
 
-// Grid
-$grid-columns: 12 !default;
-$grid-width: 1128 !default; // pixels
-$grid-gutter: $base-line !default;
-$grid-gutter-integer: ($grid-gutter / ($grid-gutter * 0 + 1)) !default;
-$grid-gap: ($grid-gutter-integer / ($grid-width / 100)) * 1% !default;
 
-// Z Indexes
+// Z-INDEX
+// ---------------------------------------------------------------------------
 $z-over-content: 100 !default;
 $z-over-control: 200 !default;
 $z-over-page: 300 !default;
 $z-over-screen: 400 !default;
 $z-over-all: 500 !default;
 
-// Text font size
-$font-size-regular: 16px !default;
 
-$font-size-big: $font-size-regular + 2px !default;
-$font-size-small: $font-size-regular - 2px !default;
-$font-size-smaller: $font-size-regular - 4px !default;
+// GRID
+// ---------------------------------------------------------------------------
+$grid-columns: 12 !default;
+$grid-gutter: 2% !default;
 
-// UI font size
-$ui-font-size: $font-size-small !default;
-$ui-font-size-small: $font-size-smaller !default;
-$ui-font-size-big: $font-size-big !default;
 
-// Headings
-$title-font-size: 60px !default;
-$h1-font-size: 48px !default;
-$h2-font-size: 36px !default;
-$h3-font-size: 24px !default;
-$h4-font-size: 18px !default;
-$h5-font-size: 16px !default;
-$h6-font-size: 12px !default;
+// FONT FAMILY
+// ---------------------------------------------------------------------------
+$text-font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif !default;
+$monospace-font-family: Consolas, Monaco, 'Courier New', monospace !default;
+$headings-font-family: $text-font-family !default;
+$buttons-font-family: $text-font-family !default;
+$input-font-family: $text-font-family !default;
 
-$title-line-height: 64px !default;
-$h1-line-height: 52px !default;
-$h2-line-height: 40px !default;
-$h3-line-height: 32px !default;
-$h4-line-height: $base-line !default;
-$h5-line-height: $base-line !default;
-$h6-line-height: 20px !default;
 
-// Spaces
-$heading-margin-bottom: 12px !default;
-$paragraph-margin-bottom: 16px !default;
+// COLORS
+// ---------------------------------------------------------------------------
 
-// Color
-$body-text-color: #333 !default;
-$heading-text-color: #000 !default;
-$samp-text-color: #fff !default;
-$input-text-color: #333 !default;
-$input-append-text-color: #555 !default;
-
-// Color States
-$color-default: #f4f4f4 !default;
-$color-primary: #3c74d9 !default;
-$color-success: #60ae4d !default;
-$color-error:   #f34248 !default;
-$color-warning: #fed443 !default;
+// Text
+$color-text: #313439 !default;
+$color-headings: #0d0d0e !default;
 
 // Links
-$link-color: darken($color-primary, 10%) !default;
-$link-hover-color: $color-error !default;
-
-
-// Background
-$body-background-color: #fff !default;
-$pre-background-color: #f8f8f8 !default;
-$mark-background-color: $color-warning !default;
-$code-background-color: $color-default !default;
-$samp-background-color: lighten($color-primary, 7%) !default;
-$highlight-background-color: rgba($color-primary, .075) !default;
-
-// Kbd
-$kbd-border: 1px solid rgba(0, 0, 0, .1) !default;
-
-// Table
-$table-striped-background-color: #f4f4f4 !default;
-$table-border: 1px solid #eee !default;
-
-// Label
-$label-font-size: $ui-font-size !default;
-$label-color: #111 !default;
-$label-font-weight: normal !default;
-
-// Input
-$input-disabled-opacity: 0.75 !default;
-$input-disabled-color: rgba(0, 0, 0, .5) !default;
-$input-border-size: 1px !default;
-$input-border-color: #dfdfdf !default;
-$input-focus-border-color: #bbb !default;
-$input-background-color: #fff !default;
-$input-focus-background-color: #fff !default;
-$input-append-background-color: #eee !default;
-$input-padding: 8px 10px !default;
-$input-padding-big: 16px 10px !default;
-
-// Fieldset
-$fieldset-border-color: rgba(0, 0, 0, .1) !default;
-$fieldset-border-size: 1px !default;
+$color-link: #007eff !default;
+$color-link-hover: #ff3366 !default;
 
 // Button
-$button-background-color: #eee !default;
-$button-font-weight: normal !default;
-$button-outline-font-weight: normal !default;
-$button-outline-border-size: 1px !default;
-$button-padding-small: 6px 20px !default;
-$button-padding: 10px 28px !default;
-$button-padding-big: 14px 48px !default;
+$color-button-primary: #007eff !default;
+$color-button-primary-text: #fff !default;
+$color-button-secondary: #313439 !default;
+$color-button-secondary-text: #fff !default;
+
+// States
+$color-error: #ff3366 !default;
+$color-success: #2ec4b6 !default;
+$color-warning: #fdb833 !default;
+$color-focus: #007eff !default;
+
+// Extra
+$color-inverted: #fff !default;
+$color-highlight: #edf2ff !default; // color-focus 15% opacity
+
+// Grayscale
+$color-black: #0d0d0e !default;
+$color-darkgray: #313439 !default;
+$color-midgray: #676b72 !default;
+$color-gray: #bdbdbd !default;
+$color-lightgray: #d4d4d4 !default;
+$color-silver: #e0e1e1 !default;
+$color-aluminum: #f8f8f8 !default;
+
+
+// TEXT
+// ---------------------------------------------------------------------------
+
+// Font Size
+$font-size: 16px !default;
+$font-size-smaller: $font-size - 4px !default;
+$font-size-small: $font-size - 2px !default;
+$font-size-big: $font-size + 2px !default;
+$font-size-large: $font-size + 4px !default;
+
+// Baseline
+$base-line: 24px !default;
+$base-line-smaller: 20px !default;
+$base-line-small: 20px !default;
+$base-line-big: 28px !default;
+$base-line-large: 32px !default;
+
+// Margin
+$text-margin-bottom: $font-size !default;
+
+
+// HEADINGS
+// ---------------------------------------------------------------------------
+
+// Font Size
+// By default: 60, 48, 36, 24, 21, 18, 16
+$heading-font-size-title: 60px !default;
+$heading-font-size-1: 48px !default;
+$heading-font-size-2: 36px !default;
+$heading-font-size-3: 24px !default;
+$heading-font-size-4: 21px !default;
+$heading-font-size-5: 18px !default;
+$heading-font-size-6: 16px !default;
+
+// Baseline
+$heading-base-line-title: 64px !default;
+$heading-base-line-1: 52px !default;
+$heading-base-line-2: 40px !default;
+$heading-base-line-3: 32px !default;
+$heading-base-line-4: 32px !default;
+$heading-base-line-5: 28px !default;
+$heading-base-line-6: 24px !default;
+
+// Margin
+$heading-margin-bottom: $font-size !default;
+
+
+// TABLES
+// ---------------------------------------------------------------------------
+
+// Font Size
+$table-font-size: $font-size - 1px !default;
+
+// Baseline
+$table-base-line: 24px !default;
+
+// Padding
+$table-padding-tb: 1rem !default;
+$table-padding-rl: 1rem !default;
+
+// Border
+$table-border: 1px solid rgba(0, 0, 0, .05) !default;
+
+// Striped
+$table-background-striped: $color-aluminum !default;
+
+
+// BUTTONS
+// ---------------------------------------------------------------------------
+
+// Font Size
+$button-font-size: 15px !default;
+$button-font-size-smaller: $button-font-size - 4px !default;
+$button-font-size-small: $button-font-size - 2px !default;
+$button-font-size-big: $button-font-size + 2px !default;
+$button-font-size-large: $button-font-size + 4px !default;
+
+// Baseline
+$button-base-line: 20px !default;
 
 // Height
-$ui-height-small: 32px !default;
-$ui-line-height-small: 32px !default;
-$ui-height: 40px !default;
-$ui-line-height: 38px !default;
-$ui-height-big: 48px !default;
-$ui-line-height-big: 46px !default;
+$button-height: 40px !default;
+$button-height-small: 36px !default;
+$button-height-big: 48px !default;
+$button-height-large: 56px !default;
 
-// Overlay
-$overlay-background-color: rgba(255, 255, 255, .9) !default;
+// Padding
+$button-padding-tb: 8px !default;
+$button-padding-rl: 20px !default;
+$button-padding-small-tb: 6px !default;
+$button-padding-small-rl: 20px !default;
+$button-padding-big-tb: 13px !default;
+$button-padding-big-rl: 24px !default;
+$button-padding-large-tb: 20px !default;
+$button-padding-large-rl: 36px !default;
+
+// Weight
+$button-font-weight: 500 !default;
+
+// Radius
+$button-border-radius: 3px !default;
+
+
+// INPUTS
+// ---------------------------------------------------------------------------
+
+// Font Size
+$input-font-size: 15px !default;
+$input-font-size-smaller: $input-font-size - 4px !default;
+$input-font-size-small: $input-font-size - 2px !default;
+$input-font-size-big: $input-font-size + 2px !default;
+$input-font-size-large: $input-font-size + 4px !default;
+
+// Baseline
+$textarea-base-line: $base-line !default;
+
+// Height
+$input-height: 40px !default;
+$input-height-small: 36px !default;
+$input-height-big: 48px !default;
+$input-height-large: 56px !default;
+
+// Padding
+$input-padding-rl: 12px !default;
+$input-padding-small-rl: 12px !default;
+$input-padding-big-rl: 12px !default;
+$input-padding-large-rl: 12px !default;
+$input-textarea-padding-tb: 8px !default;
+
+// States
+$input-border-width: 1px !default;
+$input-border-color: $color-lightgray !default;
+$input-background-color: #fff !default;
+$input-box-shadow: none !default;
+
+$input-focus-background-color: #fff !default;
+$input-focus-border-color: $color-focus !default;
+$input-focus-box-shadow: 0 0 1px $color-focus inset !default;
+
+$input-error-background-color: $color-error !default;
+$input-error-border-color: $color-error !default;
+$input-error-focus-box-shadow: 0 0 1px $color-error inset !default;
+
+$input-success-background-color: $color-success !default;
+$input-success-border-color: $color-success !default;
+$input-success-focus-box-shadow: 0 0 1px $color-success inset !default;
+
+$input-disabled-opacity: .6;
+$input-disabled-color: rgba(0, 0, 0, .5);
+
+// Radius
+$input-border-radius: 3px !default;
+
+
+// OVERLAY
+// ---------------------------------------------------------------------------
+$overlay-background-color: rgba(#fff, .95);

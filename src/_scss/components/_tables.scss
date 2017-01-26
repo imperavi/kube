@@ -4,7 +4,14 @@ table {
 	max-width: 100%;
 	width: 100%;
 	empty-cells: show;
-	font-size: $font-size-regular - 1px;
+	font-size: $table-font-size;
+	line-height: $table-base-line;
+}
+table caption {
+    text-align: left;
+    font-size: $font-size-small;
+    font-weight: 500;
+    color: $color-midgray;
 }
 
 th {
@@ -21,8 +28,7 @@ td.align-middle {
 }
 th,
 td {
-	padding: ($base-unit * 4);
-	padding-bottom: ($base-unit * 4) - 1px;
+	padding: $table-padding-tb $table-padding-rl;
 	border-bottom: $table-border;
 	&:first-child {
 		padding-left: 0;
@@ -33,13 +39,11 @@ td {
 }
 tfoot th,
 tfoot td {
-	color: rgba(0, 0, 0, .5);
+	color: rgba($color-text, .5);
 }
 
 // Bordered
 table.bordered {
-
-	margin-top: -1px;
 
 	& td,
 	& th {
@@ -50,7 +54,7 @@ table.bordered {
 
 // Striped
 table.striped tr:nth-child(odd) td {
-	background: $table-striped-background-color;
+	background: $table-background-striped;
 }
 
 table.bordered,
@@ -58,16 +62,16 @@ table.striped {
 	& td,
 	& th {
 		&:first-child {
-			padding-left: ($base-unit * 4);
+			padding-left: $table-padding-rl;
 		}
 		&:last-child {
-			padding-right: ($base-unit * 4);
+			padding-right: $table-padding-rl;
 		}
 	}
 }
 
-// Flat
-table.flat {
+// Unstyled
+table.unstyled {
 	& td,
 	& th {
 		border: none;

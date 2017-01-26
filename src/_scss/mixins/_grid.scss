@@ -1,31 +1,42 @@
-// row
+// Make Row
 @mixin grid-row {
-
-	@include flex;
-	@include flex-wrap;
-
-    margin-left: -$grid-gap;
+    @include flex;
+    @include flex-items-row;
+    @include flex-items-wrap;
 }
 
-// column
-@mixin grid-column($num) {
+// Generate Columns
+@mixin generate-grid-columns {
 
-	$width: (100% / $grid-columns) * $num;
+    @for $i from 1 through $grid-columns
+    {
+        .col-#{$i} {
+            width: 100% / $grid-columns * $i;
+        }
+        .offset-#{$i} {
+            $width: 100% / $grid-columns * $i;
+            margin-left: $width;
+        }
 
-    flex-basis: $width;
-    max-width: $width;
-    width: $width;
+    }
+
+    .gutters {
+        @for $i from 1 through $grid-columns
+        {
+            & > .col-#{$i} {
+                $width: 100% / $grid-columns * $i;
+                width: calc(#{$width} - #{$grid-gutter});
+            }
+            & > .offset-#{$i} {
+                $width: 100% / $grid-columns * $i;
+                margin-left: calc(#{$width} + #{$grid-gutter}) !important;
+            }
+        }
+    }
 }
 
-// column offset
-@mixin grid-column-offset($num) {
 
-	$width: (100% / $grid-columns) * $num;
-
-	margin-left: $width;
-}
-
-// grid media
+// Grid Media Columns
 @mixin grid-media-columns($num) {
 
 	-webkit-column-count: $num;
@@ -41,9 +52,9 @@
 		width: 100%;
 	}
 
-	@media (max-width: $breakpoint-small) {
+    @include breakpoint(sm) {
 		-webkit-column-count: 1;
 		-moz-column-count: 1;
 		column-count: 1;
-	}
+    }
 }

@@ -1,0 +1,62 @@
+// Push
+.gutters .column.push-left,
+.push-left  { margin-right: auto; }
+
+.gutters .column.push-right,
+.push-right  { margin-left: auto; }
+
+.gutters .column.push-center,
+.push-center { margin-left: auto; margin-right: auto; }
+
+.gutters .column.push-middle,
+.push-middle { margin-top:  auto; margin-bottom: auto; }
+
+.push-bottom { margin-top:  auto; }
+
+@include breakpoint(sm) {
+
+    .gutters .column.push-left-sm,
+    .push-left-sm   { margin-left: 0; }
+
+    .gutters .column.push-center-sm,
+    .push-center-sm { margin-left: auto; margin-right: auto;}
+
+    .push-top-sm    { margin-top: 0;  }
+
+}
+
+// Flex Alignment
+.align-middle {
+    @include flex-items-middle;
+}
+.align-right {
+    @include flex-items-right;
+}
+.align-center {
+    @include flex-items-center;
+}
+
+@include breakpoint(sm) {
+    .align-left-sm { @include flex-items-left; }
+}
+
+// Float
+.float-right {
+	float: right;
+}
+.float-left {
+	float: left;
+}
+@include breakpoint(sm) {
+    .float-right { float: none; }
+    .float-left  { float: none; }
+}
+
+// Fixed
+.fixed {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: $z-over-content;
+	width: 100%;
+}

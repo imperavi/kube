@@ -1,24 +1,11 @@
-@mixin label($text-color, $back-color) {
+@mixin label($text, $back) {
+    background: $back;
+    color: $text;
 
-    background: $back-color;
-
-    &,
-    & a {
-        color: $text-color;
-    }
+    &.tag,
     &.outline {
-        border-color: $back-color;
-        &,
-        & a {
-            color: $back-color;
-        }
-    }
-    &.tag {
         background: none;
-        &,
-        & a {
-            color: $back-color;
-        }
+        border-color: $back;
+        color: $back;
     }
-
 }

@@ -1,7 +1,8 @@
-@import "mixins/base";
-@import "mixins/gradients";
-@import "mixins/buttons";
+@import "mixins/breakpoints";
+@import "mixins/fonts";
 @import "mixins/flex";
 @import "mixins/grid";
+@import "mixins/buttons";
 @import "mixins/labels";
-@import "mixins/alerts";
+@import "mixins/gradients";
+@import "mixins/utils";

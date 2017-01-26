@@ -9,7 +9,7 @@ Kube is a wireframe, a skeleton for your project, in a way. It doesn’t impose 
 
 ##Why Kube
 
-There are many different reasons why thousands of professional developers and designers worldwide choose Kube for their projects. For one, Kube is only 32Kb, which is quite impressive considering what it can do for you. Another thing is that it is completely up to the developers and designers whether or not to fully embrace Kube’s minimalistic style, or expand and extend it to, well, pretty much any scale.
+There are many different reasons why thousands of professional developers and designers worldwide choose Kube for their projects. For one, Kube is only 30Kb, which is quite impressive considering what it can do for you. Another thing is that it is completely up to the developers and designers whether or not to fully embrace Kube’s minimalistic style, or expand and extend it to, well, pretty much any scale.
 
 
 ##Basic Template 
@@ -53,7 +53,6 @@ Kube supports the latest, stable releases of all major browsers:
 ##Quick Start
 - [Quick Start Guide](https://imperavi.com/kube/docs/quick-start/) — Setup in under a minute
 - [Developing with Kube](https://imperavi.com/kube/docs/quick-start/#h-development) — Getting started with custom development
-- [Theming](https://imperavi.com/kube/docs/quick-start/#h-theming) — Easily create custom styles and themes
 
 ##License
 You have our permission to use Kube in whatever projects you wish commercial, for sale, or otherwise, in whichever way you like. Official license information can be find in [LICENSE.md](LICENSE.md) (spoiler: it's the MIT License)

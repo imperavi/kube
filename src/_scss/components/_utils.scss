@@ -1,0 +1,142 @@
+// Group
+.group {
+	@include clearfix;
+}
+
+// Flex
+.flex {
+    @include flex;
+}
+@include breakpoint(sm) {
+    .flex-column-sm {
+        @include flex-items-column;
+    }
+    .flex-w100-sm {
+        @include flex-item-width(100%);
+    }
+}
+
+// Visibility
+.invisible {
+	visibility: hidden;
+}
+.visible {
+	visibility: visible;
+}
+
+// Display
+.display-block {
+    display: block;
+}
+.hide {
+	display: none !important;
+}
+@include breakpoint(sm) {
+	.hide-sm {
+		display: none !important;
+	}
+}
+@include breakpoint($min: $sm) {
+    .show-sm {
+    	display: none !important;
+	}
+}
+
+// Print
+@media print {
+	.hide-print {
+		display: none !important;
+	}
+	.show-print {
+		display: block !important;
+	}
+}
+
+// NoScroll
+.no-scroll {
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100% !important;
+}
+
+// ScrollbarMeasure
+.scrollbar-measure {
+	position: absolute;
+	top: -9999px;
+	width: 50px;
+	height: 50px;
+	overflow: scroll;
+}
+
+// Responsive embedded objects
+.video-container {
+	height: 0;
+	padding-bottom: 56.25%; // ratio 16:9
+	position: relative;
+	margin-bottom: $text-margin-bottom;
+	& iframe,
+	& object,
+	& embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
+// Close
+.close {
+
+    display: inline-block;
+    min-height: 16px;
+    min-width: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+    opacity: .6;
+
+    &:hover {
+        opacity: 1;
+    }
+    &.small {
+        font-size: 8px;
+    }
+    &.big {
+        font-size: 18px;
+    }
+    &.white {
+        color: #fff;
+    }
+}
+
+// Caret
+.caret {
+    display: inline-block;
+}
+.button {
+    & .caret {
+        margin-right: -8px;
+    }
+}
+
+// Overlay
+.overlay {
+    position: fixed;
+    z-index: $z-over-control;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $overlay-background-color;
+
+    & > .close {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+    }
+}

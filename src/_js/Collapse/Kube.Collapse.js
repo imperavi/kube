@@ -1,24 +1,17 @@
+/**
+ * @library Kube Collapse
+ * @author Imperavi LLC
+ * @license MIT
+ */
 (function(Kube)
 {
-    Kube.Сollapse = SuperKube.plugin('collapse', {
-
-        classname: 'collapse',
-        opts: {
-            target: false,
+    Kube.Collapse = function(element, options)
+    {
+        this.namespace = 'collapse';
+        this.defaults = {
+            target: null,
             toggle: true,
             active: false, // string (hash = tab id selector)
-            animation: {
-                open: {
-                    name: 'slideDown',
-                    timing: 'linear',
-                    duration: 0.3
-                },
-                close: {
-                    name: 'slideUp',
-                    timing: 'linear',
-                    duration: 0.2
-                }
-            },
             toggleClass: 'collapse-toggle',
             boxClass: 'collapse-box',
             callbacks: ['open', 'opened', 'close', 'closed'],
@@ -27,21 +20,25 @@
             hashes: [],
         	currentHash: false,
         	currentItem: false
+        };
 
-        },
-        init: function()
+        // Parent Constructor
+        Kube.apply(this, arguments);
+
+        // Initialization
+        this.start();
+    };
+
+    // Functionality
+    Kube.Collapse.prototype = {
+        start: function()
         {
-            Kube.apply(this, arguments);
-
             // items
             this.$items = this.getItems();
             this.$items.each($.proxy(this.loadItems, this));
 
             // boxes
             this.$boxes = this.getBoxes();
-
-            // close all
-            this.closeAll();
 
             // active
             this.setActiveItem();
@@ -62,14 +59,16 @@
     		item.$el.attr('rel', item.hash);
 
             // active
-    		if (item.$el.hasClass('active'))
+    		if (!$(item.hash).hasClass('hide'))
     		{
     			this.opts.currentItem = item;
     			this.opts.active = item.hash;
-    		}
+
+                item.$el.addClass('active');
+            }
 
     		// event
-    		item.$el.on('click.component.collapse', $.proxy(this.toggle, this));
+    		item.$el.on('click.collapse', $.proxy(this.toggle, this));
 
     	},
     	setActiveItem: function()
@@ -83,7 +82,7 @@
             if (this.opts.currentItem !== false)
             {
     		    this.addActive(this.opts.currentItem);
-    		    this.opts.currentItem.$box.show();
+    		    this.opts.currentItem.$box.removeClass('hide');
     		}
     	},
     	addActive: function(item)
@@ -91,15 +90,8 @@
     		item.$box.removeClass('hide').addClass('open');
     		item.$el.addClass('active');
 
-    		if (item.$caret !== false)
-    		{
-    		    item.$caret.removeClass('down').addClass('up');
-    		}
-
-    		if (item.$parent !== false)
-    		{
-        		item.$parent.addClass('active');
-    		}
+    		if (item.$caret !== false) item.$caret.removeClass('down').addClass('up');
+    		if (item.$parent !== false) item.$parent.addClass('active');
 
     		this.opts.currentItem = item;
     	},
@@ -108,46 +100,30 @@
     		item.$box.removeClass('open');
     		item.$el.removeClass('active');
 
-    		if (item.$caret !== false)
-    		{
-    		    item.$caret.addClass('down').removeClass('up');
-    		}
-
-    		if (item.$parent !== false)
-    		{
-        		item.$parent.removeClass('active');
-    		}
+    		if (item.$caret !== false) item.$caret.addClass('down').removeClass('up');
+    		if (item.$parent !== false) item.$parent.removeClass('active');
 
     		this.opts.currentItem = false;
     	},
         toggle: function(e)
         {
-            if (e)
-            {
-                e.preventDefault();
-            }
+            if (e) e.preventDefault();
 
             var target = $(e.target).closest('.' + this.opts.toggleClass).get(0) || e.target;
             var item = this.getItem(target);
 
-            return (this.isClosed(item.hash)) ? this.open(e) : this.close(item.hash);
+            if (this.isOpened(item.hash)) this.close(item.hash);
+            else                          this.open(e)
         },
         openAll: function()
         {
             this.$items.addClass('active');
-            this.$boxes.addClass('open').show();
+            this.$boxes.addClass('open').removeClass('hide');
         },
         open: function(e, push)
         {
-        	if (typeof e === 'undefined')
-        	{
-            	return;
-        	}
-
-    		if (typeof e === 'object')
-    		{
-    			e.preventDefault();
-            }
+        	if (typeof e === 'undefined') return;
+    		if (typeof e === 'object') e.preventDefault();
 
             var target = $(e.target).closest('.' + this.opts.toggleClass).get(0) || e.target;
     		var item = (typeof e === 'object') ? this.getItem(target) : this.getItemBy(e);
@@ -157,24 +133,21 @@
         		return;
     		}
 
-    		if (this.opts.toggle)
-    		{
-    		    this.closeAll();
-    		}
+    		if (this.opts.toggle) this.closeAll();
 
     		this.callback('open', item);
     		this.addActive(item);
 
-            item.$box.animation(this.opts.animation.open, $.proxy(this.opened, this));
+            item.$box.animation('slideDown', $.proxy(this.onOpened, this));
         },
-        opened: function()
+        onOpened: function()
         {
     		this.callback('opened', this.opts.currentItem);
         },
         closeAll: function()
         {
             this.$items.removeClass('active').closest('li').removeClass('active');
-            this.$boxes.removeClass('open').hide();
+            this.$boxes.removeClass('open').addClass('hide');
         },
         close: function(num)
         {
@@ -184,9 +157,9 @@
 
     		this.opts.currentItem = item;
 
-    		item.$box.animation(this.opts.animation.close, $.proxy(this.closed, this));
+    		item.$box.animation('slideUp', $.proxy(this.onClosed, this));
         },
-        closed: function()
+        onClosed: function()
         {
             var item = this.opts.currentItem;
 
@@ -196,10 +169,6 @@
         isOpened: function(hash)
         {
             return $(hash).hasClass('open');
-        },
-        isClosed: function(hash)
-        {
-            return !$(hash).hasClass('open');
         },
     	getItem: function(element)
     	{
@@ -222,7 +191,14 @@
     		var element = (typeof num === 'number') ? this.$items.eq(num-1) : this.$element.find('[rel="' + num + '"]');
 
     		return this.getItem(element);
-    	}
-    });
+        }
+    };
+
+    // Inheritance
+    Kube.Collapse.inherits(Kube);
+
+    // Plugin
+    Kube.Plugin.create('Collapse');
+    Kube.Plugin.autoload('Collapse');
 
 }(Kube));

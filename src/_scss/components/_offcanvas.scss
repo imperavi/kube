@@ -1,0 +1,26 @@
+.offcanvas {
+    background: #fff;
+    position: fixed;
+    padding: $base-line;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: $z-over-page;
+    overflow-y: scroll;
+}
+.offcanvas .close {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+.offcanvas-left {
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+.offcanvas-right {
+    left: auto;
+    right: 0;
+	border-left: 1px solid rgba(0, 0, 0, .1);
+}
+.offcanvas-push-body {
+    position: relative;
+}
