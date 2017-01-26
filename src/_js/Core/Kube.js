@@ -14,7 +14,16 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 ;(function()
 {
     // Inherits
-    Function.prototype.inherits = function(parent) { for (var key in parent.prototype) { this.prototype[key] = parent.prototype[key]; }};
+    Function.prototype.inherits = function(parent)
+    {
+        var F = function () {};
+        F.prototype = parent.prototype;
+        var f = new F();
+
+        for (var prop in this.prototype) f[prop] = this.prototype[prop];
+        this.prototype = f;
+        this.prototype.super = parent.prototype;
+    };
 
     // Core Class
     var Kube = function(element, options)

@@ -243,7 +243,7 @@ $overlay-background-color: rgba(#fff, .95);
         }
         @else if $min == md
         {
-            @media (min-width: $md) { @content; }
+            @media (min-width: $sm) and (max-width: $md) { @content; }
         }
         @else if $min == lg
         {

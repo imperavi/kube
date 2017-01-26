@@ -92,4 +92,8 @@
 // item width
 @mixin flex-item-width($width) {
 	flex: 0 0 $width;
+
+	@include breakpoint(sm) {
+        flex: 0 0 100% !important;
+    }
 }

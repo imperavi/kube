@@ -48,6 +48,18 @@
 .last     { order: 1;  }
 
 @include breakpoint(sm) {
+    .row {
+
+        & .col {
+            margin-left: 0;
+            width: 100%;
+        }
+        &.gutters {
+            & .col {
+                margin-bottom: $text-margin-bottom;
+            }
+        }
+    }
 	.first-sm { order: -1; }
 	.last-sm  { order: 1;  }
 }

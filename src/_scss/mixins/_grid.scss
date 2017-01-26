@@ -3,6 +3,11 @@
     @include flex;
     @include flex-items-row;
     @include flex-items-wrap;
+
+    @include breakpoint(sm) {
+        @include flex-items-column;
+        @include flex-items-nowrap;
+    }
 }
 
 // Generate Columns

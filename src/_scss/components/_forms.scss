@@ -101,6 +101,15 @@ textarea {
     line-height: $textarea-base-line;
     vertical-align: top;
 }
+input[type="file"] {
+    width: auto;
+    border: none;
+    padding: 0;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    display: inline-block;
+}
 input[type="search"],
 input.search {
     background-repeat: no-repeat;
