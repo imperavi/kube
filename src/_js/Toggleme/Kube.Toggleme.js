@@ -12,6 +12,8 @@
             toggleEvent: 'click',
             target: null,
             text: '',
+            animationOpen: 'slideDown',
+            animationClose: 'slideUp',
             callbacks: ['open', 'opened', 'close', 'closed']
         };
 

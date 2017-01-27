@@ -76,13 +76,13 @@
         },
         animate: function()
         {
+            this.storeHideClasses();
             if (this.isToggleEffect())
 			{
 				return this.makeSimpleEffects();
             }
 
-            this.storeHideClasses();
-            this.$element.addClass('animated');
+            this.$element.addClass('kube-animated');
 			this.$element.addClass(this.queue[0]);
             this.removeHideClass();
 
@@ -91,8 +91,8 @@
         },
         makeSimpleEffects: function()
         {
-           	if      (this.effect === 'show') this.$element.removeClass('hide');
-            else if (this.effect === 'hide') this.$element.addClass('hide');
+           	if      (this.effect === 'show') this.removeHideClass();
+            else if (this.effect === 'hide') this.revertHideClasses();
 
             if (typeof this.completeCallback === 'function') this.completeCallback(this);
         },
@@ -123,7 +123,7 @@
 		},
 		clean: function()
 		{
-			this.$element.removeClass('animated').removeClass(this.queue[0]);
+			this.$element.removeClass('kube-animated').removeClass(this.queue[0]);
 		}
     };
 

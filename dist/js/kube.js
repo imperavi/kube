@@ -298,13 +298,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
         },
         animate: function()
         {
+            this.storeHideClasses();
             if (this.isToggleEffect())
 			{
 				return this.makeSimpleEffects();
             }
 
-            this.storeHideClasses();
-            this.$element.addClass('animated');
+            this.$element.addClass('kube-animated');
 			this.$element.addClass(this.queue[0]);
             this.removeHideClass();
 
@@ -313,8 +313,8 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
         },
         makeSimpleEffects: function()
         {
-           	if      (this.effect === 'show') this.$element.removeClass('hide');
-            else if (this.effect === 'hide') this.$element.addClass('hide');
+           	if      (this.effect === 'show') this.removeHideClass();
+            else if (this.effect === 'hide') this.revertHideClasses();
 
             if (typeof this.completeCallback === 'function') this.completeCallback(this);
         },
@@ -345,7 +345,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 		},
 		clean: function()
 		{
-			this.$element.removeClass('animated').removeClass(this.queue[0]);
+			this.$element.removeClass('kube-animated').removeClass(this.queue[0]);
 		}
     };
 
@@ -803,6 +803,8 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
             toggleEvent: 'click',
             target: null,
             text: '',
+            animationOpen: 'slideDown',
+            animationClose: 'slideUp',
             callbacks: ['open', 'opened', 'close', 'closed']
         };
 
