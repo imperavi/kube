@@ -22,6 +22,9 @@ button,
         margin: 0 2px;
 	}
 }
+input[type="submit"] {
+    width: auto;
+}
 button:hover,
 .button:hover {
     outline: none;

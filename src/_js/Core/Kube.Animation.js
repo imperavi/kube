@@ -82,7 +82,7 @@
 				return this.makeSimpleEffects();
             }
 
-            this.$element.addClass('kube-animated');
+            this.$element.addClass('kubeanimated');
 			this.$element.addClass(this.queue[0]);
             this.removeHideClass();
 
@@ -123,7 +123,7 @@
 		},
 		clean: function()
 		{
-			this.$element.removeClass('kube-animated').removeClass(this.queue[0]);
+			this.$element.removeClass('kubeanimated').removeClass(this.queue[0]);
 		}
     };
 

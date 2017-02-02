@@ -1,7 +1,7 @@
 /*
 	Kube. CSS & JS Framework
-	Version 6.5.1
-	Updated: January 27, 2017
+	Version 6.5.2
+	Updated: February 2, 2017
 
 	http://imperavi.com/kube/
 
@@ -304,7 +304,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 				return this.makeSimpleEffects();
             }
 
-            this.$element.addClass('kube-animated');
+            this.$element.addClass('kubeanimated');
 			this.$element.addClass(this.queue[0]);
             this.removeHideClass();
 
@@ -345,7 +345,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 		},
 		clean: function()
 		{
-			this.$element.removeClass('kube-animated').removeClass(this.queue[0]);
+			this.$element.removeClass('kubeanimated').removeClass(this.queue[0]);
 		}
     };
 
@@ -944,6 +944,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 
             this.$close = this.getCloseLink();
             this.$element.on(this.opts.toggleEvent + '.' + this.namespace, $.proxy(this.toggle, this));
+            this.$target.addClass('offcanvas');
     	},
     	stop: function()
     	{
@@ -983,8 +984,8 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
                 this.closeAll();
         		this.callback('open');
 
+                this.$target.addClass('offcanvas-' + this.opts.direction);
                 this.$target.css('width', this.opts.width);
-                this.$target.addClass('offcanvas offcanvas-' + this.opts.direction);
 
                 this.pushBody();
 
@@ -1003,7 +1004,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
                     if ($el.hasClass('open'))
                     {
                         $el.css('width', '').animation('hide');
-                        $el.removeClass('open offcanvas offcanvas-left offcanvas-right');
+                        $el.removeClass('open offcanvas-left offcanvas-right');
                     }
 
                 });
@@ -1016,10 +1017,14 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     	{
         	if (e)
         	{
-            	e.preventDefault();
-
             	var $el = $(e.target);
-                if ($el.closest('.offcanvas').length !== 0 && !$el.hasClass('close')) return;
+            	var isTag = ($el[0].tagName === 'A' || $el[0].tagName === 'BUTTON');
+            	if (isTag && $el.closest('.offcanvas').length !== 0 && !$el.hasClass('close'))
+            	{
+                	return;
+            	}
+
+            	e.preventDefault();
             }
 
             if (this.isOpened())
@@ -1050,7 +1055,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     	{
     		if (this.detect.isMobileScreen()) $('html').removeClass('no-scroll');
 
-            this.$target.css('width', '').removeClass('offcanvas offcanvas-' + this.opts.direction);
+            this.$target.css('width', '').removeClass('offcanvas-' + this.opts.direction);
 
             this.$close.off('.' + this.namespace);
     		$(document).off('.' + this.namespace);

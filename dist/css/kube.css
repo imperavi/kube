@@ -1,7 +1,7 @@
 /*
 	Kube. CSS & JS Framework
-	Version 6.5.1
-	Updated: January 27, 2017
+	Version 6.5.2
+	Updated: February 2, 2017
 
 	http://imperavi.com/kube/
 
@@ -878,8 +878,7 @@ label {
   display: inline-block;
   margin-right: 16px; }
 
-.req,
-.required {
+.req {
   position: relative;
   top: 1px;
   font-weight: bold;
@@ -992,6 +991,9 @@ button,
     position: relative;
     top: 1px;
     margin: 0 2px; }
+
+input[type="submit"] {
+  width: auto; }
 
 button:hover,
 .button:hover {

@@ -1,7 +1,7 @@
 /*
 	Kube. CSS & JS Framework
-	Version 6.5.1
-	Updated: January 27, 2017
+	Version 6.5.2
+	Updated: February 2, 2017
 
 	http://imperavi.com/kube/
 

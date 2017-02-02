@@ -42,6 +42,7 @@
 
             this.$close = this.getCloseLink();
             this.$element.on(this.opts.toggleEvent + '.' + this.namespace, $.proxy(this.toggle, this));
+            this.$target.addClass('offcanvas');
     	},
     	stop: function()
     	{
@@ -81,8 +82,8 @@
                 this.closeAll();
         		this.callback('open');
 
+                this.$target.addClass('offcanvas-' + this.opts.direction);
                 this.$target.css('width', this.opts.width);
-                this.$target.addClass('offcanvas offcanvas-' + this.opts.direction);
 
                 this.pushBody();
 
@@ -101,7 +102,7 @@
                     if ($el.hasClass('open'))
                     {
                         $el.css('width', '').animation('hide');
-                        $el.removeClass('open offcanvas offcanvas-left offcanvas-right');
+                        $el.removeClass('open offcanvas-left offcanvas-right');
                     }
 
                 });
@@ -114,10 +115,14 @@
     	{
         	if (e)
         	{
-            	e.preventDefault();
-
             	var $el = $(e.target);
-                if ($el.closest('.offcanvas').length !== 0 && !$el.hasClass('close')) return;
+            	var isTag = ($el[0].tagName === 'A' || $el[0].tagName === 'BUTTON');
+            	if (isTag && $el.closest('.offcanvas').length !== 0 && !$el.hasClass('close'))
+            	{
+                	return;
+            	}
+
+            	e.preventDefault();
             }
 
             if (this.isOpened())
@@ -148,7 +153,7 @@
     	{
     		if (this.detect.isMobileScreen()) $('html').removeClass('no-scroll');
 
-            this.$target.css('width', '').removeClass('offcanvas offcanvas-' + this.opts.direction);
+            this.$target.css('width', '').removeClass('offcanvas-' + this.opts.direction);
 
             this.$close.off('.' + this.namespace);
     		$(document).off('.' + this.namespace);
