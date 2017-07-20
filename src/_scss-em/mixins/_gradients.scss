@@ -1,0 +1,28 @@
+// vertical
+@mixin gradient-vertical($start: #555, $end: #333) {
+	background-color: $start;
+	background-image: linear-gradient(to bottom, $start 0%, $end 100%);
+}
+
+// vertical to opacity
+@mixin gradient-vertical-to-opacity($color, $opacity: 0) {
+	$rgba: rgba(red($color), green($color), blue($color), $opacity);
+	background: linear-gradient(to bottom, $color 0%, $rgba 100%);
+}
+
+// horizontal
+@mixin gradient-horizontal($start: #555, $end: #333) {
+    background-color: $start;
+    background: linear-gradient(to right, $start 0%, $end 100%);
+}
+
+// horizontal to opacity
+@mixin gradient-horizontal-to-opacity($color: #555, $opacity: 0) {
+    $rgba: rgba(red($color), green($color), blue($color), $opacity);
+    background: linear-gradient(to right, $color 0%, $rgba 100%);
+}
+
+// radial
+@mixin gradient-radial($inner: #555, $outer: #333) {
+	background-image: radial-gradient(circle, $inner, $outer);
+}

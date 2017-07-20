@@ -32,6 +32,15 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('sass-em', function() {
+  return gulp.src('src/kube-em.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('dist/css'))
+    .pipe(rename('kube-em.min.css'))
+    .pipe(minify())
+    .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('combine', function() {
     return gulp.src([
             'src/_scss/_variables.scss',
@@ -64,4 +73,4 @@ gulp.task('watch', function() {
 
 });
 
-gulp.task('default', ['sass', 'combine', 'scripts',  'watch']);
+gulp.task('default', ['sass', 'sass-em', 'combine', 'scripts',  'watch']);

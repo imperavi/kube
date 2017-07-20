@@ -1,0 +1,45 @@
+.tabs {
+    margin-bottom: $base-line;
+    font-size: $font-size-small;
+
+    & li em,
+    & li.active a {
+    	color: $color-text;
+    	border: 1px solid rgba(0, 0, 0, .1);
+    	cursor: default;
+    	text-decoration: none;
+    	background: none;
+    }
+    & em,
+    & a {
+    	position: relative;
+    	top: em($font-size - 15px);
+    	font-style: normal;
+    	display: block;
+    	padding: .5rem 1rem;
+    	border: 1px solid transparent;
+    	color: rgba(0, 0, 0, .5);
+    	text-decoration: none;
+    }
+    & a:hover {
+    	@include transition;
+    	color: $color-text;
+    	text-decoration: underline;
+    	background-color: $color-silver;
+    }
+}
+
+@include breakpoint($min: $sm) {
+    .tabs {
+        & ul {
+            @include flex;
+
+            margin-top: em($font-size - 17px);
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+        }
+        & li em,
+        & li.active a {
+            border-bottom: 1px solid #fff;
+        }
+    }
+}

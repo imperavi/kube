@@ -1,0 +1,16 @@
+$default-font-size: 16px;
+$default-base-line: 24px;
+
+
+//Convert px to em
+@function em($pixels, $context: $default-font-size) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}

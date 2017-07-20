@@ -1,0 +1,58 @@
+.modal-box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: $z-over-control;
+}
+.modal {
+	position: relative;
+	margin: auto;
+	margin-top: em($font-size);
+	padding: 0;
+	background: #fff;
+	box-shadow: 0 em($font-size - 6px) em($font-size + 9px) rgba(0, 0, 0, .15);
+    border-radius: em($font-size - 8px);
+	color: #000;
+
+	& input,
+	& textarea {
+		@media (max-width: $sm) {
+		    font-size: em($font-size);
+		}
+	}
+    & .close {
+    	position: absolute;
+    	top: em($font-size + 2px);
+    	right: em($font-size);
+    	opacity: .3;
+    	&:hover {
+        	opacity: 1;
+    	}
+    }
+}
+.modal-header {
+	padding: em($font-size + 8px) em($font-size + 16px);
+	font-size: em($font-size + 2px);
+	font-weight: bold;
+	border-bottom: 1px solid rgba(0, 0, 0, .05);
+    &:empty {
+        display: none;
+    }
+}
+.modal-body {
+    padding: em($font-size + 20px) em($font-size + 40px);
+}
+
+
+
+// Responsive
+@media (max-width: $sm) {
+    .modal-header,
+    .modal-body {
+        padding: em($font-size + 8px);
+    }
+}

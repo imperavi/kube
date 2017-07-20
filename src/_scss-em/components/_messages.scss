@@ -1,0 +1,50 @@
+.message {
+    font-family: $monospace-font-family;
+    font-size: $font-size-small;
+    line-height: $base-line-small;
+    background: $color-silver;
+    color: $color-text;
+    padding: 1rem;
+    padding-right: 2.5em;
+    padding-bottom: .75rem;
+    margin-bottom: $base-line;
+    position: relative;
+
+    & a {
+        color: inherit;
+    }
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+        margin-bottom: 0;
+    }
+    & .close {
+        position: absolute;
+        right: 1rem;
+        top: 1.1rem;
+    }
+}
+.message.error {
+    background: $color-error;
+    color: #fff;
+}
+.message.success {
+    background: $color-success;
+    color: #fff;
+}
+.message.warning {
+    background: $color-warning;
+}
+.message.focus {
+    background: $color-focus;
+    color: #fff;
+}
+.message.black {
+    background: $color-black;
+    color: #fff;
+}
+.message.inverted {
+    background: $color-inverted;
+}
