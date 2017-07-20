@@ -1,264 +1,264 @@
 // Fieldset
 fieldset {
-    font-family: inherit;
-    border: 1px solid rgba(0, 0, 0, .1);
-    padding: 2rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+  font-family: inherit;
+  border: 1px solid rgba(0, 0, 0, .1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 legend {
-	font-weight: bold;
-	font-size: $font-size-smaller;
-	text-transform: uppercase;
-	padding: 0 1rem;
-	margin-left: -1rem;
-	top: 2px;
-	position: relative;
-	line-height: 0;
+  font-weight: bold;
+  font-size: $font-size-smaller;
+  text-transform: uppercase;
+  padding: 0 1rem;
+  margin-left: -1rem;
+  top: em($font-size - 14px);
+  position: relative;
+  line-height: 0;
 }
 input,
 textarea,
 select {
-    display: block;
-    width: 100%;
-	font-family: inherit;
-	font-size: $input-font-size;
-	height: $input-height;
-    outline: none;
-    vertical-align: middle;
-	background-color: $input-background-color;
-    border: $input-border-width solid $input-border-color;
-    border-radius: $input-border-radius;
-    box-shadow: $input-box-shadow;
-    padding: 0 $input-padding-rl;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-size: $input-font-size;
+  height: $input-height;
+  outline: none;
+  vertical-align: middle;
+  background-color: $input-background-color;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $input-border-radius;
+  box-shadow: $input-box-shadow;
+  padding: 0 $input-padding-rl;
 }
 // Sizing
 input.small,
 textarea.small,
 select.small {
-    height: $input-height-small;
-    font-size: $input-font-size-small;
-    padding: 0 $input-padding-small-rl;
-    border-radius: $input-border-radius;
+  height: $input-height-small;
+  font-size: $input-font-size-small;
+  padding: 0 $input-padding-small-rl;
+  border-radius: $input-border-radius;
 }
 input.big,
 textarea.big,
 select.big {
-    height: $input-height-big;
-    font-size: $input-font-size-big;
-    padding: 0 $input-padding-big-rl;
-    border-radius: $input-border-radius;
+  height: $input-height-big;
+  font-size: $input-font-size-big;
+  padding: 0 $input-padding-big-rl;
+  border-radius: $input-border-radius;
 }
 // States
 input,
 textarea,
 select {
+  &:focus {
+    outline: none;
+    background-color: $input-focus-background-color;
+    border-color: $input-focus-border-color;
+    box-shadow: $input-focus-box-shadow;
+  }
+  &.error {
+    background-color: rgba($input-error-background-color, .1);
+    border: $input-border-width solid lighten($input-error-border-color, 15%);
     &:focus {
-    	outline: none;
-    	background-color: $input-focus-background-color;
-    	border-color: $input-focus-border-color;
-        box-shadow: $input-focus-box-shadow;
+      border-color: $input-error-border-color;
+      box-shadow: $input-error-focus-box-shadow;
     }
-    &.error {
-	    background-color: rgba($input-error-background-color, .1);
-    	border: $input-border-width solid lighten($input-error-border-color, 15%);
-    	&:focus {
-            border-color: $input-error-border-color;
-            box-shadow: $input-error-focus-box-shadow;
-    	}
-	}
-    &.success  {
-    	background-color: rgba($input-success-background-color, .1);
-    	border: $input-border-width solid lighten($input-success-border-color, 15%);
-    	&:focus {
-            border-color: $input-success-border-color;
-            box-shadow: $input-success-focus-box-shadow;
-    	}
+  }
+  &.success  {
+    background-color: rgba($input-success-background-color, .1);
+    border: $input-border-width solid lighten($input-success-border-color, 15%);
+    &:focus {
+      border-color: $input-success-border-color;
+      box-shadow: $input-success-focus-box-shadow;
     }
-    &:disabled,
-    &.disabled {
-    	resize: none;
-    	opacity: $input-disabled-opacity;
-    	cursor: default;
-    	font-style: italic;
-    	color: $input-disabled-color;
-	}
+  }
+  &:disabled,
+  &.disabled {
+    resize: none;
+    opacity: $input-disabled-opacity;
+    cursor: default;
+    font-style: italic;
+    color: $input-disabled-color;
+  }
 }
 select {
-    -webkit-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="12" viewBox="0 0 9 12"><path fill="#5e6c75" d="M0.722,4.823L-0.01,4.1,4.134-.01,4.866,0.716Zm7.555,0L9.01,4.1,4.866-.01l-0.732.726ZM0.722,7.177L-0.01,7.9,4.134,12.01l0.732-.726Zm7.555,0L9.01,7.9,4.866,12.01l-0.732-.726Z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
+  -webkit-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="12" viewBox="0 0 9 12"><path fill="#5e6c75" d="M0.722,4.823L-0.01,4.1,4.134-.01,4.866,0.716Zm7.555,0L9.01,4.1,4.866-.01l-0.732.726ZM0.722,7.177L-0.01,7.9,4.134,12.01l0.732-.726Zm7.555,0L9.01,7.9,4.866,12.01l-0.732-.726Z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
 }
 select[multiple] {
-    background-image: none;
-    height: auto;
-    padding: .5rem .75rem;
+  background-image: none;
+  height: auto;
+  padding: .5rem .75rem;
 }
 textarea {
-    height: auto;
-    padding: $input-textarea-padding-tb $input-padding-rl;
-    line-height: $textarea-base-line;
-    vertical-align: top;
+  height: auto;
+  padding: $input-textarea-padding-tb $input-padding-rl;
+  line-height: $textarea-base-line;
+  vertical-align: top;
 }
 input[type="file"] {
-    width: auto;
-    border: none;
-    padding: 0;
-    height: auto;
-    background: none;
-    box-shadow: none;
-    display: inline-block;
+  width: auto;
+  border: none;
+  padding: 0;
+  height: auto;
+  background: none;
+  box-shadow: none;
+  display: inline-block;
 }
 input[type="search"],
 input.search {
-    background-repeat: no-repeat;
-    background-position: 8px 53%;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#000" fill-opacity="0.4" d="M14.891,14.39l-0.5.5a0.355,0.355,0,0,1-.5,0L9.526,10.529a5.3,5.3,0,1,1,2.106-4.212,5.268,5.268,0,0,1-1.1,3.21l4.362,4.362A0.354,0.354,0,0,1,14.891,14.39ZM6.316,2.418a3.9,3.9,0,1,0,3.9,3.9A3.9,3.9,0,0,0,6.316,2.418Z"/></svg>');
-    padding-left: 32px;
+  background-repeat: no-repeat;
+  background-position: em($font-size - 8px) 53%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#000" fill-opacity="0.4" d="M14.891,14.39l-0.5.5a0.355,0.355,0,0,1-.5,0L9.526,10.529a5.3,5.3,0,1,1,2.106-4.212,5.268,5.268,0,0,1-1.1,3.21l4.362,4.362A0.354,0.354,0,0,1,14.891,14.39ZM6.316,2.418a3.9,3.9,0,1,0,3.9,3.9A3.9,3.9,0,0,0,6.316,2.418Z"/></svg>');
+  padding-left: em($font-size + 16px);
 }
 input[type="radio"],
 input[type="checkbox"] {
-    display: inline-block;
-    width: auto;
-    height: auto;
-    padding: 0;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 0;
 }
 label {
-    display: block;
-    color: $color-darkgray;
-    margin-bottom: 4px;
-    font-size: $font-size - 1px;
+  display: block;
+  color: $color-darkgray;
+  margin-bottom: em($font-size - 12px);
+  font-size: em($font-size - 1px);
 
-    &.checkbox,
-    & .desc,
-    & .success,
-    & .error {
-    	text-transform: none;
-    	font-weight: normal;
-    }
-    &.checkbox {
-        font-size: $font-size;
-        line-height: $base-line;
-    	cursor: pointer;
-    	color: inherit;
+  &.checkbox,
+  & .desc,
+  & .success,
+  & .error {
+    text-transform: none;
+    font-weight: normal;
+  }
+  &.checkbox {
+    font-size: $font-size;
+    line-height: $base-line;
+    cursor: pointer;
+    color: inherit;
 
-        & input {
-            margin-top: 0;
-        }
+    & input {
+      margin-top: 0;
     }
+  }
 
 }
 .form-checkboxes {
-    & label.checkbox {
-        display: inline-block;
-        margin-right: 16px;
-	}
+  & label.checkbox {
+    display: inline-block;
+    margin-right: em($font-size);
+  }
 }
 .req {
-    position: relative;
-    top: 1px;
-	font-weight: bold;
-	color: $color-error;
-	font-size: 110%;
+  position: relative;
+  top: em($font-size - 15px);
+  font-weight: bold;
+  color: $color-error;
+  font-size: 110%;
 }
 .desc {
-    color: rgba($color-text, .5);
-    font-size: $font-size-smaller;
-    line-height: $base-line-smaller;
+  color: rgba($color-text, .5);
+  font-size: $font-size-smaller;
+  line-height: $base-line-smaller;
 }
 span.desc {
-    margin-left: 4px;
+  margin-left: em($font-size - 12px);
 }
 div.desc {
-    margin-top: 4px;
-    margin-bottom: -8px;
+  margin-top: em($font-size - 12px);
+  margin-bottom: em($font-size - 24px);
 }
 .form-buttons {
-    & button,
-    & .button {
-        margin-right: 8px;
-    }
+  & button,
+  & .button {
+    margin-right: em($font-size - 8px);
+  }
 }
 form,
 .form-item {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 .form {
-    & > .form-item:last-child {
-        margin-bottom: 0;
+  & > .form-item:last-child {
+    margin-bottom: 0;
+  }
+  & .row:last-child {
+    & .form-item {
+      margin-bottom: 0;
     }
-    & .row:last-child {
-        & .form-item {
-            margin-bottom: 0;
-        }
-    }
-    & span.success,
-    & span.error {
-        font-size: $font-size-smaller;
-        line-height: $base-line-smaller;
-        margin-left: 4px;
-    }
+  }
+  & span.success,
+  & span.error {
+    font-size: $font-size-smaller;
+    line-height: $base-line-smaller;
+    margin-left: em($font-size - 12px);
+  }
 }
 .form-inline {
-    & input,
-    & textarea,
-    & select {
-        display: inline-block;
-        width: auto;
-    }
+  & input,
+  & textarea,
+  & select {
+    display: inline-block;
+    width: auto;
+  }
 }
 
 
 // Append & Prepend
 .append,
 .prepend {
-	@include flex;
+  @include flex;
 
-	& input {
-		@include flex-item-one;
-	}
-	& .button,
-	& span {
-		@include flex-item-shrink;
-    }
-	& span {
-        @include flex;
-        @include flex-items-column;
-        @include flex-items-center;
+  & input {
+    @include flex-item-one;
+  }
+  & .button,
+  & span {
+    @include flex-item-shrink;
+  }
+  & span {
+    @include flex;
+    @include flex-items-column;
+    @include flex-items-center;
 
-		font-weight: normal;
-		border: $input-border-width solid $input-border-color;
-		background-color: $color-aluminum;
-		padding: 0 .875rem;
-		color: rgba(0, 0, 0, .5);
-		font-size: $font-size-smaller;
-		white-space: nowrap;
-	}
+    font-weight: normal;
+    border: $input-border-width solid $input-border-color;
+    background-color: $color-aluminum;
+    padding: 0 .875rem;
+    color: rgba(0, 0, 0, .5);
+    font-size: $font-size-smaller;
+    white-space: nowrap;
+  }
 }
 .prepend {
-    & input {
-        border-radius: 0 $input-border-radius $input-border-radius 0;
-    }
-    & .button {
-        margin-right: -1px;
-        border-radius: $input-border-radius 0 0 $input-border-radius !important;
-    }
-    & span {
-        border-right: none;
-        border-radius: $input-border-radius 0 0 $input-border-radius;
-    }
+  & input {
+    border-radius: 0 $input-border-radius $input-border-radius 0;
+  }
+  & .button {
+    margin-right: em($font-size - 17px);
+    border-radius: $input-border-radius 0 0 $input-border-radius !important;
+  }
+  & span {
+    border-right: none;
+    border-radius: $input-border-radius 0 0 $input-border-radius;
+  }
 }
 .append {
-    & input {
-        border-radius: $input-border-radius 0 0 $input-border-radius;
-    }
-    & .button {
-        margin-left: -1px;
-        border-radius: 0 $input-border-radius $input-border-radius 0 !important;
-    }
-    & span {
-        border-left: none;
-        border-radius: 0 $input-border-radius $input-border-radius 0;
-    }
+  & input {
+    border-radius: $input-border-radius 0 0 $input-border-radius;
+  }
+  & .button {
+    margin-left: em($font-size - 17px);
+    border-radius: 0 $input-border-radius $input-border-radius 0 !important;
+  }
+  & span {
+    border-left: none;
+    border-radius: 0 $input-border-radius $input-border-radius 0;
+  }
 }

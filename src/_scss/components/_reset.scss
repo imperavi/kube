@@ -37,7 +37,7 @@ input[type="checkbox"] {
     position: relative;
     bottom: 0.15rem;
     font-size: 115%;
-    margin-right: 3px;
+    margin-right: em($font-size - 13px);
 }
 input[type="search"] {
 	-webkit-appearance: textfield;

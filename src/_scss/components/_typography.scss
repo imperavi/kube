@@ -1,7 +1,7 @@
 html,
 body {
-    font-size: $font-size;
-    line-height: $base-line;
+	font-size: $font-size;
+	line-height: $base-line;
 }
 body {
 	font-family: $text-font-family;
@@ -23,42 +23,42 @@ h1.title, h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 	color: $color-headings;
 	text-rendering: optimizeLegibility;
-    margin-bottom: $heading-margin-bottom;
+	margin-bottom: $heading-margin-bottom;
 }
 h1.title {
-    font-size: $heading-font-size-title;
-    line-height: $heading-base-line-title;
-    margin-bottom: $heading-margin-bottom/2;
+	font-size: $heading-font-size-title;
+	line-height: $heading-base-line-title;
+	margin-bottom: $heading-margin-bottom/2;
 }
 h1,
 .h1 {
-    font-size: $heading-font-size-1;
-    line-height: $heading-base-line-1;
+	font-size: $heading-font-size-1;
+	line-height: $heading-base-line-1;
 }
 h2,
 .h2 {
-    font-size: $heading-font-size-2;
-    line-height: $heading-base-line-2;
+	font-size: $heading-font-size-2;
+	line-height: $heading-base-line-2;
 }
 h3,
 .h3 {
-    font-size: $heading-font-size-3;
-    line-height: $heading-base-line-3;
+	font-size: $heading-font-size-3;
+	line-height: $heading-base-line-3;
 }
 h4,
 .h4 {
-    font-size: $heading-font-size-4;
-    line-height: $heading-base-line-4;
+	font-size: $heading-font-size-4;
+	line-height: $heading-base-line-4;
 }
 h5,
 .h5 {
-    font-size: $heading-font-size-5;
-    line-height: $heading-base-line-5;
+	font-size: $heading-font-size-5;
+	line-height: $heading-base-line-5;
 }
 h6,
 .h6 {
-    font-size: $heading-font-size-6;
-    line-height: $heading-base-line-6;
+	font-size: $heading-font-size-6;
+	line-height: $heading-base-line-6;
 }
 h1 a, .h1 a,
 h2 a, .h2 a,
@@ -66,7 +66,7 @@ h3 a, .h3 a,
 h4 a, .h4 a,
 h5 a, .h5 a,
 h6 a, .h6 a {
-  color: inherit;
+	color: inherit;
 }
 
 // Top Space
@@ -92,10 +92,10 @@ figure {
 // Lists
 ul,
 ol {
-    &,
-    & ul,
-    & ol {
-	    margin: 0 0 0 $base-line;
+	&,
+	& ul,
+	& ol {
+		margin: 0 0 0 $base-line;
 	}
 }
 ol ol li {
@@ -105,14 +105,14 @@ ol ol ol li {
 	list-style-type: lower-roman;
 }
 nav {
-    & ul,
-    & ol {
-        margin: 0;
-	    list-style: none;
-	    & ul,
-	    & ol {
-    	    margin-left: $base-line;
-	    }
+	& ul,
+	& ol {
+		margin: 0;
+		list-style: none;
+		& ul,
+		& ol {
+			margin-left: $base-line;
+		}
 	}
 }
 dl dt {
@@ -127,17 +127,17 @@ p, blockquote, hr, pre, ol, ul, dl, table, fieldset, figure, address, form {
 	margin-bottom: $text-margin-bottom;
 }
 hr {
-    border: none;
+	border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
-	margin-top: -1px;
+	margin-top: em($font-size - 17px);
 }
 blockquote {
 	padding-left: 1rem;
-	border-left: 4px solid rgba(0, 0, 0, .1);
+	border-left: em($font-size - 12px) solid rgba(0, 0, 0, .1);
 	font-style: italic;
 	color: rgba($color-text, .65);
 	& p {
-    	margin-bottom: .5rem;
+		margin-bottom: .5rem;
 	}
 }
 
@@ -146,21 +146,21 @@ time, cite, small, figcaption {
 	font-size: 87.5%;
 }
 cite {
-    opacity: .6;
+	opacity: .6;
 }
 abbr[title], dfn[title] {
 	border-bottom: 1px dotted rgba(0, 0, 0, .5);
 	cursor: help;
 }
 var {
-    font-size: $font-size;
+	font-size: $font-size;
 	opacity: .6;
 	font-style: normal;
 }
 mark, code, samp, kbd {
-    position: relative;
-    top: -1px;
-	padding: 4px 4px 2px 4px;
+	position: relative;
+	top: em($font-size - 17px);
+	padding: em($font-size - 12px) em($font-size - 12px) em($font-size - 14px) em($font-size - 12px);
 	display: inline-block;
 	line-height: 1;
 	color: rgba($color-text, .85);
@@ -180,7 +180,7 @@ kbd {
 }
 sub,
 sup {
-    font-size: x-small;
+	font-size: x-small;
 	line-height: 0;
 	margin-left: 1rem/4;
 	position: relative;
@@ -189,7 +189,7 @@ sup {
 	top: 0;
 }
 sub {
-	bottom: 1px;
+	bottom: em($font-size - 15px);
 }
 
 // Preformatted
@@ -201,17 +201,17 @@ pre, code, samp, var, kbd, mark {
 }
 pre,
 pre code {
-    background: $color-aluminum;
+	background: $color-aluminum;
 	padding: 0;
 	top: 0;
-    display: block;
-    line-height: $base-line-small;
-    color: rgba($color-text, .85);
+	display: block;
+	line-height: $base-line-small;
+	color: rgba($color-text, .85);
 	overflow: none;
 	white-space: pre-wrap;
 }
 pre {
-    padding: 1rem;
+	padding: 1rem;
 }
 
 // Figure
@@ -219,19 +219,19 @@ figcaption {
 	opacity: .6;
 }
 figure figcaption {
-    position: relative;
-    top: -1rem/2;
+	position: relative;
+	top: -1rem/2;
 }
 figure pre {
-    background: none;
-    border: 1px solid rgba(0, 0, 0, .1);
-    border-radius: 4px;
+	background: none;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: em($font-size - 12px);
 }
 figure {
-    & .video-container,
-    & pre {
-        margin-bottom: $text-margin-bottom/2;
-    }
+	& .video-container,
+	& pre {
+		margin-bottom: $text-margin-bottom/2;
+	}
 }
 
 
@@ -248,43 +248,43 @@ figure {
 
 // Modifiers
 ul.unstyled {
-    & {
-        margin-left: 0;
-    }
-    &,
-    & ul {
-        list-style: none;
-    }
+	& {
+		margin-left: 0;
+	}
+	&,
+	& ul {
+		list-style: none;
+	}
 }
 .monospace {
-   font-family: $monospace-font-family;
+	font-family: $monospace-font-family;
 }
 .upper {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 .lower {
-    text-transform: lowercase;
+	text-transform: lowercase;
 }
 .italic {
-    font-style: italic !important;
+	font-style: italic !important;
 }
 .strong {
-    font-weight: bold !important;
+	font-weight: bold !important;
 }
 .normal {
-    font-weight: normal !important;
+	font-weight: normal !important;
 }
 .muted {
-    opacity: .55;
+	opacity: .55;
 }
 a.muted {
-    color: $color-black;
+	color: $color-black;
 }
 a.muted:hover {
-    opacity: 1;
+	opacity: 1;
 }
 .black {
-    color: $color-black;
+	color: $color-black;
 }
 .smaller {
 	font-size: $font-size-smaller;
@@ -303,7 +303,7 @@ a.muted:hover {
 	line-height: $base-line-large;
 }
 .end {
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
 }
 .highlight {
 	background-color: $color-highlight;
@@ -317,13 +317,13 @@ a.muted:hover {
 // Text Columns
 @include breakpoint(md) {
 
-    .columns-2,
-    .columns-3,
-    .columns-4 {
-         column-gap: $base-line;
-    }
+	.columns-2,
+	.columns-3,
+	.columns-4 {
+		column-gap: $base-line;
+	}
 
-    .columns-2 { column-count: 2; }
-    .columns-3 { column-count: 3; }
-    .columns-4 { column-count: 4; }
+	.columns-2 { column-count: 2; }
+	.columns-3 { column-count: 3; }
+	.columns-4 { column-count: 4; }
 }
