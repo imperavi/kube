@@ -1,0 +1,31 @@
+@mixin button($color-text, $color-back)
+{
+	color: $color-text;
+	background-color: $color-back;
+
+	&:hover {
+	    color: $color-text;
+	    background-color: lighten($color-back, 20%);
+	}
+    &:disabled,
+    &.disabled {
+	    color: rgba($color-text, .7);
+	    background-color: rgba($color-back, .7);
+    }
+    &.outline {
+        background: none;
+        color: $color-back;
+        border-color: $color-back;
+
+        &:hover {
+            color: rgba($color-back, .6);
+            border-color: rgba($color-back, .5);
+        }
+        &:disabled,
+        &.disabled {
+            background: none;
+    	    color: rgba($color-back, .7);
+    	    border-color: rgba($color-back, .5);
+        }
+    }
+}

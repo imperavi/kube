@@ -1,0 +1,65 @@
+// Grid Row
+.row {
+    @include grid-row;
+
+    // Gutters
+    &.gutters,
+    &.gutters > .row {
+        margin-left: -$grid-gutter;
+
+        @include breakpoint(sm) {
+            margin-left: 0;
+        }
+
+        & > .col {
+            margin-left: $grid-gutter;
+
+            @include breakpoint(sm) {
+                margin-left: 0;
+            }
+        }
+    }
+	&.around {
+		@include flex-items-space-around;
+	}
+	&.between {
+		@include flex-items-space-between;
+	}
+	&.auto {
+    	& .col {
+        	@include flex-item-grow(1);
+        }
+	}
+}
+
+// Grid Columns
+@include generate-grid-columns;
+
+// Offset
+[class^='offset-'],
+[class*=' offset-'] {
+    @include breakpoint(sm) {
+        margin-left: 0;
+    }
+}
+
+// Ordering
+.first    { order: -1; }
+.last     { order: 1;  }
+
+@include breakpoint(sm) {
+    .row {
+
+        & .col {
+            margin-left: 0;
+            width: 100%;
+        }
+        &.gutters {
+            & .col {
+                margin-bottom: $text-margin-bottom;
+            }
+        }
+    }
+	.first-sm { order: -1; }
+	.last-sm  { order: 1;  }
+}

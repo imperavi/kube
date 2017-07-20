@@ -1,0 +1,65 @@
+// Make Row
+@mixin grid-row {
+    @include flex;
+    @include flex-items-row;
+    @include flex-items-wrap;
+
+    @include breakpoint(sm) {
+        @include flex-items-column;
+        @include flex-items-nowrap;
+    }
+}
+
+// Generate Columns
+@mixin generate-grid-columns {
+
+    @for $i from 1 through $grid-columns
+    {
+        .col-#{$i} {
+            width: 100% / $grid-columns * $i;
+        }
+        .offset-#{$i} {
+            $width: 100% / $grid-columns * $i;
+            margin-left: $width;
+        }
+
+    }
+
+    .gutters {
+        @for $i from 1 through $grid-columns
+        {
+            & > .col-#{$i} {
+                $width: 100% / $grid-columns * $i;
+                width: calc(#{$width} - #{$grid-gutter});
+            }
+            & > .offset-#{$i} {
+                $width: 100% / $grid-columns * $i;
+                margin-left: calc(#{$width} + #{$grid-gutter}) !important;
+            }
+        }
+    }
+}
+
+
+// Grid Media Columns
+@mixin grid-media-columns($num) {
+
+	-webkit-column-count: $num;
+	-moz-column-count: $num;
+	column-count: $num;
+
+	-webkit-column-gap: $grid-gutter;
+	-moz-column-gap: $grid-gutter;
+	column-gap: $grid-gutter;
+
+	& > div {
+		display: inline-block;
+		width: 100%;
+	}
+
+    @include breakpoint(sm) {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+    }
+}

@@ -1,0 +1,11 @@
+@mixin label($text, $back) {
+    background: $back;
+    color: $text;
+
+    &.tag,
+    &.outline {
+        background: none;
+        border-color: $back;
+        color: $back;
+    }
+}

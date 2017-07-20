@@ -1,0 +1,48 @@
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+}
+img,
+video,
+audio {
+    max-width: 100%;
+}
+img,
+video {
+	height: auto;
+}
+svg {
+    max-height: 100%;
+}
+iframe {
+    border: none;
+}
+::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+input[type="radio"],
+input[type="checkbox"] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 0.15rem;
+    font-size: 115%;
+    margin-right: em($font-size - 13px);
+}
+input[type="search"] {
+	-webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+}

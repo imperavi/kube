@@ -1,0 +1,99 @@
+// display
+@mixin flex {
+	display: flex;
+}
+
+// basis
+@mixin flex-basis($width) {
+	flex-basis: $width;
+}
+
+// items wrap
+@mixin flex-items-wrap {
+	flex-wrap: wrap;
+}
+
+// items nowrap
+@mixin flex-items-nowrap {
+	flex-wrap: nowrap;
+}
+
+// items row
+@mixin flex-items-row {
+    flex-direction: row;
+}
+
+// items columns
+@mixin flex-items-column {
+    flex-direction: column;
+}
+
+// items left
+@mixin flex-items-left {
+    justify-content: flex-start;
+}
+
+// items right
+@mixin flex-items-right {
+    justify-content: flex-end;
+}
+
+// items center
+@mixin flex-items-center {
+	justify-content: center;
+}
+
+// items between
+@mixin flex-items-space-between {
+	justify-content: space-between;
+}
+
+// items around
+@mixin flex-items-space-around {
+	justify-content: space-around;
+}
+
+// items vertical top
+@mixin flex-items-top {
+    align-items: flex-start;
+}
+
+// items vertical middle
+@mixin flex-items-middle {
+	align-items: center;
+}
+
+// items vertical bottom
+@mixin flex-items-bottom {
+    align-items: flex-end;
+}
+
+// item grow
+@mixin flex-item-grow($grow: 0) {
+    flex-grow: $grow;
+}
+
+
+// item auto
+@mixin flex-item-auto {
+    flex: auto;
+}
+
+// item one
+@mixin flex-item-one {
+    flex: 1;
+}
+
+// item shrink
+@mixin flex-item-shrink($num: 0) {
+	flex-shrink: $num;
+}
+
+// item width
+@mixin flex-item-width($width) {
+	flex: 0 0 $width;
+
+	@include breakpoint(sm) {
+        flex: 0 0 100% !important;
+    }
+}

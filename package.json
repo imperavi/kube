@@ -1,6 +1,6 @@
 {
   "name": "kube",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "A web framework for professional developers and designers alike.",
   "main": "dist/css/kube.css",
   "scripts": {
@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/vitoravelino/kube/issues"
   },
-  "homepage": "https://github.com/vitoravelino/kube#readme"
+  "homepage": "https://github.com/vitoravelino/kube#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
 }
