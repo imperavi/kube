@@ -1,3 +1,18 @@
+$font-size: 16px !default;
+
+// Calculate em from px
+@function em($pixels, $context: $font-size) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}
+
 // BREAKPOINTS
 // ---------------------------------------------------------------------------
 $sm: em(768) !default;
@@ -78,21 +93,6 @@ $color-aluminum: #f8f8f8 !default;
 // ---------------------------------------------------------------------------
 
 // Font Size
-$font-size: 16px !default;
-
-// Calculate em from px
-@function em($pixels, $context: $font-size) {
-  @if (unitless($pixels)) {
-    $pixels: $pixels * 1px;
-  }
-
-  @if (unitless($context)) {
-    $context: $context * 1px;
-  }
-
-  @return $pixels / $context * 1em;
-}
-
 $font-size-smaller: em($font-size - 4px) !default;
 $font-size-small: em($font-size - 2px) !default;
 $font-size-big: em($font-size + 2px) !default;
