@@ -7,7 +7,7 @@ $font-size: 16px !default;
   }
 
   @if (unitless($base-font-size)) {
-    $context: $base-font-size * 1px;
+    $base-font-size: $base-font-size * 1px;
   }
 
   @return $pixels / $base-font-size * 1em;
