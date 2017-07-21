@@ -1,6 +1,6 @@
 /*
 	Kube. CSS & JS Framework
-	Version 6.5.2
+	Version 6.6.0
 	Updated: February 2, 2017
 
 	http://imperavi.com/kube/
@@ -289,7 +289,7 @@ hr {
 
 blockquote {
   padding-left: 1rem;
-  border-left: 0.25em solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid rgba(0, 0, 0, 0.1);
   font-style: italic;
   color: rgba(49, 52, 57, 0.65); }
   blockquote p {
@@ -1471,16 +1471,16 @@ button:hover,
   width: auto; }
 
 .w-small {
-  width: 30em; }
+  width: em(480); }
 
 .w-medium {
-  width: 37.5em; }
+  width: em(600); }
 
 .w-big {
-  width: 46.25em; }
+  width: em(740); }
 
 .w-large {
-  width: 52.5em; }
+  width: em(840); }
 
 @media (max-width: 48em) {
   .w-auto-sm {
@@ -1553,16 +1553,16 @@ button:hover,
   max-width: 100%; }
 
 .max-w-small {
-  max-width: 30em; }
+  max-width: em(480); }
 
 .max-w-medium {
-  max-width: 37.5em; }
+  max-width: em(600); }
 
 .max-w-big {
-  max-width: 46.25em; }
+  max-width: em(740); }
 
 .max-w-large {
-  max-width: 52.5em; }
+  max-width: em(840); }
 
 @media (max-width: 48em) {
   .max-w-auto-sm,
@@ -1672,10 +1672,6 @@ button:hover,
 
 @media (max-width: 48em) {
   .hide-sm {
-    display: none !important; } }
-
-@media (min-width: 48em) {
-  .show-sm {
     display: none !important; } }
 
 @media print {
@@ -1967,7 +1963,7 @@ button:hover,
   font-size: 0.9375em;
   background: #fff;
   box-shadow: 0 0.625em 1.5625em rgba(0, 0, 0, 0.15);
-  border-radius: 0.1875em;
+  border-radius: 3px;
   max-height: 300px;
   margin: 0;
   padding: 0;
@@ -2145,12 +2141,3 @@ button:hover,
     color: #313439;
     text-decoration: underline;
     background-color: #e0e1e1; }
-
-@media (min-width: 48em) {
-  .tabs ul {
-    display: flex;
-    margin-top: -0.0625em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-  .tabs li em,
-  .tabs li.active a {
-    border-bottom: 1px solid #fff; } }
