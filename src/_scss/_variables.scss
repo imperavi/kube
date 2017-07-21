@@ -1,16 +1,16 @@
 $font-size: 16px !default;
 
 // Calculate em from px
-@function em($pixels, $context: $font-size) {
+@function em($pixels, $base-font-size: $font-size) {
   @if (unitless($pixels)) {
     $pixels: $pixels * 1px;
   }
 
-  @if (unitless($context)) {
-    $context: $context * 1px;
+  @if (unitless($base-font-size)) {
+    $context: $base-font-size * 1px;
   }
 
-  @return $pixels / $context * 1em;
+  @return $pixels / $base-font-size * 1em;
 }
 
 // BREAKPOINTS
