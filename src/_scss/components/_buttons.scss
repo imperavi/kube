@@ -18,8 +18,8 @@ button,
 
 	& i {
         position: relative;
-        top: 1px;
-        margin: 0 2px;
+        top: em($font-size - 15px);
+        margin: 0 em($font-size - 14px);
 	}
 }
 input[type="submit"] {
@@ -66,7 +66,7 @@ button:hover,
 // Outline
 .button.outline {
     background: none;
-    border-width: 2px;
+    border-width: em($font-size - 14px);
     border-color: $color-button-primary;
     color: $color-button-primary;
 
@@ -99,7 +99,7 @@ button:hover,
 
 // Raised
 .button.raised {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    box-shadow: 0 em($font-size - 15px) em($font-size - 13px) rgba(0, 0, 0, .3);
 }
 
 // Upper

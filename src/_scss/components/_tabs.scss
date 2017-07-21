@@ -13,7 +13,7 @@
     & em,
     & a {
     	position: relative;
-    	top: 1px;
+    	top: em($font-size - 15px);
     	font-style: normal;
     	display: block;
     	padding: .5rem 1rem;
@@ -34,7 +34,7 @@
         & ul {
             @include flex;
 
-            margin-top: -1px;
+            margin-top: em($font-size - 17px);
             border-bottom: 1px solid rgba(0, 0, 0, .1);
         }
         & li em,

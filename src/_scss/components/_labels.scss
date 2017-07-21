@@ -1,15 +1,15 @@
 .label {
     display: inline-block;
-    font-size: 13px;
+    font-size: em($font-size - 3px);
     background: $color-silver;
-    line-height: 18px;
-    padding: 0 10px;
+    line-height: em($font-size + 2px);
+    padding: 0 em($font-size - 6px);
     font-weight: 500;
     color: $color-text;
     border: 1px solid transparent;
     vertical-align: middle;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: em($font-size - 12px);
 	& a,
 	& a:hover {
 		color: inherit;
@@ -18,12 +18,12 @@
 }
 .label.big {
     font-size: $font-size-small;
-    line-height: 24px;
-    padding: 0 12px;
+    line-height: em($font-size + 8px);
+    padding: 0 em($font-size - 6px);
 }
 .label.upper {
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: em($font-size - 5px);
 }
 
 // Outline
@@ -35,10 +35,10 @@
 // Badges
 .label.badge {
     text-align: center;
-    border-radius: 64px;
-    padding: 0 6px;
+    border-radius: em($font-size + 48px);
+    padding: 0 em($font-size - 10px);
     &.big {
-        padding: 0 8px;
+        padding: 0 em($font-size - 8px);
     }
 }
 
@@ -48,9 +48,9 @@
     background: none;
     border: none;
     text-transform: uppercase;
-    font-size: $font-size-smaller - 1px;
+    font-size: em($font-size - 6px);
     &.big {
-        font-size: $font-size-small - 1px;
+        font-size: em($font-size - 8px);
     }
 }
 
