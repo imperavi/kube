@@ -1,4 +1,3 @@
-button,
 .button {
 	font-family: $text-font-family;
 	font-size: $button-font-size;
@@ -25,7 +24,6 @@ button,
 input[type="submit"] {
     width: auto;
 }
-button:hover,
 .button:hover {
     outline: none;
 	text-decoration: none;
@@ -34,7 +32,6 @@ button:hover,
 }
 
 // Disabled
-.button:disabled,
 .button.disabled {
 	cursor: default;
 	font-style: normal;
