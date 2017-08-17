@@ -1,122 +1,146 @@
-.button {
-	font-family: $text-font-family;
-	font-size: $button-font-size;
-	color: $color-button-primary-text;
-	background-color: $color-button-primary;
-	border-radius: $button-border-radius;
-	min-height: $button-height;
-	padding: $button-padding-tb $button-padding-rl;
-	font-weight: $button-font-weight;
-	text-decoration: none;
-	cursor: pointer;
-	display: inline-block;
-	line-height: $button-base-line;
-	border: 1px solid transparent;
-	vertical-align: middle;
-	-webkit-appearance: none;
+button {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
 
-	& i {
-        position: relative;
-        top: em($font-size - 15px);
-        margin: 0 em($font-size - 14px);
-	}
+.button {
+  font-family: $text-font-family;
+  font-size: $button-font-size;
+  color: $color-button-primary;
+  background-color: rgba($color-button-primary, 0);
+  border-radius: $button-border-radius;
+  min-height: $button-height;
+  padding: $button-padding-tb $button-padding-rl;
+  font-weight: $button-font-weight;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: $button-base-line;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  border-color: rgba($color-button-primary, 0);
+
+  & i {
+    position: relative;
+    top: em($font-size - 15px);
+    margin: 0 em($font-size - 14px);
+  }
 }
 input[type="submit"] {
-    width: auto;
+  width: auto;
 }
-.button:hover {
+
+.button {
+  &:hover {
     outline: none;
-	text-decoration: none;
-	color: $color-button-primary-text;
-	background-color: lighten($color-button-primary, 10%);
+    text-decoration: none;
+    color: lighten($color-button-primary, 10%);
+    background-color: lighten($color-button-primary, 100%);
+  }
+
+  &.primary:hover {
+    color: $color-button-primary-text;
+    background-color: lighten($color-button-primary, 10%);
+  }
+
+  &.secondary:hover {
+    color: $color-button-secondary-text;
+    background-color: lighten($color-button-secondary, 10%);
+  }
 }
 
 // Disabled
 .button.disabled {
-	cursor: default;
-	font-style: normal;
-	color: rgba($color-button-primary-text, .7);
-	background-color: rgba($color-button-primary, .7);
+  cursor: default;
+  font-style: normal;
+  color: rgba($color-button-primary-text, .7);
+  background-color: rgba($color-button-primary, .7);
 }
 
 // Size
 .button.small {
-    font-size: $button-font-size-small;
-    min-height: $button-height-small;
-    padding: $button-padding-small-tb $button-padding-small-rl;
-    border-radius: $button-border-radius;
+  font-size: $button-font-size-small;
+  min-height: $button-height-small;
+  padding: $button-padding-small-tb $button-padding-small-rl;
+  border-radius: $button-border-radius;
 }
 .button.big {
-    font-size: $button-font-size-big;
-    min-height: $button-height-big;
-    padding: $button-padding-big-tb $button-padding-big-rl;
-    border-radius: $button-border-radius;
+  font-size: $button-font-size-big;
+  min-height: $button-height-big;
+  padding: $button-padding-big-tb $button-padding-big-rl;
+  border-radius: $button-border-radius;
 }
 .button.large {
-    font-size: $button-font-size-large;
-    min-height: $button-height-large;
-    padding: $button-padding-large-tb $button-padding-large-rl;
-    border-radius: $button-border-radius;
+  font-size: $button-font-size-large;
+  min-height: $button-height-large;
+  padding: $button-padding-large-tb $button-padding-large-rl;
+  border-radius: $button-border-radius;
 }
 
 
 // Outline
 .button.outline {
-    background: none;
-    border-width: em($font-size - 14px);
-    border-color: $color-button-primary;
-    color: $color-button-primary;
+  background: none;
+  border-width: em($font-size - 14px);
+  border-color: $color-button-primary;
+  color: $color-button-primary;
 
-    &:hover {
-        background: none;
-        color: rgba($color-button-primary, .6);
-        border-color: rgba($color-button-primary, .5);
-    }
-    &:disabled,
-    &.disabled {
-        background: none;
-        color: rgba($color-button-primary, .7);
-    	border-color: rgba($color-button-primary, .5);
-    }
+  &:hover {
+    background: none;
+    color: rgba($color-button-primary, .6);
+    border-color: rgba($color-button-primary, .5);
+  }
+  &:disabled,
+  &.disabled {
+    background: none;
+    color: rgba($color-button-primary, .7);
+    border-color: rgba($color-button-primary, .5);
+  }
 }
 
 // White
 .button.inverted {
-    @include button(#000, #fff);
+  @include button(#000, #fff);
 
-    &:hover {
-        opacity: .7;
-    }
+  &:hover {
+    opacity: .7;
+  }
 }
 
 // Round
 .button.round {
-    border-radius: $button-height-large;
+  border-radius: $button-height-large;
 }
 
 // Raised
 .button.raised {
-    box-shadow: 0 em($font-size - 15px) em($font-size - 13px) rgba(0, 0, 0, .3);
+  box-shadow: 0 em($font-size - 15px) em($font-size - 13px) rgba(0, 0, 0, .3);
 }
 
 // Upper
 .button.upper {
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    font-size: $button-font-size-small;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: $button-font-size-small;
 
-    &.small {
-        font-size: $button-font-size-smaller;
-    }
-    &.big {
-        font-size: $button-font-size-small;
-    }
-    &.large {
-        font-size: $button-font-size;
-    }
+  &.small {
+    font-size: $button-font-size-smaller;
+  }
+  &.big {
+    font-size: $button-font-size-small;
+  }
+  &.large {
+    font-size: $button-font-size;
+  }
+}
+
+// Primary
+.button.primary {
+  @include button($color-button-primary-text, $color-button-primary);
 }
 
 // Secondary
 .button.secondary {
-	@include button($color-button-secondary-text, $color-button-secondary);
+  @include button($color-button-secondary-text, $color-button-secondary);
 }

@@ -1,6 +1,6 @@
 /*
 	Kube. CSS & JS Framework
-	Version 6.6.0
+	Version 6.6.1
 	Updated: February 2, 2017
 
 	http://imperavi.com/kube/
@@ -969,12 +969,15 @@ form,
   border-left: none;
   border-radius: 0 0.1875em 0.1875em 0; }
 
-button,
+button {
+  border: 1px solid transparent;
+  background-color: transparent; }
+
 .button {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 0.9375em;
-  color: #fff;
-  background-color: #1c86f2;
+  color: #1c86f2;
+  background-color: rgba(28, 134, 242, 0);
   border-radius: 0.1875em;
   min-height: 2.5em;
   padding: 0.5em 1.25em;
@@ -985,8 +988,8 @@ button,
   line-height: 1.25em;
   border: 1px solid transparent;
   vertical-align: middle;
-  -webkit-appearance: none; }
-  button i,
+  -webkit-appearance: none;
+  border-color: rgba(28, 134, 242, 0); }
   .button i {
     position: relative;
     top: 0.0625em;
@@ -995,14 +998,20 @@ button,
 input[type="submit"] {
   width: auto; }
 
-button:hover,
 .button:hover {
   outline: none;
   text-decoration: none;
+  color: #4ca0f5;
+  background-color: white; }
+
+.button.primary:hover {
   color: #fff;
   background-color: #4ca0f5; }
 
-.button:disabled,
+.button.secondary:hover {
+  color: #fff;
+  background-color: #494d54; }
+
 .button.disabled {
   cursor: default;
   font-style: normal;
@@ -1080,6 +1089,27 @@ button:hover,
     font-size: 0.5625em; }
   .button.upper.large {
     font-size: 0.9375em; }
+
+.button.primary {
+  color: #fff;
+  background-color: #1c86f2; }
+  .button.primary:hover {
+    color: #fff;
+    background-color: #7cb9f8; }
+  .button.primary:disabled, .button.primary.disabled {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(28, 134, 242, 0.7); }
+  .button.primary.outline {
+    background: none;
+    color: #1c86f2;
+    border-color: #1c86f2; }
+    .button.primary.outline:hover {
+      color: rgba(28, 134, 242, 0.6);
+      border-color: rgba(28, 134, 242, 0.5); }
+    .button.primary.outline:disabled, .button.primary.outline.disabled {
+      background: none;
+      color: rgba(28, 134, 242, 0.7);
+      border-color: rgba(28, 134, 242, 0.5); }
 
 .button.secondary {
   color: #fff;
