@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.FormData = function(app)
     {
@@ -79,4 +79,4 @@
     };
 
 
-}(Kube));
+}(Kube,jQuery));

@@ -16,7 +16,7 @@
 
 })(jQuery);
 
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Modal = function(element, options)
     {
@@ -340,4 +340,4 @@
     Kube.Plugin.create('Modal');
     Kube.Plugin.autoload('Modal');
 
-}(Kube));
+}(Kube,jQuery));

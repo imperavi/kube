@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Message = function(element, options)
     {
@@ -79,4 +79,4 @@
     Kube.Plugin.create('Message');
     Kube.Plugin.autoload('Message');
 
-}(Kube));
+}(Kube,jQuery));
