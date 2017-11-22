@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Animation = function(element, effect, callback)
     {
@@ -150,4 +150,4 @@
 
     $.fn.animation.options = {};
 
-})(jQuery);
+})(jQuery,jQuery);
