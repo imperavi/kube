@@ -130,7 +130,7 @@
     // Inheritance
     Kube.Animation.inherits(Kube);
 
-}(Kube));
+}(Kube,jQuery));
 
 // Plugin
 (function($)
@@ -150,4 +150,4 @@
 
     $.fn.animation.options = {};
 
-})(jQuery,jQuery);
+})(jQuery);
