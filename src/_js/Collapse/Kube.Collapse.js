@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Collapse = function(element, options)
     {
@@ -201,4 +201,4 @@
     Kube.Plugin.create('Collapse');
     Kube.Plugin.autoload('Collapse');
 
-}(Kube));
+}(Kube,jQuery));
