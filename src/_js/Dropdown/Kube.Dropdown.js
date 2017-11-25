@@ -13,8 +13,8 @@
     		toggleEvent: 'click',
     		height: false, // integer
     		width: false, // integer
-    		animationOpen: 'slideDown',
-        	animationClose: 'slideUp',
+    		animationOpen: 'fadeIn',
+        	animationClose: 'fadeOut',
     		caretUp: false,
             callbacks: ['open', 'opened', 'close', 'closed']
         };
