@@ -1229,8 +1229,8 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     		toggleEvent: 'click',
     		height: false, // integer
     		width: false, // integer
-    		animationOpen: 'slideDown',
-        	animationClose: 'slideUp',
+    		animationOpen: 'fadeIn',
+        	animationClose: 'fadeOut',
     		caretUp: false,
             callbacks: ['open', 'opened', 'close', 'closed']
         };
@@ -1809,8 +1809,8 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     		overlay: true,
     		appendForms: false,
     		appendFields: false,
-    		animationOpen: 'show',
-        	animationClose: 'hide',
+    		animationOpen: 'flipIn',
+        	animationClose: 'fadeOut',
     		callbacks: ['open', 'opened', 'close', 'closed']
         };
 
@@ -1964,7 +1964,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     		$.ajax({
     			url: this.opts.url + '?' + new Date().getTime(),
     			cache: false,
-    			type: 'post',
+    			type: 'get',
     			data: this.getData(),
     			success: $.proxy(function(data)
     			{
