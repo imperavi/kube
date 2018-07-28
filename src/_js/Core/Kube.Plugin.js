@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Plugin = {
         create: function(classname, pluginname)
@@ -125,4 +125,4 @@
         Kube.Plugin.watch();
     });
 
-}(Kube));
+}(Kube, jQuery));

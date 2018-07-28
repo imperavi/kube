@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Dropdown = function(element, options)
     {
@@ -246,4 +246,4 @@
     Kube.Plugin.create('Dropdown');
     Kube.Plugin.autoload('Dropdown');
 
-}(Kube));
+}(Kube,jQuery));

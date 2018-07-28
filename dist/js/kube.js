@@ -11,7 +11,7 @@
 if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 ;(function($) { var version = $.fn.jquery.split('.'); if (version[0] == 1 && version[1] < 8) {throw new Error('Kube\'s requires at least jQuery v1.8'); }})(jQuery);
 
-;(function()
+;(function($)
 {
     // Inherits
     Function.prototype.inherits = function(parent)
@@ -91,13 +91,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     // Scope
     window.Kube = Kube;
 
-})();
+})(jQuery);
 /**
  * @library Kube Plugin
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Plugin = {
         create: function(classname, pluginname)
@@ -219,13 +219,14 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
         Kube.Plugin.watch();
     });
 
-}(Kube));
+}(Kube, jQuery));
+
 /**
  * @library Kube Animation
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Animation = function(element, effect, callback)
     {
@@ -352,7 +353,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     // Inheritance
     Kube.Animation.inherits(Kube);
 
-}(Kube));
+}(Kube,jQuery));
 
 // Plugin
 (function($)
@@ -373,6 +374,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     $.fn.animation.options = {};
 
 })(jQuery);
+
 /**
  * @library Kube Detect
  * @author Imperavi LLC
@@ -412,7 +414,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.FormData = function(app)
     {
@@ -488,13 +490,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     };
 
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Response
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Response = function(app) {};
 
@@ -596,13 +598,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     };
 
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Utils
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Utils = function() {};
 
@@ -642,13 +644,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     };
 
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Message
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Message = function(element, options)
     {
@@ -724,13 +726,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Message');
     Kube.Plugin.autoload('Message');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Sticky
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Sticky = function(element, options)
     {
@@ -788,13 +790,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Sticky');
     Kube.Plugin.autoload('Sticky');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Toggleme
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Toggleme = function(element, options)
     {
@@ -899,13 +901,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Toggleme');
     Kube.Plugin.autoload('Toggleme');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Offcanvas
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Offcanvas = function(element, options)
     {
@@ -1091,13 +1093,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Offcanvas');
     Kube.Plugin.autoload('Offcanvas');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Collapse
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Collapse = function(element, options)
     {
@@ -1295,13 +1297,14 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Collapse');
     Kube.Plugin.autoload('Collapse');
 
-}(Kube));
+}(Kube,jQuery));
+
 /**
  * @library Kube Dropdown
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Dropdown = function(element, options)
     {
@@ -1544,13 +1547,13 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Dropdown');
     Kube.Plugin.autoload('Dropdown');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Tabs
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Tabs = function(element, options)
     {
@@ -1855,7 +1858,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Tabs');
     Kube.Plugin.autoload('Tabs');
 
-}(Kube));
+}(Kube,jQuery));
 /**
  * @library Kube Modal
  * @author Imperavi LLC
@@ -1874,7 +1877,7 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
 
 })(jQuery);
 
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Modal = function(element, options)
     {
@@ -2198,4 +2201,4 @@ if (typeof jQuery === 'undefined') {throw new Error('Kube\'s requires jQuery')};
     Kube.Plugin.create('Modal');
     Kube.Plugin.autoload('Modal');
 
-}(Kube));
+}(Kube,jQuery));

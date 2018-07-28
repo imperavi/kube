@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Response = function(app) {};
 
@@ -105,4 +105,4 @@
     };
 
 
-}(Kube));
+}(Kube,jQuery));

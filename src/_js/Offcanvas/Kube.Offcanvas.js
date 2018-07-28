@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Offcanvas = function(element, options)
     {
@@ -189,4 +189,4 @@
     Kube.Plugin.create('Offcanvas');
     Kube.Plugin.autoload('Offcanvas');
 
-}(Kube));
+}(Kube,jQuery));

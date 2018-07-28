@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Sticky = function(element, options)
     {
@@ -61,4 +61,4 @@
     Kube.Plugin.create('Sticky');
     Kube.Plugin.autoload('Sticky');
 
-}(Kube));
+}(Kube,jQuery));

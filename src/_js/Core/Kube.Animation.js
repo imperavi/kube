@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Animation = function(element, effect, callback)
     {
@@ -130,7 +130,7 @@
     // Inheritance
     Kube.Animation.inherits(Kube);
 
-}(Kube));
+}(Kube,jQuery));
 
 // Plugin
 (function($)

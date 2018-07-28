@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Tabs = function(element, options)
     {
@@ -308,4 +308,4 @@
     Kube.Plugin.create('Tabs');
     Kube.Plugin.autoload('Tabs');
 
-}(Kube));
+}(Kube,jQuery));

@@ -3,7 +3,7 @@
  * @author Imperavi LLC
  * @license MIT
  */
-(function(Kube)
+(function(Kube,$)
 {
     Kube.Toggleme = function(element, options)
     {
@@ -108,4 +108,4 @@
     Kube.Plugin.create('Toggleme');
     Kube.Plugin.autoload('Toggleme');
 
-}(Kube));
+}(Kube,jQuery));
