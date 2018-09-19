@@ -1,0 +1,206 @@
+/* =Forms
+-----------------------------------------------------------------------------*/
+.forms {
+	& label {
+		display: block;
+		margin-bottom: $fieldsBottom;
+	}
+
+	& fieldset {
+		padding-bottom: .5em;
+		border-radius: 4px;
+	}
+
+	& input[type="text"],
+	& input[type="password"],
+	& input[type="email"],
+	& input[type="url"],
+	& input[type="phone"],
+	& input[type="tel"],
+	& input[type="number"],
+	& input[type="datetime"],
+	& input[type="date"],
+	& input[type="search"],
+	& input[type="range"],
+	& input[type="file"],
+	& input[type="datetime-local"],
+	& textarea,
+	& select {
+		display: block;
+	}
+}
+.forms-inline,
+.forms-inline-list {
+	& input[type="text"],
+	& input[type="password"],
+	& input[type="email"],
+	& input[type="url"],
+	& input[type="phone"],
+	& input[type="tel"],
+	& input[type="number"],
+	& input[type="datetime"],
+	& input[type="date"],
+	& input[type="search"],
+	& input[type="range"],
+	& input[type="file"],
+	& input[type="datetime-local"],
+	& textarea,
+	& select {
+		display: inline-block;
+	}
+}
+
+.forms-list,
+.forms-inline-list {
+	margin: 0;
+	padding: 0;
+	margin-bottom: $fieldsBottom;
+	list-style: none;
+}
+.forms-list label,
+.forms-inline-list li,
+.forms-inline-list li label {
+	display: inline-block;
+	margin-bottom: 0;
+}
+.forms-inline-list li label {
+	margin-right: $fieldsBottom;
+}
+.forms-list li {
+	margin-bottom: 6px;
+}
+.forms-desc {
+	margin-top: 4px;
+	color: rgba(0, 0, 0, .4);
+	font-size: $smallFontSize;
+	line-height: 1.4em;
+}
+
+
+input[type="radio"],
+input[type="checkbox"] {
+	position: relative;
+	top: -1px;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="search"],
+input[type="datetime-local"],
+textarea {
+	@include transition(border ease .5s);
+}
+input[type="range"] {
+	position: relative;
+	top: 3px;
+}
+textarea {
+	line-height: 1.4em;
+}
+select {
+	margin-bottom: 0 !important;
+}
+
+/* States */
+.error,
+.success {
+	font-weight: normal;
+	font-size: $smallFontSize;
+}
+input.input-error,
+textarea.input-error,
+select.input-error,
+.input-error {
+	border-color: $colorRed;
+	box-shadow: 0 0 0 2px rgba(red($colorRed), green($colorRed), blue($colorRed), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+}
+input.input-success,
+textarea.input-success,
+select.input-success,
+.input-success  {
+	border-color: $colorGreen;
+	box-shadow: 0 0 0 2px rgba(red($colorGreen), green($colorGreen), blue($colorGreen), .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+
+}
+input.input-gray,
+textarea.input-gray,
+select.input-gray,
+.input-gray {
+	border-color: #ccc;
+	box-shadow: 0 0 0 2px rgba(204, 204, 204, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+	border-color: #5ca9e4;
+	box-shadow: 0 0 0 2px rgba(70, 161, 231, .3), 0 1px 2px rgba(0, 0, 0, .2) inset;
+}
+
+input.input-search,
+input[type="search"] {
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-bottom: 0;
+	border-radius: 15px;
+}
+
+/* Append & Prepend */
+.input-groups {
+	display: table !important;
+}
+.input-groups input {
+	width: 100%;
+}
+.input-groups input,
+.input-groups .input-append,
+.input-groups .input-prepend,
+.input-groups .btn-append {
+	display: table-cell !important;
+}
+.input-groups .btn-append,
+.input-groups .input-append,
+.input-groups .input-prepend {
+	width: 1%;
+	vertical-align: middle;
+}
+.input-groups .input-append,
+.input-groups .input-prepend {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	margin: 0;
+	padding: 0;
+	color: $colorBody;
+	line-height: 1;
+	font-size: 1em;
+	white-space: nowrap;
+}
+.input-groups .input-prepend {
+	border-right: none;
+}
+.input-groups .input-append {
+	position: relative;
+	z-index: 1;
+	border-left: none;
+}
+.input-groups .btn-append .btn {
+	display: block;
+	height: auto;
+	border-radius: 0 4px 4px 0;
+}
+
+/* =Mobile (Portrait)
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+
+	.forms-list label {
+		display: inline-block;
+	}
+
+}

@@ -1,0 +1,324 @@
+/* =Typography
+-----------------------------------------------------------------------------*/
+body {
+	background: $backgroundBody;
+	color: $colorBody;
+	font-size: $baseFontSize + 0px;
+	line-height: $baseLineInEms;
+	font-family: $baseFontFamily;
+}
+a {
+	color: $colorLink;
+	&:focus,
+	&:hover {
+		color: $colorLinkHover;
+	}
+}
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $headingsFontFamily;
+	font-weight: bold;
+	color: $colorHeadings;
+	text-rendering: optimizeLegibility;
+}
+h1 {
+	font-size: $h1FontSize;
+	line-height: 1.111em;
+	margin-bottom: .25em;
+}
+h2 {
+	font-size: $h2FontSize;
+	line-height: 1.111em;
+	margin-bottom: .5em;
+}
+h3 {
+	font-size: $h3FontSize;
+	line-height: 1.333em;
+	margin-bottom: .5em;
+}
+h4 {
+	font-size: $h4FontSize;
+	line-height: 1.5em;
+	margin-bottom: .333em;
+}
+h5 {
+	font-size: $h5FontSize;
+	line-height: $baseLineInEms;
+	margin-bottom: .25em;
+}
+h6 {
+	font-size: $h6FontSize;
+	text-transform: uppercase;
+	line-height: $baseLineInEms;
+	margin-bottom: .25em;
+}
+
+/* =Subheading
+-----------------------------------------------------------------------------*/
+hgroup h1:first-child,
+hgroup h2:first-child,
+hgroup h3:first-child,
+hgroup h4:first-child,
+hgroup h5:first-child, {
+	margin-bottom: 0;
+}
+h1.subheading,
+h2.subheading,
+h3.subheading,
+h4.subheading,
+h5.subheading {
+	font-weight: 300;
+}
+h1.subheading {
+	font-size: $h1SubheadingFontSize;
+}
+h2.subheading {
+	font-size: $h2SubheadingFontSize;
+}
+h3.subheading {
+	font-size: $h3SubheadingFontSize;
+}
+h4.subheading {
+	font-size: $h4SubheadingFontSize;
+}
+h5.subheading {
+	font-size: $h5SubheadingFontSize;
+}
+
+/* =Lead
+-----------------------------------------------------------------------------*/
+.lead {
+	font-size: $leadFontSize;
+	font-weight: 300;
+	line-height: 1.4em;
+	margin-bottom: .75em;
+}
+p,
+ul,
+ol,
+dl,
+dd,
+dt,
+blockquote,
+td,
+th {
+	line-height: $baseLineInEms;
+}
+ul,
+ol,
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+	margin: 0 0 0 $baseLineInEms;
+}
+ol ol li {
+	list-style-type: lower-alpha;
+}
+ol ol ol li {
+	list-style-type: lower-roman;
+}
+p,
+ul,
+ol,
+dl,
+blockquote,
+hr,
+pre,
+table,
+form,
+fieldset,
+figure,
+address {
+	margin-bottom: $baseLineInEms;
+}
+address {
+	font-style: normal;
+}
+dl dt {
+	font-weight: 500;
+}
+dd {
+	margin-left: 1em;
+}
+blockquote {
+	font-size: $quoteFontSize;
+	font-style: italic;
+	position: relative;
+	padding-left: $baseLineInEms;
+	margin-left: 0;
+	border-left: 2px solid #dbdada;
+	& p {
+		margin-bottom: .5em;
+	}
+}
+blockquote small,
+cite {
+	color: #777;
+	font-style: italic;
+}
+small,
+blockquote cite {
+	font-size: $smallFontSize;
+	line-height: 1;
+}
+del {
+	text-decoration: line-through;
+}
+abbr[title],
+dfn[title] {
+	border-bottom: 1px dotted #000;
+	cursor: help;
+}
+strong,
+b {
+	font-weight: bold;
+}
+em,
+i {
+	font-style: italic;
+}
+sub,
+sup {
+	font-size: $superSmallFontSize;
+	line-height: 0;
+	position: relative;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+figcaption {
+	font-size: $smallFontSize;
+	font-style: italic;
+}
+ins,
+mark {
+	background-color: $colorYellow;
+	color: $colorBlack;
+	text-decoration: none;
+}
+pre,
+code,
+kbd,
+samp {
+	font-size: 90%;
+	font-family: $codeFontFamily;
+}
+pre {
+	font-size: 90%;
+	line-height: 1.45em;
+	color: $colorBody;
+	background: #f6f6f6;
+	padding: $baseLineInEms;
+	overflow: auto;
+}
+code {
+	padding: 3px 3px 1px 3px;
+	display: inline-block;
+	line-height: 1;
+	background: #f6f6f6;
+	border: 1px solid #ddd;
+}
+pre code {
+	font-size: 100%;
+	border: none;
+	padding: 0;
+	background: none;
+	line-height: $baseLineInEms;
+}
+kbd {
+	padding: 2px 6px 1px 6px;
+	line-height: 1;
+	display: inline-block;
+	border-radius: .3em;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px white inset;
+	background-color: #fafafa;
+	border: 1px solid #ccc;
+	color: $colorBody;
+	font-weight: normal;
+	white-space: nowrap;
+}
+button:active,
+button:focus {
+	outline: none;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="search"],
+input[type="datetime-local"],
+textarea,
+select[multiple="multiple"] {
+	font-family: $controlsFontFamily;
+	line-height: 1;
+	font-size: $baseFontSize + 0px;
+	border-radius: 0;
+	background: #fff;
+	box-shadow: none;
+	border: 1px solid #bbbcc0;
+	outline: none;
+	padding: 7px 5px;
+	position: relative;
+	z-index: 2;
+	-webkit-appearance: none;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="search"],
+input[type="datetime-local"] {
+	height: 2.3em;
+}
+input[type="range"] {
+	position: relative;
+	top: 3px;
+}
+select[multiple="multiple"],
+textarea {
+	line-height: 1.35em;
+}
+fieldset {
+	padding: $baseLineInEms;
+	margin-bottom: $baseLineInEms;
+	border: 1px solid #dbdada;
+}
+legend {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: -1em;
+}
+tfoot th,
+tfoot td {
+	background-color: #f4f4f4;
+}
+th,
+td {
+	border-bottom: 1px solid #eee;
+	padding: 8px 10px;
+}
+table caption {
+	text-transform: uppercase;
+	padding: 0 1em;
+	color: #777;
+	font-size: $smallFontSize;
+}

@@ -1,0 +1,92 @@
+/* =Helpers
+-----------------------------------------------------------------------------*/
+.group {
+	@include clearfix;
+}
+.small {
+	font-size: $smallFontSize;
+}
+.nowrap,
+.nowrap td {
+	white-space: nowrap;
+}
+.req,
+.required {
+	font-weight: normal;
+	color: $colorRed;
+}
+.color-gray {
+	color: #777;
+}
+.color-gray-light {
+	color: #999;
+}
+.color-black {
+	color: #000;
+}
+.color-red,
+.error {
+	color: $colorRed;
+}
+.color-green,
+.success {
+	color: $colorGreen;
+}
+.text-centered {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+.last {
+	margin-right: 0 !important;
+}
+.pause {
+	margin-bottom: $baseLineHeight/2 + 0em !important;
+}
+.end {
+	margin-bottom: 0 !important;
+}
+.normal {
+	font-weight: normal;
+}
+.bold {
+	font-weight: bold;
+}
+.italic {
+	font-style: italic;
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+
+/* Responsive embedded objects */
+.video-wrapper {
+	height: 0;
+	padding-bottom: 56.25%; // ratio 16:9
+	position: relative;
+	margin-bottom: $baseLineInEms;
+	& iframe,
+	& object,
+	& embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+
+/* =Responsive
+-----------------------------------------------------------------------------*/
+@media only screen and (max-width: 767px) {
+	.left,
+	.right {
+		float: none;
+	}
+}
