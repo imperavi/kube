@@ -1,0 +1,26 @@
+{
+  "name": "kube",
+  "version": "3.0.2",
+  "homepage": "https://github.com/imperavi/kube",
+  "authors": [
+    "imperavi"
+  ],
+  "description": "Kube is a minimalistic CSS-framework for professional developers and designers.",
+  "main": "css/kube.min.css",
+  "keywords": [
+    "css",
+    "less",
+    "responsive",
+    "lightweight",
+    "grid",
+    "framework"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
