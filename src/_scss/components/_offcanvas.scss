@@ -10,8 +10,8 @@
 }
 .offcanvas .close {
 	position: absolute;
-	top: 8px;
-	right: 8px;
+	top: em($font-size - 8px);
+	right: em($font-size - 8px);
 }
 .offcanvas-left {
     border-right: 1px solid rgba(0, 0, 0, .1);

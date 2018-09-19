@@ -1,9 +1,13 @@
-button,
+button {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
 .button {
 	font-family: $text-font-family;
 	font-size: $button-font-size;
-	color: $color-button-primary-text;
-	background-color: $color-button-primary;
+	color: $color-button-primary;
+	background-color: transparent;
 	border-radius: $button-border-radius;
 	min-height: $button-height;
 	padding: $button-padding-tb $button-padding-rl;
@@ -18,23 +22,34 @@ button,
 
 	& i {
         position: relative;
-        top: 1px;
-        margin: 0 2px;
+        top: em($font-size - 15px);
+        margin: 0 em($font-size - 14px);
 	}
 }
 input[type="submit"] {
     width: auto;
 }
-button:hover,
-.button:hover {
-    outline: none;
-	text-decoration: none;
-	color: $color-button-primary-text;
-	background-color: lighten($color-button-primary, 10%);
+
+.button {
+  &:hover {
+      outline: none;
+      text-decoration: none;
+      color: lighten($color-button-primary, 10%);
+      background-color: lighten($color-button-primary, 100%);
+  }
+
+  &.primary:hover {
+      color: $color-button-primary-text;
+      background-color: lighten($color-button-primary, 10%);
+  }
+
+  &.secondary:hover {
+      color: $color-button-secondary-text;
+      background-color: lighten($color-button-secondary, 10%);
+  }
 }
 
 // Disabled
-.button:disabled,
 .button.disabled {
 	cursor: default;
 	font-style: normal;
@@ -66,7 +81,7 @@ button:hover,
 // Outline
 .button.outline {
     background: none;
-    border-width: 2px;
+    border-width: em($font-size - 14px);
     border-color: $color-button-primary;
     color: $color-button-primary;
 
@@ -99,7 +114,7 @@ button:hover,
 
 // Raised
 .button.raised {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    box-shadow: 0 em($font-size - 15px) em($font-size - 13px) rgba(0, 0, 0, .3);
 }
 
 // Upper
@@ -117,6 +132,11 @@ button:hover,
     &.large {
         font-size: $button-font-size;
     }
+}
+
+// Primary
+.button.primary {
+    @include button($color-button-primary-text, $color-button-primary);
 }
 
 // Secondary

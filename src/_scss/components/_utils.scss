@@ -65,9 +65,9 @@
 // ScrollbarMeasure
 .scrollbar-measure {
 	position: absolute;
-	top: -9999px;
-	width: 50px;
-	height: 50px;
+	top: em($font-size - 9999);
+	width: em($font-size + 34px);
+	height: em($font-size + 34px);
 	overflow: scroll;
 }
 
@@ -92,22 +92,22 @@
 .close {
 
     display: inline-block;
-    min-height: 16px;
-    min-width: 16px;
-    line-height: 16px;
+    min-height: em($font-size);
+    min-width: em($font-size);
+    line-height: em($font-size);
     vertical-align: middle;
     text-align: center;
-    font-size: 12px;
+    font-size: em($font-size - 4px);
     opacity: .6;
 
     &:hover {
         opacity: 1;
     }
     &.small {
-        font-size: 8px;
+        font-size: em($font-size - 8px);
     }
     &.big {
-        font-size: 18px;
+        font-size: em($font-size + 2px);
     }
     &.white {
         color: #fff;
@@ -120,7 +120,7 @@
 }
 .button {
     & .caret {
-        margin-right: -8px;
+        margin-right: em($font-size - 24px);
     }
 }
 

@@ -129,7 +129,7 @@ p, blockquote, hr, pre, ol, ul, dl, table, fieldset, figure, address, form {
 hr {
     border: none;
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
-	margin-top: -1px;
+	margin-top: em($font-size - 17px);
 }
 blockquote {
 	padding-left: 1rem;
@@ -159,8 +159,8 @@ var {
 }
 mark, code, samp, kbd {
     position: relative;
-    top: -1px;
-	padding: 4px 4px 2px 4px;
+    top: em($font-size - 17px);
+	padding: em($font-size - 12px) em($font-size - 12px) em($font-size - 14px) em($font-size - 12px);
 	display: inline-block;
 	line-height: 1;
 	color: rgba($color-text, .85);
@@ -189,7 +189,7 @@ sup {
 	top: 0;
 }
 sub {
-	bottom: 1px;
+	bottom: em($font-size - 15px);
 }
 
 // Preformatted
@@ -225,7 +225,7 @@ figure figcaption {
 figure pre {
     background: none;
     border: 1px solid rgba(0, 0, 0, .1);
-    border-radius: 4px;
+    border-radius: em($font-size - 12px);
 }
 figure {
     & .video-container,

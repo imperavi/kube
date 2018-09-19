@@ -1,0 +1,29 @@
+// Generate Columns
+@mixin generate-grid-columns-qty($new-grid-columns) {
+
+  @for $i from 1 through $new-grid-columns
+  {
+    .col-#{$i} {
+      width: 100% / $new-grid-columns * $i;
+    }
+    .offset-#{$i} {
+      $width: 100% / $new-grid-columns * $i;
+      margin-left: $width;
+    }
+
+  }
+
+  .gutters {
+    @for $i from 1 through $new-grid-columns
+    {
+      & > .col-#{$i} {
+        $width: 100% / $new-grid-columns * $i;
+        width: calc(#{$width} - #{$grid-gutter});
+      }
+      & > .offset-#{$i} {
+        $width: 100% / $new-grid-columns * $i;
+        margin-left: calc(#{$width} + #{$grid-gutter}) !important;
+      }
+    }
+  }
+}

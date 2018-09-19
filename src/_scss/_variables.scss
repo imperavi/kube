@@ -1,16 +1,31 @@
+$font-size: 16px !default;
+
+// Calculate em from px
+@function em($pixels, $base-font-size: $font-size) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($base-font-size)) {
+    $base-font-size: $base-font-size * 1px;
+  }
+
+  @return $pixels / $base-font-size * 1em;
+}
+
 // BREAKPOINTS
 // ---------------------------------------------------------------------------
-$sm: 768px !default;
-$md: 1024px !default;
-$lg: 1200px !default;
+$sm: em(768) !default;
+$md: em(1024) !default;
+$lg: em(1200) !default;
 
 
 // WIDTH
 // ---------------------------------------------------------------------------
-$w-small: 480px !default;
-$w-medium: 600px !default;
-$w-big: 740px !default;
-$w-large: 840px !default;
+$w-small: em(480) !default;
+$w-medium: em(600) !default;
+$w-big: em(740) !default;
+$w-large: em(840) !default;
 
 
 // Z-INDEX
@@ -78,21 +93,20 @@ $color-aluminum: #f8f8f8 !default;
 // ---------------------------------------------------------------------------
 
 // Font Size
-$font-size: 16px !default;
-$font-size-smaller: $font-size - 4px !default;
-$font-size-small: $font-size - 2px !default;
-$font-size-big: $font-size + 2px !default;
-$font-size-large: $font-size + 4px !default;
+$font-size-smaller: em($font-size - 4px) !default;
+$font-size-small: em($font-size - 2px) !default;
+$font-size-big: em($font-size + 2px) !default;
+$font-size-large: em($font-size + 4px) !default;
 
 // Baseline
-$base-line: 24px !default;
-$base-line-smaller: 20px !default;
-$base-line-small: 20px !default;
-$base-line-big: 28px !default;
-$base-line-large: 32px !default;
+$base-line: em($font-size + 8px) !default;
+$base-line-smaller: em($font-size + 4px) !default;
+$base-line-small: em($font-size + 4px) !default;
+$base-line-big: em($font-size + 12px) !default;
+$base-line-large: em($font-size + 16px) !default;
 
 // Margin
-$text-margin-bottom: $font-size !default;
+$text-margin-bottom: em($font-size) !default;
 
 
 // HEADINGS
@@ -100,22 +114,22 @@ $text-margin-bottom: $font-size !default;
 
 // Font Size
 // By default: 60, 48, 36, 24, 21, 18, 16
-$heading-font-size-title: 60px !default;
-$heading-font-size-1: 48px !default;
-$heading-font-size-2: 36px !default;
-$heading-font-size-3: 24px !default;
-$heading-font-size-4: 21px !default;
-$heading-font-size-5: 18px !default;
-$heading-font-size-6: 16px !default;
+$heading-font-size-title: em($font-size + 44px) !default;
+$heading-font-size-1: em($font-size + 32px) !default;
+$heading-font-size-2: em($font-size + 16px) !default;
+$heading-font-size-3: em($font-size + 8px) !default;
+$heading-font-size-4: em($font-size + 5px) !default;
+$heading-font-size-5: em($font-size + 2px) !default;
+$heading-font-size-6: em($font-size) !default;
 
 // Baseline
-$heading-base-line-title: 64px !default;
-$heading-base-line-1: 52px !default;
-$heading-base-line-2: 40px !default;
-$heading-base-line-3: 32px !default;
-$heading-base-line-4: 32px !default;
-$heading-base-line-5: 28px !default;
-$heading-base-line-6: 24px !default;
+$heading-base-line-title: 4/3.25 * em($font-size) !default;
+$heading-base-line-1: 3.25/2.5 * em($font-size) !default;
+$heading-base-line-2: 2.5/2 * em($font-size) !default;
+$heading-base-line-3: 2/2 * em($font-size) !default;
+$heading-base-line-4: 2/1.75 * em($font-size) !default;
+$heading-base-line-5: 1.75/1.5 * em($font-size) !default;
+$heading-base-line-6: 1.5/1.25 * em($font-size) !default;
 
 // Margin
 $heading-margin-bottom: $font-size !default;
@@ -125,10 +139,10 @@ $heading-margin-bottom: $font-size !default;
 // ---------------------------------------------------------------------------
 
 // Font Size
-$table-font-size: $font-size - 1px !default;
+$table-font-size: em($font-size - 1px) !default;
 
 // Baseline
-$table-base-line: 24px !default;
+$table-base-line: em($font-size + 8px) !default;
 
 // Padding
 $table-padding-tb: 1rem !default;
@@ -145,63 +159,63 @@ $table-background-striped: $color-aluminum !default;
 // ---------------------------------------------------------------------------
 
 // Font Size
-$button-font-size: 15px !default;
-$button-font-size-smaller: $button-font-size - 4px !default;
-$button-font-size-small: $button-font-size - 2px !default;
-$button-font-size-big: $button-font-size + 2px !default;
-$button-font-size-large: $button-font-size + 4px !default;
+$button-font-size: em($font-size - 1px) !default;
+$button-font-size-smaller: em($font-size - 5px) !default;
+$button-font-size-small: em($font-size - 7px) !default;
+$button-font-size-big: em($font-size + 1px) !default;
+$button-font-size-large: em($font-size + 3px) !default;
 
 // Baseline
-$button-base-line: 20px !default;
+$button-base-line: em($font-size + 4px) !default;
 
 // Height
-$button-height: 40px !default;
-$button-height-small: 36px !default;
-$button-height-big: 48px !default;
-$button-height-large: 56px !default;
+$button-height: em($font-size + 24px) !default;
+$button-height-small: em($font-size + 20px) !default;
+$button-height-big: em($font-size + 32px) !default;
+$button-height-large: em($font-size + 40px) !default;
 
 // Padding
-$button-padding-tb: 8px !default;
-$button-padding-rl: 20px !default;
-$button-padding-small-tb: 6px !default;
-$button-padding-small-rl: 20px !default;
-$button-padding-big-tb: 13px !default;
-$button-padding-big-rl: 24px !default;
-$button-padding-large-tb: 20px !default;
-$button-padding-large-rl: 36px !default;
+$button-padding-tb: em($font-size - 8px) !default;
+$button-padding-rl: em($font-size + 4px) !default;
+$button-padding-small-tb: em($font-size - 10px) !default;
+$button-padding-small-rl: em($font-size + 4px) !default;
+$button-padding-big-tb: em($font-size - 3px) !default;
+$button-padding-big-rl: em($font-size + 8px) !default;
+$button-padding-large-tb: em($font-size + 4px) !default;
+$button-padding-large-rl: em($font-size + 20px) !default;
 
 // Weight
 $button-font-weight: 500 !default;
 
 // Radius
-$button-border-radius: 3px !default;
+$button-border-radius: em($font-size - 13px) !default;
 
 
 // INPUTS
 // ---------------------------------------------------------------------------
 
 // Font Size
-$input-font-size: 15px !default;
-$input-font-size-smaller: $input-font-size - 4px !default;
-$input-font-size-small: $input-font-size - 2px !default;
-$input-font-size-big: $input-font-size + 2px !default;
-$input-font-size-large: $input-font-size + 4px !default;
+$input-font-size: em($font-size - 1px) !default;
+$input-font-size-smaller: em($font-size - 5px) !default;
+$input-font-size-small: em($font-size - 3px) !default;
+$input-font-size-big: em($font-size + 1px) !default;
+$input-font-size-large: em($font-size + 3px) !default;
 
 // Baseline
 $textarea-base-line: $base-line !default;
 
 // Height
-$input-height: 40px !default;
-$input-height-small: 36px !default;
-$input-height-big: 48px !default;
-$input-height-large: 56px !default;
+$input-height: em($font-size + 24px) !default;
+$input-height-small: em($font-size + 20px) !default;
+$input-height-big: em($font-size + 32px) !default;
+$input-height-large: em($font-size + 40px) !default;
 
 // Padding
-$input-padding-rl: 12px !default;
-$input-padding-small-rl: 12px !default;
-$input-padding-big-rl: 12px !default;
-$input-padding-large-rl: 12px !default;
-$input-textarea-padding-tb: 8px !default;
+$input-padding-rl: em($font-size - 4px) !default;
+$input-padding-small-rl: em($font-size - 4px) !default;
+$input-padding-big-rl: em($font-size - 4px) !default;
+$input-padding-large-rl: em($font-size - 4px) !default;
+$input-textarea-padding-tb: em($font-size - 8px) !default;
 
 // States
 $input-border-width: 1px !default;
@@ -225,7 +239,7 @@ $input-disabled-opacity: .6;
 $input-disabled-color: rgba(0, 0, 0, .5);
 
 // Radius
-$input-border-radius: 3px !default;
+$input-border-radius: em($font-size - 13px) !default;
 
 
 // OVERLAY

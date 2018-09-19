@@ -12,7 +12,7 @@
     & span,
     & a {
     	font-style: normal;
-    	padding: 0 10px;
+    	padding: 0 em($font-size - 6px);
     	display: inline-block;
     	white-space: nowrap;
     }

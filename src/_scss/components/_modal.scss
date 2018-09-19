@@ -11,23 +11,23 @@
 .modal {
 	position: relative;
 	margin: auto;
-	margin-top: 16px;
+	margin-top: em($font-size);
 	padding: 0;
 	background: #fff;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
-    border-radius: 8px;
+	box-shadow: 0 em($font-size - 6px) em($font-size + 9px) rgba(0, 0, 0, .15);
+    border-radius: em($font-size - 8px);
 	color: #000;
 
 	& input,
 	& textarea {
 		@media (max-width: $sm) {
-		    font-size: 16px;
+		    font-size: em($font-size);
 		}
 	}
     & .close {
     	position: absolute;
-    	top: 18px;
-    	right: 16px;
+    	top: em($font-size + 2px);
+    	right: em($font-size);
     	opacity: .3;
     	&:hover {
         	opacity: 1;
@@ -35,8 +35,8 @@
     }
 }
 .modal-header {
-	padding: 24px 32px;
-	font-size: 18px;
+	padding: em($font-size + 8px) em($font-size + 16px);
+	font-size: em($font-size + 2px);
 	font-weight: bold;
 	border-bottom: 1px solid rgba(0, 0, 0, .05);
     &:empty {
@@ -44,7 +44,7 @@
     }
 }
 .modal-body {
-    padding: 36px 56px;
+    padding: em($font-size + 20px) em($font-size + 40px);
 }
 
 
@@ -53,6 +53,6 @@
 @media (max-width: $sm) {
     .modal-header,
     .modal-body {
-        padding: 24px;
+        padding: em($font-size + 8px);
     }
 }
