@@ -1,0 +1,415 @@
+/* =Typography
+-----------------------------------------------------------------------------*/
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	line-height: $base-line;
+	background: $background-body;
+	color: $color-body;
+}
+
+/* =Links
+-----------------------------------------------------------------------------*/
+a {
+	color: $color-link;
+	&:focus,
+	&:hover {
+		color: $color-link-hover;
+	}
+}
+
+/* =Headings
+-----------------------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	font-family: $font-family-headings;
+	font-weight: bold;
+	color: $color-headings;
+	text-rendering: optimizeLegibility;
+	margin: 0 0 .5em 0;
+}
+h1,
+.h1,
+h2,
+.h2 {
+	line-height: 1.1;
+}
+h3,
+.h3,
+h4,
+.h4 {
+	line-height: 1.3;
+}
+h1,
+.h1 {
+	font-size: $font-size-h1-lg;
+}
+h2,
+.h2 {
+	font-size: $font-size-h2-lg;
+	margin-bottom: .7em;
+}
+h3,
+.h3 {
+	font-size: $font-size-h3-lg;
+}
+h4,
+.h4 {
+	font-size: $font-size-h4-lg;
+}
+h5,
+.h5 {
+	font-size: $font-size-h5-lg;
+}
+h6,
+.h6 {
+	font-size: $font-size-h6-lg;
+	text-transform: uppercase;
+}
+
+
+/* =Lead
+-----------------------------------------------------------------------------*/
+.lead {
+	font-size: $font-size-lead;
+	line-height: $line-height-lead;
+	margin-bottom: $base-line / 1.5;
+}
+
+/* =Line height and margin
+-----------------------------------------------------------------------------*/
+p,
+ul,
+ol,
+dl,
+dd,
+dt,
+blockquote,
+td,
+th {
+	line-height: $base-line;
+}
+ul,
+ol,
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+	margin: 0 0 0 $base-line * 2;
+}
+ul li,
+ol li {
+	text-align: left;
+}
+ol ol li {
+	list-style-type: lower-alpha;
+}
+ol ol ol li {
+	list-style-type: lower-roman;
+}
+p,
+ul,
+ol,
+dl,
+blockquote,
+hr,
+pre,
+table,
+form,
+fieldset,
+figure,
+address {
+	margin-bottom: $base-line;
+}
+
+/* =Blockquote
+-----------------------------------------------------------------------------*/
+blockquote {
+	position: relative;
+	font-style: italic;
+	font-size: 1.125em;
+	margin-left: $base-line * 1.5;
+	padding-left: $base-line;
+	border-left: 2px solid $color-blockquote-border;
+	& p {
+		margin-bottom: .5em;
+	}
+}
+blockquote small,
+cite {
+	color: rgba(0, 0, 0, .4);
+	font-style: italic;
+}
+small,
+blockquote cite {
+	font-size: $font-size-small;
+	line-height: 1;
+}
+
+
+/* =Address
+-----------------------------------------------------------------------------*/
+address {
+	font-style: normal;
+}
+
+/* =Definition list
+-----------------------------------------------------------------------------*/
+dl dt {
+	font-weight: bold;
+}
+dd {
+	margin-left: $base-line;
+}
+
+/* =Text-level
+-----------------------------------------------------------------------------*/
+s,
+del {
+	text-decoration: line-through;
+}
+abbr[title],
+dfn[title] {
+	border-bottom: 1px dotted $color-black;
+	cursor: help;
+}
+strong,
+b {
+	font-weight: bold;
+}
+em,
+i {
+	font-style: italic;
+}
+sub,
+sup {
+	font-size: $font-size-smaller;
+	line-height: 0;
+	position: relative;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+figcaption {
+	margin: .3em 0;
+	font-size: $font-size-small;
+	font-style: italic;
+}
+ins,
+u {
+	text-decoration: underline;
+}
+mark {
+	background-color: $color-yellow;
+	color: $color-black;
+	text-decoration: none;
+}
+
+/* =Code
+-----------------------------------------------------------------------------*/
+pre,
+code,
+kbd,
+samp,
+var,
+output {
+	font-size: 90%;
+	font-style: normal;
+	font-family: $font-family-code;
+}
+pre {
+	margin-top: $base-line;
+	font-size: 100%;
+	line-height: 1.5;
+	color: $color-body;
+	overflow: auto;
+}
+code,
+samp,
+kbd {
+	padding: 3px 6px 2px 6px;
+	display: inline-block;
+	line-height: 1;
+	border-radius: 2px;
+}
+code {
+	background: $color-code-background;
+	border: 1px solid $color-code-border;
+}
+pre code {
+	font-size: 100%;
+	border: none;
+	padding: 0;
+	background: none;
+	line-height: $base-line;
+}
+var {
+	color: rgba(0, 0, 0, .5);
+}
+samp {
+	background: $color-blue-pastel;
+	border: 1px solid darken($color-blue-pastel, 7%);
+}
+kbd {
+	background: $color-black;
+	color: rgba(255, 255, 255, .85);
+	white-space: nowrap;
+}
+
+/* =Form
+-----------------------------------------------------------------------------*/
+button:active,
+button:focus {
+	outline: none;
+}
+textarea,
+select {
+	font-family: $font-family-controls;
+	font-size: 1em;
+	box-shadow: none;
+}
+textarea,
+select[multiple],
+select[multiple="multiple"] {
+	padding: $padding-input;
+	line-height: 1.35em;
+	width: 100%;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
+input[type="search"],
+input[type="datetime-local"] {
+	font-family: $font-family-controls;
+	font-size: 1em;
+	box-shadow: none;
+	padding: $padding-input;
+	line-height: $base-line;
+	border-radius: 0;
+	outline: none;
+}
+select[multiple],
+select[multiple="multiple"],
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
+input[type="search"],
+input[type="datetime-local"] {
+	background: $color-white;
+	border: 1px solid $color-input-border;
+	position: relative;
+	z-index: 2;
+	-webkit-appearance: none;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="phone"],
+input[type="tel"],
+input[type="number"],
+input[type="datetime"],
+input[type="date"],
+input[type="month"],
+input[type="color"],
+input[type="time"],
+input[type="search"],
+input[type="datetime-local"] {
+	&[disabled] {
+		resize: none;
+		color: rgba(0, 0, 0, .5);
+	}
+}
+select,
+input[type="checkbox"],
+input[type="radio"] {
+	&[disabled] {
+		cursor: default;
+	}
+}
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+input[type="range"] {
+	position: relative;
+	top: 3px;
+}
+
+select {
+	margin-bottom: 0 !important;
+}
+fieldset {
+	padding: $base-line;
+	margin-bottom: $base-line;
+	border: 1px solid $color-fieldset-border;
+	& *:last-child {
+		margin-bottom: 0 !important;
+	}
+}
+legend {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: -1em;
+}
+
+
+/* =Tables
+-----------------------------------------------------------------------------*/
+table {
+	max-width: 100%;
+	width: 100%;
+	empty-cells: show;
+
+	caption {
+		text-transform: uppercase;
+		padding: 0 $base-line / 1.5;
+		color: rgba(0, 0, 0, .4);
+		font-size: $font-size-small;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid $color-table-border;
+		padding: $base-line / 2 $base-line / 1.5;
+	}
+
+	tfoot th,
+	tfoot td {
+		color: rgba(0, 0, 0, .4);
+	}
+}
