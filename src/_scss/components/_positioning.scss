@@ -1,24 +1,24 @@
 // Push
-.gutters .column.push-left,
+.gutters .col.push-left,
 .push-left  { margin-right: auto; }
 
-.gutters .column.push-right,
+.gutters .col.push-right,
 .push-right  { margin-left: auto; }
 
-.gutters .column.push-center,
+.gutters .col.push-center,
 .push-center { margin-left: auto; margin-right: auto; }
 
-.gutters .column.push-middle,
+.gutters .col.push-middle,
 .push-middle { margin-top:  auto; margin-bottom: auto; }
 
 .push-bottom { margin-top:  auto; }
 
 @include breakpoint(sm) {
 
-    .gutters .column.push-left-sm,
+    .gutters .col.push-left-sm,
     .push-left-sm   { margin-left: 0; }
 
-    .gutters .column.push-center-sm,
+    .gutters .col.push-center-sm,
     .push-center-sm { margin-left: auto; margin-right: auto;}
 
     .push-top-sm    { margin-top: 0;  }
